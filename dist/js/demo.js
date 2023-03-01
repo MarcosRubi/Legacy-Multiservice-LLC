@@ -233,3 +233,4 @@
   $container.append($no_expand_sidebar_container)
 
 })(jQuery)
+

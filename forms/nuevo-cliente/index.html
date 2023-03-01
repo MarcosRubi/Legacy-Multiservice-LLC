@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Legacy Multiservice LLC | Inicio</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper d-flex justify-content-center pt-3">
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Agregar nuevo cliente</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Apellido -->
+                            <div class="form-group">
+                                <label>Apellido</label>
+                                <input type="text" class="form-control" placeholder="Apellido ...">
+                            </div>
+                            <!-- Segundo nombre -->
+                            <div class="form-group">
+                                <label>Segundo nombre</label>
+                                <input type="text" class="form-control" placeholder="Segundo nombre ...">
+                            </div>
+                            <!-- Primer nombre -->
+                            <div class="form-group">
+                                <label>Primer nombre</label>
+                                <input type="text" class="form-control" placeholder="Primer nombre ...">
+                            </div>
+                            <!-- phone mask -->
+                            <div class="form-group">
+                                <label>Teléfono:</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"'
+                                        placeholder="(516) 1234-5678" data-mask>
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- Dirección -->
+                            <div class="form-group">
+                                <label>Dirección</label>
+                                <input type="text" class="form-control" placeholder="Main Street 1234 ...">
+                            </div>
+                            <!-- Date dd/mm/yyyy -->
+                            <div class="form-group">
+                                <label>Fecha de nacimiento:</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- /.form group -->
+                            <div class="form-group pr-1">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Guardar</button>
+                            </div>
+                            <div class="form-group pl-1">
+                                <button class="btn btn-outline-primary btn-lg btn-block" type="reset" onclick="javascript:closeForm();">Cancelar</button>
+                            </div>
+                        </div>
+                        <!-- /.form group -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- InputMask -->
+    <script src="../../plugins/moment/moment.min.js"></script>
+    <script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Phone Number
+            $('[data-mask]').inputmask()
+        })
+    </script>
+    <script>
+        function closeForm(){
+            window.close()
+        }
+    </script>
+</body>
+
+</html>
