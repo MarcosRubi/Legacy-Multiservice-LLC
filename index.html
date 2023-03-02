@@ -123,6 +123,12 @@
                     <p>Nuevo Cliente</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link" onclick="javascript:nuevoClientev2();">
+                    <i class="fa fa-plus nav-icon"></i>
+                    <p>Nuevo Cliente v2</p>
+                  </a>
+                </li>
               </ul>
             </li>
             <li class="nav-item">
@@ -2383,6 +2389,9 @@
   <script>
     function nuevoCliente(){
       window.open('./forms/nuevo-cliente/', 'Nuevo Cliente', 'width=400,height=1000')
+    }
+    function nuevoClientev2(){
+      window.open('./forms/cliente/frmNuevo.html', 'Nuevo Cliente', 'width=2000,height=300')
     }
   </script>
 </body>
