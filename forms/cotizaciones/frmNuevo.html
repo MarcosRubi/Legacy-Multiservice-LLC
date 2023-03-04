@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Legacy Multiservice LLC | Inicio</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper d-flex justify-content-center pt-3">
+        <!-- Main content -->
+        <div class="content py-3 mx-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title w-100 font-weight-bold text-center">Agregar nueva cotización</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- ID Del Cliente -->
+                            <div class="form-group mx-1">
+                                <label>ID Del Cliente</label>
+                                <input type="text" class="form-control" disabled value="123456">
+                            </div>
+                            <!-- PNR(s) -->
+                            <div class="form-group mx-1">
+                                <label>PNR(s)</label>
+                                <input type="text" class="form-control" placeholder="PNR(s) ...">
+                            </div>
+                            <!-- Comentario -->
+                            <div class="form-group mx-1">
+                                <label>Comentario</label>
+                                <input type="text" class="form-control" placeholder="Comentario ...">
+                            </div>
+                            <!-- Acción -->
+                            <div class="form-group mx-1">
+                                <label>Acción</label>
+                                <input type="text" class="form-control" placeholder="Acción ...">
+                            </div>
+                            <!-- Fecha dd/mm/yyyy -->
+                            <div class="form-group mx-1">
+                                <label>Fecha:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- Creado dd/mm/yyyy -->
+                            <div class="form-group mx-1">
+                                <label>Creado:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy"
+                                        disabled value="03/03/2023">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- Agencia -->
+                            <div class="form-group mx-1">
+                                <label>Agencia</label>
+                                <input type="text" class="form-control" placeholder="Agencia ...">
+                            </div>
+                            <!-- Agente -->
+                            <div class="form-group mx-1">
+                                <label>Agente</label>
+                                <input type="text" class="form-control" placeholder="Agente ...">
+                            </div>
+                            <!-- Origen -->
+                            <div class="form-group mx-1">
+                                <label>Origen</label>
+                                <input type="text" class="form-control" placeholder="Origen ...">
+                            </div>
+                            <!-- Destino -->
+                            <div class="form-group mx-1">
+                                <label>Destino</label>
+                                <input type="text" class="form-control" placeholder="Destino ...">
+                            </div>
+                            <!-- Ida dd/mm/yyyy -->
+                            <div class="form-group mx-1">
+                                <label>Ida:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                                </div>
+                            </div>
+                            <!-- Regreso dd/mm/yyyy -->
+                            <div class="form-group mx-1">
+                                <label>Regreso:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                                </div>
+                            </div>
+                            <!-- # Boletos -->
+                            <div class="form-group mx-1">
+                                <label># Boletos</label>
+                                <input type="text" class="form-control" placeholder="# Boletos ...">
+                            </div>
+                            <!-- Cotizado -->
+                            <div class="form-group mx-1">
+                                <label>Cotizado</label>
+                                <input type="text" class="form-control" placeholder="Cotizado ...">
+                            </div>
+                            <!-- /.form group -->
+                            <div class="form-group pr-1">
+                                <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar</button>
+                            </div>
+                            <div class="form-group pl-1">
+                                <button class="btn btn-block text-center" type="reset"
+                                    onclick="javascript:closeForm();">Cancelar</button>
+                            </div>
+                        </div>
+                        <!-- /.form group -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- InputMask -->
+    <script src="../../plugins/moment/moment.min.js"></script>
+    <script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Phone Number
+            $('[data-mask]').inputmask()
+        })
+    </script>
+    <script>
+        function closeForm() {
+            window.close()
+        }
+    </script>
+</body>
+
+</html>
