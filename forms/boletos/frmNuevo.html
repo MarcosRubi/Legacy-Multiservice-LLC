@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Legacy Multiservice LLC | Inicio</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <style>
+        .form-control {
+            display: inline-block !important;
+            font-size: 12px !important;
+        }
+
+        .form-group label {
+            margin-bottom: .25rem !important;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed" style="font-size:12px !important;">
+    <div class="wrapper d-flex justify-content-center pt-3">
+        <!-- Main content -->
+        <div class="content py-3 mx-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title w-100 font-weight-bold text-center">Agregar nuevo boleto</h3>
+                        </div>
+                        <form class="card-body">
+                            <div class="form-group mx-1 p-2 rounded"
+                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                                <label>Código PNR</label>
+                                <input type="text" class="form-control" placeholder="PNR ...">
+                            </div>
+                            <div id="addNewFile">
+                                <span class="btn btn-primary mb-1" onclick="mostrarNuevaFila();">
+                                    <i class="fa fa-plus"></i>
+                                </span>
+                            </div>
+                            <div class="px-2 mb-3 rounded fila"
+                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-1">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-1')"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="number" class="form-control" placeholder="# Boleto ...">
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ...">
+                                    </div>
+                                    <!-- Passenger DOB dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ...">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ...">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ...">
+                                    </div>
+                                    <!-- Fecha Ida dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ...">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ...">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ...">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ...">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila"
+                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-2">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-2')"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="number" class="form-control" placeholder="# Boleto ...">
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ...">
+                                    </div>
+                                    <!-- Passenger DOB dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ...">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ...">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ...">
+                                    </div>
+                                    <!-- Fecha Ida dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ...">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ...">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ...">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ...">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila"
+                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-3">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-3')"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="number" class="form-control" placeholder="# Boleto ...">
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ...">
+                                    </div>
+                                    <!-- Passenger DOB dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ...">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ...">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ...">
+                                    </div>
+                                    <!-- Fecha Ida dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ...">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ...">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ...">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ...">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila"
+                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-4">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-4')"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="number" class="form-control" placeholder="# Boleto ...">
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ...">
+                                    </div>
+                                    <!-- Passenger DOB dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ...">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ...">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ...">
+                                    </div>
+                                    <!-- Fecha Ida dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ...">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ...">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ...">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ...">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila"
+                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-5">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-5')"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="number" class="form-control" placeholder="# Boleto ...">
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ...">
+                                    </div>
+                                    <!-- Passenger DOB dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ...">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ...">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ...">
+                                    </div>
+                                    <!-- Fecha Ida dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd/mm/yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i
+                                                        class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2 select2-hidden-accessible"
+                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" data-select2-id="3">Opción 1</option>
+                                            <option>Opción 2</option>
+                                            <option>Opción 3</option>
+                                            <option>Opción 4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ...">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ...">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ...">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ...">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ...">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Itinerario</label>
+                                <textarea id="summernote">
+                                    Escribe <em>el</em> <u>itinerario</u> <strong>aquí</strong>
+                                </textarea>
+                            </div>
+                            <!-- /.form group -->
+                            <div class="form-group pr-1 mt-3">
+                                <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar</button>
+                            </div>
+                            <div class="form-group pl-1">
+                                <button class="btn btn-block text-center" type="reset"
+                                    onclick="javascript:closeForm();">Cancelar</button>
+                            </div>
+                        </form>
+                        <!-- /.form group -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- InputMask -->
+    <script src="../../plugins/moment/moment.min.js"></script>
+    <script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- Summernote -->
+    <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Phone Number
+            $('[data-mask]').inputmask()
+            // Summernote
+            $('#summernote').summernote()
+        })
+    </script>
+    <script>
+        let posicion = 1;
+
+        function closeForm() {
+            window.close()
+        }
+
+        function mostrarNuevaFila() {
+            const filas = document.querySelectorAll('.fila.d-none')
+
+            if (posicion === 4) {
+                document.getElementById('addNewFile').classList.add('d-none')
+            }
+            if (posicion <= 5) {
+                filas[0].classList.remove('d-none')
+                posicion++
+                return
+            }
+        }
+
+        function eliminarFila(id){
+            document.getElementById(id).classList.add('d-none')
+            posicion--
+
+            if(posicion <= 4){
+                document.getElementById('addNewFile').classList.remove('d-none')
+            }
+        }
+    </script>
+</body>
+
+</html>
