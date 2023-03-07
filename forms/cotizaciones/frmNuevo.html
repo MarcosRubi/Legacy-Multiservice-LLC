@@ -28,107 +28,111 @@
                             <h3 class="card-title w-100 font-weight-bold text-center">Agregar nueva cotización</h3>
                         </div>
                         <div class="card-body">
-                            <!-- ID Del Cliente -->
-                            <div class="form-group mx-1">
-                                <label>ID Del Cliente</label>
-                                <input type="text" class="form-control" disabled value="123456">
-                            </div>
-                            <!-- PNR(s) -->
-                            <div class="form-group mx-1">
-                                <label>PNR(s)</label>
-                                <input type="text" class="form-control" placeholder="PNR(s) ...">
-                            </div>
-                            <!-- Comentario -->
-                            <div class="form-group mx-1">
-                                <label>Comentario</label>
-                                <input type="text" class="form-control" placeholder="Comentario ...">
-                            </div>
-                            <!-- Acción -->
-                            <div class="form-group mx-1">
-                                <label>Acción</label>
-                                <input type="text" class="form-control" placeholder="Acción ...">
-                            </div>
-                            <!-- Fecha dd/mm/yyyy -->
-                            <div class="form-group mx-1">
-                                <label>Fecha:</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                            <div class="d-flex flex-column flex-xl-row">
+                                <!-- ID Del Cliente -->
+                                <div class="form-group mx-1">
+                                    <label>ID Del Cliente</label>
+                                    <input type="text" class="form-control" disabled value="123456">
                                 </div>
-                                <!-- /.input group -->
-                            </div>
-                            <!-- Creado dd/mm/yyyy -->
-                            <div class="form-group mx-1">
-                                <label>Creado:</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy"
-                                        disabled value="03/03/2023">
+                                <!-- PNR(s) -->
+                                <div class="form-group mx-1">
+                                    <label>PNR(s)</label>
+                                    <input type="text" class="form-control" placeholder="PNR(s) ...">
                                 </div>
-                                <!-- /.input group -->
-                            </div>
-                            <!-- Agencia -->
-                            <div class="form-group mx-1">
-                                <label>Agencia</label>
-                                <input type="text" class="form-control" placeholder="Agencia ...">
-                            </div>
-                            <!-- Agente -->
-                            <div class="form-group mx-1">
-                                <label>Agente</label>
-                                <input type="text" class="form-control" placeholder="Agente ...">
-                            </div>
-                            <!-- Origen -->
-                            <div class="form-group mx-1">
-                                <label>Origen</label>
-                                <input type="text" class="form-control" placeholder="Origen ...">
-                            </div>
-                            <!-- Destino -->
-                            <div class="form-group mx-1">
-                                <label>Destino</label>
-                                <input type="text" class="form-control" placeholder="Destino ...">
-                            </div>
-                            <!-- Ida dd/mm/yyyy -->
-                            <div class="form-group mx-1">
-                                <label>Ida:</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                <!-- Comentario -->
+                                <div class="form-group mx-1">
+                                    <label>Comentario</label>
+                                    <input type="text" class="form-control" placeholder="Comentario ...">
+                                </div>
+                                <!-- Acción -->
+                                <div class="form-group mx-1">
+                                    <label>Acción</label>
+                                    <input type="text" class="form-control" placeholder="Acción ...">
+                                </div>
+                                <!-- Fecha dd/mm/yyyy -->
+                                <div class="form-group mx-1">
+                                    <label>Fecha:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                            data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                     </div>
-                                    <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                                    <!-- /.input group -->
+                                </div>
+                                <!-- Creado dd/mm/yyyy -->
+                                <div class="form-group mx-1">
+                                    <label>Creado:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                            data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy"
+                                            disabled value="03/03/2023">
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                                <!-- Agencia -->
+                                <div class="form-group mx-1">
+                                    <label>Agencia</label>
+                                    <input type="text" class="form-control" placeholder="Agencia ...">
                                 </div>
                             </div>
-                            <!-- Regreso dd/mm/yyyy -->
-                            <div class="form-group mx-1">
-                                <label>Regreso:</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                            <div class="d-flex flex-column flex-xl-row">
+                                <!-- Agente -->
+                                <div class="form-group mx-1">
+                                    <label>Agente</label>
+                                    <input type="text" class="form-control" placeholder="Agente ...">
                                 </div>
-                            </div>
-                            <!-- # Boletos -->
-                            <div class="form-group mx-1">
-                                <label># Boletos</label>
-                                <input type="text" class="form-control" placeholder="# Boletos ...">
-                            </div>
-                            <!-- Cotizado -->
-                            <div class="form-group mx-1">
-                                <label>Cotizado</label>
-                                <input type="text" class="form-control" placeholder="Cotizado ...">
-                            </div>
-                            <!-- MAX -->
-                            <div class="form-group mx-1">
-                                <label>MAX</label>
-                                <input type="text" class="form-control" placeholder="Max ...">
+                                <!-- Origen -->
+                                <div class="form-group mx-1">
+                                    <label>Origen</label>
+                                    <input type="text" class="form-control" placeholder="Origen ...">
+                                </div>
+                                <!-- Destino -->
+                                <div class="form-group mx-1">
+                                    <label>Destino</label>
+                                    <input type="text" class="form-control" placeholder="Destino ...">
+                                </div>
+                                <!-- Ida dd/mm/yyyy -->
+                                <div class="form-group mx-1">
+                                    <label>Ida:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                            data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                                    </div>
+                                </div>
+                                <!-- Regreso dd/mm/yyyy -->
+                                <div class="form-group mx-1">
+                                    <label>Regreso:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime"
+                                            data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                                    </div>
+                                </div>
+                                <!-- # Boletos -->
+                                <div class="form-group mx-1">
+                                    <label># Boletos</label>
+                                    <input type="text" class="form-control" placeholder="# Boletos ...">
+                                </div>
+                                <!-- Cotizado -->
+                                <div class="form-group mx-1">
+                                    <label>Cotizado</label>
+                                    <input type="text" class="form-control" placeholder="Cotizado ...">
+                                </div>
+                                <!-- MAX -->
+                                <div class="form-group mx-1">
+                                    <label>MAX</label>
+                                    <input type="text" class="form-control" placeholder="Max ...">
+                                </div>
                             </div>
                             <!-- /.form group -->
                             <div class="form-group pr-1">
