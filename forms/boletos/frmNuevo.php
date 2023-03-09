@@ -1,5 +1,9 @@
+<?php
+require_once '../../func/validateSession.php';
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -7,8 +11,7 @@
     <title>Nuevo Boleto</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -40,8 +43,7 @@
                             <h3 class="card-title w-100 font-weight-bold text-center">Agregar nuevo boleto</h3>
                         </div>
                         <form class="card-body">
-                            <div class="form-group mx-1 p-2 rounded"
-                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                            <div class="form-group mx-1 p-2 rounded" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                                 <label>Código PNR</label>
                                 <input type="text" class="form-control" placeholder="PNR ...">
                             </div>
@@ -50,8 +52,7 @@
                                     <i class="fa fa-plus"></i>
                                 </span>
                             </div>
-                            <div class="px-2 mb-3 rounded fila"
-                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-1">
+                            <div class="px-2 mb-3 rounded fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-1">
                                 <div class="d-flex justify-content-end pt-2">
                                     <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-1')"></i>
                                 </div>
@@ -72,12 +73,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -102,12 +100,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd/mm/yyyy -->
@@ -116,12 +111,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                     </div>
                                 </div>
@@ -129,8 +121,7 @@
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -140,8 +131,7 @@
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -151,8 +141,7 @@
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -186,8 +175,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila"
-                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-2">
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-2">
                                 <div class="d-flex justify-content-end pt-2">
                                     <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-2')"></i>
                                 </div>
@@ -208,12 +196,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -238,12 +223,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd/mm/yyyy -->
@@ -252,12 +234,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                     </div>
                                 </div>
@@ -265,8 +244,7 @@
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -276,8 +254,7 @@
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -287,8 +264,7 @@
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -322,8 +298,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila"
-                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-3">
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-3">
                                 <div class="d-flex justify-content-end pt-2">
                                     <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-3')"></i>
                                 </div>
@@ -344,12 +319,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -374,12 +346,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd/mm/yyyy -->
@@ -388,12 +357,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                     </div>
                                 </div>
@@ -401,8 +367,7 @@
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -412,8 +377,7 @@
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -423,8 +387,7 @@
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -458,8 +421,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila"
-                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-4">
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-4">
                                 <div class="d-flex justify-content-end pt-2">
                                     <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-4')"></i>
                                 </div>
@@ -480,12 +442,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -510,12 +469,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd/mm/yyyy -->
@@ -524,12 +480,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                     </div>
                                 </div>
@@ -537,8 +490,7 @@
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -548,8 +500,7 @@
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -559,8 +510,7 @@
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -594,8 +544,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila"
-                                style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-5">
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-5">
                                 <div class="d-flex justify-content-end pt-2">
                                     <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-5')"></i>
                                 </div>
@@ -616,12 +565,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -646,12 +592,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd/mm/yyyy -->
@@ -660,12 +603,9 @@
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="far fa-calendar-alt"></i></span>
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                                data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                                                placeholder="dd/mm/yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
                                         </div>
                                     </div>
                                 </div>
@@ -673,8 +613,7 @@
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -684,8 +623,7 @@
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -695,8 +633,7 @@
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible"
-                                            style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                             <option selected="selected" data-select2-id="3">Opción 1</option>
                                             <option>Opción 2</option>
                                             <option>Opción 3</option>
@@ -741,8 +678,7 @@
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar</button>
                             </div>
                             <div class="form-group pl-1">
-                                <button class="btn btn-block text-center" type="reset"
-                                    onclick="javascript:closeForm();">Cancelar</button>
+                                <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cancelar</button>
                             </div>
                         </form>
                         <!-- /.form group -->
@@ -777,11 +713,15 @@
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        $(function () {
+        $(function() {
             //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            $('#datemask').inputmask('dd/mm/yyyy', {
+                'placeholder': 'dd/mm/yyyy'
+            })
             //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            $('#datemask2').inputmask('mm/dd/yyyy', {
+                'placeholder': 'mm/dd/yyyy'
+            })
             //Phone Number
             $('[data-mask]').inputmask()
             // Summernote
@@ -808,11 +748,11 @@
             }
         }
 
-        function eliminarFila(id){
+        function eliminarFila(id) {
             document.getElementById(id).classList.add('d-none')
             posicion--
 
-            if(posicion <= 4){
+            if (posicion <= 4) {
                 document.getElementById('addNewFile').classList.remove('d-none')
             }
         }

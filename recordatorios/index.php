@@ -1,14 +1,17 @@
+<?php
+require_once '../func/validateSession.php';
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Legacy Multiservice LLC | Recordatorios</title>
+    <title>Recordatorios | Legacy Multiservice LLC</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <!-- summernote -->
@@ -28,206 +31,12 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-            </ul>
-
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <?php include_once '../secciones/navbar.php'; ?>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="/" class="brand-link d-flex">
-                <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
-                <span class="brand-text font-weight-light text-md">Legacy Multiservice LLC</span>
-            </a>
+        <?php include_once '../secciones/mainSidebarContainer.php'; ?>
 
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a class="d-block">Marcos Rubí</a>
-                    </div>
-                </div>
-
-                <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-legacy" data-widget="treeview"
-                        role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-                 with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                            <a href="/" class="nav-link active">
-                                <i class="nav-icon fas fa-home"></i>
-                                <p>
-                                    Inicio
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Clientes
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../buscar-cliente/" class="nav-link">
-                                        <i class="fa fa-search nav-icon"></i>
-                                        <p>Buscar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" onclick="javascript:nuevoCliente();">
-                                        <i class="fa fa-plus nav-icon"></i>
-                                        <p>Nuevo Cliente</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="./" class="nav-link">
-                                <i class="nav-icon fas fa-clock"></i>
-                                <p>
-                                    Recordatorios
-                                </p>
-                                <span class="badge badge-info right">0</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" onclick="javascript:buscarCotizacion();">
-                                <i class="nav-icon fa fa-dollar-sign"></i>
-                                <p>
-                                    Cotizaciones
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-calculator"></i>
-                                <p>
-                                    Contabilidad
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-search nav-icon"></i>
-                                        <p>Buscar Factura</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-list-alt nav-icon"></i>
-                                        <p>Reporte Diario</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-list-alt nav-icon"></i>
-                                        <p>Reporte De Boletos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-list-alt nav-icon"></i>
-                                        <p>Reporte Volumen</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-list-alt nav-icon"></i>
-                                        <p>Reporte De Llamadas</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-user-cog"></i>
-                                <p>
-                                    Mantenimiento
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-list nav-icon"></i>
-                                        <p>Listar Empleados</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-plus nav-icon"></i>
-                                        <p>Nuevo Empleado</p>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-door-open"></i>
-                                <p>
-                                    Cerrar Sesión
-                                </p>
-                            </a>
-                        </li>
-                </nav>
-                <!-- /.sidebar-menu -->
-            </div>
-            <!-- /.sidebar -->
-        </aside>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -242,8 +51,7 @@
                                 <h3 class="card-title">Recordatorios</h3>
 
                                 <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                            class="fas fa-plus"></i>
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                                 <!-- /.card-tools -->
@@ -264,12 +72,9 @@
 
                                             <div class="form-group">
                                                 <label>Fecha y Hora:</label>
-                                                <div class="input-group date" id="reservationdatetime"
-                                                    data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input"
-                                                        data-target="#reservationdatetime">
-                                                    <div class="input-group-append" data-target="#reservationdatetime"
-                                                        data-toggle="datetimepicker">
+                                                <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime">
+                                                    <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                         </div>
                                                     </div>
@@ -563,9 +368,7 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2023</strong> Legacy Multiservice LLC.
-        </footer>
+        <?php include_once '../secciones/footer.php'; ?>
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
@@ -600,7 +403,7 @@
 
     <!-- Page specific script -->
     <script>
-        $(function () {
+        $(function() {
             //Initialize Select2 Elements
             $('.select2').select2()
 
@@ -608,16 +411,13 @@
             $('#summernote').summernote()
 
             //Date and time picker
-            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' }, format: 'DD/MM/YYYY hh:mm A' });
+            $('#reservationdatetime').datetimepicker({
+                icons: {
+                    time: 'far fa-clock'
+                },
+                format: 'DD/MM/YYYY hh:mm A'
+            });
         })
-    </script>
-    <script>
-        function nuevoCliente() {
-            window.open('../forms/clientes/frmNuevo.html', 'Nuevo Cliente', 'width=400,height=1000')
-        }
-        function buscarCotizacion() {
-            window.open('../forms/cotizaciones/frmBuscar.html', 'Buscar Cotización', 'width=400,height=450')
-        }
     </script>
 
 </body>

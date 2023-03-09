@@ -1,10 +1,13 @@
+<?php
+require_once '../../func/validateSession.php';
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Legacy Multiservice LLC | Resultados</title>
+    <title>Resultados de cotizaciones</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -314,7 +317,7 @@
             window.open('../forms/nuevo-cliente/', 'Nuevo Cliente', 'width=400,height=1000')
         }
         function nuevoClientev2() {
-            window.open('../forms/cliente/frmNuevo.html', 'Nuevo Cliente', 'width=2000,height=400')
+            window.open('../forms/cliente/frmNuevo.php', 'Nuevo Cliente', 'width=2000,height=400')
         }
 
         function cerrarVentana() {

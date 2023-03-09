@@ -1,5 +1,8 @@
+<?php
+require_once '../../func/validateSession.php';
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -160,12 +163,12 @@
             window.open('../forms/nuevo-cliente/', 'Nuevo Cliente', 'width=400,height=1000')
         }
         function nuevoClientev2() {
-            window.open('../forms/cliente/frmNuevo.html', 'Nuevo Cliente', 'width=2000,height=400')
+            window.open('../forms/cliente/frmNuevo.php', 'Nuevo Cliente', 'width=2000,height=400')
         }
         
         function obtenerResultados() {
             window.close();
-            window.open('./frmResultados.html', 'Resultados de búsqueda', 'width=1400,height=600')
+            window.open('./frmResultados.php', 'Resultados de búsqueda', 'width=1400,height=600')
         }
         
     </script>
