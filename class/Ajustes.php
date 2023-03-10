@@ -8,7 +8,7 @@ class Ajustes
     }
     public function RemoverEtiquetas($content)
     {
-        return strip_tags($content);
+        return strip_tags(trim($content));
     }
 
 }

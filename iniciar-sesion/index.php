@@ -114,7 +114,7 @@ session_start();
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000
+        timer: 300000
       });
       const showError = () => {
         Toast.fire({

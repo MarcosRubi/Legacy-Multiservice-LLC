@@ -48,6 +48,7 @@ if ($_POST['txtRegreso'] !== "" && $_POST['txtRegreso'] !== "dd-mm-yyyy" && !pre
 $Res_Cotizaciones = $Obj_Cotizaciones->Insertar();
 
 if ($Res_Cotizaciones) {
+    $_SESSION['registro'] = 's-cotizacion';
     echo "<script>
     let URL = window.opener.location.pathname;
     if (URL.indexOf('buscar-cliente') !== -1) {

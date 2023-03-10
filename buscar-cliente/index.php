@@ -31,6 +31,10 @@ if (isset($_GET['s'])) {
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
@@ -121,7 +125,7 @@ if (isset($_GET['s'])) {
                                                     </td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">
-                                                            <a class="btn btn-sm mx-1 bg-success" title="Agregar" onclick="javascript:nuevaFactura(<?= $DatosCliente['IdCliente'] ?>);">
+                                                            <a class="btn btn-sm mx-1 bg-success" title="Agregar" onclick="javascript:nuevaFactura(<?= $DatosCliente['IdCliente'] . ',\'' .  $DatosCliente['PrimerNombre'] . '\',\'' . $DatosCliente['Apellido'] . '\'' ?>);">
                                                                 <i class="fa fa-plus"></i>
                                                             </a>
                                                             <a class="btn btn-sm mx-1 bg-success" title="Listar" onclick="javascript:listarFacturas(<?= $DatosCliente['IdCliente'] ?>);">
@@ -181,7 +185,10 @@ if (isset($_GET['s'])) {
     <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-
+    <!-- SweetAlert2 -->
+    <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -209,8 +216,8 @@ if (isset($_GET['s'])) {
             window.open('<?= $_SESSION['path'] ?>forms/boletos/frmNuevo.php', 'Nuevo Boleto', 'width=2000,height=2000')
         }
 
-        function nuevaFactura() {
-            window.open('<?= $_SESSION['path'] ?>forms/facturas/frmNuevo.php', 'Nueva Factura', 'width=1000,height=2000')
+        function nuevaFactura(id, primerNombre, apellido) {
+            window.open('<?= $_SESSION['path'] ?>forms/facturas/frmNuevo.php?id=' + id + '&nombre=' + primerNombre + ' ' + apellido, 'Nueva Factura', 'width=1000,height=2000')
         }
 
         function listarBoletos() {
@@ -225,6 +232,42 @@ if (isset($_GET['s'])) {
             window.open('<?= $_SESSION['path'] ?>forms/facturas/listar.php', 'Facturas', 'width=2000,height=2000')
         }
     </script>
+    <?php
+    if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-factura') {?>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'success',
+                title: 'Factura guardada correctamente.'
+            })
+        </script>
+    <?php
+        unset($_SESSION['registro']);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-cotizacion') {?>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'success',
+                title: 'Cotización guardada correctamente.'
+            })
+        </script>
+    <?php
+        unset($_SESSION['registro']);
+    }
+    ?>
 </body>
 
 </html>
