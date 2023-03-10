@@ -1,5 +1,10 @@
 <?php
 require_once '../../func/validateSession.php';
+
+if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
+    echo "<script>window.location.replace('" . $_SESSION['path'] . "buscar-cliente/');</script>";
+    return;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,12 +15,15 @@ require_once '../../func/validateSession.php';
     <title>Nueva Cotización</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -30,122 +38,107 @@ require_once '../../func/validateSession.php';
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Agregar nueva cotización</h3>
                         </div>
-                        <div class="card-body">
+                        <form action="./insertar.php" method="post" class="card-body" id="frmNuevo">
                             <div class="d-flex flex-column flex-xl-row">
                                 <!-- Cliente -->
                                 <div class="form-group mx-1">
                                     <label>Cliente</label>
-                                    <input type="text" class="form-control" disabled value="Marcos Daniel Rubí">
+                                    <input type="text" class="form-control" disabled value="<?= $_GET['nombre'] ?>">
                                 </div>
                                 <!-- PNR(s) -->
                                 <div class="form-group mx-1">
                                     <label>PNR(s)</label>
-                                    <input type="text" class="form-control" placeholder="PNR(s) ...">
+                                    <input type="text" class="form-control" placeholder="PNR(s) ..." name="txtPnr">
                                 </div>
                                 <!-- Comentario -->
                                 <div class="form-group mx-1">
                                     <label>Comentario</label>
-                                    <input type="text" class="form-control" placeholder="Comentario ...">
+                                    <input type="text" class="form-control" placeholder="Comentario ..." name="txtComentario">
                                 </div>
                                 <!-- Acción -->
                                 <div class="form-group mx-1">
                                     <label>Acción</label>
-                                    <input type="text" class="form-control" placeholder="Acción ...">
+                                    <input type="text" class="form-control" placeholder="Acción ..." name="txtAccion">
                                 </div>
-                                <!-- Fecha dd/mm/yyyy -->
+                                <!-- Fecha yyyy-mm-dd -->
                                 <div class="form-group mx-1">
                                     <label>Fecha:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                            data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="yyyy-mm-dd" name="txtFecha">
                                     </div>
                                     <!-- /.input group -->
                                 </div>
-                                <!-- Creado dd/mm/yyyy -->
-                                <div class="form-group mx-1 d-none">
-                                    <label>Creado:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                            data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy"
-                                            disabled value="03/03/2023">
-                                    </div>
-                                    <!-- /.input group -->
-                                </div>
+
                                 <!-- Agencia -->
                                 <div class="form-group mx-1">
                                     <label>Agencia</label>
-                                    <input type="text" class="form-control" placeholder="Agencia ...">
+                                    <input type="text" class="form-control" placeholder="Agencia ..." name="txtAgencia">
                                 </div>
                             </div>
                             <div class="d-flex flex-column flex-xl-row">
                                 <!-- Agente -->
                                 <div class="form-group mx-1">
                                     <label>Agente</label>
-                                    <input type="text" class="form-control" placeholder="Agente ...">
+                                    <input type="text" class="form-control" placeholder="Agente ..." name="txtAgente">
                                 </div>
                                 <!-- Origen -->
                                 <div class="form-group mx-1">
                                     <label>Origen</label>
-                                    <input type="text" class="form-control" placeholder="Origen ...">
+                                    <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen">
                                 </div>
                                 <!-- Destino -->
                                 <div class="form-group mx-1">
                                     <label>Destino</label>
-                                    <input type="text" class="form-control" placeholder="Destino ...">
+                                    <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino">
                                 </div>
-                                <!-- Ida dd/mm/yyyy -->
+                                <!-- Ida yyyy-mm-dd -->
                                 <div class="form-group mx-1">
                                     <label>Ida:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                            data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="yyyy-mm-dd" name="txtIda">
                                     </div>
                                 </div>
-                                <!-- Regreso dd/mm/yyyy -->
+                                <!-- Regreso yyyy-mm-dd -->
                                 <div class="form-group mx-1">
                                     <label>Regreso:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime"
-                                            data-inputmask-inputformat="dd/mm/yyyy" data-mask placeholder="dd/mm/yyyy">
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="yyyy-mm-dd" name="txtRegreso">
                                     </div>
                                 </div>
                                 <!-- # Boletos -->
                                 <div class="form-group mx-1">
                                     <label># Boletos</label>
-                                    <input type="text" class="form-control" placeholder="# Boletos ...">
+                                    <input type="text" class="form-control" placeholder="# Boletos ..." name="txtNumeroBoletos">
                                 </div>
                                 <!-- Cotizado -->
                                 <div class="form-group mx-1">
                                     <label>Cotizado</label>
-                                    <input type="text" class="form-control" placeholder="Cotizado ...">
+                                    <input type="text" class="form-control" placeholder="Cotizado ..." name="txtCotizado">
                                 </div>
                                 <!-- MAX -->
                                 <div class="form-group mx-1">
                                     <label>MAX</label>
-                                    <input type="text" class="form-control" placeholder="Max ...">
+                                    <input type="text" class="form-control" placeholder="Max ..." name="txtMax">
                                 </div>
+                                <input type="text" class="form-control d-none" name="IdCliente" value="<?=$_GET['id']?>">
                             </div>
                             <!-- /.form group -->
                             <div class="form-group pr-1">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar</button>
                             </div>
                             <div class="form-group pl-1">
-                                <button class="btn btn-block text-center" type="reset"
-                                    onclick="javascript:closeForm();">Cancelar</button>
+                                <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cancelar</button>
                             </div>
-                        </div>
+                        </form>
                         <!-- /.form group -->
                     </div>
                     <!-- /.card-body -->
@@ -170,21 +163,148 @@ require_once '../../func/validateSession.php';
     <!-- InputMask -->
     <script src="../../plugins/moment/moment.min.js"></script>
     <script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        $(function () {
-            //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-            //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-            //Phone Number
+        $(function() {
             $('[data-mask]').inputmask()
         })
     </script>
+    <script>
+        $(function() {
+            $('#frmNuevo').validate({
+                rules: {
+                    txtPnr: {
+                        required: true
+                    },
+                    txtAgencia: {
+                        required: true
+                    },
+                    txtAgente: {
+                        required: true
+                    },
+                    txtOrigen: {
+                        required: true
+                    },
+                    txtDestino: {
+                        required: true
+                    },
+                    txtIda: {
+                        required: true
+                    },
+                    txtRegreso: {
+                        required: true
+                    },
+                    txtNumeroBoletos: {
+                        required: true
+                    },
+                },
+                messages: {
+                    txtPnr: {
+                        required: "El PNR es obligatorio",
+                    },
+                    txtAgencia: {
+                        required: "El nombre de agencia es obligatorio",
+                    },
+                    txtAgente: {
+                        required: "El nombre del agente es obligatorio",
+                    },
+                    txtOrigen: {
+                        required: "El lugar de origen es obligatorio",
+                    },
+                    txtDestino: {
+                        required: "El lugar de destino es obligatorio",
+                    },
+                    txtIda: {
+                        required: "La fecha de ida es obligatorio",
+                    },
+                    txtRegreso: {
+                        required: "La fecha de regreso es obligatorio",
+                    },
+                    txtNumeroBoletos: {
+                        required: "El número de boletos es obligatorio",
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        })
+    </script>
+    <?php
+    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'fecha') { ?>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'Fecha no válida.'
+            })
+        </script>
+    <?php
+        unset($_SESSION['error-registro']);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'ida') { ?>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            Toast.fire({
+                icon: 'error',
+                title: 'Fecha de ida no válida.'
+            })
+        </script>
+    <?php
+        unset($_SESSION['error-registro']);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'regreso') { ?>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            Toast.fire({
+                icon: 'error',
+                title: 'Fecha de regreso no válida.'
+            })
+        </script>
+    <?php
+        unset($_SESSION['error-registro']);
+    }
+    ?>
     <script>
         function closeForm() {
             window.close()

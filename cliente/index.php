@@ -5,14 +5,13 @@ require_once '../class/Clientes.php';
 
 $Obj_Clientes = new Clientes();
 
-$Res_Clientes = $Obj_Clientes->listarTodo();
 
-if (isset($_GET['s'])) {
-    $Res_Clientes = $Obj_Clientes->buscarCliente($_GET['s']);
+if (!isset($_GET['id'])) {
+    echo "<script>window.location.replace('" . $_SESSION['path'] . "buscar-cliente/');</script>";
+    return;
 }
-
-
-
+$Res_Clientes = $Obj_Clientes->buscarPorId($_GET['id']);
+$DatosCliente = $Res_Clientes->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +33,14 @@ if (isset($_GET['s'])) {
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <style>
+        #logs_wrapper .row:last-child{
+            display: none !important;
+        }
+        #list-results{
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -52,37 +59,13 @@ if (isset($_GET['s'])) {
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <h2 class="text-center display-4">Buscar Cliente</h2>
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <form method="get">
-                                <div class="input-group">
-                                    <input type="search" class="form-control form-control-lg" placeholder="Buscar..." autofocus name="s">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-lg btn-default">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                            <span class="text-gray">Puedes buscar por cualquier parámetro de la tabla</span>
-                        </div>
-                    </div>
+                    <h3 class='display-5'>Datos de: <strong><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " ". $DatosCliente['Apellido'] ?></strong></h3>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <?php
-                            if (isset($_GET['s']) && $_GET['s'] !== "") { ?>
-                                <div class="d-flex justify-content-between mb-2 mt-3">
-                                    <h3 class='display-5'>Clientes encontrados para: <strong><?= $_GET['s'] ?></strong></h3>
-                                    <a href="./" class="btn btn-primary">Listar todo</a>
-                                </div>
-                            <?php } else {
-                                echo "<h3 class='display-5'>Últimos clientes creados</h3>";
-                            }
-
-                            ?>
-
                             <div class="card">
+                                <div class="card-header">
+                                    <h5 class='display-5'>Información personal</h5>
+                                </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="logs" class="table table-bordered table-hover">
@@ -95,15 +78,12 @@ if (isset($_GET['s'])) {
                                                 <th>Número De Teléfono</th>
                                                 <th>Dirección</th>
                                                 <th>Fecha de Nac.</th>
-                                                <th>Boletos</th>
-                                                <th>Facturas</th>
-                                                <th>Cotizaciones</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php while ($DatosCliente = $Res_Clientes->fetch_assoc()) { ?>
                                                 <tr>
-                                                    <td><a href="<?= $_SESSION['path'] ?>cliente/?id=<?= $DatosCliente['IdCliente'] ?>"><?= $DatosCliente['IdCliente'] ?></a></td>
+                                                    <td><?= $DatosCliente['IdCliente'] ?></td>
                                                     <td><?= $DatosCliente['Apellido'] ?></td>
                                                     <td><?= $DatosCliente['SegundoNombre'] ?></td>
                                                     <td><?= $DatosCliente['PrimerNombre'] ?></td>
@@ -112,36 +92,15 @@ if (isset($_GET['s'])) {
                                                     <td><?= $DatosCliente['FechaNacimiento'] ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">
-                                                            <a class="btn btn-sm mx-1 btn-primary" title="Agregar" onclick="javascript:nuevoBoleto(<?= $DatosCliente['IdCliente'] ?>);">
-                                                                <i class="fa fa-plus"></i>
+                                                            <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editar(<?= $DatosCliente['IdCliente'] ?>);">
+                                                                <i class="fa fa-edit"></i>
                                                             </a>
-                                                            <a href="#" class="btn btn-sm mx-1 btn-primary" title="Listar" onclick="javascript:listarBoletos(<?= $DatosCliente['IdCliente'] ?>);">
-                                                                <i class="fa fa-list"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-around">
-                                                            <a class="btn btn-sm mx-1 bg-success" title="Agregar" onclick="javascript:nuevaFactura(<?= $DatosCliente['IdCliente'] ?>);">
-                                                                <i class="fa fa-plus"></i>
-                                                            </a>
-                                                            <a class="btn btn-sm mx-1 bg-success" title="Listar" onclick="javascript:listarFacturas(<?= $DatosCliente['IdCliente'] ?>);">
-                                                                <i class="fa fa-list"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-around">
-                                                            <a class="btn btn-sm mx-1 bg-info" title="Agregar" onclick="javascript:nuevaCotizacion(<?= $DatosCliente['IdCliente'] . ',\'' .  $DatosCliente['PrimerNombre'] .'\',\''. $DatosCliente['Apellido'] . '\'' ?>);">
-                                                                <i class="fa fa-plus"></i>
-                                                            </a>
-                                                            <a class="btn btn-sm mx-1 bg-info" title="Listar" onclick="javascript:listarCotizaciones(<?= $DatosCliente['IdCliente'] ?>);">
-                                                                <i class="fa fa-list"></i>
+                                                            <a href="#" class="btn btn-sm mx-1 btn-primary" title="Eliminar" onclick="javascript:eliminar(<?= $DatosCliente['IdCliente'] ?>);">
+                                                                <i class="fa fa-trash"></i>
                                                             </a>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -152,6 +111,9 @@ if (isset($_GET['s'])) {
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
+                    <div class="row">
+                        <?php require_once '../cliente/listar.php' ?>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -200,10 +162,21 @@ if (isset($_GET['s'])) {
                 "responsive": true,
             });
         });
+        $(function() {
+            $('#list-results').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": false,
+                "info": false,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
     </script>
     <script>
-        function nuevaCotizacion(id, primerNombre, apellido) {
-            window.open('<?= $_SESSION['path'] ?>forms/cotizaciones/frmNuevo.php?id='+id+'&nombre='+primerNombre+' '+apellido, 'Nueva Cotización', 'width=400,height=1000')
+        function nuevaCotizacion() {
+            window.open('<?= $_SESSION['path'] ?>forms/cotizaciones/frmNuevo.php', 'Nueva Cotización', 'width=400,height=1000')
         }
 
         function nuevoBoleto() {

@@ -1,5 +1,5 @@
 <?php
-require_once '../../func/validateSession.php';
+    require_once '../../func/validateSession.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">

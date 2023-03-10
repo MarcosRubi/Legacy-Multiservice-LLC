@@ -14,8 +14,17 @@ $Obj_Clientes->FechaNacimiento = $_POST['txtFechaNacimiento'];
 
 $regexFecha = '/^(19|20)(((([02468][048])|([13579][26]))-02-29)|(\d{2})-((02-((0[1-9])|1\d|2[0-8]))|((((0[13456789])|1[012]))-((0[1-9])|((1|2)\d)|30))|(((0[13578])|(1[02]))-31)))$/';
 
-if(!preg_match($regexFecha, $_POST['txtFechaNacimiento'])){
-    $_SESSION['error-registro'] = 'true';
+
+//VALIDANDO FORMATO DE FECHA
+if($_POST['txtFechaNacimiento'] !== "" && $_POST['txtFechaNacimiento'] !== "yyyy-mm-dd" && !preg_match($regexFecha, $_POST['txtFechaNacimiento'])){
+    $_SESSION['error-registro'] = 'fecha';
+    echo "<script>history.go(-1)</script>";
+    return;
+};
+
+//VALIDANDO FORMATO DE TELEFONO
+if(str_contains($_POST['txtTelefono'], "_")){
+    $_SESSION['error-registro'] = 'tel';
     echo "<script>history.go(-1)</script>";
     return;
 };

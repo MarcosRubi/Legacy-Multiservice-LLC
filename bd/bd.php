@@ -10,10 +10,10 @@ class DB
 
     public function __construct()
     {
-        $this->Server = "";
-        $this->User = "";
+        $this->Server = "127.0.0.1";
+        $this->User = "root";
         $this->Password = "";
-        $this->DataBase = "";
+        $this->DataBase = "db_legacy_multiservice_llc";
     }
 
     protected function ConectarDB()

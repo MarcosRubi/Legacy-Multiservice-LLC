@@ -11,7 +11,7 @@ class Clientes extends DB
 
     public function listarTodo()
     {
-        $query = "SELECT * FROM vta_listar_clientes";
+        $query = "SELECT * FROM vta_listar_clientes ORDER BY IdCliente DESC";
         return $this->EjecutarQuery($query);
     }
 
@@ -23,7 +23,7 @@ class Clientes extends DB
 
     public function buscarCliente($content)
     {
-        $query = "SELECT * FROM tbl_clientes WHERE 
+        $query = "SELECT * FROM vta_listar_clientes WHERE 
         IdCliente LIKE'%" . $content . "%' OR 
         PrimerNombre LIKE'%" . $content . "%' OR 
         SegundoNombre LIKE'%" . $content . "%' OR 

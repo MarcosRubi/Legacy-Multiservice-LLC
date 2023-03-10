@@ -138,15 +138,25 @@ require_once '../../func/validateSession.php';
         $(function() {
             $('#frmNuevo').validate({
                 rules: {
-                    txtFechaNacimiento: {
-                        required: true,
-                        minLength: 8
-                    }
+                    txtApellido: {
+                        required: true
+                    },
+                    txtPrimerNombre: {
+                        required: true
+                    },
+                    txtTelefono: {
+                        required: true
+                    },
                 },
                 messages: {
-                    txtFechaNacimiento: {
-                        required: "Ingrese una fecha de nacimiento",
-                        minLength: "Ingrese la fecha completa"
+                    txtApellido: {
+                        required: "El apellido es obligatorio",
+                    },
+                    txtPrimerNombre: {
+                        required: "El primer nombre es obligatorio",
+                    },
+                    txtTelefono: {
+                        required: "El teléfono es obligatorio",
                     }
                 },
                 errorElement: 'span',
@@ -162,9 +172,15 @@ require_once '../../func/validateSession.php';
                 }
             });
         })
+        const showError = () => {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Número de teléfono no válido.'
+                })
+            };
     </script>
     <?php
-    if (isset($_SESSION['error-registro'])) { ?>
+    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'fecha') { ?>
         <script>
             var Toast = Swal.mixin({
                 toast: true,
@@ -172,12 +188,22 @@ require_once '../../func/validateSession.php';
                 showConfirmButton: false,
                 timer: 3000
             });
-            const showError = () => {
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Fecha de nacimiento no válida.'
-                })
-            };
+            showError();
+        </script>
+    <?php
+        unset($_SESSION['error-registro']);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'tel') { ?>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            
             showError();
         </script>
     <?php
