@@ -18,10 +18,17 @@ class Cotizaciones extends DB
     public $Cotizado;
     public $Max;
     public $Creado;
+    public $CreadoTimestamp;
 
     public function listarTodo()
     {
         $query = "SELECT * FROM vta_listar_cotizaciones";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function buscarPorClienteId($id)
+    {
+        $query = "SELECT * FROM vta_listar_cotizaciones WHERE IdCliente='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
 
@@ -49,6 +56,7 @@ class Cotizaciones extends DB
             Cotizado,
             Max,
             Creado,
+            CreadoTimestamp,
             Eliminado )
             VALUES (
             '" . $this->IdCliente . "',
@@ -65,7 +73,8 @@ class Cotizaciones extends DB
             '" . $this->NumeroBoletos . "',
             '" . $this->Cotizado . "',
             '" . $this->Max . "',
-            '" . date("Y-m-d h:i:s") . "',
+            '" . date("Y-m-d h:i:s ") . "',
+            '" . date("A") . "',
             'N' ) ";
         return $this->EjecutarQuery($query);
     }

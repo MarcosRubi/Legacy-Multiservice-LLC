@@ -60,14 +60,14 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                     <label>Acción</label>
                                     <input type="text" class="form-control" placeholder="Acción ..." name="txtAccion">
                                 </div>
-                                <!-- Fecha yyyy-mm-dd -->
+                                <!-- Fecha dd-mm-yyyy -->
                                 <div class="form-group mx-1">
                                     <label>Fecha:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="yyyy-mm-dd" name="txtFecha">
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFecha">
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -94,24 +94,24 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                     <label>Destino</label>
                                     <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino">
                                 </div>
-                                <!-- Ida yyyy-mm-dd -->
+                                <!-- Ida dd-mm-yyyy -->
                                 <div class="form-group mx-1">
                                     <label>Ida:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="yyyy-mm-dd" name="txtIda">
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtIda">
                                     </div>
                                 </div>
-                                <!-- Regreso yyyy-mm-dd -->
+                                <!-- Regreso dd-mm-yyyy -->
                                 <div class="form-group mx-1">
                                     <label>Regreso:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="yyyy-mm-dd" name="txtRegreso">
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtRegreso">
                                     </div>
                                 </div>
                                 <!-- # Boletos -->

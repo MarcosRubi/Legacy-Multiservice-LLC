@@ -2,17 +2,16 @@
 require_once '../func/validateSession.php';
 require_once '../bd/bd.php';
 require_once '../class/Clientes.php';
+require_once '../class/Ajustes.php';
 
 $Obj_Clientes = new Clientes();
+$Obj_Ajustes = new Ajustes();
 
 $Res_Clientes = $Obj_Clientes->listarTodo();
 
 if (isset($_GET['s'])) {
     $Res_Clientes = $Obj_Clientes->buscarCliente($_GET['s']);
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +108,7 @@ if (isset($_GET['s'])) {
                                                     <td><?= $DatosCliente['PrimerNombre'] ?></td>
                                                     <td><?= $DatosCliente['Telefono'] ?></td>
                                                     <td><?= $DatosCliente['Direccion'] ?></td>
-                                                    <td><?= $DatosCliente['FechaNacimiento'] ?></td>
+                                                    <td><?= $DatosCliente['FechaNacimiento'] !== '0000-00-00' ? $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']) : '' ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">
                                                             <a class="btn btn-sm mx-1 btn-primary" title="Agregar" onclick="javascript:nuevoBoleto(<?= $DatosCliente['IdCliente'] ?>);">
@@ -132,7 +131,7 @@ if (isset($_GET['s'])) {
                                                     </td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">
-                                                            <a class="btn btn-sm mx-1 bg-info" title="Agregar" onclick="javascript:nuevaCotizacion(<?= $DatosCliente['IdCliente'] . ',\'' .  $DatosCliente['PrimerNombre'] .'\',\''. $DatosCliente['Apellido'] . '\'' ?>);">
+                                                            <a class="btn btn-sm mx-1 bg-info" title="Agregar" onclick="javascript:nuevaCotizacion(<?= $DatosCliente['IdCliente'] . ',\'' .  $DatosCliente['PrimerNombre'] . '\',\'' . $DatosCliente['Apellido'] . '\'' ?>);">
                                                                 <i class="fa fa-plus"></i>
                                                             </a>
                                                             <a class="btn btn-sm mx-1 bg-info" title="Listar" onclick="javascript:listarCotizaciones(<?= $DatosCliente['IdCliente'] ?>);">
@@ -203,7 +202,7 @@ if (isset($_GET['s'])) {
     </script>
     <script>
         function nuevaCotizacion(id, primerNombre, apellido) {
-            window.open('<?= $_SESSION['path'] ?>forms/cotizaciones/frmNuevo.php?id='+id+'&nombre='+primerNombre+' '+apellido, 'Nueva Cotización', 'width=400,height=1000')
+            window.open('<?= $_SESSION['path'] ?>forms/cotizaciones/frmNuevo.php?id=' + id + '&nombre=' + primerNombre + ' ' + apellido, 'Nueva Cotización', 'width=400,height=1000')
         }
 
         function nuevoBoleto() {
@@ -218,8 +217,8 @@ if (isset($_GET['s'])) {
             window.open('<?= $_SESSION['path'] ?>forms/boletos/listar.php', 'Boletos', 'width=2000,height=2000')
         }
 
-        function listarCotizaciones() {
-            window.open('<?= $_SESSION['path'] ?>forms/cotizaciones/listar.php', 'Cotizaciones', 'width=2000,height=2000')
+        function listarCotizaciones(id) {
+            window.open('<?= $_SESSION['path'] ?>forms/cotizaciones/listar.php?id=' + id, 'Cotizaciones', 'width=2000,height=2000')
         }
 
         function listarFacturas() {

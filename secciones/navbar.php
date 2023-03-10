@@ -14,9 +14,9 @@
                 <i class="fas fa-search"></i>
             </a>
             <div class="navbar-search-block">
-                <form class="form-inline">
+                <form action="<?=$_SESSION['path']?>buscar-cliente/" class="form-inline">
                     <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Buscar" name="s">
                         <div class="input-group-append">
                             <button class="btn btn-navbar" type="submit">
                                 <i class="fas fa-search"></i>

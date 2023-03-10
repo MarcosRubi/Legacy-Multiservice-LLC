@@ -75,7 +75,7 @@ require_once '../../func/validateSession.php';
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask placeholder="yyyy-mm-dd" name="txtFechaNacimiento">
+                                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaNacimiento">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -124,11 +124,11 @@ require_once '../../func/validateSession.php';
     <!-- Page specific script -->
     <script>
         $(function() {
-            $('#datemask').inputmask('yyyy-mm-dd', {
-                'placeholder': 'yyyy-mm-dd'
+            $('#datemask').inputmask('dd-mm-yyy', {
+                'placeholder': 'dd-mm-yyy'
             })
-            $('#datemask2').inputmask('yyyy-mm-dd', {
-                'placeholder': 'yyyy-mm-dd'
+            $('#datemask2').inputmask('dd-mm-yyy', {
+                'placeholder': 'dd-mm-yyy'
             })
             //Phone Number
             $('[data-mask]').inputmask()
@@ -172,12 +172,6 @@ require_once '../../func/validateSession.php';
                 }
             });
         })
-        const showError = () => {
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Número de teléfono no válido.'
-                })
-            };
     </script>
     <?php
     if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'fecha') { ?>
@@ -188,7 +182,10 @@ require_once '../../func/validateSession.php';
                 showConfirmButton: false,
                 timer: 3000
             });
-            showError();
+            Toast.fire({
+                    icon: 'error',
+                    title: 'Fecha de nacimiento no válida.'
+                })
         </script>
     <?php
         unset($_SESSION['error-registro']);
@@ -204,7 +201,10 @@ require_once '../../func/validateSession.php';
                 timer: 3000
             });
             
-            showError();
+            Toast.fire({
+                    icon: 'error',
+                    title: 'Número de teléfono no válido.'
+                })
         </script>
     <?php
         unset($_SESSION['error-registro']);
