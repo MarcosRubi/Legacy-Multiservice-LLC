@@ -94,8 +94,8 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                                                     <td><?=$DatosCotizacion['Accion']?></td>
                                                     <td><?=$DatosCotizacion['Fecha'] === '0000-00-00' ? '' : $Obj_Ajustes->FechaInvertir($DatosCotizacion['Fecha']) ?></td>
                                                     <td><?=$DatosCotizacion['Comentario']?></td>
-                                                    <td><?=$DatosCotizacion['Cotizado']?></td>
-                                                    <td><?=$DatosCotizacion['Max']?></td>
+                                                    <td><?=$Obj_Ajustes->FormatoDinero($DatosCotizacion['Cotizado'])?></td>
+                                                    <td><?=$Obj_Ajustes->FormatoDinero($DatosCotizacion['Max'])?></td>
                                                 </tr>
                                                 <?php } ?>
                                             </tbody>

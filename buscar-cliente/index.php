@@ -228,8 +228,8 @@ if (isset($_GET['s'])) {
             window.open('<?= $_SESSION['path'] ?>forms/cotizaciones/listar.php?id=' + id, 'Cotizaciones', 'width=2000,height=2000')
         }
 
-        function listarFacturas() {
-            window.open('<?= $_SESSION['path'] ?>forms/facturas/listar.php', 'Facturas', 'width=2000,height=2000')
+        function listarFacturas(id) {
+            window.open('<?= $_SESSION['path'] ?>forms/facturas/listar.php?id='+id, 'Facturas', 'width=2000,height=2000')
         }
     </script>
     <?php

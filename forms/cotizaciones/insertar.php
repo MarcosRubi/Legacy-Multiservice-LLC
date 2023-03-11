@@ -38,12 +38,6 @@ if ($_POST['txtIda'] !== "" && $_POST['txtIda'] !== "dd-mm-yyyy" && !preg_match(
     echo "<script>history.go(-1)</script>";
     return;
 };
-//VALIDANDO FORMATO DE FECHA - REGRESO
-if ($_POST['txtRegreso'] !== "" && $_POST['txtRegreso'] !== "dd-mm-yyyy" && !preg_match($regexFecha, $_POST['txtRegreso'])) {
-    $_SESSION['error-registro'] = 'regreso';
-    echo "<script>history.go(-1)</script>";
-    return;
-};
 
 $Res_Cotizaciones = $Obj_Cotizaciones->Insertar();
 

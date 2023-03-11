@@ -1,5 +1,22 @@
 <?php
 require_once '../../func/validateSession.php';
+if (!isset($_GET['id'])) {
+    echo "<script>window.close(); window.location.replace('" . $_SESSION['path'] . "buscar-cliente/');</script>";
+    return;
+}
+
+require_once '../../bd/bd.php';
+require_once '../../class/Facturas.php';
+require_once '../../class/Ajustes.php';
+
+$Obj_Ajustes = new Ajustes();
+
+$Obj_Facturas = new Facturas();
+$Res_Facturas = $Obj_Facturas->buscarPorId($_GET['id']);
+$Res_ValorTotal = $Obj_Facturas->ValorTotalPorCliente($_GET['id']);
+
+$Datosfacturas = $Res_Facturas->fetch_assoc();
+$valorTotal = $Obj_Ajustes->FormatoDinero($Res_ValorTotal->fetch_assoc()['ValorTotal'], 2);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,8 +27,7 @@ require_once '../../func/validateSession.php';
     <title>Facturas</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
@@ -33,7 +49,11 @@ require_once '../../func/validateSession.php';
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Facturas a nombre de <strong>Marcos Daniel Rubí</strong></h3>
+                                    <?php if ($Res_Facturas->num_rows === 0) { ?>
+                                        <h3 class="card-title">No hay facturas creadas para este cliente</h3>
+                                    <?php } else { ?>
+                                        <h3 class="card-title">Facturas a nombre de <strong><?= $Datosfacturas['PrimerNombre'] . " " . $Datosfacturas['Apellido'] ?></strong></h3>
+                                    <?php } ?>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -48,10 +68,14 @@ require_once '../../func/validateSession.php';
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>2,400.25</td>
-                                                <td>2,400.259</td>
-                                                <td>0.00</td>
+                                                <?php if ($Res_Facturas->num_rows === 0) { ?>
+                                                    <td></td>
+                                                <?php } else { ?>
+                                                    <td><?= $Datosfacturas['PrimerNombre'] . " " . $Datosfacturas['Apellido'] ?></td>
+                                                <?php } ?>
+                                                <td><?= $valorTotal ?></td>
+                                                <td><?= $valorTotal ?></td>
+                                                <td>$0.00</td>
                                     </table>
                                 </div>
                                 <div class="card-body">
@@ -59,7 +83,7 @@ require_once '../../func/validateSession.php';
                                         <thead>
                                             <tr>
                                                 <th># Factura</th>
-                                                <th>Fecha</th>
+                                                <th>Factura ingresada</th>
                                                 <th>Cliente</th>
                                                 <th>Agente</th>
                                                 <th>Agencia</th>
@@ -71,121 +95,29 @@ require_once '../../func/validateSession.php';
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>07-07-1999</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>MR</td>
-                                                <td>AMS</td>
-                                                <td>DEP-01 - Tickets/Boletos</td>
-                                                <td>6541651651 Total Tkts: 1</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td style="width:3rem;">
-                                                    <div class="d-flex justify-content-around">
-                                                        <a href="#" title="Imprimir">
-                                                            <i
-                                                                class="fa fa-print fa-lg bg-primary p-2 mx-1 rounded"></i>
-                                                        </a>
-                                                        <a href="#" title="Crear Factura">
-                                                            <i
-                                                                class="fa fa-dollar-sign fa-lg bg-primary p-2 mx-1 rounded"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>07-07-1999</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>MR</td>
-                                                <td>AMS</td>
-                                                <td>DEP-01 - Tickets/Boletos</td>
-                                                <td>6541651651 Total Tkts: 1</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td style="width:3rem;">
-                                                    <div class="d-flex justify-content-around">
-                                                        <a href="#" title="Imprimir">
-                                                            <i
-                                                                class="fa fa-print fa-lg bg-primary p-2 mx-1 rounded"></i>
-                                                        </a>
-                                                        <a href="#" title="Crear Factura">
-                                                            <i
-                                                                class="fa fa-dollar-sign fa-lg bg-primary p-2 mx-1 rounded"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>07-07-1999</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>MR</td>
-                                                <td>AMS</td>
-                                                <td>DEP-01 - Tickets/Boletos</td>
-                                                <td>6541651651 Total Tkts: 1</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td style="width:3rem;">
-                                                    <div class="d-flex justify-content-around">
-                                                        <a href="#" title="Imprimir">
-                                                            <i
-                                                                class="fa fa-print fa-lg bg-primary p-2 mx-1 rounded"></i>
-                                                        </a>
-                                                        <a href="#" title="Crear Factura">
-                                                            <i
-                                                                class="fa fa-dollar-sign fa-lg bg-primary p-2 mx-1 rounded"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>07-07-1999</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>MR</td>
-                                                <td>AMS</td>
-                                                <td>DEP-01 - Tickets/Boletos</td>
-                                                <td>6541651651 Total Tkts: 1</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td style="width:3rem;">
-                                                    <div class="d-flex justify-content-around">
-                                                        <a href="#" title="Imprimir">
-                                                            <i
-                                                                class="fa fa-print fa-lg bg-primary p-2 mx-1 rounded"></i>
-                                                        </a>
-                                                        <a href="#" title="Crear Factura">
-                                                            <i
-                                                                class="fa fa-dollar-sign fa-lg bg-primary p-2 mx-1 rounded"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>07-07-1999</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>MR</td>
-                                                <td>AMS</td>
-                                                <td>DEP-01 - Tickets/Boletos</td>
-                                                <td>6541651651 Total Tkts: 1</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td style="width:3rem;">
-                                                    <div class="d-flex justify-content-around">
-                                                        <a href="#" title="Imprimir">
-                                                            <i
-                                                                class="fa fa-print fa-lg bg-primary p-2 mx-1 rounded"></i>
-                                                        </a>
-                                                        <a href="#" title="Crear Factura">
-                                                            <i
-                                                                class="fa fa-dollar-sign fa-lg bg-primary p-2 mx-1 rounded"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            <?php foreach ($Res_Facturas as $key => $Datosfactura) { ?>
+                                                <tr>
+                                                    <td><?= $Datosfactura['IdFactura'] ?></td>
+                                                    <td><?= $Datosfactura['Creado'] . " " . $Datosfactura['CreadoTimestamp'] ?></td>
+                                                    <td><?= $Datosfactura['PrimerNombre'] . " " . $Datosfactura['Apellido'] ?></td>
+                                                    <td><?= $Datosfactura['Agente'] ?></td>
+                                                    <td><?= $Datosfactura['Agencia'] ?></td>
+                                                    <td><?= $Datosfactura['Tipo'] ?></td>
+                                                    <td><?= $Datosfactura['Descripcion'] ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Valor']) ?></td>
+                                                    <td>$0.00</td>
+                                                    <td style="width:3rem;">
+                                                        <div class="d-flex justify-content-around">
+                                                            <a href="#" title="Imprimir">
+                                                                <i class="fa fa-print fa-lg bg-primary p-2 mx-1 rounded"></i>
+                                                            </a>
+                                                            <a href="#" title="Crear Factura">
+                                                                <i class="fa fa-dollar-sign fa-lg bg-primary p-2 mx-1 rounded"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -196,7 +128,7 @@ require_once '../../func/validateSession.php';
                                                 <th># Factura</th>
                                                 <th>Agencia</th>
                                                 <th>Agente</th>
-                                                <th>Fecha</th>
+                                                <th>Factura ingresada</th>
                                                 <th>Efectivo</th>
                                                 <th>Crédito</th>
                                                 <th>Cheque</th>
@@ -208,76 +140,22 @@ require_once '../../func/validateSession.php';
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>AMS</td>
-                                                <td>MR</td>
-                                                <td>02-07-2020</td>
-                                                <td>0.00</td>
-                                                <td>523.00</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td>523.00</td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>AMS</td>
-                                                <td>MR</td>
-                                                <td>02-07-2020</td>
-                                                <td>0.00</td>
-                                                <td>523.00</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td>523.00</td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>AMS</td>
-                                                <td>MR</td>
-                                                <td>02-07-2020</td>
-                                                <td>0.00</td>
-                                                <td>523.00</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td>523.00</td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>AMS</td>
-                                                <td>MR</td>
-                                                <td>02-07-2020</td>
-                                                <td>0.00</td>
-                                                <td>523.00</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td>523.00</td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>AMS</td>
-                                                <td>MR</td>
-                                                <td>02-07-2020</td>
-                                                <td>0.00</td>
-                                                <td>523.00</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td>0.00</td>
-                                                <td>523.00</td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            <?php foreach ($Res_Facturas as $key => $Datosfactura) { ?>
+                                                <tr>
+                                                    <td><?= $Datosfactura['IdFactura'] ?></td>
+                                                    <td><?= $Datosfactura['Agencia'] ?></td>
+                                                    <td><?= $Datosfactura['Agente'] ?></td>
+                                                    <td><?= $Datosfactura['Creado'] . " " . $Datosfactura['CreadoTimestamp'] ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Efectivo']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['CreditoValor']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Cheque']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Banco']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Cupon']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Valor']) ?></td>
+                                                    <td><?= $Datosfactura['Comentario'] ?></td>
+                                                    <td></td>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -326,7 +204,7 @@ require_once '../../func/validateSession.php';
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        $(function () {
+        $(function() {
             $('#list-results-1').DataTable({
                 "paging": true,
                 "lengthChange": false,
@@ -337,7 +215,7 @@ require_once '../../func/validateSession.php';
                 "responsive": true,
             });
         });
-        $(function () {
+        $(function() {
             $('#list-results-2').DataTable({
                 "paging": true,
                 "lengthChange": false,

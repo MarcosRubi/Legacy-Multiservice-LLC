@@ -261,7 +261,7 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 300000
+                timer: 4000
             });
             Toast.fire({
                 icon: 'error',
@@ -273,18 +273,37 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
     }
     ?>
     <?php
-    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'numeroTarjeta') {
+    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'numeroTarjetaVacio') {
         echo $_SESSION['error-registro'] ?>
         <script>
             var Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000
+                timer: 5000
             });
             Toast.fire({
                 icon: 'error',
                 title: 'El pago con tarjeta de crédito debe ingresar los 4 números finales de la tarjeta.'
+            })
+        </script>
+    <?php
+        unset($_SESSION['error-registro']);
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'numeroTarjetaNoCompleto') {
+        echo $_SESSION['error-registro'] ?>
+        <script>
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'Rellene los 4 números de la tarjeta de crédito.'
             })
         </script>
     <?php

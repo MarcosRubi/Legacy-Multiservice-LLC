@@ -1,8 +1,11 @@
 <?php
+date_default_timezone_set('America/El_Salvador'); 
+
 class Facturas extends DB
 {
     public $IdCliente;
     public $IdTipoFactura;
+    public $IdEmpleado;
     public $Valor;
     public $Descripcion;
     public $Efectivo;
@@ -12,6 +15,8 @@ class Facturas extends DB
     public $Banco;
     public $Cupon;
     public $Comentario;
+    public $Creado;
+    public $CreadoTimestamp;
 
 
     public function listarTodo()
@@ -22,7 +27,12 @@ class Facturas extends DB
 
     public function buscarPorId($id)
     {
-        $query = "SELECT * FROM vta_listar_facturas WHERE IdFactura='" . $id . "'";
+        $query = "SELECT * FROM vta_listar_facturas WHERE IdCliente='" . $id . "'";
+        return $this->EjecutarQuery($query);
+    }
+    
+    public function ValorTotalPorCliente($id){
+        $query = "SELECT SUM(vta_listar_facturas.Valor) AS ValorTotal FROM vta_listar_facturas WHERE IdCliente='".$id."'";
         return $this->EjecutarQuery($query);
     }
 
@@ -31,6 +41,7 @@ class Facturas extends DB
         $query = "INSERT INTO tbl_facturas(
             IdCliente,
             IdTipoFactura,
+            IdEmpleado,
             Valor,
             Descripcion,
             Efectivo,
@@ -40,10 +51,13 @@ class Facturas extends DB
             Banco,
             Cupon,
             Comentario,
+            Creado,
+            CreadoTimestamp,
             Eliminado )
             VALUES (
             '" . $this->IdCliente . "',
             '" . $this->IdTipoFactura . "',
+            '" . $this->IdEmpleado . "',
             '" . $this->Valor . "',
             '" . $this->Descripcion . "',
             '" . $this->Efectivo . "',
@@ -53,6 +67,8 @@ class Facturas extends DB
             '" . $this->Banco . "',
             '" . $this->Cupon . "',
             '" . $this->Comentario . "',
+            '" . date("Y-m-d h:i:s ") . "',
+            '" . date("A") . "',
             'N' ) ";
         return $this->EjecutarQuery($query);
     }

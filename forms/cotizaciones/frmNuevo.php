@@ -75,14 +75,14 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                 <!-- Agencia -->
                                 <div class="form-group mx-1">
                                     <label>Agencia</label>
-                                    <input type="text" class="form-control" placeholder="Agencia ..." name="txtAgencia">
+                                    <input type="text" class="form-control" placeholder="Agencia ..." name="txtAgencia" value="<?=$_SESSION['Agencia'] ?>">
                                 </div>
                             </div>
                             <div class="d-flex flex-column flex-xl-row">
                                 <!-- Agente -->
                                 <div class="form-group mx-1">
                                     <label>Agente</label>
-                                    <input type="text" class="form-control" placeholder="Agente ..." name="txtAgente">
+                                    <input type="text" class="form-control" placeholder="Agente ..." name="txtAgente" value="<?=$_SESSION['Agente'] ?>">
                                 </div>
                                 <!-- Origen -->
                                 <div class="form-group mx-1">
@@ -202,9 +202,6 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                     txtIda: {
                         required: true
                     },
-                    txtRegreso: {
-                        required: true
-                    },
                     txtNumeroBoletos: {
                         required: true
                     },
@@ -280,25 +277,6 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
             Toast.fire({
                 icon: 'error',
                 title: 'Fecha de ida no válida.'
-            })
-        </script>
-    <?php
-        unset($_SESSION['error-registro']);
-    }
-    ?>
-    <?php
-    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'regreso') { ?>
-        <script>
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-
-            Toast.fire({
-                icon: 'error',
-                title: 'Fecha de regreso no válida.'
             })
         </script>
     <?php
