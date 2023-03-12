@@ -207,12 +207,12 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ...">
+                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto2">
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
                                         <label>Nombre del pasajero</label>
-                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ...">
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero2">
                                     </div>
                                     <!-- Passenger DOB dd-mm-yyyy -->
                                     <div class="form-group mx-1">
@@ -222,24 +222,24 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob2">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
                                     <!-- Aerolínea -->
                                     <div class="form-group mx-1">
                                         <label>Aerolínea</label>
-                                        <input type="text" class="form-control" placeholder="Aerolínea ...">
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea2">
                                     </div>
                                     <!-- Origen -->
                                     <div class="form-group mx-1">
                                         <label>Origen</label>
-                                        <input type="text" class="form-control" placeholder="Origen ...">
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen2">
                                     </div>
                                     <!-- Destino -->
                                     <div class="form-group mx-1">
                                         <label>Destino</label>
-                                        <input type="text" class="form-control" placeholder="Destino ...">
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino2">
                                     </div>
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
@@ -249,7 +249,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaIda2">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd-mm-yyyy -->
@@ -260,7 +260,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaRegreso2">
                                         </div>
                                     </div>
                                 </div>
@@ -268,57 +268,57 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata2">
+                                            <option value="2" selected="selected">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo2">
+                                            <option value="2" selected="selected">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago2">
+                                            <option value="2" selected="selected">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
                                         <label>Precio</label>
-                                        <input type="number" class="form-control" placeholder="Precio ...">
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio2">
                                     </div>
                                     <!--Base -->
                                     <div class="form-group mx-1">
                                         <label>Base</label>
-                                        <input type="number" class="form-control" placeholder="Base ...">
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase2">
                                     </div>
                                     <!-- TAX -->
                                     <div class="form-group mx-1">
                                         <label>Tax</label>
-                                        <input type="number" class="form-control" placeholder="Tax ...">
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax2">
                                     </div>
                                     <!-- Fm -->
                                     <div class="form-group mx-1">
                                         <label>Fm</label>
-                                        <input type="number" class="form-control" placeholder="Fm ...">
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm2">
                                     </div>
                                     <!-- Fee -->
                                     <div class="form-group mx-1">
                                         <label>Fee</label>
-                                        <input type="number" class="form-control" placeholder="Fee ...">
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee2">
                                     </div>
                                 </div>
                             </div>
@@ -698,6 +698,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     Escribe <em>el</em> <u>itinerario</u> <strong>aquí</strong>
                                 </textarea>
                             </div>
+                            <input type="hidden" name="nb" id="nb" value="1">
                             <!-- /.form group -->
                             <div class="form-group pr-1 mt-3">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar</button>
@@ -853,6 +854,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
     </script>
     <script>
         let posicion = 1;
+        let inputNb = document.getElementById('nb')
 
         function closeForm() {
             window.close()
@@ -867,6 +869,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
             if (posicion <= 5) {
                 filas[0].classList.remove('d-none')
                 posicion++
+                inputNb.value = posicion
                 return
             }
         }
@@ -874,6 +877,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
         function eliminarFila(id) {
             document.getElementById(id).classList.add('d-none')
             posicion--
+            inputNb.value = posicion
 
             if (posicion <= 4) {
                 document.getElementById('addNewRow').classList.remove('d-none')

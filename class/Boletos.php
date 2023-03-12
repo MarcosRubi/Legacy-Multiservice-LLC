@@ -1,7 +1,6 @@
 <?php
 class Boletos extends DB
 {
-    public $IdBoleto;
     public $IdCliente;
     public $NumeroBoletos;
     public $NombrePasajero;
@@ -44,7 +43,6 @@ class Boletos extends DB
     public function Insertar()
     {
         $query = "INSERT INTO tbl_Boletos(
-            IdBoleto,
             IdCliente,
             NumeroBoletos,
             NombrePasajero,
@@ -67,7 +65,6 @@ class Boletos extends DB
             Agente,
             Eliminado )
             VALUES (
-            '" . $this->IdBoleto . "',
             '" . $this->IdCliente . "',
             '" . $this->NumeroBoletos . "',
             '" . $this->NombrePasajero . "',
@@ -89,13 +86,13 @@ class Boletos extends DB
             '" . $this->Agencia . "',
             '" . $this->Agente . "',
             'N' ) ";
-        return $this->EjecutarQuery($query);
+        // return $this->EjecutarQuery($query);
+        return $query;
     }
 
     public function Actualizar($id)
     {
         $query = "UPDATE tbl_boletos SET 
-        IdBoleto = '" . $this->IdBoleto . "',
         IdCliente = '" . $this->IdCliente . "',
         NumeroBoletos = '" . $this->NumeroBoletos . "',
         NombrePasajero = '" . $this->NombrePasajero . "',
