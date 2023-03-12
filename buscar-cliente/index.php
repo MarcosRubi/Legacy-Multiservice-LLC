@@ -212,16 +212,16 @@ if (isset($_GET['s'])) {
             window.open('<?= $_SESSION['path'] ?>forms/cotizaciones/frmNuevo.php?id=' + id + '&nombre=' + primerNombre + ' ' + apellido, 'Nueva Cotización', 'width=400,height=1000')
         }
 
-        function nuevoBoleto() {
-            window.open('<?= $_SESSION['path'] ?>forms/boletos/frmNuevo.php', 'Nuevo Boleto', 'width=2000,height=2000')
+        function nuevoBoleto(id) {
+            window.open('<?= $_SESSION['path'] ?>forms/boletos/frmNuevo.php?id=' + id, 'Nuevo Boleto', 'width=2000,height=2000')
         }
 
         function nuevaFactura(id, primerNombre, apellido) {
             window.open('<?= $_SESSION['path'] ?>forms/facturas/frmNuevo.php?id=' + id + '&nombre=' + primerNombre + ' ' + apellido, 'Nueva Factura', 'width=1000,height=2000')
         }
 
-        function listarBoletos() {
-            window.open('<?= $_SESSION['path'] ?>forms/boletos/listar.php', 'Boletos', 'width=2000,height=2000')
+        function listarBoletos(id) {
+            window.open('<?= $_SESSION['path'] ?>forms/boletos/listar.php?id='+id, 'Boletos', 'width=2000,height=2000')
         }
 
         function listarCotizaciones(id) {
@@ -229,45 +229,66 @@ if (isset($_GET['s'])) {
         }
 
         function listarFacturas(id) {
-            window.open('<?= $_SESSION['path'] ?>forms/facturas/listar.php?id='+id, 'Facturas', 'width=2000,height=2000')
+            window.open('<?= $_SESSION['path'] ?>forms/facturas/listar.php?id=' + id, 'Facturas', 'width=2000,height=2000')
         }
     </script>
-    <?php
-    if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-factura') {?>
-        <script>
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'success',
-                title: 'Factura guardada correctamente.'
-            })
-        </script>
-    <?php
-        unset($_SESSION['registro']);
-    }
-    ?>
-    <?php
-    if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-cotizacion') {?>
-        <script>
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'success',
-                title: 'Cotización guardada correctamente.'
-            })
-        </script>
-    <?php
-        unset($_SESSION['registro']);
-    }
-    ?>
+    <script>
+        <?php
+        if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-factura') {
+            echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Factura guardada correctamente.'
+                })";
+            unset($_SESSION['registro']);
+        }
+        if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-cotizacion') {
+                echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Cotización guardada correctamente.'
+                })";
+            unset($_SESSION['registro']);
+        }
+        if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-boleto') {
+                echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Boleto guardado correctamente.'
+                })";
+            unset($_SESSION['registro']);
+        }
+        if (isset($_SESSION['error']) && $_SESSION['error'] === 'ClienteNotFound') {
+                echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Cliente no encontrado.'
+                })";
+            unset($_SESSION['error']);
+        }
+        ?>
+    </script>
+
 </body>
 
 </html>

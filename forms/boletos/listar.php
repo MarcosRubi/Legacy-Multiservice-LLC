@@ -1,5 +1,20 @@
 <?php
-    require_once '../../func/validateSession.php';
+require_once '../../func/validateSession.php';
+if (!isset($_GET['id'])) {
+    echo "<script>window.close(); window.location.replace('" . $_SESSION['path'] . "buscar-cliente/');</script>";
+    return;
+}
+
+require_once '../../bd/bd.php';
+require_once '../../class/Boletos.php';
+require_once '../../class/Ajustes.php';
+
+$Obj_Ajustes = new Ajustes();
+
+$Obj_Boletos = new Boletos();
+$Res_Boletos = $Obj_Boletos->buscarPorClienteId($_GET['id']);
+
+$DatosBoletos = $Res_Boletos->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,7 +46,12 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Boletos a nombre de <strong>Marcos Daniel Rubí</strong></h3>
+                                    <?php if ($Res_Boletos->num_rows === 0) {
+                                        echo "<h3 class='card-title'>No se encontraron boletos</h3>";
+                                    } ?>
+                                    <?php if ($Res_Boletos->num_rows !== 0) {
+                                        echo "<h3 class='card-title'>Boletos realizados a <strong>" . $DatosBoletos['PrimerNombre'] . " " . $DatosBoletos['SegundoNombre'] . " " . $DatosBoletos['Apellido'] . "</strong></h3>";
+                                    } ?>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -58,340 +78,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>1651651</td>
-                                                <td>Marcos Daniel Rubí</td>
-                                                <td>07-07-1999</td>
-                                                <td>American Multi Services</td>
-                                                <td>Marcos Rubí</td>
-                                                <td>134</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td style="width:4.1rem;">02-02-2020</td>
-                                                <td style="width:4.1rem;">02-07-2020</td>
-                                                <td>U</td>
-                                                <td>Efectivo</td>
-                                                <td>623.00</td>
-                                                <td>523.00</td>
-                                                <td>100.00</td>
-                                                <td>5.00</td>
-                                                <td style="width:1rem;">
-                                                    <a href="#" title="Editar">
-                                                        <i class="fa fa-edit fa-lg"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th># Boleto</th>
-                                                <th>Nombre del pasajero</th>
-                                                <th>Passenger DOB</th>
-                                                <th>Agencia</th>
-                                                <th>Agente</th>
-                                                <th>Aerolínea</th>
-                                                <th>Origen</th>
-                                                <th>Destino</th>
-                                                <th>Fecha Ida</th>
-                                                <th>Fecha Regreso</th>
-                                                <th>IATA</th>
-                                                <th>Forma de pago</th>
-                                                <th>Precio</th>
-                                                <th>Base</th>
-                                                <th>Tax</th>
-                                                <th>FM</th>
-                                                <th>&nbsp;</th>
-                                            </tr>
-                                        </tfoot>
+                                            <?php foreach ($Res_Boletos as $key => $DatosBoleto) { ?>
+                                                <tr>
+                                                    <td><?= $DatosBoleto['IdBoleto'] ?></td>
+                                                    <td><?= $DatosBoleto['NombrePasajero'] ?></td>
+                                                    <td><?= $Obj_Ajustes->FechaInvertir($DatosBoleto['Dob']) ?></td>
+                                                    <td><?= $DatosBoleto['Agencia'] ?></td>
+                                                    <td><?= $DatosBoleto['Agente'] ?></td>
+                                                    <td><?= $DatosBoleto['Aerolinea'] ?></td>
+                                                    <td><?= $DatosBoleto['Origen'] ?></td>
+                                                    <td><?= $DatosBoleto['Destino'] ?></td>
+                                                    <td><?= $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaIda']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaRegreso']) ?></td>
+                                                    <td><?= $DatosBoleto['IdIata'] ?></td>
+                                                    <td><?= $DatosBoleto['IdTipo'] ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Precio']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Base']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Tax']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Fm']) ?></td>
+                                                    <td>
+                                                        <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editarBoleto(<?= $DatosCliente['IdBoleto'] ?>);">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
                                     </table>
                                 </div>
                                 <!-- /.card-body -->

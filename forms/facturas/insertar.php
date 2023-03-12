@@ -44,7 +44,7 @@ if (trim($_POST['txtCreditoValor']) !== '' && trim($_POST['txtCreditoNumero']) =
     return;
 }
 //SI LA FORMA DE PAGO SELECCIONADA ES CREDITO AGREGAR LOS 4 NUMEROS DE TARJETA
-if (trim($_POST['txtCreditoValor']) !== '' && trim($_POST['txtCreditoNumero']) !== '' && str_contains($_POST['txtCreditoNumero'], "_")) {
+if (trim($_POST['txtCreditoValor']) !== '' && trim($_POST['txtCreditoNumero']) !== '' && strpos($_POST['txtCreditoNumero'], "_")) {
     //VALIDANDO NUMEROS DE TARJETA DE CREDITO
     $_SESSION['error-registro'] = 'numeroTarjetaNoCompleto';
     echo "<script>history.go(-1)</script>";
@@ -52,7 +52,7 @@ if (trim($_POST['txtCreditoValor']) !== '' && trim($_POST['txtCreditoNumero']) !
 }
 
 //SI LA FORMA DE PAGO SELECCIONADA ES CREDITO AGREGAR LOS 4 NUMEROS DE TARJETA
-if (trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCreditoNumero']) !== '' && str_contains($_POST['txtCreditoNumero'], "_")) {
+if (trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCreditoNumero']) !== '' && strpos($_POST['txtCreditoNumero'], "_")) {
     //VALIDANDO NUMEROS DE TARJETA DE CREDITO
     $Obj_Facturas->CreditoNumero = "";
 }

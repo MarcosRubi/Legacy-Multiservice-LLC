@@ -24,7 +24,7 @@ if($_POST['txtFechaNacimiento'] !== "" && $_POST['txtFechaNacimiento'] !== "dd-m
 };
 
 //VALIDANDO FORMATO DE TELEFONO
-if(str_contains($_POST['txtTelefono'], "_")){
+if(strpos($_POST['txtTelefono'], "_")){
     $_SESSION['error-registro'] = 'tel';
     echo "<script>history.go(-1)</script>";
     return;
