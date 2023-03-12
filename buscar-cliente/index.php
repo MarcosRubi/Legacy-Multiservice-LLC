@@ -260,6 +260,19 @@ if (isset($_GET['s'])) {
                 })";
             unset($_SESSION['registro']);
         }
+        if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-boletos') {
+                echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Boletos guardado correctamente.'
+                })";
+            unset($_SESSION['registro']);
+        }
         if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-boleto') {
                 echo "var Toast = Swal.mixin({
                     toast: true,

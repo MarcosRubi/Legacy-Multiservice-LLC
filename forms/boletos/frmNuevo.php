@@ -77,7 +77,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <i class="fa fa-plus"></i>
                                 </span>
                             </div>
-                            <div class="px-2 mb-3 rounded fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-1">
+                            <div class="px-2 mb-3 rounded fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="1">
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
@@ -199,9 +199,9 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-2">
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="2">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-2')"></i>
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(2)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -322,20 +322,20 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-3">
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="3">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-3')"></i>
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(3)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ...">
+                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto3">
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
                                         <label>Nombre del pasajero</label>
-                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ...">
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero3">
                                     </div>
                                     <!-- Passenger DOB dd-mm-yyyy -->
                                     <div class="form-group mx-1">
@@ -345,24 +345,24 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob3">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
                                     <!-- Aerolínea -->
                                     <div class="form-group mx-1">
                                         <label>Aerolínea</label>
-                                        <input type="text" class="form-control" placeholder="Aerolínea ...">
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea3">
                                     </div>
                                     <!-- Origen -->
                                     <div class="form-group mx-1">
                                         <label>Origen</label>
-                                        <input type="text" class="form-control" placeholder="Origen ...">
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen3">
                                     </div>
                                     <!-- Destino -->
                                     <div class="form-group mx-1">
                                         <label>Destino</label>
-                                        <input type="text" class="form-control" placeholder="Destino ...">
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino3">
                                     </div>
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
@@ -372,7 +372,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaIda3">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd-mm-yyyy -->
@@ -383,7 +383,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaRegreso3">
                                         </div>
                                     </div>
                                 </div>
@@ -391,74 +391,74 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata3">
+                                            <option selected="selected" value="2">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo3">
+                                            <option selected="selected" value="2">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago3">
+                                            <option selected="selected" value="2">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
                                         <label>Precio</label>
-                                        <input type="number" class="form-control" placeholder="Precio ...">
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio3">
                                     </div>
                                     <!--Base -->
                                     <div class="form-group mx-1">
                                         <label>Base</label>
-                                        <input type="number" class="form-control" placeholder="Base ...">
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase3">
                                     </div>
                                     <!-- TAX -->
                                     <div class="form-group mx-1">
                                         <label>Tax</label>
-                                        <input type="number" class="form-control" placeholder="Tax ...">
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax3">
                                     </div>
                                     <!-- Fm -->
                                     <div class="form-group mx-1">
                                         <label>Fm</label>
-                                        <input type="number" class="form-control" placeholder="Fm ...">
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm3">
                                     </div>
                                     <!-- Fee -->
                                     <div class="form-group mx-1">
                                         <label>Fee</label>
-                                        <input type="number" class="form-control" placeholder="Fee ...">
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee3">
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-4">
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="4">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-4')"></i>
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(4)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ...">
+                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto4">
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
                                         <label>Nombre del pasajero</label>
-                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ...">
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero4">
                                     </div>
                                     <!-- Passenger DOB dd-mm-yyyy -->
                                     <div class="form-group mx-1">
@@ -468,24 +468,24 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob4">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
                                     <!-- Aerolínea -->
                                     <div class="form-group mx-1">
                                         <label>Aerolínea</label>
-                                        <input type="text" class="form-control" placeholder="Aerolínea ...">
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea4">
                                     </div>
                                     <!-- Origen -->
                                     <div class="form-group mx-1">
                                         <label>Origen</label>
-                                        <input type="text" class="form-control" placeholder="Origen ...">
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen4">
                                     </div>
                                     <!-- Destino -->
                                     <div class="form-group mx-1">
                                         <label>Destino</label>
-                                        <input type="text" class="form-control" placeholder="Destino ...">
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino4">
                                     </div>
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
@@ -495,7 +495,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaIda4">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd-mm-yyyy -->
@@ -506,7 +506,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaRegreso4">
                                         </div>
                                     </div>
                                 </div>
@@ -514,75 +514,75 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" value="2">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" value="2">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option selected="selected" value="2">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
                                         <label>Precio</label>
-                                        <input type="number" class="form-control" placeholder="Precio ...">
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio4">
                                     </div>
                                     <!--Base -->
                                     <div class="form-group mx-1">
                                         <label>Base</label>
-                                        <input type="number" class="form-control" placeholder="Base ...">
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase4">
                                     </div>
                                     <!-- TAX -->
                                     <div class="form-group mx-1">
                                         <label>Tax</label>
-                                        <input type="number" class="form-control" placeholder="Tax ...">
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax4">
                                     </div>
                                     <!-- Fm -->
                                     <div class="form-group mx-1">
                                         <label>Fm</label>
-                                        <input type="number" class="form-control" placeholder="Fm ...">
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm4">
                                     </div>
                                     <!-- Fee -->
                                     <div class="form-group mx-1">
                                         <label>Fee</label>
-                                        <input type="number" class="form-control" placeholder="Fee ...">
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee4">
                                     </div>
                                     <input type="text" class="form-control d-none" name="IdCliente" value="<?= $DatosClientes['IdCliente'] ?>">
                                 </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="registro-5">
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="5">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila('registro-5')"></i>
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(5)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ...">
+                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto5">
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
                                         <label>Nombre del pasajero</label>
-                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ...">
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero5">
                                     </div>
                                     <!-- Passenger DOB dd-mm-yyyy -->
                                     <div class="form-group mx-1">
@@ -592,24 +592,24 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob5">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
                                     <!-- Aerolínea -->
                                     <div class="form-group mx-1">
                                         <label>Aerolínea</label>
-                                        <input type="text" class="form-control" placeholder="Aerolínea ...">
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea5">
                                     </div>
                                     <!-- Origen -->
                                     <div class="form-group mx-1">
                                         <label>Origen</label>
-                                        <input type="text" class="form-control" placeholder="Origen ...">
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen5">
                                     </div>
                                     <!-- Destino -->
                                     <div class="form-group mx-1">
                                         <label>Destino</label>
-                                        <input type="text" class="form-control" placeholder="Destino ...">
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino5">
                                     </div>
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
@@ -619,7 +619,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaIda5">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd-mm-yyyy -->
@@ -630,7 +630,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaRegreso5">
                                         </div>
                                     </div>
                                 </div>
@@ -638,57 +638,57 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option value="2" selected="selected">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option value="2" selected="selected">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" data-select2-id="3">Opción 1</option>
-                                            <option>Opción 2</option>
-                                            <option>Opción 3</option>
-                                            <option>Opción 4</option>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                            <option value="2" selected="selected">Opción 1</option>
+                                            <option value="3">Opción 2</option>
+                                            <option value="4">Opción 3</option>
+                                            <option value="5">Opción 4</option>
                                         </select>
                                     </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
                                         <label>Precio</label>
-                                        <input type="number" class="form-control" placeholder="Precio ...">
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio5">
                                     </div>
                                     <!--Base -->
                                     <div class="form-group mx-1">
                                         <label>Base</label>
-                                        <input type="number" class="form-control" placeholder="Base ...">
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase5">
                                     </div>
                                     <!-- TAX -->
                                     <div class="form-group mx-1">
                                         <label>Tax</label>
-                                        <input type="number" class="form-control" placeholder="Tax ...">
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax5">
                                     </div>
                                     <!-- Fm -->
                                     <div class="form-group mx-1">
                                         <label>Fm</label>
-                                        <input type="number" class="form-control" placeholder="Fm ...">
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm5">
                                     </div>
                                     <!-- Fee -->
                                     <div class="form-group mx-1">
                                         <label>Fee</label>
-                                        <input type="number" class="form-control" placeholder="Fee ...">
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee5">
                                     </div>
                                 </div>
                             </div>
@@ -754,106 +754,107 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
         })
     </script>
     <script>
-        $(function() {
-            $('#frmNuevo').validate({
-                rules: {
-                    txtPnr: {
-                        required: true
-                    },
-                    txtBoleto1: {
-                        required: true
-                    },
-                    txtNombrePasajero1: {
-                        required: true
-                    },
-                    txtFechaDob1: {
-                        required: true
-                    },
-                    txtAerolinea1: {
-                        required: true
-                    },
-                    txtOrigen1: {
-                        required: true
-                    },
-                    txtDestino1: {
-                        required: true
-                    },
-                    txtFechaIda1: {
-                        required: true
-                    },
-                    txtFechaRegreso1: {
-                        required: true
-                    },
-                    txtPrecio1: {
-                        required: true
-                    },
-                    txtBase1: {
-                        required: true
-                    },
-                    txtTax1: {
-                        required: true
-                    },
-                    txtFm1: {
-                        required: true
-                    }
-                },
-                messages: {
-                    txtPnr: {
-                        required: "El PNR es obligatorio",
-                    },
-                    txtBoleto1: {
-                        required: "El # de boletos es obligatorio"
-                    },
-                    txtNombrePasajero1: {
-                        required: "El nombre es obligatorio"
-                    },
-                    txtFechaDob1: {
-                        required: "La fecha es obligatorio"
-                    },
-                    txtAerolinea1: {
-                        required: "La Aerolínea es obligatorio"
-                    },
-                    txtOrigen1: {
-                        required: "El origen es obligatorio"
-                    },
-                    txtDestino1: {
-                        required: "El desino es obligatorio"
-                    },
-                    txtFechaIda1: {
-                        required: "La fecha de ida es obligatorio"
-                    },
-                    txtFechaRegreso1: {
-                        required: "La fecha de regreso es obligatorio"
-                    },
-                    txtPrecio1: {
-                        required: "El precio es obligatorio"
-                    },
-                    txtBase1: {
-                        required: "La base es obligatorio"
-                    },
-                    txtTax1: {
-                        required: "El TAX es obligatorio"
-                    },
-                    txtFm1: {
-                        required: "El FM es obligatorio"
-                    }
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
-            });
-        })
+        // $(function() {
+        //     $('#frmNuevo').validate({
+        //         rules: {
+        //             txtPnr: {
+        //                 required: true
+        //             },
+        //             txtBoleto1: {
+        //                 required: true
+        //             },
+        //             txtNombrePasajero1: {
+        //                 required: true
+        //             },
+        //             txtFechaDob1: {
+        //                 required: true
+        //             },
+        //             txtAerolinea1: {
+        //                 required: true
+        //             },
+        //             txtOrigen1: {
+        //                 required: true
+        //             },
+        //             txtDestino1: {
+        //                 required: true
+        //             },
+        //             txtFechaIda1: {
+        //                 required: true
+        //             },
+        //             txtFechaRegreso1: {
+        //                 required: true
+        //             },
+        //             txtPrecio1: {
+        //                 required: true
+        //             },
+        //             txtBase1: {
+        //                 required: true
+        //             },
+        //             txtTax1: {
+        //                 required: true
+        //             },
+        //             txtFm1: {
+        //                 required: true
+        //             }
+        //         },
+        //         messages: {
+        //             txtPnr: {
+        //                 required: "El PNR es obligatorio",
+        //             },
+        //             txtBoleto1: {
+        //                 required: "El # de boletos es obligatorio"
+        //             },
+        //             txtNombrePasajero1: {
+        //                 required: "El nombre es obligatorio"
+        //             },
+        //             txtFechaDob1: {
+        //                 required: "La fecha es obligatorio"
+        //             },
+        //             txtAerolinea1: {
+        //                 required: "La Aerolínea es obligatorio"
+        //             },
+        //             txtOrigen1: {
+        //                 required: "El origen es obligatorio"
+        //             },
+        //             txtDestino1: {
+        //                 required: "El desino es obligatorio"
+        //             },
+        //             txtFechaIda1: {
+        //                 required: "La fecha de ida es obligatorio"
+        //             },
+        //             txtFechaRegreso1: {
+        //                 required: "La fecha de regreso es obligatorio"
+        //             },
+        //             txtPrecio1: {
+        //                 required: "El precio es obligatorio"
+        //             },
+        //             txtBase1: {
+        //                 required: "La base es obligatorio"
+        //             },
+        //             txtTax1: {
+        //                 required: "El TAX es obligatorio"
+        //             },
+        //             txtFm1: {
+        //                 required: "El FM es obligatorio"
+        //             }
+        //         },
+        //         errorElement: 'span',
+        //         errorPlacement: function(error, element) {
+        //             error.addClass('invalid-feedback');
+        //             element.closest('.form-group').append(error);
+        //         },
+        //         highlight: function(element, errorClass, validClass) {
+        //             $(element).addClass('is-invalid');
+        //         },
+        //         unhighlight: function(element, errorClass, validClass) {
+        //             $(element).removeClass('is-invalid');
+        //         }
+        //     });
+        // })
     </script>
     <script>
         let posicion = 1;
+        let formsValidar = [1]
         let inputNb = document.getElementById('nb')
 
         function closeForm() {
@@ -867,9 +868,10 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                 document.getElementById('addNewRow').classList.add('d-none')
             }
             if (posicion <= 5) {
+                formsValidar.push(parseInt(filas[0].id))
                 filas[0].classList.remove('d-none')
                 posicion++
-                inputNb.value = posicion
+                inputNb.value = formsValidar
                 return
             }
         }
@@ -877,7 +879,8 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
         function eliminarFila(id) {
             document.getElementById(id).classList.add('d-none')
             posicion--
-            inputNb.value = posicion
+            formsValidar = formsValidar.filter(pos => pos !== id)
+            inputNb.value = formsValidar
 
             if (posicion <= 4) {
                 document.getElementById('addNewRow').classList.remove('d-none')

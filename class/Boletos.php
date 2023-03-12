@@ -86,8 +86,7 @@ class Boletos extends DB
             '" . $this->Agencia . "',
             '" . $this->Agente . "',
             'N' ) ";
-        // return $this->EjecutarQuery($query);
-        return $query;
+        return $this->EjecutarQuery($query);
     }
 
     public function Actualizar($id)
