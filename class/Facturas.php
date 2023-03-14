@@ -5,7 +5,6 @@ class Facturas extends DB
 {
     public $IdCliente;
     public $IdTipoFactura;
-    public $IdEmpleado;
     public $Valor;
     public $Descripcion;
     public $Efectivo;
@@ -17,6 +16,9 @@ class Facturas extends DB
     public $Comentario;
     public $Creado;
     public $CreadoTimestamp;
+    public $Agencia;
+    public $Agente;
+    public $Balance;
 
 
     public function listarTodo()
@@ -30,9 +32,17 @@ class Facturas extends DB
         $query = "SELECT * FROM vta_listar_facturas WHERE IdCliente='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
+    public function obtenerBalanceFactura($id){
+        $query = "SELECT Balance FROM tbl_facturas WHERE IdFactura='".$id."' ";
+        return $this->EjecutarQuery($query);
+    }
     
     public function ValorTotalPorCliente($id){
         $query = "SELECT SUM(vta_listar_facturas.Valor) AS ValorTotal FROM vta_listar_facturas WHERE IdCliente='".$id."'";
+        return $this->EjecutarQuery($query);
+    }
+    public function BalanceTotalPorCliente($id){
+        $query = "SELECT SUM(vta_listar_facturas.Balance) AS BalanceTotal FROM vta_listar_facturas WHERE IdCliente='".$id."'";
         return $this->EjecutarQuery($query);
     }
 
@@ -41,7 +51,8 @@ class Facturas extends DB
         $query = "INSERT INTO tbl_facturas(
             IdCliente,
             IdTipoFactura,
-            IdEmpleado,
+            Agencia,
+            Agente,
             Valor,
             Descripcion,
             Efectivo,
@@ -50,6 +61,7 @@ class Facturas extends DB
             Cheque,
             Banco,
             Cupon,
+            Balance,
             Comentario,
             Creado,
             CreadoTimestamp,
@@ -57,7 +69,8 @@ class Facturas extends DB
             VALUES (
             '" . $this->IdCliente . "',
             '" . $this->IdTipoFactura . "',
-            '" . $this->IdEmpleado . "',
+            '" . $this->Agencia . "',
+            '" . $this->Agente . "',
             '" . $this->Valor . "',
             '" . $this->Descripcion . "',
             '" . $this->Efectivo . "',
@@ -66,6 +79,7 @@ class Facturas extends DB
             '" . $this->Cheque . "',
             '" . $this->Banco . "',
             '" . $this->Cupon . "',
+            '" . (doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon) ) - doubleval($this->Valor) . "',
             '" . $this->Comentario . "',
             '" . date("Y-m-d h:i:s ") . "',
             '" . date("A") . "',
@@ -81,12 +95,23 @@ class Facturas extends DB
         Valor = '" . $this->Valor . "',
         Descripcion = '" . $this->Descripcion . "' 
         Efectivo = '" . $this->Efectivo . "' 
+        Agencia = '" . $this->Agencia . "' 
+        Agente = '" . $this->Agente . "' 
         CreditoValor = '" . $this->CreditoValor . "' 
         CreditoNumero = '" . $this->CreditoNumero . "' 
         Cheque = '" . $this->Cheque . "' 
         Banco = '" . $this->Banco . "' 
         Cupon = '" . $this->Cupon . "' 
         Comentario = '" . $this->Comentario . "' 
+        WHERE IdFactura='" . $id . "' ";
+
+        return $this->EjecutarQuery($query);
+    }
+
+    public function ActualizarBalanceFactura($id, $balance)
+    {
+        $query = "UPDATE tbl_facturas SET 
+        Balance = '" . $balance . "'
         WHERE IdFactura='" . $id . "' ";
 
         return $this->EjecutarQuery($query);

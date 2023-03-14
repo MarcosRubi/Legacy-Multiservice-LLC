@@ -4,14 +4,11 @@ require_once '../../bd/bd.php';
 require_once '../../class/OpcionesTablas.php';
 
 
-if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
-    echo "<script>window.location.replace('" . $_SESSION['path'] . "buscar-cliente/');</script>";
+if (!isset($_GET['factura']) || !isset($_GET['nombre']) || !isset($_GET['cliente']) ) {
+    echo "<script>history.go(-1)</script>";
     return;
 }
 
-$Obj_OpcionesTablas = new OpcionesTablas();
-
-$Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +16,7 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Nueva Factura</title>
+    <title>Nuevo Abono</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -48,9 +45,9 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                 <div class="row">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title w-100 font-weight-bold text-center">Agregar nueva factura</h3>
+                            <h3 class="card-title w-100 font-weight-bold text-center">Agregar nueva abono</h3>
                         </div>
-                        <form action="./insertar.php" method="post" class="card-body" id="frmNuevo">
+                        <form action="./insertar-abono.php" method="post" class="card-body" id="frmNuevo">
                             <div class="px-2 mb-3 rounded" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                                 <div class="d-flex pt-3">
                                     <!-- Cliente -->
@@ -61,26 +58,14 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                     <!-- Tipo -->
                                     <div class="form-group mx-1 container-fluid">
                                         <label>Tipo</label>
-                                        <select class="form-control select2" style="width: 100%;" name="txtIdTipo">
-                                            <?php
-                                            while ($DatoTipoFactura = $Res_OpcionesTipoFactura->fetch_assoc()) { ?>
-                                                <option value="<?= $DatoTipoFactura['IdTipoFactura'] ?>"><?= $DatoTipoFactura['Tipo'] ?></option>
-                                            <?php } ?>
+                                        <select class="form-control select2" style="width: 100%;" name="txtIdTipo" disabled>
+                                        <option value="3" selected>DEP01 - Abono</option>
                                         </select>
                                     </div>
                                     <!-- Valor -->
                                     <div class="form-group mx-1 container-fluid">
                                         <label>Valor</label>
                                         <input type="number" class="form-control" placeholder="0.0" name="txtValor">
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <!-- Descripción -->
-                                    <div class="form-group">
-                                        <label>Descripción</label>
-                                        <textarea id="summernote" name="txtDescripcion">
-                                            Escribe <em>la</em> <u>descripción</u> <strong>aquí</strong>
-                                        </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -161,10 +146,11 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                     </div>
                                 </div>
                             </div>
-                            <input type="text" class="form-control d-none" value="<?= $_GET['id'] ?>" name="txtIdCliente" readonly>
+                            <input type="text" class="form-control d-none" value="<?= $_GET['cliente'] ?>" name="txtIdCliente" readonly>
+                            <input type="text" class="form-control d-none" value="<?= $_GET['factura'] ?>" name="txtIdFactura" readonly>
                             <!-- /.form group -->
                             <div class="form-group pr-1 mt-3">
-                                <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar factura</button>
+                                <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar abono</button>
                             </div>
                             <div class="form-group pl-1">
                                 <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cancelar</button>

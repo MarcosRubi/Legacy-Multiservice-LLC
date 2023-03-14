@@ -2,6 +2,7 @@
 class Boletos extends DB
 {
     public $IdCliente;
+    public $Pnr;
     public $NumeroBoletos;
     public $NombrePasajero;
     public $Aerolinea;
@@ -44,6 +45,7 @@ class Boletos extends DB
     {
         $query = "INSERT INTO tbl_Boletos(
             IdCliente,
+            Pnr,
             NumeroBoletos,
             NombrePasajero,
             Aerolinea,
@@ -66,6 +68,7 @@ class Boletos extends DB
             Eliminado )
             VALUES (
             '" . $this->IdCliente . "',
+            '" . $this->Pnr . "',
             '" . $this->NumeroBoletos . "',
             '" . $this->NombrePasajero . "',
             '" . $this->Aerolinea . "',
@@ -93,6 +96,7 @@ class Boletos extends DB
     {
         $query = "UPDATE tbl_boletos SET 
         IdCliente = '" . $this->IdCliente . "',
+        Pnr = '" . $this->Pnr . "',
         NumeroBoletos = '" . $this->NumeroBoletos . "',
         NombrePasajero = '" . $this->NombrePasajero . "',
         Aerolinea = '" . $this->Aerolinea . "', 

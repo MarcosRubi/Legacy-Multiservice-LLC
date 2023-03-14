@@ -20,7 +20,7 @@ if (isset($_GET['s'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inicio | Legacy Multiservice LLC</title>
+    <title>Buscar Cliente | Legacy Multiservice LLC</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -96,7 +96,7 @@ if (isset($_GET['s'])) {
                                                 <th>Segundo Nombre</th>
                                                 <th>Primer Nombre</th>
                                                 <th>Número De Teléfono</th>
-                                                <th>Dirección</th>
+                                                <th style="max-width:1rem;" >Dirección</th>
                                                 <th>Fecha de Nac.</th>
                                                 <th>Boletos</th>
                                                 <th>Facturas</th>
@@ -111,7 +111,7 @@ if (isset($_GET['s'])) {
                                                     <td><?= $DatosCliente['SegundoNombre'] ?></td>
                                                     <td><?= $DatosCliente['PrimerNombre'] ?></td>
                                                     <td><?= $DatosCliente['Telefono'] ?></td>
-                                                    <td><?= $DatosCliente['Direccion'] ?></td>
+                                                    <td style="text-overflow:ellipsis;"><?= $DatosCliente['Direccion'] ?></td>
                                                     <td><?= $DatosCliente['FechaNacimiento'] !== '0000-00-00' ? $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']) : '' ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">
@@ -233,73 +233,7 @@ if (isset($_GET['s'])) {
         }
     </script>
     <script>
-        <?php
-        if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-factura') {
-            echo "var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Factura guardada correctamente.'
-                })";
-            unset($_SESSION['registro']);
-        }
-        if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-cotizacion') {
-                echo "var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Cotización guardada correctamente.'
-                })";
-            unset($_SESSION['registro']);
-        }
-        if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-boletos') {
-                echo "var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Boletos guardado correctamente.'
-                })";
-            unset($_SESSION['registro']);
-        }
-        if (isset($_SESSION['registro']) && $_SESSION['registro'] === 's-boleto') {
-                echo "var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Boleto guardado correctamente.'
-                })";
-            unset($_SESSION['registro']);
-        }
-        if (isset($_SESSION['error']) && $_SESSION['error'] === 'ClienteNotFound') {
-                echo "var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Cliente no encontrado.'
-                })";
-            unset($_SESSION['error']);
-        }
-        ?>
+        <?php require_once '../func/Mensajes.php'; ?>
     </script>
 
 </body>

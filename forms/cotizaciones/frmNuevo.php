@@ -246,43 +246,7 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
             });
         })
     </script>
-    <?php
-    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'fecha') { ?>
-        <script>
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'Fecha no válida.'
-            })
-        </script>
-    <?php
-        unset($_SESSION['error-registro']);
-    }
-    ?>
-    <?php
-    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'ida') { ?>
-        <script>
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-
-            Toast.fire({
-                icon: 'error',
-                title: 'Fecha de ida no válida.'
-            })
-        </script>
-    <?php
-        unset($_SESSION['error-registro']);
-    }
-    ?>
+    <?php require_once '../../func/Mensajes.php'; ?>
     <script>
         function closeForm() {
             window.close()

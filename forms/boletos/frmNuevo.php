@@ -9,11 +9,31 @@ if (!isset($_GET['id'])) {
 require_once '../../bd/bd.php';
 require_once '../../class/Clientes.php';
 require_once '../../class/Ajustes.php';
+require_once '../../class/OpcionesTablas.php';
 
 $Obj_Clientes = new Clientes();
 $Obj_Ajustes = new Ajustes();
+$Obj_OpcionesTablas = new OpcionesTablas();
 
 $Res_Clientes = $Obj_Clientes->buscarPorId($_GET['id']);
+$Res_OpcionesIatas = $Obj_OpcionesTablas->listarIatas();
+$Res_OpcionesTipos = $Obj_OpcionesTablas->listarTipos();
+$Res_OpcionesFormasPago = $Obj_OpcionesTablas->listarFormasPagos();
+
+$opcionesIatas = "";
+while ($DatoTipoIata = $Res_OpcionesIatas->fetch_assoc()) {
+    $opcionesIatas .= "<option value=" . $DatoTipoIata['IdIata'] . ">" . $DatoTipoIata['NombreIata'] . "</option>";
+}
+
+$opcionesTipo = '';
+while ($DatoTipos = $Res_OpcionesTipos->fetch_assoc()) {
+    $opcionesTipo .= "<option value=" . $DatoTipos['IdTipo'] . ">" . $DatoTipos['NombreTipo'] . "</option>";
+}
+
+$opcionesFormaPago = '';
+while ($DatoFormaPago = $Res_OpcionesFormasPago->fetch_assoc()) {
+    $opcionesFormaPago .= "<option value=" . $DatoFormaPago['IdFormaPago'] . ">" . $DatoFormaPago['FormaPago'] . "</option>";
+}
 
 if ($Res_Clientes->num_rows === 0) {
     $_SESSION['error'] = 'ClienteNotFound';
@@ -43,6 +63,11 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
     <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <style>
@@ -121,23 +146,23 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="input-group date" id="dateto1" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto1"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda1">
+                                            <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaIda1">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="input-group date" id="datefrom1" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso1">
+                                            <div class="input-group-append" data-target="#datefrom1" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaRegreso1">
                                         </div>
                                     </div>
                                 </div>
@@ -145,31 +170,22 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata1">
-                                            <option selected="selected" value="2">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata1">
+                                            <?= $opcionesIatas ?>
                                         </select>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo1">
-                                            <option selected="selected"  value="2">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo1">
+                                            <?= $opcionesTipo ?>
                                         </select>
                                     </div>
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago1">
-                                            <option selected="selected" value="2">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago1">
+                                            <?= $opcionesFormaPago ?>
                                         </select>
                                     </div>
                                     <!-- Precio -->
@@ -244,23 +260,23 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="input-group date" id="dateto2" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto2" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda2">
+                                            <div class="input-group-append" data-target="#dateto2" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaIda2">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="input-group date" id="datefrom2" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom2" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso2">
+                                            <div class="input-group-append" data-target="#datefrom2" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaRegreso2">
                                         </div>
                                     </div>
                                 </div>
@@ -268,31 +284,22 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata2">
-                                            <option value="2" selected="selected">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata2">
+                                            <?= $opcionesIatas ?>
                                         </select>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo2">
-                                            <option value="2" selected="selected">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo2">
+                                            <?= $opcionesTipo ?>
                                         </select>
                                     </div>
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago2">
-                                            <option value="2" selected="selected">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago2">
+                                            <?= $opcionesFormaPago ?>
                                         </select>
                                     </div>
                                     <!-- Precio -->
@@ -367,23 +374,23 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="input-group date" id="dateto3" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto3" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda3">
+                                            <div class="input-group-append" data-target="#dateto3" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaIda3">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="input-group date" id="datefrom3" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom3" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso3">
+                                            <div class="input-group-append" data-target="#datefrom3" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaRegreso3">
                                         </div>
                                     </div>
                                 </div>
@@ -391,31 +398,22 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata3">
-                                            <option selected="selected" value="2">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata3">
+                                            <?= $opcionesIatas ?>
                                         </select>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo3">
-                                            <option selected="selected" value="2">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo3">
+                                            <?= $opcionesTipo ?>
                                         </select>
                                     </div>
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago3">
-                                            <option selected="selected" value="2">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago3">
+                                            <?= $opcionesFormaPago ?>
                                         </select>
                                     </div>
                                     <!-- Precio -->
@@ -490,23 +488,23 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="input-group date" id="dateto4" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto4" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda4">
+                                            <div class="input-group-append" data-target="#dateto4" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaIda4">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="input-group date" id="datefrom4" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom4" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso4">
+                                            <div class="input-group-append" data-target="#datefrom4" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaRegreso4">
                                         </div>
                                     </div>
                                 </div>
@@ -514,31 +512,22 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" value="2">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata4">
+                                            <?= $opcionesIatas ?>
                                         </select>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" value="2">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo4">
+                                            <?= $opcionesTipo ?>
                                         </select>
                                     </div>
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option selected="selected" value="2">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago4">
+                                            <?= $opcionesFormaPago ?>
                                         </select>
                                     </div>
                                     <!-- Precio -->
@@ -566,7 +555,6 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <label>Fee</label>
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee4">
                                     </div>
-                                    <input type="text" class="form-control d-none" name="IdCliente" value="<?= $DatosClientes['IdCliente'] ?>">
                                 </div>
                             </div>
                             <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="5">
@@ -614,23 +602,23 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="input-group date" id="dateto5" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto5" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda5">
+                                            <div class="input-group-append" data-target="#dateto5" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaIda5">
                                         </div>
                                     </div>
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        <div class="input-group date" id="datefrom5" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom5" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso5">
+                                            <div class="input-group-append" data-target="#datefrom5" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaRegreso5">
                                         </div>
                                     </div>
                                 </div>
@@ -638,31 +626,22 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- IATA -->
                                     <div class="form-group mx-1">
                                         <label>IATA</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option value="2" selected="selected">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata5">
+                                            <?= $opcionesIatas ?>
                                         </select>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1">
                                         <label>Tipo</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option value="2" selected="selected">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo5">
+                                            <?= $opcionesTipo ?>
                                         </select>
                                     </div>
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <option value="2" selected="selected">Opción 1</option>
-                                            <option value="3">Opción 2</option>
-                                            <option value="4">Opción 3</option>
-                                            <option value="5">Opción 4</option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago5">
+                                            <?= $opcionesFormaPago ?>
                                         </select>
                                     </div>
                                     <!-- Precio -->
@@ -699,6 +678,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                 </textarea>
                             </div>
                             <input type="hidden" name="nb" id="nb" value="1">
+                            <input type="hidden" class="form-control d-none" name="IdCliente" value="<?= $DatosClientes['IdCliente'] ?>">
                             <!-- /.form group -->
                             <div class="form-group pr-1 mt-3">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar</button>
@@ -740,6 +720,10 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
     <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="../../plugins/toastr/toastr.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Select2 -->
+    <script src="../../plugins/select2/js/select2.full.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -747,110 +731,136 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
     <!-- Page specific script -->
     <script>
         $(function() {
+            // $('.select2').select2()
             //Phone Number
             $('[data-mask]').inputmask()
             // Summernote
             $('#summernote').summernote()
+            //Date picker
+            $('#datefrom1').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto1').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom2').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto2').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom3').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto3').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom4').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto4').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom5').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto5').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
         })
     </script>
     <script>
-        // $(function() {
-        //     $('#frmNuevo').validate({
-        //         rules: {
-        //             txtPnr: {
-        //                 required: true
-        //             },
-        //             txtBoleto1: {
-        //                 required: true
-        //             },
-        //             txtNombrePasajero1: {
-        //                 required: true
-        //             },
-        //             txtFechaDob1: {
-        //                 required: true
-        //             },
-        //             txtAerolinea1: {
-        //                 required: true
-        //             },
-        //             txtOrigen1: {
-        //                 required: true
-        //             },
-        //             txtDestino1: {
-        //                 required: true
-        //             },
-        //             txtFechaIda1: {
-        //                 required: true
-        //             },
-        //             txtFechaRegreso1: {
-        //                 required: true
-        //             },
-        //             txtPrecio1: {
-        //                 required: true
-        //             },
-        //             txtBase1: {
-        //                 required: true
-        //             },
-        //             txtTax1: {
-        //                 required: true
-        //             },
-        //             txtFm1: {
-        //                 required: true
-        //             }
-        //         },
-        //         messages: {
-        //             txtPnr: {
-        //                 required: "El PNR es obligatorio",
-        //             },
-        //             txtBoleto1: {
-        //                 required: "El # de boletos es obligatorio"
-        //             },
-        //             txtNombrePasajero1: {
-        //                 required: "El nombre es obligatorio"
-        //             },
-        //             txtFechaDob1: {
-        //                 required: "La fecha es obligatorio"
-        //             },
-        //             txtAerolinea1: {
-        //                 required: "La Aerolínea es obligatorio"
-        //             },
-        //             txtOrigen1: {
-        //                 required: "El origen es obligatorio"
-        //             },
-        //             txtDestino1: {
-        //                 required: "El desino es obligatorio"
-        //             },
-        //             txtFechaIda1: {
-        //                 required: "La fecha de ida es obligatorio"
-        //             },
-        //             txtFechaRegreso1: {
-        //                 required: "La fecha de regreso es obligatorio"
-        //             },
-        //             txtPrecio1: {
-        //                 required: "El precio es obligatorio"
-        //             },
-        //             txtBase1: {
-        //                 required: "La base es obligatorio"
-        //             },
-        //             txtTax1: {
-        //                 required: "El TAX es obligatorio"
-        //             },
-        //             txtFm1: {
-        //                 required: "El FM es obligatorio"
-        //             }
-        //         },
-        //         errorElement: 'span',
-        //         errorPlacement: function(error, element) {
-        //             error.addClass('invalid-feedback');
-        //             element.closest('.form-group').append(error);
-        //         },
-        //         highlight: function(element, errorClass, validClass) {
-        //             $(element).addClass('is-invalid');
-        //         },
-        //         unhighlight: function(element, errorClass, validClass) {
-        //             $(element).removeClass('is-invalid');
-        //         }
-        //     });
-        // })
+        $(function() {
+            $('#frmNuevo').validate({
+                rules: {
+                    txtPnr: {
+                        required: true
+                    },
+                    txtBoleto1: {
+                        required: true
+                    },
+                    txtNombrePasajero1: {
+                        required: true
+                    },
+                    txtFechaDob1: {
+                        required: true
+                    },
+                    txtAerolinea1: {
+                        required: true
+                    },
+                    txtOrigen1: {
+                        required: true
+                    },
+                    txtDestino1: {
+                        required: true
+                    },
+                    txtFechaIda1: {
+                        required: true
+                    },
+                    txtPrecio1: {
+                        required: true
+                    },
+                    txtBase1: {
+                        required: true
+                    },
+                    txtTax1: {
+                        required: true
+                    },
+                    txtFm1: {
+                        required: true
+                    }
+                },
+                messages: {
+                    txtPnr: {
+                        required: "El PNR es obligatorio",
+                    },
+                    txtBoleto1: {
+                        required: "El # de boletos es obligatorio"
+                    },
+                    txtNombrePasajero1: {
+                        required: "El nombre es obligatorio"
+                    },
+                    txtFechaDob1: {
+                        required: "La fecha es obligatorio"
+                    },
+                    txtAerolinea1: {
+                        required: "La Aerolínea es obligatorio"
+                    },
+                    txtOrigen1: {
+                        required: "El origen es obligatorio"
+                    },
+                    txtDestino1: {
+                        required: "El desino es obligatorio"
+                    },
+                    txtFechaIda1: {
+                        required: "La fecha de ida es obligatorio"
+                    },
+                    txtPrecio1: {
+                        required: "El precio es obligatorio"
+                    },
+                    txtBase1: {
+                        required: "La base es obligatorio"
+                    },
+                    txtTax1: {
+                        required: "El TAX es obligatorio"
+                    },
+                    txtFm1: {
+                        required: "El FM es obligatorio"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        })
     </script>
     <script>
         let posicion = 1;
@@ -888,198 +898,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
         }
     </script>
     <script>
-        <?php
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'dobVacio') {
-            echo "
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'Passenger DOB es obligatorio.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'boletos') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'El número de boletos es obligatorio.'
-            })";
-            unset($_SESSION['error-registro']);
-        
-        
-        
-        }
-        
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'dobFormato') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'La fecha de Passenger DOB no es válida.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'nombre') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'El nombre del pasajero es obligatorio.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'aerolinea') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'La aerolinea es obligatorio.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'origen') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'El origen es obligatorio.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'destino') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'El destino es obligatorio.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'idaVacio') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'La fecha de ida es obligatoria.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'idaFormato') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'La fecha de ida no es válida.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'regresoVacio') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'La fecha de regreso es obligatoria.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'regresoFormato') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'La fecha de regreso no es válida.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'precio') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'El precio es obligatorio.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'base') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'Base es obligatorio.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'tax') {
-            echo "var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                icon: 'error',
-                title: 'El TAX es obligatorio.'
-            })";
-            unset($_SESSION['error-registro']);
-        }
-        
-        ?>
+        <?php require_once '../../func/Mensajes.php'; ?>
     </script>
 
 </body>

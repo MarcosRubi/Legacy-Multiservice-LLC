@@ -173,43 +173,9 @@ require_once '../../func/validateSession.php';
             });
         })
     </script>
-    <?php
-    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'fecha') { ?>
-        <script>
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            Toast.fire({
-                    icon: 'error',
-                    title: 'Fecha de nacimiento no válida.'
-                })
-        </script>
-    <?php
-        unset($_SESSION['error-registro']);
-    }
-    ?>
-    <?php
-    if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'tel') { ?>
-        <script>
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
-            
-            Toast.fire({
-                    icon: 'error',
-                    title: 'Número de teléfono no válido.'
-                })
-        </script>
-    <?php
-        unset($_SESSION['error-registro']);
-    }
-    ?>
+    <script>
+        <?php require_once '../../func/Mensajes.php'; ?>
+    </script>
     <script>
         function closeForm() {
             window.close()

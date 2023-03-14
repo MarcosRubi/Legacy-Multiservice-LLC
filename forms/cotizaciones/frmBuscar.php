@@ -14,16 +14,8 @@ require_once '../../func/validateSession.php';
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.min.css">
-    <!-- CodeMirror -->
-    <link rel="stylesheet" href="../../plugins/codemirror/codemirror.css">
-    <link rel="stylesheet" href="../../plugins/codemirror/theme/monokai.css">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -59,7 +51,7 @@ require_once '../../func/validateSession.php';
                                                 <label>Desde:</label>
                                                 <div class="input-group date" id="datefrom" data-target-input="nearest">
                                                     <input type="text" class="form-control datetimepicker-input"
-                                                        data-target="#datefrom">
+                                                        data-target="#datefrom" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
                                                     <div class="input-group-append" data-target="#datefrom"
                                                         data-toggle="datetimepicker">
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i>
@@ -74,7 +66,7 @@ require_once '../../func/validateSession.php';
                                                 <label>Hasta:</label>
                                                 <div class="input-group date" id="dateto" data-target-input="nearest">
                                                     <input type="text" class="form-control datetimepicker-input"
-                                                        data-target="#dateto">
+                                                        data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy">
                                                     <div class="input-group-append" data-target="#dateto"
                                                         data-toggle="datetimepicker">
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i>
@@ -121,8 +113,6 @@ require_once '../../func/validateSession.php';
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Select2 -->
-    <script src="../../plugins/select2/js/select2.full.min.js"></script>
     <!-- InputMask -->
     <script src="../../plugins/moment/moment.min.js"></script>
     <script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
@@ -130,25 +120,14 @@ require_once '../../func/validateSession.php';
     <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- Summernote -->
-    <script src="../../plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- CodeMirror -->
-    <script src="../../plugins/codemirror/codemirror.js"></script>
-    <script src="../../plugins/codemirror/mode/css/css.js"></script>
-    <script src="../../plugins/codemirror/mode/xml/xml.js"></script>
-    <script src="../../plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
 
     <!-- Page specific script -->
     <script>
         $(function () {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-
-            // Summernote
-            $('#summernote').summernote()
-
+            //Phone Number
+            $('[data-mask]').inputmask()
             //Date picker
             $('#datefrom').datetimepicker({
                 format: 'DD/MM/YYYY'
@@ -159,13 +138,6 @@ require_once '../../func/validateSession.php';
         })
     </script>
     <script>
-        function nuevoCliente() {
-            window.open('../forms/nuevo-cliente/', 'Nuevo Cliente', 'width=400,height=1000')
-        }
-        function nuevoClientev2() {
-            window.open('../forms/cliente/frmNuevo.php', 'Nuevo Cliente', 'width=2000,height=400')
-        }
-        
         function obtenerResultados() {
             window.close();
             window.open('./frmResultados.php', 'Resultados de búsqueda', 'width=1400,height=600')

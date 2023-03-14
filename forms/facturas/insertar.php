@@ -18,7 +18,8 @@ $Obj_Facturas->Cheque = $Obj_Ajustes->RemoverEtiquetas($_POST['txtCheque']);
 $Obj_Facturas->Banco = $Obj_Ajustes->RemoverEtiquetas($_POST['txtBanco']);
 $Obj_Facturas->Cupon = $Obj_Ajustes->RemoverEtiquetas($_POST['txtCupon']);
 $Obj_Facturas->Comentario = $_POST['txtComentario'];
-$Obj_Facturas->IdEmpleado = $_SESSION['IdEmpleado'];
+$Obj_Facturas->Agencia = $_SESSION['Agencia'];
+$Obj_Facturas->Agente = $_SESSION['Agente'];
 
 //EL VALOR NO VENGA VACIO
 if (trim($_POST['txtValor']) === '') {
@@ -28,11 +29,11 @@ if (trim($_POST['txtValor']) === '') {
 }
 
 //HAYA SELECCIONADO UNA FORMA DE PAGO
-if (trim($_POST['txtEfectivo']) === '' && trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCheque']) === '' && trim($_POST['txtBanco']) === '') {
-    $_SESSION['error-registro'] = 'pago';
-    echo "<script>history.go(-1)</script>";
-    return;
-}
+// if (trim($_POST['txtEfectivo']) === '' && trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCheque']) === '' && trim($_POST['txtBanco']) === '') {
+//     $_SESSION['error-registro'] = 'pago';
+//     echo "<script>history.go(-1)</script>";
+//     return;
+// }
 //SI LA FORMA DE PAGO SELECCIONADA ES CREDITO AGREGAR LOS 4 NUMEROS DE TARJETA
 if (trim($_POST['txtCreditoValor']) !== '' && trim($_POST['txtCreditoNumero']) === '') {
     //VALIDANDO FORMATO DE TELEFONO
@@ -51,7 +52,7 @@ if (trim($_POST['txtCreditoValor']) !== '' && trim($_POST['txtCreditoNumero']) !
     return;
 }
 
-//SI LA FORMA DE PAGO SELECCIONADA ES CREDITO AGREGAR LOS 4 NUMEROS DE TARJETA
+//NO AGREGAR LOS 4 DIGITOS DE LA TARJETA SI NO HAY CANTIDAD INGRESADA CON ESTA FORMA DE PAGO
 if (trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCreditoNumero']) !== '' && strpos($_POST['txtCreditoNumero'], "_")) {
     //VALIDANDO NUMEROS DE TARJETA DE CREDITO
     $Obj_Facturas->CreditoNumero = "";
@@ -60,7 +61,7 @@ if (trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCreditoNumero']) !
 $Res_Facturas = $Obj_Facturas->Insertar();
 
 if ($Res_Facturas) {
-    $_SESSION['registro'] = 's-factura';
+    $_SESSION['success-registro'] = 'factura';
     echo "<script>
     let URL = window.opener.location.pathname;
     if (URL.indexOf('buscar-cliente') !== -1) {

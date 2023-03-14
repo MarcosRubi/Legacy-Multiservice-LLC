@@ -110,10 +110,6 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                         </div>
                         <!-- /.col -->
                     </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <?php require_once '../cliente/listar.php' ?>
-                    </div>
                 </div>
                 <!-- /.container-fluid -->
             </div>

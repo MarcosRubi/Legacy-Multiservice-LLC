@@ -42,7 +42,7 @@ if ($_POST['txtIda'] !== "" && $_POST['txtIda'] !== "dd-mm-yyyy" && !preg_match(
 $Res_Cotizaciones = $Obj_Cotizaciones->Insertar();
 
 if ($Res_Cotizaciones) {
-    $_SESSION['registro'] = 's-cotizacion';
+    $_SESSION['success-registro'] = 'cotizacion';
     echo "<script>
     let URL = window.opener.location.pathname;
     if (URL.indexOf('buscar-cliente') !== -1) {

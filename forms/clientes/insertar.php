@@ -16,15 +16,15 @@ $Obj_Clientes->FechaNacimiento =  $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->F
 
 $regexFecha = '/^(\d{2})-(\d{2})-(\d{4})$/';
 
-//VALIDANDO FORMATO DE FECHA
-if($_POST['txtFechaNacimiento'] !== "" && $_POST['txtFechaNacimiento'] !== "dd-mm-yyyy" && !preg_match($regexFecha, $_POST['txtFechaNacimiento'])){
+// //VALIDANDO FORMATO DE FECHA
+if ($_POST['txtFechaNacimiento'] !== "" && $_POST['txtFechaNacimiento'] !== "dd-mm-yyyy" && !preg_match($regexFecha, $_POST['txtFechaNacimiento'])) {
     $_SESSION['error-registro'] = 'fecha';
     echo "<script>history.go(-1)</script>";
     return;
 };
 
 //VALIDANDO FORMATO DE TELEFONO
-if(strpos($_POST['txtTelefono'], "_")){
+if (strpos($_POST['txtTelefono'], "_")) {
     $_SESSION['error-registro'] = 'tel';
     echo "<script>history.go(-1)</script>";
     return;
@@ -33,11 +33,10 @@ if(strpos($_POST['txtTelefono'], "_")){
 $Res_Clientes = $Obj_Clientes->Insertar();
 
 if ($Res_Clientes) {
+    $_SESSION['success-registro'] = 'cliente';
     echo "<script>
     let URL = window.opener.location.pathname;
-    if (URL.indexOf('buscar-cliente') !== -1) {
         window.opener.location.reload();
-    }
     window.close();
 </script>";
 }

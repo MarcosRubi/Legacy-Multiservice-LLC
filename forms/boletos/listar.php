@@ -7,6 +7,7 @@ if (!isset($_GET['id'])) {
 
 require_once '../../bd/bd.php';
 require_once '../../class/Boletos.php';
+require_once '../../class/OpcionesTablas.php';
 require_once '../../class/Ajustes.php';
 
 $Obj_Ajustes = new Ajustes();
@@ -15,6 +16,8 @@ $Obj_Boletos = new Boletos();
 $Res_Boletos = $Obj_Boletos->buscarPorClienteId($_GET['id']);
 
 $DatosBoletos = $Res_Boletos->fetch_assoc();
+
+$Obj_OpcionesTablas = new OpcionesTablas();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -78,7 +81,10 @@ $DatosBoletos = $Res_Boletos->fetch_assoc();
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($Res_Boletos as $key => $DatosBoleto) { ?>
+                                            <?php foreach ($Res_Boletos as $key => $DatosBoleto) { 
+                                                $Res_Iata = $Obj_OpcionesTablas->buscarIata($DatosBoleto['IdIata']);
+                                                $Res_FormaPagos = $Obj_OpcionesTablas->buscarFormaPago($DatosBoleto['IdFormaPago']);
+                                                ?>
                                                 <tr>
                                                     <td><?= $DatosBoleto['IdBoleto'] ?></td>
                                                     <td><?= $DatosBoleto['NombrePasajero'] ?></td>
@@ -88,10 +94,10 @@ $DatosBoletos = $Res_Boletos->fetch_assoc();
                                                     <td><?= $DatosBoleto['Aerolinea'] ?></td>
                                                     <td><?= $DatosBoleto['Origen'] ?></td>
                                                     <td><?= $DatosBoleto['Destino'] ?></td>
-                                                    <td><?= $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaIda']) ?></td>
-                                                    <td><?= $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaRegreso']) ?></td>
-                                                    <td><?= $DatosBoleto['IdIata'] ?></td>
-                                                    <td><?= $DatosBoleto['IdTipo'] ?></td>
+                                                    <td><?= $DatosBoleto['FechaIda'] === '0000-00-00' ? '' : $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaIda']) ?></td>
+                                                    <td><?= $DatosBoleto['FechaRegreso'] === '0000-00-00' ? '' : $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaRegreso']) ?></td>
+                                                    <td><?= $Res_Iata->fetch_assoc()['NombreIata'] ?></td>
+                                                    <td><?= $Res_FormaPagos->fetch_assoc()['FormaPago'] ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Precio']) ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Base']) ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Tax']) ?></td>

@@ -12,7 +12,13 @@ $Obj_Boletos->IdCliente = $Obj_Ajustes->RemoverEtiquetas($_POST['IdCliente']);
 $Obj_Boletos->Itinerario = trim($_POST['txtItinerario']);
 $Obj_Boletos->Agencia = $_SESSION['Agencia'];
 $Obj_Boletos->Agente = $_SESSION['Agente'];
+$Obj_Boletos->Pnr = $_POST['txtPnr'];
 
+if (trim($_POST['txtPnr']) === '') {
+    $_SESSION['error-registro'] = 'pnr';
+    echo "<script>history.go(-1)</script>";
+    return;
+};
 
 $regexFecha = '/^(\d{2})-(\d{2})-(\d{4})$/';
 $arr = explode(',', $_POST['nb']);
@@ -83,11 +89,11 @@ if (isset($_POST['nb'])) {
             echo "<script>history.go(-1)</script>";
             return;
         };
-        if ($_POST['txtFechaRegreso' . $i] === '') {
-            $_SESSION['error-registro'] = 'regresoVacio';
-            echo "<script>history.go(-1)</script>";
-            return;
-        };
+        // if ($_POST['txtFechaRegreso' . $i] === '') {
+        //     $_SESSION['error-registro'] = 'regresoVacio';
+        //     echo "<script>history.go(-1)</script>";
+        //     return;
+        // };
         if ($_POST['txtFechaRegreso' . $i] !== "" && $_POST['txtFechaRegreso' . $i] !== "dd-mm-yyyy" && !preg_match($regexFecha, $_POST['txtFechaRegreso' . $i])) {
             $_SESSION['error-registro'] = 'regresoFormato';
             echo "<script>history.go(-1)</script>";
@@ -120,10 +126,10 @@ if (isset($_POST['nb'])) {
 
 
 if ($Res_Boletos) {
-    if(count($arr)>1){
-        $_SESSION['registro'] = 's-boletos';
-    }else{
-        $_SESSION['registro'] = 's-boleto';
+    if (count($arr) > 1) {
+        $_SESSION['success-registro'] = 'boletos';
+    } else {
+        $_SESSION['success-registro'] = 'boleto';
     }
     echo "<script>
     let URL = window.opener.location.pathname;

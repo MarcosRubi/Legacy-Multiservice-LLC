@@ -14,9 +14,13 @@ $Obj_Ajustes = new Ajustes();
 $Obj_Facturas = new Facturas();
 $Res_Facturas = $Obj_Facturas->buscarPorId($_GET['id']);
 $Res_ValorTotal = $Obj_Facturas->ValorTotalPorCliente($_GET['id']);
+$Res_BalanceTotal = $Obj_Facturas->BalanceTotalPorCliente($_GET['id']);
 
 $Datosfacturas = $Res_Facturas->fetch_assoc();
-$valorTotal = $Obj_Ajustes->FormatoDinero($Res_ValorTotal->fetch_assoc()['ValorTotal'], 2);
+$valorTotal = $Res_ValorTotal->fetch_assoc()['ValorTotal'];
+$BalanceTotal = $Res_BalanceTotal->fetch_assoc()['BalanceTotal'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -57,7 +61,7 @@ $valorTotal = $Obj_Ajustes->FormatoDinero($Res_ValorTotal->fetch_assoc()['ValorT
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table class="table table-bordered table-hover table-striped">
+                                    <table id="data-personal" class="table table-bordered table-hover table-striped">
                                         <thead>
                                             <tr>
                                                 <th>Cliente</th>
@@ -73,9 +77,9 @@ $valorTotal = $Obj_Ajustes->FormatoDinero($Res_ValorTotal->fetch_assoc()['ValorT
                                                 <?php } else { ?>
                                                     <td><?= $Datosfacturas['PrimerNombre'] . " " . $Datosfacturas['Apellido'] ?></td>
                                                 <?php } ?>
-                                                <td><?= $valorTotal ?></td>
-                                                <td><?= $valorTotal ?></td>
-                                                <td>$0.00</td>
+                                                <td><?= $Obj_Ajustes->FormatoDinero($valorTotal) ?></td>
+                                                <td><?= $Obj_Ajustes->FormatoDinero(doubleval($valorTotal) + doubleval($BalanceTotal)) ?></td>
+                                                <td class="<?=doubleval($BalanceTotal)<0 ? 'text-danger font-weight-bold' : ''?>" ><?= $Obj_Ajustes->FormatoDinero($BalanceTotal) ?></td>
                                     </table>
                                 </div>
                                 <div class="card-body">
@@ -98,21 +102,21 @@ $valorTotal = $Obj_Ajustes->FormatoDinero($Res_ValorTotal->fetch_assoc()['ValorT
                                             <?php foreach ($Res_Facturas as $key => $Datosfactura) { ?>
                                                 <tr>
                                                     <td><?= $Datosfactura['IdFactura'] ?></td>
-                                                    <td><?= $Datosfactura['Creado'] . " " . $Datosfactura['CreadoTimestamp'] ?></td>
+                                                    <td><?= $Obj_Ajustes->FechaInvertir(substr($Datosfacturas['Creado'], 0, -9)) ?></td>
                                                     <td><?= $Datosfactura['PrimerNombre'] . " " . $Datosfactura['Apellido'] ?></td>
                                                     <td><?= $Datosfactura['Agente'] ?></td>
                                                     <td><?= $Datosfactura['Agencia'] ?></td>
                                                     <td><?= $Datosfactura['Tipo'] ?></td>
                                                     <td><?= $Datosfactura['Descripcion'] ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Valor']) ?></td>
-                                                    <td>$0.00</td>
-                                                    <td style="width:3rem;">
+                                                    <td class="<?=doubleval($Datosfactura['Balance'])<0 ? 'text-danger font-weight-bold' : ''?>" ><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Balance']) ?></td>
+                                                    <td>
                                                         <div class="d-flex justify-content-around">
-                                                            <a href="#" title="Imprimir">
-                                                                <i class="fa fa-print fa-lg bg-primary p-2 mx-1 rounded"></i>
+                                                            <a class="btn btn-sm mx-1 btn-primary" title="Imprimir" >
+                                                                <i class="fa fa-print fa-lg"></i>
                                                             </a>
-                                                            <a href="#" title="Crear Factura">
-                                                                <i class="fa fa-dollar-sign fa-lg bg-primary p-2 mx-1 rounded"></i>
+                                                            <a href="<?= "./frmAbono.php?factura=" . $Datosfactura['IdFactura'] . "&nombre=" . $Datosfactura['PrimerNombre'] . " " . $Datosfactura['Apellido'] . "&cliente=" . $Datosfactura['IdCliente'] ?>" class="btn btn-sm mx-1 btn-primary" title="Abonar" >
+                                                                <i class="fa fa-dollar-sign px-1 fa-lg"></i>
                                                             </a>
                                                         </div>
                                                     </td>
@@ -145,7 +149,7 @@ $valorTotal = $Obj_Ajustes->FormatoDinero($Res_ValorTotal->fetch_assoc()['ValorT
                                                     <td><?= $Datosfactura['IdFactura'] ?></td>
                                                     <td><?= $Datosfactura['Agencia'] ?></td>
                                                     <td><?= $Datosfactura['Agente'] ?></td>
-                                                    <td><?= $Datosfactura['Creado'] . " " . $Datosfactura['CreadoTimestamp'] ?></td>
+                                                    <td><?= $Obj_Ajustes->FechaInvertir(substr($Datosfacturas['Creado'], 0, -9)) . " " . substr($Datosfacturas['Creado'], 10, 20) . " " .  $Datosfactura['CreadoTimestamp'] ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Efectivo']) ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['CreditoValor']) ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Cheque']) ?></td>
@@ -209,7 +213,7 @@ $valorTotal = $Obj_Ajustes->FormatoDinero($Res_ValorTotal->fetch_assoc()['ValorT
                 "paging": true,
                 "lengthChange": false,
                 "searching": false,
-                "ordering": false,
+                "ordering": true,
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
@@ -218,6 +222,17 @@ $valorTotal = $Obj_Ajustes->FormatoDinero($Res_ValorTotal->fetch_assoc()['ValorT
         $(function() {
             $('#list-results-2').DataTable({
                 "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+        $(function() {
+            $('#data-personal').DataTable({
+                "paging": false,
                 "lengthChange": false,
                 "searching": false,
                 "ordering": false,
