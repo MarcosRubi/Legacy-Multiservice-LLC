@@ -32,6 +32,11 @@ class Facturas extends DB
         $query = "SELECT * FROM vta_listar_facturas WHERE IdCliente='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
+    public function obtenerValoresPagos($id)
+    {
+        $query = "SELECT Efectivo, CreditoValor, Cheque, Banco, Cupon FROM vta_listar_facturas WHERE IdFactura='" . $id . "'";
+        return $this->EjecutarQuery($query);
+    }
     public function obtenerBalanceFactura($id){
         $query = "SELECT Balance FROM tbl_facturas WHERE IdFactura='".$id."' ";
         return $this->EjecutarQuery($query);
@@ -112,6 +117,18 @@ class Facturas extends DB
     {
         $query = "UPDATE tbl_facturas SET 
         Balance = '" . $balance . "'
+        WHERE IdFactura='" . $id . "' ";
+
+        return $this->EjecutarQuery($query);
+    }
+    public function ActualizarValoresPago($id)
+    {
+        $query = "UPDATE tbl_facturas SET 
+        Efectivo = '" . $this->Efectivo . "',
+        CreditoValor = '" . $this->CreditoValor . "',
+        Cheque = '" . $this->Cheque . "',
+        Banco = '" . $this->Banco . "',
+        Cupon = '" . $this->Cupon . "'
         WHERE IdFactura='" . $id . "' ";
 
         return $this->EjecutarQuery($query);

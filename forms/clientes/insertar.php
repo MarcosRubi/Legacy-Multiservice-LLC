@@ -7,11 +7,11 @@ require_once '../../class/Ajustes.php';
 $Obj_Clientes = new Clientes();
 $Obj_Ajustes = new Ajustes();
 
-$Obj_Clientes->PrimerNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower($_POST['txtPrimerNombre'])));
-$Obj_Clientes->SegundoNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower($_POST['txtSegundoNombre'])));
-$Obj_Clientes->Apellido = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower($_POST['txtApellido'])));
-$Obj_Clientes->Telefono = $Obj_Ajustes->RemoverEtiquetas($_POST['txtTelefono']);
-$Obj_Clientes->Direccion = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower($_POST['txtDireccion'])));
+$Obj_Clientes->PrimerNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtPrimerNombre']))));
+$Obj_Clientes->SegundoNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtSegundoNombre']))));
+$Obj_Clientes->Apellido = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtApellido']))));
+$Obj_Clientes->Telefono = $Obj_Ajustes->RemoverEtiquetas(trim($_POST['txtTelefono']));
+$Obj_Clientes->Direccion = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtDireccion']))));
 $Obj_Clientes->FechaNacimiento =  $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertir($_POST['txtFechaNacimiento']));
 
 $regexFecha = '/^(\d{2})-(\d{2})-(\d{4})$/';

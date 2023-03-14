@@ -55,7 +55,7 @@ if (isset($_GET['s'])) {
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <h2 class="text-center display-4">Buscar Cliente</h2>
+                    <!-- <h2 class="text-center display-4">Buscar Cliente</h2>
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
                             <form method="get">
@@ -70,22 +70,23 @@ if (isset($_GET['s'])) {
                             </form>
                             <span class="text-gray">Puedes buscar por cualquier parámetro de la tabla</span>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row mt-3">
                         <div class="col-12">
-                            <?php
-                            if (isset($_GET['s']) && $_GET['s'] !== "") { ?>
-                                <div class="d-flex justify-content-between mb-2 mt-3">
-                                    <h3 class='display-5'>Clientes encontrados para: <strong><?= $_GET['s'] ?></strong></h3>
-                                    <a href="./" class="btn btn-primary">Listar todo</a>
-                                </div>
-                            <?php } else {
-                                echo "<h3 class='display-5'>Últimos clientes creados</h3>";
-                            }
-
-                            ?>
-
                             <div class="card">
+                                <div class="card-header">
+                                    <?php
+                                    if (isset($_GET['s']) && $_GET['s'] !== "") { ?>
+                                        <div class="d-flex justify-content-between mb-2 mt-3">
+                                            <h3 class='card-title'>Clientes encontrados para: <strong><?= $_GET['s'] ?></strong></h3>
+                                            <a href="./" class="btn btn-primary">Listar todo</a>
+                                        </div>
+                                    <?php } else {
+                                        echo "<h3 class='card-title'>Últimos clientes creados</h3>";
+                                    }
+                                    ?>
+
+                                </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="logs" class="table table-bordered table-hover">
@@ -96,7 +97,7 @@ if (isset($_GET['s'])) {
                                                 <th>Segundo Nombre</th>
                                                 <th>Primer Nombre</th>
                                                 <th>Número De Teléfono</th>
-                                                <th style="max-width:1rem;" >Dirección</th>
+                                                <th style="max-width:1rem;">Dirección</th>
                                                 <th>Fecha de Nac.</th>
                                                 <th>Boletos</th>
                                                 <th>Facturas</th>
@@ -199,7 +200,7 @@ if (isset($_GET['s'])) {
             $('#logs').DataTable({
                 "paging": true,
                 "lengthChange": false,
-                "searching": false,
+                "searching": true,
                 "ordering": false,
                 "info": true,
                 "autoWidth": false,
@@ -221,7 +222,7 @@ if (isset($_GET['s'])) {
         }
 
         function listarBoletos(id) {
-            window.open('<?= $_SESSION['path'] ?>forms/boletos/listar.php?id='+id, 'Boletos', 'width=2000,height=2000')
+            window.open('<?= $_SESSION['path'] ?>forms/boletos/listar.php?id=' + id, 'Boletos', 'width=2000,height=2000')
         }
 
         function listarCotizaciones(id) {

@@ -89,7 +89,7 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                                                     <td><?=$DatosCotizacion['Origen']?></td>
                                                     <td><?=$DatosCotizacion['Destino']?></td>
                                                     <td><?=$Obj_Ajustes->FechaInvertir($DatosCotizacion['Ida'])?></td>
-                                                    <td><?=$Obj_Ajustes->FechaInvertir($DatosCotizacion['Regreso'])?></td>
+                                                    <td><?=$DatosCotizacion['Regreso'] === '0000-00-00' ? '' : $Obj_Ajustes->FechaInvertir($DatosCotizacion['Regreso'])?></td>
                                                     <td><?=$DatosCotizacion['NumeroBoletos']?></td>
                                                     <td><?=$DatosCotizacion['Accion']?></td>
                                                     <td><?=$DatosCotizacion['Fecha'] === '0000-00-00' ? '' : $Obj_Ajustes->FechaInvertir($DatosCotizacion['Fecha']) ?></td>

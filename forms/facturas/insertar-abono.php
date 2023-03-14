@@ -29,7 +29,7 @@ if (trim($_POST['txtValor']) === '') {
 }
 
 //HAYA SELECCIONADO UNA FORMA DE PAGO
-if (trim($_POST['txtEfectivo']) === '' && trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCheque']) === '' && trim($_POST['txtBanco']) === '') {
+if (trim($_POST['txtEfectivo']) === '' && trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCheque']) === '' && trim($_POST['txtBanco']) === '' && trim($_POST['txtCupon']) === '') {
     $_SESSION['error-registro'] = 'pago';
     echo "<script>history.go(-1)</script>";
     return;
@@ -64,10 +64,23 @@ $ValorBalance = $Res_Balance->fetch_assoc()['Balance'];
 $Obj_Abonos->BalanceActual = doubleval($ValorBalance) + doubleval($_POST['txtValor']);
 
 $Res_Abonos = $Obj_Abonos->Insertar();
-$Obj_Facturas->ActualizarBalanceFactura($_POST['txtIdFactura'], doubleval($ValorBalance) + doubleval($_POST['txtValor']));
+
+$Res_Factura = $Obj_Facturas->obtenerValoresPagos($_POST['txtIdFactura']);
+
+while ($DatosPagos = $Res_Factura->fetch_assoc()) {
+    $Obj_Facturas->Efectivo = $Obj_Ajustes->ConvertirFormatoDolar($DatosPagos['Efectivo']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtEfectivo']);
+    $Obj_Facturas->CreditoValor = $Obj_Ajustes->ConvertirFormatoDolar($DatosPagos['CreditoValor']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtCreditoValor']);
+    $Obj_Facturas->Cheque = $Obj_Ajustes->ConvertirFormatoDolar($DatosPagos['Cheque']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtCheque']);
+    $Obj_Facturas->Banco = $Obj_Ajustes->ConvertirFormatoDolar($DatosPagos['Banco']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtBanco']);
+    $Obj_Facturas->Cupon = $Obj_Ajustes->ConvertirFormatoDolar($DatosPagos['Cupon']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtBanco']);
+}
+$Obj_Facturas->ActualizarValoresPago($_POST['txtIdFactura']);
+
 
 if ($Res_Abonos) {
     $_SESSION['success-registro'] = 'abono';
+    $Obj_Facturas->ActualizarBalanceFactura($_POST['txtIdFactura'], doubleval($ValorBalance) + doubleval($_POST['txtValor']));
+
 
     echo "<script>
         window.opener.location.reload();

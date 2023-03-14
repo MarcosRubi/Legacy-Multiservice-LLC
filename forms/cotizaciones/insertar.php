@@ -10,8 +10,8 @@ $Obj_Ajustes = new Ajustes();
 
 $Obj_Cotizaciones->IdCliente = $Obj_Ajustes->RemoverEtiquetas($_POST['IdCliente']);
 $Obj_Cotizaciones->Pnr = $Obj_Ajustes->RemoverEtiquetas(strtoupper($_POST['txtPnr']));
-$Obj_Cotizaciones->Comentario = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower($_POST['txtComentario'])));
-$Obj_Cotizaciones->Accion = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower($_POST['txtAccion'])));
+$Obj_Cotizaciones->Comentario = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtComentario']))));
+$Obj_Cotizaciones->Accion = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtAccion']))));
 $Obj_Cotizaciones->Fecha = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertir($_POST['txtFecha']));
 $Obj_Cotizaciones->Agencia = $Obj_Ajustes->RemoverEtiquetas(strtoupper($_POST['txtAgencia']));
 $Obj_Cotizaciones->Agente = $Obj_Ajustes->RemoverEtiquetas(strtoupper($_POST['txtAgente']));

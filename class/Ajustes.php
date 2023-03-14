@@ -19,4 +19,11 @@ class Ajustes
         return "$".number_format($content, 2);
     }
 
+    public function ConvertirFormatoDolar($valor){
+        if($valor === ''){
+            return 0.0;
+        }
+        return doubleval($valor);
+    }
+
 }
