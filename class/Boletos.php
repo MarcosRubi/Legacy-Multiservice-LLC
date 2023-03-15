@@ -34,10 +34,27 @@ class Boletos extends DB
         $query = "SELECT * FROM vta_listar_boletos WHERE IdCliente='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
+    public function buscarNombreClientePorId($id)
+    {
+        $query = "SELECT PrimerNombre, SegundoNombre, Apellido FROM vta_listar_clientes WHERE IdCliente='" . $id . "'";
+        return $this->EjecutarQuery($query);
+    }
 
     public function buscarPorId($id)
     {
         $query = "SELECT * FROM vta_listar_boletos WHERE IdBoleto='" . $id . "'";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function buscarPorPnr($idCliente, $pnr)
+    {
+        $query = "SELECT * FROM vta_listar_boletos WHERE IdCliente='" . $idCliente . "' AND Pnr='".$pnr."'";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function obtenerBoletoCreado($id)
+    {
+        $query = "SELECT * FROM vta_listar_boletos WHERE IdCliente='" . $id . "'" . " ORDER BY IdBoleto desc LIMIT 1";
         return $this->EjecutarQuery($query);
     }
 
@@ -124,6 +141,11 @@ class Boletos extends DB
     public function Eliminar($id)
     {
         $query = "UPDATE tbl_boletos SET Eliminado='S' WHERE IdBoleto='" . $id . "'";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function valorTotalBoletos($idCliente, $pnr){
+        $query = "SELECT SUM(vta_listar_boletos.Precio) AS 'Valor' FROM vta_listar_boletos WHERE IdCliente='".$idCliente."' AND Pnr='".$pnr."'";
         return $this->EjecutarQuery($query);
     }
 }

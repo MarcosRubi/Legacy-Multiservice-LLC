@@ -151,4 +151,5 @@ class Facturas extends DB
         $query = "UPDATE tbl_facturas SET Eliminado='S' WHERE IdFactura='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
+
 }

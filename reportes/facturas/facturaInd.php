@@ -22,6 +22,7 @@ $Res_Facturas = $Obj_Facturas->buscarPorId($_GET['id']);
 $Datosfacturas = $Res_Facturas->fetch_assoc();
 
 
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,7 +30,7 @@ $Datosfacturas = $Res_Facturas->fetch_assoc();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Factura</title>
+    <title>Factura #<?=$DatosCliente['IdFactura'] . " - " . $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido'] ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -82,7 +83,7 @@ $Datosfacturas = $Res_Facturas->fetch_assoc();
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-sm-4 invoice-col">
-                                        <b>Factura #7</b><br>
+                                        <b>Factura #<?=$DatosCliente['IdFactura'] ?></b><br>
                                         <b>Factura creada:</b> <?= $Obj_Ajustes->FechaInvertir(substr($DatosCliente['Creado'], 0, -9)) . " " . substr($DatosCliente['Creado'], 10, 20) . " " .  $DatosCliente['CreadoTimestamp'] ?>
                                     </div>
                                     <!-- /.col -->

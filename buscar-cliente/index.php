@@ -97,7 +97,7 @@ if (isset($_GET['s'])) {
                                                 <th>Segundo Nombre</th>
                                                 <th>Primer Nombre</th>
                                                 <th>Número De Teléfono</th>
-                                                <th style="max-width:1rem;">Dirección</th>
+                                                <th>Dirección</th>
                                                 <th>Fecha de Nac.</th>
                                                 <th>Boletos</th>
                                                 <th>Facturas</th>

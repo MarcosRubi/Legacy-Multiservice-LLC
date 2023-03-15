@@ -12,7 +12,7 @@ $Obj_Boletos->IdCliente = $Obj_Ajustes->RemoverEtiquetas($_POST['IdCliente']);
 $Obj_Boletos->Itinerario = trim($_POST['txtItinerario']);
 $Obj_Boletos->Agencia = $_SESSION['Agencia'];
 $Obj_Boletos->Agente = $_SESSION['Agente'];
-$Obj_Boletos->Pnr = $_POST['txtPnr'];
+$Obj_Boletos->Pnr = $Obj_Ajustes->RemoverEtiquetas(trim(strtoupper($_POST['txtPnr'])));
 
 if (trim($_POST['txtPnr']) === '') {
     $_SESSION['error-registro'] = 'pnr';
@@ -131,11 +131,8 @@ if ($Res_Boletos) {
     } else {
         $_SESSION['success-registro'] = 'boleto';
     }
-    echo "<script>
-    let URL = window.opener.location.pathname;
-    if (URL.indexOf('buscar-cliente') !== -1) {
-        window.opener.location.reload();
-    }
-    window.close();
-</script>";
+    $Res_Boletos = $Obj_Boletos->obtenerBoletoCreado($_POST['IdCliente']);
+    $DatosBoleto = $Res_Boletos->fetch_assoc();
+    
+    header("Location:" . $_SESSION['path'] . "forms/facturas/frmNuevo.php?cliente=" . $DatosBoleto['IdCliente'] . "&pnr=" . $DatosBoleto['Pnr'] ."");
 }

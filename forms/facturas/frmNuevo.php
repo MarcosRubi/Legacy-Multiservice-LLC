@@ -2,16 +2,43 @@
 require_once '../../func/validateSession.php';
 require_once '../../bd/bd.php';
 require_once '../../class/OpcionesTablas.php';
+require_once '../../class/Boletos.php';
 
 
-if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
-    echo "<script>window.location.replace('" . $_SESSION['path'] . "buscar-cliente/');</script>";
+if (!isset($_GET['id']) && !isset($_GET['nombre']) && !isset($_GET['cliente']) && !isset($_GET['pnr'])) {
+    echo "<script>window.location.replace('" . $_SESSION['path'] . "buscar-cliente/');window.close();</script>";
     return;
 }
 
-$Obj_OpcionesTablas = new OpcionesTablas();
+$totalEfectivo = 0;
+$totalCredito = 0;
+$valor = 0;
+$NombreCliente = '';
 
+if (isset($_GET['cliente'])) {
+    $Obj_Boleto = new Boletos();
+    $Res_Boleto = $Obj_Boleto->buscarPorPnr($_GET['cliente'], $_GET['pnr']);
+    $Res_ValorTotal = $Obj_Boleto->valorTotalBoletos($_GET['cliente'], $_GET['pnr']);
+    $Res_NombreCliente = $Obj_Boleto->buscarNombreClientePorId($_GET['cliente']);
+
+    $DatosCliente = $Res_NombreCliente->fetch_assoc();
+    $NombreCliente = $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido'];
+
+    $Valor = $Res_ValorTotal->fetch_assoc()['Valor'];
+
+    while ($DatosBoletos = $Res_Boleto->fetch_assoc()) {
+        if ($DatosBoletos['IdFormaPago'] === '2') {
+            $totalEfectivo = $totalEfectivo + doubleval($DatosBoletos['Precio']);
+        }
+        if ($DatosBoletos['IdFormaPago'] === '3') {
+            $totalCredito = $totalCredito + doubleval($DatosBoletos['Precio']);
+        }
+    }
+}
+
+$Obj_OpcionesTablas = new OpcionesTablas();
 $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -56,22 +83,27 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                     <!-- Cliente -->
                                     <div class="form-group mx-1 container-fluid">
                                         <label>Cliente</label>
-                                        <input type="text" class="form-control" value="<?= $_GET['nombre'] ?>" readonly>
+                                        <input type="text" class="form-control" value="<?= isset($_GET['nombre']) ? $_GET['nombre'] : $NombreCliente ?>" readonly>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1 container-fluid">
                                         <label>Tipo</label>
                                         <select class="form-control select2" style="width: 100%;" name="txtIdTipo">
                                             <?php
-                                            while ($DatoTipoFactura = $Res_OpcionesTipoFactura->fetch_assoc()) { ?>
-                                                <option value="<?= $DatoTipoFactura['IdTipoFactura'] ?>"><?= $DatoTipoFactura['Tipo'] ?></option>
-                                            <?php } ?>
+                                            if (isset($_GET['pnr'])) { ?>
+                                                <option value="2" selected>DEP01 - Ticket(s)/Boleto(s)</option>
+                                                <?php
+                                            } else {
+                                                while ($DatoTipoFactura = $Res_OpcionesTipoFactura->fetch_assoc()) { ?>
+                                                    <option value="<?= $DatoTipoFactura['IdTipoFactura'] ?>"><?= $DatoTipoFactura['Tipo'] ?></option>
+                                            <?php }
+                                            } ?>
                                         </select>
                                     </div>
                                     <!-- Valor -->
                                     <div class="form-group mx-1 container-fluid">
                                         <label>Valor</label>
-                                        <input type="number" class="form-control" placeholder="0.0" name="txtValor">
+                                        <input type="number" class="form-control" placeholder="0.0" name="txtValor" value="<?= $Valor>0 ? $Valor : '' ?>">
                                     </div>
                                 </div>
                                 <div class="d-flex">
@@ -101,7 +133,7 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                                     <td>
                                                         <!-- Valor -->
                                                         <div class="form-group mx-1 container-fluid mb-0">
-                                                            <input type="number" class="form-control" placeholder="0.0" name="txtEfectivo">
+                                                            <input type="number" class="form-control" placeholder="0.0" name="txtEfectivo" value="<?= $totalEfectivo > 0 ? $totalEfectivo : '' ?>">
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -110,7 +142,7 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                                     <td>
                                                         <!-- Valor -->
                                                         <div class="form-group mx-1 container-fluid">
-                                                            <input type="number" class="form-control" placeholder="0.0" name="txtCreditoValor">
+                                                            <input type="number" class="form-control" placeholder="0.0" name="txtCreditoValor" value="<?= $totalCredito > 0 ? $totalCredito : '' ?>">
                                                         </div>
                                                         <div class="form-group mx-1 container-fluid">
                                                             <input type="text" class="form-control" placeholder="Últimos 4" data-inputmask="'mask': ['9999']" data-mask name="txtCreditoNumero">
@@ -161,7 +193,7 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                     </div>
                                 </div>
                             </div>
-                            <input type="text" class="form-control d-none" value="<?= $_GET['id'] ?>" name="txtIdCliente" readonly>
+                            <input type="text" class="form-control d-none" value="<?= isset($_GET['id']) ? $_GET['id'] : $_GET['cliente'] ?>" name="txtIdCliente" readonly>
                             <!-- /.form group -->
                             <div class="form-group pr-1 mt-3">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar factura</button>
