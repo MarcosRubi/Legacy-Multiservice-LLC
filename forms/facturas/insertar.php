@@ -20,6 +20,7 @@ $Obj_Facturas->Cupon = $Obj_Ajustes->RemoverEtiquetas($_POST['txtCupon']);
 $Obj_Facturas->Comentario = $_POST['txtComentario'];
 $Obj_Facturas->Agencia = $_SESSION['Agencia'];
 $Obj_Facturas->Agente = $_SESSION['Agente'];
+$Obj_Facturas->Pnr = $_POST['txtPnr'];
 
 if ($_POST['txtEfectivo'] !== '') {
     $Obj_Facturas->FormaPagoInicial = 'Efectivo';

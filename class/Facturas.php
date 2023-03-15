@@ -19,6 +19,7 @@ class Facturas extends DB
     public $Agencia;
     public $Agente;
     public $FormaPagoInicial;
+    public $Pnr;
 
 
     public function listarTodo()
@@ -30,6 +31,11 @@ class Facturas extends DB
     public function buscarPorId($id)
     {
         $query = "SELECT * FROM vta_listar_facturas WHERE IdCliente='" . $id . "'";
+        return $this->EjecutarQuery($query);
+    }
+    public function buscarPorIdFactura($id)
+    {
+        $query = "SELECT IdCliente,Pnr FROM tbl_facturas WHERE IdFactura='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
     public function obtenerValoresPagos($id)
@@ -80,6 +86,7 @@ class Facturas extends DB
             CreadoTimestamp,
             BalanceInicial,
             FormaPagoInicial,
+            Pnr,
             Eliminado )
             VALUES (
             '" . $this->IdCliente . "',
@@ -100,6 +107,7 @@ class Facturas extends DB
             '" . date("A") . "',
             '" . (doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon)) - doubleval($this->Valor) . "',
             '" . $this->FormaPagoInicial . "',
+            '" . $this->Pnr . "',
             'N' ) ";
         return $this->EjecutarQuery($query);
     }

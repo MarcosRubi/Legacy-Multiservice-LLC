@@ -194,6 +194,7 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                 </div>
                             </div>
                             <input type="text" class="form-control d-none" value="<?= isset($_GET['id']) ? $_GET['id'] : $_GET['cliente'] ?>" name="txtIdCliente" readonly>
+                            <input type="text" class="form-control d-none" value="<?= isset($_GET['pnr']) ? $_GET['pnr'] : '' ?>" name="txtPnr" readonly>
                             <!-- /.form group -->
                             <div class="form-group pr-1 mt-3">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar factura</button>

@@ -6,8 +6,10 @@ require_once '../../bd/bd.php';
 require_once '../../class/Abonos.php';
 require_once '../../class/Facturas.php';
 require_once '../../class/Ajustes.php';
+require_once '../../class/Boletos.php';
 
 $Obj_Abonos = new Abonos();
+$Obj_Boletos = new Boletos();
 $Obj_Ajustes = new Ajustes();
 
 $Res_Abonos = $Obj_Abonos->listarAbonos($_GET['id']);
@@ -21,6 +23,13 @@ $Res_Facturas = $Obj_Facturas->buscarPorId($_GET['id']);
 
 $Datosfacturas = $Res_Facturas->fetch_assoc();
 
+$Res_PnrFactura = $Obj_Facturas->buscarPorIdFactura($DatosCliente['IdFactura']);
+
+
+$Res_buscarPagos = $Res_PnrFactura->fetch_assoc();
+$Res_PagosBoletos = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res_buscarPagos['Pnr']);
+
+$Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res_buscarPagos['Pnr']);
 
 
 ?>
@@ -30,7 +39,7 @@ $Datosfacturas = $Res_Facturas->fetch_assoc();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Factura #<?=$DatosCliente['IdFactura'] . " - " . $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido'] ?></title>
+    <title>Factura #<?= $DatosCliente['IdFactura'] . " - " . $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido'] ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -83,7 +92,7 @@ $Datosfacturas = $Res_Facturas->fetch_assoc();
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-sm-4 invoice-col">
-                                        <b>Factura #<?=$DatosCliente['IdFactura'] ?></b><br>
+                                        <b>Factura #<?= $DatosCliente['IdFactura'] ?></b><br>
                                         <b>Factura creada:</b> <?= $Obj_Ajustes->FechaInvertir(substr($DatosCliente['Creado'], 0, -9)) . " " . substr($DatosCliente['Creado'], 10, 20) . " " .  $DatosCliente['CreadoTimestamp'] ?>
                                     </div>
                                     <!-- /.col -->
@@ -110,7 +119,7 @@ $Datosfacturas = $Res_Facturas->fetch_assoc();
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['Valor']) ?></td>
                                                     <td><?= $Obj_Ajustes->FechaInvertir(substr($DatosCliente['Creado'], 0, -9)) . " " . substr($DatosCliente['Creado'], 10, 20) . " " .  $DatosCliente['CreadoTimestamp'] ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) ?></td>
-                                                    <td><?= $DatosCliente['FormaPagoInicial'] ?></td>
+                                                    <td><?= $Res_PagosBoletos->num_rows > 0 ? '' : $DatosCliente['FormaPagoInicial'] ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['BalanceInicial']) ?></td>
                                                 </tr>
                                                 <?php while ($DatosAbonos = $Res_Abonos->fetch_assoc()) { ?>
@@ -143,6 +152,42 @@ $Datosfacturas = $Res_Facturas->fetch_assoc();
                                                 <?php } ?>
                                             </tbody>
                                         </table>
+                                        <?php if ($Res_Itinerario->num_rows > 0) { ?>
+                                            <table class="table table-striped mt-5">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nombre del pasajero</th>
+                                                        <th># Boletos</th>
+                                                        <th>Aerolínea</th>
+                                                        <th>Precio</th>
+                                                        <th>Forma de pago</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) { ?>
+                                                        <tr>
+                                                            <td><?= $DatosPagosBoletos['NombrePasajero'] ?></td>
+                                                            <td><?= $DatosPagosBoletos['NumeroBoletos'] ?></td>
+                                                            <td><?= $DatosPagosBoletos['Aerolinea'] ?></td>
+                                                            <td><?= $Obj_Ajustes->FormatoDinero($DatosPagosBoletos['Precio']) ?></td>
+                                                            <td><?= $DatosPagosBoletos['FormaPago'] ?></td>
+
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        <?php } ?>
+
+                                        <?php if ($Res_Itinerario->num_rows > 0) { ?>
+                                            <div class="row my-4">
+                                                <div class="col-12">
+                                                    <p class="lead">Itinerario</p>
+                                                    <div class="col-12">
+                                                        <?= $Res_Itinerario->fetch_assoc()['Itinerario'] ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                     <!-- /.col -->
                                 </div>

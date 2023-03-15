@@ -20,7 +20,6 @@ $Datosfacturas = $Res_Facturas->fetch_assoc();
 $valorTotal = $Res_ValorTotal->fetch_assoc()['ValorTotal'];
 $BalanceTotal = $Res_BalanceTotal->fetch_assoc()['BalanceTotal'];
 
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -112,9 +111,16 @@ $BalanceTotal = $Res_BalanceTotal->fetch_assoc()['BalanceTotal'];
                                                     <td class="<?= doubleval($Datosfactura['Balance']) < 0 ? 'text-danger font-weight-bold' : '' ?>"><?= $Obj_Ajustes->FormatoDinero($Datosfactura['Balance']) ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">
-                                                            <a href="<?= $_SESSION['path'] . "reportes/facturas/facturaInd.php?id=" . $Datosfactura['IdFactura'] ?>" class="btn btn-sm mx-1 btn-primary" title="Imprimir">
-                                                                <i class="fa fa-print fa-lg"></i>
-                                                            </a>
+                                                            <?php if ($Datosfactura['IdTipoFactura'] === '2') { ?>
+                                                                <a href="<?= $_SESSION['path'] . "reportes/facturas/facturaInd.php?id=" . $Datosfactura['IdFactura'] ?>&boleto" class="btn btn-sm mx-1 btn-primary" title="Imprimir">
+                                                                    <i class="fa fa-print fa-lg"></i>
+                                                                </a>
+                                                            <?php } ?>
+                                                            <?php if ($Datosfactura['IdTipoFactura'] !== '2') { ?>
+                                                                <a href="<?= $_SESSION['path'] . "reportes/facturas/facturaInd.php?id=" . $Datosfactura['IdFactura'] ?>" class="btn btn-sm mx-1 btn-primary" title="Imprimir">
+                                                                    <i class="fa fa-print fa-lg"></i>
+                                                                </a>
+                                                            <?php } ?>
                                                             <a href="<?= "./frmAbono.php?factura=" . $Datosfactura['IdFactura'] . "&nombre=" . $Datosfactura['PrimerNombre'] . " " . $Datosfactura['Apellido'] . "&cliente=" . $Datosfactura['IdCliente'] ?>" class="btn btn-sm mx-1 btn-primary" title="Abonar">
                                                                 <i class="fa fa-dollar-sign px-1 fa-lg"></i>
                                                             </a>
