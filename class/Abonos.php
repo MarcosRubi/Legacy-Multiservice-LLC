@@ -19,9 +19,14 @@ class Abonos extends DB
     public $CreadoTimestamp;
 
 
-    public function listarTodo()
+    public function listarAbonos($id)
     {
-        $query = "SELECT * FROM vta_listar_abonos";
+        $query = "SELECT * FROM vta_listar_abonos WHERE IdFactura='".$id."'";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function listarDatosCliente($id){
+        $query = "SELECT * FROM vta_factura_cliente WHERE IdFactura='".$id."'";
         return $this->EjecutarQuery($query);
     }
 

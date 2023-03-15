@@ -21,6 +21,22 @@ $Obj_Facturas->Comentario = $_POST['txtComentario'];
 $Obj_Facturas->Agencia = $_SESSION['Agencia'];
 $Obj_Facturas->Agente = $_SESSION['Agente'];
 
+if ($_POST['txtEfectivo'] !== '') {
+    $Obj_Facturas->FormaPagoInicial = 'Efectivo';
+}
+if ($_POST['txtCreditoValor'] !== '') {
+    $Obj_Facturas->FormaPagoInicial = 'Crédito';
+}
+if ($_POST['txtCheque'] !== '') {
+    $Obj_Facturas->FormaPagoInicial = 'Cheque';
+}
+if ($_POST['txtBanco'] !== '') {
+    $Obj_Facturas->FormaPagoInicial = 'Banco';
+}
+if ($_POST['txtCupon'] !== '') {
+    $Obj_Facturas->FormaPagoInicial = 'Cupon';
+}
+
 //EL VALOR NO VENGA VACIO
 if (trim($_POST['txtValor']) === '') {
     $_SESSION['error-registro'] = 'valor';
@@ -36,7 +52,6 @@ if (trim($_POST['txtValor']) === '') {
 // }
 //SI LA FORMA DE PAGO SELECCIONADA ES CREDITO AGREGAR LOS 4 NUMEROS DE TARJETA
 if (trim($_POST['txtCreditoValor']) !== '' && trim($_POST['txtCreditoNumero']) === '') {
-    //VALIDANDO FORMATO DE TELEFONO
     if (trim($_POST['txtCreditoNumero'] === '')) {
         $_SESSION['error-registro'] = 'numeroTarjetaVacio';
         echo "<script>history.go(-1)</script>";
