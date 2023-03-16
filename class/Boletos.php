@@ -60,7 +60,7 @@ class Boletos extends DB
 
     public function Insertar()
     {
-        $query = "INSERT INTO tbl_Boletos(
+        $query = "INSERT INTO tbl_boletos(
             IdCliente,
             Pnr,
             NumeroBoletos,

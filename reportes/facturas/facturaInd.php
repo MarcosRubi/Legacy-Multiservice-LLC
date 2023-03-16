@@ -49,7 +49,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini" style="font-size:12px !important;">
     <div class="wrapper">
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="margin-left:0px;">
@@ -100,7 +100,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                 <!-- /.row -->
 
                                 <!-- Table row -->
-                                <div class="row mt-5">
+                                <div class="row">
                                     <div class="col-12 table-responsive">
                                         <table class="table table-striped">
                                             <thead>
@@ -153,7 +153,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                             </tbody>
                                         </table>
                                         <?php if ($Res_Itinerario->num_rows > 0) { ?>
-                                            <table class="table table-striped mt-5">
+                                            <table class="table table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th>Nombre del pasajero</th>
@@ -195,7 +195,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
 
                                 <div class="row">
                                     <!-- /.col -->
-                                    <div class="col-6 mt-4">
+                                    <div class="col-6">
                                         <p class="lead">Resumen</p>
 
                                         <div class="table-responsive">
@@ -228,7 +228,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                 <!-- /.row -->
 
                                 <?php if ($Res_Itinerario->num_rows > 0) { ?>
-                                    <div class="row text-sm mt-5">
+                                    <div class="row text-sm mt-2">
                                         <div class="col-12">
                                             <div>
                                                 X <span style="min-width: 10rem;border-bottom:1px solid black; display:inline-block;"></span>
