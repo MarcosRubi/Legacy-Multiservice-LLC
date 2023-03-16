@@ -226,6 +226,18 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                     <!-- /.col -->
                                 </div>
                                 <!-- /.row -->
+
+                                <?php if ($Res_Itinerario->num_rows > 0) { ?>
+                                    <div class="row text-sm mt-5">
+                                        <div class="col-12">
+                                            <div>
+                                                X <span style="min-width: 10rem;border-bottom:1px solid black; display:inline-block;"></span>
+                                            </div>
+                                            <p class="pl-5">Firma cliente</p>
+                                            <p>Es importante revisar cuidadosamente su itinerario al recibirlo para verificar su nombre, fecha de viaje, ruta de vuelo y otra información relevante. Si tiene preguntas, es mejor hacerlas antes de salir de la oficina. No nos haremos responsables si no se revisa. Verifique que sus documentos de viaje estén vigentes por al menos seis meses después de llegar a su destino. Al aceptar los términos y condiciones, autoriza recibir información sobre productos y servicios por correo electrónico, llamadas telefónicas y mensajes de texto.</p>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
                             <!-- /.invoice -->
                         </div><!-- /.col -->
