@@ -47,6 +47,11 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <style>
+        .table-striped th {
+            min-width: 25rem !important;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini" style="font-size:12px !important;">
@@ -101,7 +106,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
 
                                 <!-- Table row -->
                                 <div class="row">
-                                    <div class="col-12 table-responsive">
+                                    <div class="col-12">
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
@@ -161,6 +166,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                                         <th>Aerolínea</th>
                                                         <th>Precio</th>
                                                         <th>Forma de pago</th>
+                                                        <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -171,7 +177,8 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                                             <td><?= $DatosPagosBoletos['Aerolinea'] ?></td>
                                                             <td><?= $Obj_Ajustes->FormatoDinero($DatosPagosBoletos['Precio']) ?></td>
                                                             <td><?= $DatosPagosBoletos['FormaPago'] ?></td>
-
+                                                            <td>
+                                                            <td>
                                                         </tr>
                                                     <?php } ?>
                                                 </tbody>
@@ -200,26 +207,20 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
 
                                         <div class="table-responsive">
                                             <table class="table">
-                                                <tr>
-                                                    <th style="width:50%">Total:</th>
-                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['Valor']) ?></td>
-                                                </tr>
-                                                <tr>
+                                                <thead>
+                                                    <th>Total:</th>
                                                     <th>Total recibido:</th>
-                                                    <td><?= $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) ?></td>
-                                                </tr>
-                                                <tr>
                                                     <th>Balance:</th>
-                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['Balance']) ?></td>
-                                                </tr>
-                                                <tr>
                                                     <th>Agencia:</th>
-                                                    <td><?= $DatosCliente['Agencia'] ?></td>
-                                                </tr>
-                                                <tr>
                                                     <th>Agente:</th>
+                                                </thead>
+                                                <tbody>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['Valor']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['Balance']) ?></td>
+                                                    <td><?= $DatosCliente['Agencia'] ?></td>
                                                     <td><?= $DatosCliente['Agente'] ?></td>
-                                                </tr>
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -228,7 +229,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                 <!-- /.row -->
 
                                 <?php if ($Res_Itinerario->num_rows > 0) { ?>
-                                    <div class="row text-sm mt-2">
+                                    <div class="row text-sm mt-3">
                                         <div class="col-12">
                                             <div>
                                                 X <span style="min-width: 10rem;border-bottom:1px solid black; display:inline-block;"></span>

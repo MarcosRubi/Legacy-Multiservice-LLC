@@ -107,7 +107,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto1">
+                                        <input type="text" class="form-control" name="txtBoleto1" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
@@ -123,8 +123,8 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') {
-                                                                                                                                                                                                                                echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);
-                                                                                                                                                                                                                            } ?>">
+                                                echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);
+                                            } ?>">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -147,7 +147,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
                                         <div class="input-group date" id="dateto1" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto1"  data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda1">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda1">
                                             <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
@@ -223,7 +223,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto2">
+                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto2" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
@@ -337,7 +337,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto3">
+                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto3" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
@@ -451,7 +451,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto4">
+                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto4" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
@@ -565,7 +565,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto5">
+                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto5" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
