@@ -94,16 +94,16 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                                 <option value="2" selected>DEP01 - Ticket(s)/Boleto(s)</option>
                                                 <?php
                                             } else {
-                                                while ($DatoTipoFactura = $Res_OpcionesTipoFactura->fetch_assoc()) { ?>
-                                                    <option value="<?= $DatoTipoFactura['IdTipoFactura'] ?>"><?= $DatoTipoFactura['Tipo'] ?></option>
-                                            <?php }
-                                            } ?>
+                                                while ($DatoTipoFactura = $Res_OpcionesTipoFactura->fetch_assoc()) {
+                                                    if ($DatoTipoFactura['IdTipoFactura'] > 3) { ?>
+                                                        <option value="<?= $DatoTipoFactura['IdTipoFactura'] ?>"><?= $DatoTipoFactura['Tipo'] ?></option>
+                                            <?php } } } ?>
                                         </select>
                                     </div>
                                     <!-- Valor -->
                                     <div class="form-group mx-1 container-fluid">
                                         <label>Valor</label>
-                                        <input type="number" class="form-control" placeholder="0.0" name="txtValor" value="<?= $Valor>0 ? $Valor : '' ?>">
+                                        <input type="number" class="form-control" placeholder="0.0" name="txtValor" value="<?= $Valor > 0 ? $Valor : '' ?>">
                                     </div>
                                 </div>
                                 <div class="d-flex">
