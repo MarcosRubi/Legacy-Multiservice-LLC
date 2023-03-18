@@ -117,7 +117,7 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                 <!-- # Boletos -->
                                 <div class="form-group mx-1">
                                     <label># Boletos</label>
-                                    <input type="text" class="form-control" placeholder="# Boletos ..." name="txtNumeroBoletos">
+                                    <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtNumeroBoletos" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                 </div>
                                 <!-- Cotizado -->
                                 <div class="form-group mx-1">
@@ -229,7 +229,7 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                         required: "La fecha de regreso es obligatorio",
                     },
                     txtNumeroBoletos: {
-                        required: "El número de boletos es obligatorio",
+                        required: "El número de boleto es obligatorio",
                     }
                 },
                 errorElement: 'span',
@@ -246,7 +246,9 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
             });
         })
     </script>
-    <?php require_once '../../func/Mensajes.php'; ?>
+    <script>
+        <?php require_once '../../func/Mensajes.php'; ?>
+    </script>
     <script>
         function closeForm() {
             window.close()

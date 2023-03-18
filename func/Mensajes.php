@@ -22,7 +22,7 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'bolet
             });
             Toast.fire({
                 icon: 'error',
-                title: 'El número de boletos es obligatorio.'
+                title: 'El número de boleto es obligatorio.'
             })";
     unset($_SESSION['error-registro']);
 }

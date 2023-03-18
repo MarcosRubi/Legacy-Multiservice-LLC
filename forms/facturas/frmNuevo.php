@@ -97,7 +97,9 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                                 while ($DatoTipoFactura = $Res_OpcionesTipoFactura->fetch_assoc()) {
                                                     if ($DatoTipoFactura['IdTipoFactura'] > 3) { ?>
                                                         <option value="<?= $DatoTipoFactura['IdTipoFactura'] ?>"><?= $DatoTipoFactura['Tipo'] ?></option>
-                                            <?php } } } ?>
+                                            <?php }
+                                                }
+                                            } ?>
                                         </select>
                                     </div>
                                     <!-- Valor -->
@@ -149,34 +151,34 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="text-right align-middle">Cheque</td>
-                                                    <td>
-                                                        <!-- Valor -->
-                                                        <div class="form-group mx-1 container-fluid mb-0">
-                                                            <input type="number" class="form-control" placeholder="0.0" name="txtCheque">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-right align-middle">Banco</td>
-                                                    <td>
-                                                        <!-- Valor -->
-                                                        <div class="form-group mx-1 container-fluid mb-0">
-                                                            <input type="number" class="form-control" placeholder="0.0" name="txtBanco">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-right align-middle">Cupón</td>
-                                                    <td>
-                                                        <!-- Valor -->
-                                                        <div class="form-group mx-1 container-fluid mb-0">
-                                                            <input type="number" class="form-control" placeholder="0.0" name="txtCupon">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+                                                        <tr class="<?php if(isset($_GET['pnr'])){echo "d-none";} ?>">
+                                                            <td class="text-right align-middle">Cheque</td>
+                                                            <td>
+                                                                <!-- Valor -->
+                                                                <div class="form-group mx-1 container-fluid mb-0">
+                                                                    <input type="number" class="form-control" placeholder="0.0" name="txtCheque">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="<?php if(isset($_GET['pnr'])){echo "d-none";} ?>">
+                                                            <td class="text-right align-middle">Banco</td>
+                                                            <td>
+                                                                <!-- Valor -->
+                                                                <div class="form-group mx-1 container-fluid mb-0">
+                                                                    <input type="number" class="form-control" placeholder="0.0" name="txtBanco">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="<?php if(isset($_GET['pnr'])){echo "d-none";} ?>">
+                                                            <td class="text-right align-middle">Cupón</td>
+                                                            <td>
+                                                                <!-- Valor -->
+                                                                <div class="form-group mx-1 container-fluid mb-0">
+                                                                    <input type="number" class="form-control" placeholder="0.0" name="txtCupon">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                            </tbody>x
                                         </table>
                                     </div>
                                     <!-- /.card-body -->

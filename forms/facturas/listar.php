@@ -112,7 +112,7 @@ $BalanceTotal = $Res_BalanceTotal->fetch_assoc()['BalanceTotal'];
                                                     <td>
                                                         <div class="d-flex justify-content-around">
                                                             <?php if ($Datosfactura['IdTipoFactura'] === '2') { ?>
-                                                                <a href="<?= $_SESSION['path'] . "reportes/facturas/facturaInd.php?id=" . $Datosfactura['IdFactura'] ?>&boleto" class="btn btn-sm mx-1 btn-primary" title="Imprimir">
+                                                                <a href="<?= $_SESSION['path'] . "reportes/facturas/facturaBoleto.php?id=" . $Datosfactura['IdFactura'] ?>&boleto" class="btn btn-sm mx-1 btn-primary" title="Imprimir">
                                                                     <i class="fa fa-print fa-lg"></i>
                                                                 </a>
                                                             <?php } ?>

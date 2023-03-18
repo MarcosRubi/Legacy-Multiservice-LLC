@@ -2,8 +2,10 @@
 require_once '../func/validateSession.php';
 require_once '../bd/bd.php';
 require_once '../class/Clientes.php';
+require_once '../class/Ajustes.php';
 
 $Obj_Clientes = new Clientes();
+$Obj_Ajustes = new Ajustes();
 
 
 if (!isset($_GET['id'])) {
@@ -89,7 +91,7 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                                     <td><?= $DatosCliente['PrimerNombre'] ?></td>
                                                     <td><?= $DatosCliente['Telefono'] ?></td>
                                                     <td><?= $DatosCliente['Direccion'] ?></td>
-                                                    <td><?= $DatosCliente['FechaNacimiento'] ?></td>
+                                                    <td><?php if($DatosCliente['FechaNacimiento'] !== '0000-00-00'){echo $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']);} ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">
                                                             <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editar(<?= $DatosCliente['IdCliente'] ?>);">

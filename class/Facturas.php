@@ -33,6 +33,11 @@ class Facturas extends DB
         $query = "SELECT * FROM vta_listar_facturas WHERE IdCliente='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
+    public function buscarPorParaFactura($id)
+    {
+        $query = "SELECT * FROM vta_listar_facturas WHERE IdFactura='" . $id . "'";
+        return $this->EjecutarQuery($query);
+    }
     public function buscarPorIdFactura($id)
     {
         $query = "SELECT IdCliente,Pnr FROM tbl_facturas WHERE IdFactura='" . $id . "'";
@@ -101,11 +106,11 @@ class Facturas extends DB
             '" . $this->Cheque . "',
             '" . $this->Banco . "',
             '" . $this->Cupon . "',
-            '" . ((doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon)) - doubleval($this->Valor)) . "',
+            '" . ((doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon) + doubleval($this->Banco)) - doubleval($this->Valor)) . "',
             '" . $this->Comentario . "',
             '" . date("Y-m-d h:i:s ") . "',
             '" . date("A") . "',
-            '" . ((doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon)) - doubleval($this->Valor)) . "',
+            '" . ((doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon) + doubleval($this->Banco)) - doubleval($this->Valor)) . "',
             '" . $this->FormaPagoInicial . "',
             '" . $this->Pnr . "',
             'N' ) ";

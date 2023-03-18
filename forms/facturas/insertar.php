@@ -76,6 +76,7 @@ if (trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCreditoNumero']) !
 
 $Res_Facturas = $Obj_Facturas->Insertar();
 
+
 if ($Res_Facturas) {
     $_SESSION['success-registro'] = 'factura';
     echo "<script>

@@ -6,8 +6,10 @@ require_once '../../bd/bd.php';
 require_once '../../class/Abonos.php';
 require_once '../../class/Facturas.php';
 require_once '../../class/Ajustes.php';
+require_once '../../class/Boletos.php';
 
 $Obj_Abonos = new Abonos();
+$Obj_Boletos = new Boletos();
 $Obj_Ajustes = new Ajustes();
 
 $Res_Abonos = $Obj_Abonos->listarAbonos($_GET['id']);
@@ -17,45 +19,17 @@ $DatosCliente = $Res_Cliente->fetch_assoc();
 
 
 $Obj_Facturas = new Facturas();
-$Res_Facturas = $Obj_Facturas->buscarPorParaFactura($_GET['id']);
+$Res_Facturas = $Obj_Facturas->buscarPorId($_GET['id']);
 
 $Datosfacturas = $Res_Facturas->fetch_assoc();
 
-$efectivo = 0;
-$banco = 0;
-$credito = 0;
-$cheque = 0;
-$cupon = 0;
-
-if ($Res_Facturas->num_rows === 1) {
-    foreach ($Datosfacturas as $key => $value) {
-        if ($key === 'Efectivo') {
-            $efectivo = $efectivo + doubleval($Datosfacturas['Efectivo']);
-        }
-        if ($key === 'CreditoValor') {
-            $credito = $credito + doubleval($Datosfacturas['CreditoValor']);
-        }
-        if ($key === 'Banco') {
-            $banco = $banco + doubleval($Datosfacturas['Banco']);
-        }
-        if ($key === 'Cheque') {
-            $cheque = $cheque + doubleval($Datosfacturas['Cheque']);
-        }
-        if ($key === 'Cupon') {
-            $cupon = $cupon + doubleval($Datosfacturas['Cupon']);
-        }
-    }
-}
+$Res_PnrFactura = $Obj_Facturas->buscarPorIdFactura($DatosCliente['IdFactura']);
 
 
-$arrPagos = [$efectivo, $banco, $credito, $cheque, $cupon];
-$formasPagos = 0;
+$Res_buscarPagos = $Res_PnrFactura->fetch_assoc();
+$Res_PagosBoletos = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res_buscarPagos['Pnr']);
 
-for ($i = 0; $i < 5; $i++) {
-    if ($arrPagos[$i] > 0) {
-        $formasPagos++;
-    }
-}
+$Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res_buscarPagos['Pnr']);
 
 
 ?>
@@ -127,7 +101,6 @@ for ($i = 0; $i < 5; $i++) {
                                 <!-- /.row -->
 
                                 <!-- Table row -->
-
                                 <div class="row">
                                     <div class="col-12">
                                         <h5 class="text-center py-2">FACTURA DE SERVICIOS</h5>
@@ -137,13 +110,17 @@ for ($i = 0; $i < 5; $i++) {
                                                     <th>Servicio</th>
                                                     <th>Fecha</th>
                                                     <th>Valor total</th>
-                                                    <?php if ($formasPagos <= 1) { ?>
-                                                        <th>Total recibido</th>
-                                                        <?php if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) > 0) { ?>
-                                                            <th>Forma de pago</th>
-                                                        <?php } ?>
-                                                        <th>Balance</th>
-                                                    <?php } ?>
+                                                    <?php
+                                                    if ($Res_PagosBoletos->num_rows <= 1) {
+                                                        echo "<th>Total recibido</th>";
+                                                        if (((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) > 0) ) {
+                                                            if($Res_Abonos->num_rows <= 0){
+                                                                echo "<th>Forma de pago</th>";
+                                                            }
+                                                        }
+                                                        echo "<th>Balance</th>";
+                                                    }
+                                                    ?>
                                                     <th>Agencia</th>
                                                     <th>Agente</th>
                                                 </tr>
@@ -153,31 +130,16 @@ for ($i = 0; $i < 5; $i++) {
                                                     <td><?= $DatosCliente['Tipo'] ?></td>
                                                     <td><?= $Obj_Ajustes->FechaInvertir(substr($DatosCliente['Creado'], 0, -9)) ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['Valor']) ?></td>
-                                                    <?php if ($formasPagos <= 1) { ?>
-                                                        <td><?= $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) ?></td>
-                                                        <?php if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) > 0) { ?>
-
-                                                            <td><?php
-                                                                if ($efectivo > 0) {
-                                                                    echo "Efectivo";
-                                                                }
-                                                                if ($credito > 0) {
-                                                                    echo "Crédito";
-                                                                }
-                                                                if ($cupon > 0) {
-                                                                    echo "Cupon";
-                                                                }
-                                                                if ($cheque > 0) {
-                                                                    echo "Cheque";
-                                                                }
-                                                                if ($banco > 0) {
-                                                                    echo "Banco";
-                                                                }
-                                                                ?></td>
-                                                        <?php } ?>
-
-                                                        <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['BalanceInicial']) ?></td>
-                                                    <?php } ?>
+                                                    <?php
+                                                    if ($Res_PagosBoletos->num_rows <= 1) {
+                                                        echo "<td>" . $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) . "</td>";
+                                                        if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) > 0) {
+                                                            if($Res_Abonos->num_rows <= 0){
+                                                                echo "<td>" . $Res_PagosBoletos->fetch_assoc()['FormaPago'] . "</td>";
+                                                            }
+                                                        }
+                                                        echo "<td>" . $Obj_Ajustes->FormatoDinero($DatosCliente['BalanceInicial']) . "</td>";
+                                                    } ?>
                                                     <td><?= $DatosCliente['Agencia'] ?></td>
                                                     <td><?= $DatosCliente['Agente'] ?></td>
                                                 </tr>
@@ -185,7 +147,7 @@ for ($i = 0; $i < 5; $i++) {
                                         </table>
 
                                         <?php
-                                        if ($formasPagos > 1) { ?>
+                                        if ($Res_PagosBoletos->num_rows > 1) { ?>
                                             <div class="row">
                                                 <!-- /.col -->
                                                 <div class="col-4">
@@ -193,34 +155,34 @@ for ($i = 0; $i < 5; $i++) {
 
                                                     <div class="table-responsive">
                                                         <table class="table">
-                                                            <?php if ($efectivo > 0) { ?>
+                                                            <?php
+                                                            $efectivo = 0;
+                                                            $credito = 0;
+                                                            while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
+                                                                if ($DatosPagosBoletos['FormaPago'] === 'Efectivo') {
+                                                                    $efectivo = $efectivo + $DatosPagosBoletos['Precio'];
+                                                                }
+                                                                if ($DatosPagosBoletos['FormaPago'] === 'Crédito') {
+                                                                    $credito = $credito + $DatosPagosBoletos['Precio'];
+                                                                }
+                                                            }
+                                                            ?>
+                                                            <tr>
+                                                                <?php if ($efectivo > 0 && $credito === 0) { ?>
+                                                                    <td>FORMA DE PAGO: <b>Efectivo</b></td>
+                                                                <?php } ?>
+                                                                <?php if ($credito > 0 && $efectivo === 0) { ?>
+                                                                    <td>FORMA DE PAGO: <b>Crédito</b></td>
+                                                                <?php } ?>
+                                                            </tr>
+                                                            <?php if ($credito > 0 && $efectivo > 0) { ?>
                                                                 <tr>
                                                                     <td>Pago recibido: <b><?= $Obj_Ajustes->FormatoDinero($efectivo) ?></b></td>
                                                                     <td>Forma de pago: <b>Efectivo</b></td>
                                                                 </tr>
-                                                            <?php } ?>
-                                                            <?php if ($credito > 0) { ?>
                                                                 <tr>
                                                                     <td>Pago recibido: <b><?= $Obj_Ajustes->FormatoDinero($credito) ?></b></td>
                                                                     <td>Forma de pago: <b>Crédito</b></td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                            <?php if ($banco > 0) { ?>
-                                                                <tr>
-                                                                    <td>Pago recibido: <b><?= $Obj_Ajustes->FormatoDinero($banco) ?></b></td>
-                                                                    <td>Forma de pago: <b>Banco</b></td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                            <?php if ($cheque > 0) { ?>
-                                                                <tr>
-                                                                    <td>Pago recibido: <b><?= $Obj_Ajustes->FormatoDinero($cheque) ?></b></td>
-                                                                    <td>Forma de pago: <b>Cheque</b></td>
-                                                                </tr>
-                                                            <?php } ?>
-                                                            <?php if ($cupon > 0) { ?>
-                                                                <tr>
-                                                                    <td>Pago recibido: <b><?= $Obj_Ajustes->FormatoDinero($cupon) ?></b></td>
-                                                                    <td>Forma de pago: <b>Cupón</b></td>
                                                                 </tr>
                                                             <?php } ?>
                                                             <tr>
@@ -236,7 +198,6 @@ for ($i = 0; $i < 5; $i++) {
                                             </div>
                                             <!-- /.row -->
                                         <?php } ?>
-
                                         <?php
                                         if ($Res_Abonos->num_rows >= 1) { ?>
                                             <div class="row">
@@ -280,11 +241,23 @@ for ($i = 0; $i < 5; $i++) {
                                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosAbonos['BalanceActual']) ?></td>
                                                                 </tr>
                                                             <?php
-                                                            } ?>
+                                                        } ?>
                                                         </table>
                                                     </div>
                                                 </div>
                                                 <!-- /.col -->
+                                            </div>
+                                            <!-- /.row -->
+                                        <?php } ?>
+
+                                        <?php if ($Res_Itinerario->num_rows > 0) { ?>
+                                            <div class="row my-4">
+                                                <div class="col-12">
+                                                    <p class="lead">Itinerario</p>
+                                                    <div class="col-12">
+                                                        <?= $Res_Itinerario->fetch_assoc()['Itinerario'] ?>
+                                                    </div>
+                                                </div>
                                             </div>
                                         <?php } ?>
                                     </div>
@@ -293,6 +266,17 @@ for ($i = 0; $i < 5; $i++) {
                                 <!-- /.row -->
 
 
+                                <?php if ($Res_Itinerario->num_rows > 0) { ?>
+                                    <div class="row text-sm mt-3">
+                                        <div class="col-12">
+                                            <div>
+                                                X <span style="min-width: 10rem;border-bottom:1px solid black; display:inline-block;"></span>
+                                            </div>
+                                            <p class="pl-5">Firma cliente</p>
+                                            <p>Es importante revisar cuidadosamente su itinerario al recibirlo para verificar su nombre, fecha de viaje, ruta de vuelo y otra información relevante. Si tiene preguntas, es mejor hacerlas antes de salir de la oficina. No nos haremos responsables si no se revisa. Verifique que sus documentos de viaje estén vigentes por al menos seis meses después de llegar a su destino. Al aceptar los términos y condiciones, autoriza recibir información sobre productos y servicios por correo electrónico, llamadas telefónicas y mensajes de texto.</p>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
                             <!-- /.invoice -->
                         </div><!-- /.col -->

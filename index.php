@@ -2,7 +2,8 @@
 require_once './func/validateSession.php';
 
 require_once './bd/bd.php';
-require_once './class/Empleados.php';
+
+
 ?>
 
 <!DOCTYPE html>

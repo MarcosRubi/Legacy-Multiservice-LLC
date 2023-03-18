@@ -223,7 +223,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto2" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto2" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
@@ -337,7 +337,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto3" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto3" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
@@ -451,7 +451,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto4" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto4" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
@@ -565,7 +565,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
                                         <label># Boleto</label>
-                                        <input type="number" class="form-control" placeholder="# Boleto ..." name="txtBoleto5" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto5" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1">
@@ -815,7 +815,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                         required: "El PNR es obligatorio",
                     },
                     txtBoleto1: {
-                        required: "El # de boletos es obligatorio"
+                        required: "El # de boleto es obligatorio"
                     },
                     txtNombrePasajero1: {
                         required: "El nombre es obligatorio"
