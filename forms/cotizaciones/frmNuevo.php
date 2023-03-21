@@ -24,6 +24,11 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
     <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -99,36 +104,38 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                     <label>Destino</label>
                                     <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino">
                                 </div>
-                                <!-- Ida dd-mm-yyyy -->
+                                <!-- Fecha Ida -->
                                 <div class="form-group mx-1">
-                                    <label>Ida:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                        </div>
-                                        <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtIda">
-                                        <?php } ?>
-                                        <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtIda">
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <!-- Regreso dd-mm-yyyy -->
-                                <div class="form-group mx-1">
-                                    <label>Regreso:</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                        </div>
-                                        <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtRegreso">
+                                        <label>Ida:</label>
+                                        <div class="input-group date" id="ida" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#ida" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtIda">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtRegreso">
-                                        <?php } ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#ida" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtIda">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#ida" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                <!-- Fecha Regreso -->
+                                <div class="form-group mx-1">
+                                        <label>Regreso:</label>
+                                        <div class="input-group date" id="regreso" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#regreso" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtRegreso">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#regreso" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtRegreso">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#regreso" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <!-- # Boletos -->
                                 <div class="form-group mx-1">
                                     <label># Boletos</label>
@@ -185,6 +192,10 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
     <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="../../plugins/toastr/toastr.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Select2 -->
+    <script src="../../plugins/select2/js/select2.full.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -268,6 +279,23 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
         function closeForm() {
             window.close()
         }
+        <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+            $('#ida').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#regreso').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+        <?php  } ?>
+
+        <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+            $('#ida').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#regreso').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+        <?php  } ?>
     </script>
 </body>
 

@@ -23,7 +23,7 @@ $Obj_Cotizaciones->Origen = $Obj_Ajustes->RemoverEtiquetas(strtoupper($_POST['tx
 $Obj_Cotizaciones->Destino = $Obj_Ajustes->RemoverEtiquetas(strtoupper($_POST['txtDestino']));
 $Obj_Cotizaciones->Ida = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtIda']));
 
-if (trim($_POST['txtRegreso']) !== "" && $_POST['txtRegreso'] !== "dd-mm-yyyy" && $_POST['txtRegreso'] !== "mm-dd-yyyy") {
+if (trim($_POST['txtRegreso']) !== "") {
     $Obj_Cotizaciones->Regreso = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtRegreso']));
 }
 
@@ -60,6 +60,7 @@ if ($_POST['txtRegreso'] !== "" && $_POST['txtRegreso'] !== "dd-mm-yyyy" && $_PO
 };
 
 $Res_Cotizaciones = $Obj_Cotizaciones->Insertar();
+
 
     if ($Res_Cotizaciones) {
         $_SESSION['success-registro'] = 'cotizacion';
