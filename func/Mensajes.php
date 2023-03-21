@@ -410,4 +410,31 @@ if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'a
     unset($_SESSION['success-registro']);
 }
 
+if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'movimiento') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Movimiento guardado correctamente.'
+                })";
+    unset($_SESSION['success-registro']);
+}
+if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'eliminar-movimiento') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Movimiento eliminado correctamente.'
+                })";
+    unset($_SESSION['success-registro']);
+}
+
 ?>

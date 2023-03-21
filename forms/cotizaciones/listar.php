@@ -160,7 +160,7 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
     </script>
     <script>
         function detallesCotizacion(id) {
-            window.open('<?= $_SESSION['path'] ?>cotizaciones/detalles.php?id='+id ,'Nueva Cotización', 'width=800,height=1000')
+            window.open('<?= $_SESSION['path'] ?>cotizaciones/detalles.php?id='+id ,'Detalles Cotización', 'width=1000,height=1000')
         }
     </script>
 </body>

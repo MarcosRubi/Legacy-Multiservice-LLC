@@ -10,11 +10,17 @@ if (!isset($_GET['id'])) {
 }
 require_once '../bd/bd.php';
 require_once '../class/Cotizaciones.php';
+require_once '../class/Movimientos.php';
 
 $Obj_Cotizaciones = new Cotizaciones();
+$Obj_Movimientos = new Movimientos();
 
 $Res_Cotizaciones = $Obj_Cotizaciones->buscarPorId($_GET['id']);
 $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
+
+$Res_Movimientos = $Obj_Movimientos->listarMovimientos($_GET['id']);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,10 +36,16 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
@@ -79,7 +91,7 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                                                 <td>
                                                     <!-- Valor -->
                                                     <div class="form-group mx-1 container-fluid mb-0">
-                                                        <input type="text" class="form-control" value="<?=$Obj_Ajustes->FechaInvertir(substr($DatosCotizacion['FechaCreado'], 0, -9))?>" readonly>
+                                                        <input type="text" class="form-control" value="<?= $Obj_Ajustes->FechaInvertir(substr($DatosCotizacion['FechaCreado'], 0, -9)) ?>" readonly>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -93,11 +105,16 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="align-middle" style="max-width:5rem;">Fecha de ida <?php if($DatosCotizacion['Regreso'] !== '0000-00-00'){echo " / Fecha de regreso"; } ?> </td>
+                                                <td class="align-middle" style="max-width:5rem;">Fecha de ida <?php if ($DatosCotizacion['Regreso'] !== '0000-00-00') {
+                                                                                                                    echo " / Fecha de regreso";
+                                                                                                                } ?> </td>
                                                 <td>
                                                     <!-- Valor -->
                                                     <div class="form-group mx-1 container-fluid mb-0">
-                                                        <input type="text" class="form-control" value="<?php echo $Obj_Ajustes->FechaInvertir($DatosCotizacion['Ida']);  if($DatosCotizacion['Regreso'] !== '0000-00-00'){echo " / " . $Obj_Ajustes->FechaInvertir($DatosCotizacion['Regreso']);} ?>" readonly>
+                                                        <input type="text" class="form-control" value="<?php echo $Obj_Ajustes->FechaInvertir($DatosCotizacion['Ida']);
+                                                                                                        if ($DatosCotizacion['Regreso'] !== '0000-00-00') {
+                                                                                                            echo " / " . $Obj_Ajustes->FechaInvertir($DatosCotizacion['Regreso']);
+                                                                                                        } ?>" readonly>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -127,6 +144,32 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                             <!-- /.card -->
                             <div class="card">
                                 <!-- /.card-header -->
+                                <div class="card-header d-flex justify-content-center">
+                                    <button class="btn btn-primary btn-lg btn-block p-3 px-5 font-weight-bold" onclick="javascript:showForm();">Crear nuevo movimiento</button>
+                                </div>
+                                <form action="./insertar-movimiento.php" class="m-3 d-none" id="formMovimientos" method="post">
+                                    <!-- Comentario -->
+                                    <div class="form-group">
+                                        <label>Comentario</label>
+                                        <textarea id="comentario" name="txtComentario">
+                                            Escribe <em>tu</em> <u>comentario</u> <strong>aquí</strong>
+                                        </textarea>
+                                    </div>
+                                    <!-- Accion -->
+                                    <div class="form-group mt-5">
+                                        <label>Acción</label>
+                                        <textarea id="accion" name="txtAccion">
+                                            Escribe <em>la</em> <u>acción</u> <strong>aquí</strong>
+                                        </textarea>
+                                    </div>
+                                    <input type="hidden" name="IdCotizacion" value="<?= $_GET['id']; ?>">
+                                    <div class="form-group pr-1 mt-3">
+                                        <button class="btn btn-primary btn-block btn-lg" type="submit">Guardar</button>
+                                    </div>
+                                    <div class="form-group pl-1">
+                                        <button class="btn btn-block text-center" type="reset" onclick="javascript:hideForm();">Cancelar</button>
+                                    </div>
+                                </form>
                                 <div class="card-body">
                                     <table id="logs" class="table table-bordered table-hover">
                                         <thead>
@@ -136,16 +179,28 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                                                 <th>Agencia</th>
                                                 <th>Comentario</th>
                                                 <th>Acción</th>
+                                                <?php if ($_SESSION['NombreRol'] === 'Administrador') { ?>
+                                                    <th></th>
+                                                <?php } ?>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><?= $DatosCotizacion['FechaCreado'] . " " . $DatosCotizacion['HoraCreado']  ?></td>
-                                                <td><?= $DatosCotizacion['Agente'] ?></td>
-                                                <td><?= $DatosCotizacion['Agencia'] ?></td>
-                                                <td><?= $DatosCotizacion['Comentario'] ?></td>
-                                                <td><?= $DatosCotizacion['Accion'] ?></td>
-                                            </tr>
+                                            <?php
+                                            while ($DatosMovimientos = $Res_Movimientos->fetch_assoc()) {
+                                            ?>
+                                                <tr>
+                                                    <td><?= $Obj_Ajustes->FechaInvertir(substr($DatosMovimientos['Creado'], 0, -9)) . " " . substr($DatosMovimientos['Creado'], 10, 20) . " " . $DatosMovimientos['CreadoTimesTamp']  ?></td>
+                                                    <td><?= $DatosMovimientos['Agente'] ?></td>
+                                                    <td><?= $DatosMovimientos['Agencia'] ?></td>
+                                                    <td><?= $DatosMovimientos['Comentario'] ?></td>
+                                                    <td><?= $DatosMovimientos['Accion'] ?></td>
+                                                    <?php if ($_SESSION['NombreRol'] === 'Administrador') { ?>
+                                                        <td style="width:1rem;">
+                                                            <a href="#" title="Eliminar" onclick="javascript:eliminarMovimiento(<?= $DatosMovimientos['IdMovimiento'] ?>)"><i class="fa fa-trash fa-lg"></i></a>
+                                                        </td>
+                                                    <?php } ?>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -178,6 +233,12 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
     <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <!-- Summernote -->
+    <script src="../plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -186,7 +247,7 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
     <script>
         $(function() {
             $('#logs').DataTable({
-                "paging": false,
+                "paging": true,
                 "lengthChange": false,
                 "searching": false,
                 "ordering": false,
@@ -195,11 +256,38 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                 "responsive": true,
             });
         });
+
+        $(function() {
+            // Summernote
+            $('#comentario').summernote()
+            $('#accion').summernote()
+        })
     </script>
     <script>
+        let form = document.getElementById('formMovimientos');
+
         function cerrarVentana() {
             window.close();
         }
+
+        function showForm() {
+            form.classList.remove('d-none');
+        }
+
+        function hideForm() {
+            form.classList.add('d-none');
+        }
+
+        function eliminarMovimiento(id) {
+            let confirmacion = confirm("¿Está seguro que desea eliminar el movimiento?");
+
+            if (confirmacion) {
+                window.location.href = './eliminar-movimiento.php?id=' + id
+            }
+        }
+    </script>
+    <script>
+        <?php require_once '../func/Mensajes.php'; ?>
     </script>
 </body>
 
