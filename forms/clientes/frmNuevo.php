@@ -35,20 +35,20 @@ require_once '../../func/validateSession.php';
                             <h3 class="card-title w-100 font-weight-bold text-center">Agregar nuevo cliente</h3>
                         </div>
                         <div class="card-body">
-                            <!-- Apellido -->
+                            <!-- Primer nombre -->
                             <div class="form-group">
-                                <label>Apellido</label>
-                                <input type="text" class="form-control" placeholder="Apellido ..." name="txtApellido">
+                                <label>Primer nombre</label>
+                                <input type="text" class="form-control" placeholder="Primer nombre ..." name="txtPrimerNombre">
                             </div>
                             <!-- Segundo nombre -->
                             <div class="form-group">
                                 <label>Segundo nombre</label>
                                 <input type="text" class="form-control" placeholder="Segundo nombre ..." name="txtSegundoNombre">
                             </div>
-                            <!-- Primer nombre -->
+                            <!-- Apellido -->
                             <div class="form-group">
-                                <label>Primer nombre</label>
-                                <input type="text" class="form-control" placeholder="Primer nombre ..." name="txtPrimerNombre">
+                                <label>Apellido</label>
+                                <input type="text" class="form-control" placeholder="Apellido ..." name="txtApellido">
                             </div>
                             <!-- phone mask -->
                             <div class="form-group">
@@ -58,14 +58,24 @@ require_once '../../func/validateSession.php';
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' placeholder="(516) 1234-5678" data-mask name="txtTelefono">
+                                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' placeholder="(XXX) XXXX-XXXX" data-mask name="txtTelefono" onkeypress="javascript:typeNumber();">
                                 </div>
                                 <!-- /.input group -->
                             </div>
-                            <!-- Dirección -->
+                            <!-- Código postal -->
                             <div class="form-group">
-                                <label>Dirección</label>
-                                <input type="text" class="form-control" placeholder="Main Street 1234 ..." name="txtDireccion">
+                                <label>Código postal</label>
+                                <input type="text" class="form-control" placeholder="Código postal ..." name="txtCp">
+                            </div>
+                            <!-- Ciudad -->
+                            <div class="form-group">
+                                <label>Ciudad</label>
+                                <input type="text" class="form-control" placeholder="Ciudad ..." name="txtCiudad">
+                            </div>
+                            <!-- Provincia -->
+                            <div class="form-group">
+                                <label>Provincia</label>
+                                <input type="text" class="form-control" placeholder="Provincia ..." name="txtProvincia">
                             </div>
                             <!-- Date dd/mm/yyyy -->
                             <div class="form-group">
@@ -75,7 +85,12 @@ require_once '../../func/validateSession.php';
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaNacimiento">
+                                    <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaNacimiento">
+                                    <?php } ?>
+                                    <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaNacimiento">
+                                    <?php } ?>
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -124,12 +139,6 @@ require_once '../../func/validateSession.php';
     <!-- Page specific script -->
     <script>
         $(function() {
-            $('#datemask').inputmask('dd-mm-yyy', {
-                'placeholder': 'dd-mm-yyy'
-            })
-            $('#datemask2').inputmask('dd-mm-yyy', {
-                'placeholder': 'dd-mm-yyy'
-            })
             //Phone Number
             $('[data-mask]').inputmask()
         })

@@ -30,9 +30,9 @@ if (isset($_POST['nb'])) {
         $Obj_Boletos->Aerolinea = $Obj_Ajustes->RemoverEtiquetas(ucwords(strtolower($_POST['txtAerolinea' . $i])));
         $Obj_Boletos->Origen = $Obj_Ajustes->RemoverEtiquetas(strtoupper($_POST['txtOrigen' . $i]));
         $Obj_Boletos->Destino = $Obj_Ajustes->RemoverEtiquetas(strtoupper($_POST['txtDestino' . $i]));
-        $Obj_Boletos->FechaIda = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertir($_POST['txtFechaIda' . $i]));
-        $Obj_Boletos->FechaRegreso = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertir($_POST['txtFechaRegreso' . $i]));
-        $Obj_Boletos->Dob = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertir($_POST['txtFechaDob' . $i]));
+        $Obj_Boletos->FechaIda = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaIda' . $i]));
+        $Obj_Boletos->FechaRegreso = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaRegreso' . $i]));
+        $Obj_Boletos->Dob = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaDob' . $i]));
         $Obj_Boletos->IdIata = $Obj_Ajustes->RemoverEtiquetas($_POST['txtIdIata' . $i]);
         $Obj_Boletos->IdTipo = $Obj_Ajustes->RemoverEtiquetas($_POST['txtIdTipo' . $i]);
         $Obj_Boletos->IdFormaPago = $Obj_Ajustes->RemoverEtiquetas($_POST['txtIdPago' . $i]);
@@ -53,7 +53,7 @@ if (isset($_POST['nb'])) {
             echo "<script>history.go(-1)</script>";
             return;
         };
-        if ($_POST['txtFechaDob' . $i] !== "" && $_POST['txtFechaDob' . $i] !== "dd-mm-yyyy" && !preg_match($regexFecha, $_POST['txtFechaDob' . $i])) {
+        if ($_POST['txtFechaDob' . $i] !== "" && $_POST['txtFechaDob' . $i] !== "dd-mm-yyyy" && $_POST['txtFechaDob' . $i] !== "mm-dd-yyyy" && !preg_match($regexFecha, $_POST['txtFechaDob' . $i])) {
             $_SESSION['error-registro'] = 'dobFormato';
             echo "<script>history.go(-1)</script>";
             return;
@@ -84,7 +84,7 @@ if (isset($_POST['nb'])) {
             echo "<script>history.go(-1)</script>";
             return;
         };
-        if ($_POST['txtFechaIda' . $i] !== "" && $_POST['txtFechaIda' . $i] !== "dd-mm-yyyy" && !preg_match($regexFecha, $_POST['txtFechaIda' . $i])) {
+        if ($_POST['txtFechaIda' . $i] !== "" && $_POST['txtFechaIda' . $i] !== "dd-mm-yyyy" && $_POST['txtFechaIda' . $i] !== "mm-dd-yyyy" && !preg_match($regexFecha, $_POST['txtFechaIda' . $i])) {
             $_SESSION['error-registro'] = 'idaFormato';
             echo "<script>history.go(-1)</script>";
             return;
@@ -94,7 +94,7 @@ if (isset($_POST['nb'])) {
         //     echo "<script>history.go(-1)</script>";
         //     return;
         // };
-        if ($_POST['txtFechaRegreso' . $i] !== "" && $_POST['txtFechaRegreso' . $i] !== "dd-mm-yyyy" && !preg_match($regexFecha, $_POST['txtFechaRegreso' . $i])) {
+        if ($_POST['txtFechaRegreso' . $i] !== "" && $_POST['txtFechaRegreso' . $i] !== "dd-mm-yyyy" && $_POST['txtFechaRegreso' . $i] !== "mm-dd-yyyy" && !preg_match($regexFecha, $_POST['txtFechaRegreso' . $i])) {
             $_SESSION['error-registro'] = 'regresoFormato';
             echo "<script>history.go(-1)</script>";
             return;

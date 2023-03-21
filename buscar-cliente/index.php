@@ -93,10 +93,8 @@ if (isset($_GET['s'])) {
                                         <thead>
                                             <tr class="text-center">
                                                 <th>ID</th>
-                                                <th>Apellido</th>
-                                                <th>Segundo Nombre</th>
-                                                <th>Primer Nombre</th>
-                                                <th>Número De Teléfono</th>
+                                                <th>Cliente</th>
+                                                <th># Teléfono</th>
                                                 <th>Dirección</th>
                                                 <th>Fecha de Nac.</th>
                                                 <th>Boletos</th>
@@ -108,11 +106,9 @@ if (isset($_GET['s'])) {
                                             <?php while ($DatosCliente = $Res_Clientes->fetch_assoc()) { ?>
                                                 <tr>
                                                     <td><a href="<?= $_SESSION['path'] ?>cliente/?id=<?= $DatosCliente['IdCliente'] ?>"><?= $DatosCliente['IdCliente'] ?></a></td>
-                                                    <td><?= $DatosCliente['Apellido'] ?></td>
-                                                    <td><?= $DatosCliente['SegundoNombre'] ?></td>
-                                                    <td><?= $DatosCliente['PrimerNombre'] ?></td>
+                                                    <td><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido']  ?></td>
                                                     <td><?= $DatosCliente['Telefono'] ?></td>
-                                                    <td style="text-overflow:ellipsis;"><?= $DatosCliente['Direccion'] ?></td>
+                                                    <td><?php echo $DatosCliente['Cp'];  if($DatosCliente['Ciudad'] !== null){echo ", ";} echo $DatosCliente['Ciudad']; if($DatosCliente['Provincia'] !== null){echo ", ";} echo $DatosCliente['Provincia'] ?></td>
                                                     <td><?= $DatosCliente['FechaNacimiento'] !== '0000-00-00' ? $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']) : '' ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">

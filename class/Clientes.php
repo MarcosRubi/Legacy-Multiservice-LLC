@@ -5,7 +5,9 @@ class Clientes extends DB
     public $SegundoNombre;
     public $Apellido;
     public $Telefono;
-    public $Direccion;
+    public $Cp;
+    public $Ciudad;
+    public $Provincia;
     public $FechaNacimiento;
 
 
@@ -29,7 +31,9 @@ class Clientes extends DB
         SegundoNombre LIKE'%" . $content . "%' OR 
         Apellido LIKE'%" . $content . "%' OR 
         Telefono LIKE'%" . $content . "%' OR 
-        Direccion LIKE'%" . $content . "%' OR 
+        Cp LIKE'%" . $content . "%' OR 
+        Ciudad LIKE'%" . $content . "%' OR 
+        Provincia LIKE'%" . $content . "%' OR 
         FechaNacimiento LIKE'%" . $content . "%'";
         return $this->EjecutarQuery($query);
     }
@@ -41,7 +45,9 @@ class Clientes extends DB
             SegundoNombre,
             Apellido,
             Telefono,
-            Direccion,
+            Cp,
+            Ciudad,
+            Provincia,
             FechaNacimiento,
             Eliminado )
             VALUES (
@@ -49,10 +55,13 @@ class Clientes extends DB
             '" . $this->SegundoNombre . "',
             '" . $this->Apellido . "',
             '" . $this->Telefono . "',
-            '" . $this->Direccion . "',
+            '" . $this->Cp . "',
+            '" . $this->Ciudad . "',
+            '" . $this->Provincia . "',
             '" . $this->FechaNacimiento . "',
             'N' ) ";
-        return $this->EjecutarQuery($query);
+        // return $this->EjecutarQuery($query);
+        return $query;
     }
 
     public function Actualizar($id)
@@ -62,7 +71,9 @@ class Clientes extends DB
         SegundoNombre = '" . $this->SegundoNombre . "',
         Apellido = '" . $this->Apellido . "',
         Telefono = '" . $this->Telefono . "' 
-        Direccion = '" . $this->Direccion . "' 
+        Cp = '" . $this->Cp . "' 
+        Ciudad = '" . $this->Ciudad . "' 
+        Provincia = '" . $this->Provincia . "' 
         FechaNacimiento = '" . $this->FechaNacimiento . "' 
         WHERE IdCliente='" . $id . "' ";
 

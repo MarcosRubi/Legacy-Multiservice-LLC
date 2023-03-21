@@ -4,8 +4,28 @@ class Ajustes
     
     public function FechaInvertir($fecha)
     {
-        return implode('-', array_reverse(explode('-', $fecha)));
+        if($_SESSION['FormatoFecha'] === 'mdy'){
+            $fechaOrdenar = explode('-' , $fecha);
+            $fechaOrdenada = $fechaOrdenar[1] . "-" . $fechaOrdenar[2] . "-" . $fechaOrdenar[0];
+            return $fechaOrdenada;
+        }
+        if($_SESSION['FormatoFecha'] === 'dmy'){
+            return implode('-', array_reverse(explode('-', $fecha)));
+        }
     }
+    
+    public function FechaInvertirGuardar($fecha)
+    {
+        if($_SESSION['FormatoFecha'] === 'mdy'){
+            $fechaOrdenar = explode('-' , $fecha);
+            $fechaOrdenada = $fechaOrdenar[2] . "-" . $fechaOrdenar[0] . "-" . $fechaOrdenar[1];
+            return $fechaOrdenada;
+        }
+        if($_SESSION['FormatoFecha'] === 'dmy'){
+            return implode('-', array_reverse(explode('-', $fecha)));
+        }
+    }
+
     public function RemoverEtiquetas($content)
     {
         return strip_tags(trim($content));

@@ -122,9 +122,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') {
-                                                echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);
-                                            } ?>">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') { echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);} ?>">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') { echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);} ?>">
+                                            <?php } ?>
+
+                                            
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -147,7 +152,12 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
                                         <div class="input-group date" id="dateto1" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda1">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda1">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda1">
+                                            <?php } ?>
                                             <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
@@ -158,7 +168,12 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
                                         <div class="input-group date" id="datefrom1" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso1">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso1">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso1">
+                                            <?php } ?>
                                             <div class="input-group-append" data-target="#datefrom1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
@@ -238,7 +253,12 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob2">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob2">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob2">
+                                            <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -260,9 +280,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-                                        <div class="input-group date" id="dateto2" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto2" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda2">
-                                            <div class="input-group-append" data-target="#dateto2" data-toggle="datetimepicker">
+                                        <div class="input-group date" id="dateto1" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda2">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda2">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -271,9 +296,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-                                        <div class="input-group date" id="datefrom2" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom2" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso2">
-                                            <div class="input-group-append" data-target="#datefrom2" data-toggle="datetimepicker">
+                                        <div class="input-group date" id="datefrom1" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso2">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso2">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -352,7 +382,12 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob3">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob3">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob3">
+                                            <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -374,9 +409,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-                                        <div class="input-group date" id="dateto3" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto3" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda3">
-                                            <div class="input-group-append" data-target="#dateto3" data-toggle="datetimepicker">
+                                        <div class="input-group date" id="dateto1" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda3">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda3">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -385,9 +425,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-                                        <div class="input-group date" id="datefrom3" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom3" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso3">
-                                            <div class="input-group-append" data-target="#datefrom3" data-toggle="datetimepicker">
+                                        <div class="input-group date" id="datefrom1" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso3">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso3">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -466,7 +511,12 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob4">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob4">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob4">
+                                            <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -488,9 +538,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-                                        <div class="input-group date" id="dateto4" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto4" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda4">
-                                            <div class="input-group-append" data-target="#dateto4" data-toggle="datetimepicker">
+                                        <div class="input-group date" id="dateto1" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda4">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda4">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -499,9 +554,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-                                        <div class="input-group date" id="datefrom4" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom4" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso4">
-                                            <div class="input-group-append" data-target="#datefrom4" data-toggle="datetimepicker">
+                                        <div class="input-group date" id="datefrom1" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso4">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso4">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -580,7 +640,12 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob5">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob5">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob5">
+                                            <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -602,9 +667,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-                                        <div class="input-group date" id="dateto5" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#dateto5" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda5">
-                                            <div class="input-group-append" data-target="#dateto5" data-toggle="datetimepicker">
+                                        <div class="input-group date" id="dateto1" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda5">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda5">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -613,9 +683,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-                                        <div class="input-group date" id="datefrom5" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datefrom5" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso5">
-                                            <div class="input-group-append" data-target="#datefrom5" data-toggle="datetimepicker">
+                                        <div class="input-group date" id="datefrom1" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso5">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso5">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -736,6 +811,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
             $('[data-mask]').inputmask()
             // Summernote
             $('#summernote').summernote()
+            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
             //Date picker
             $('#datefrom1').datetimepicker({
                 format: 'DD-MM-YYYY'
@@ -767,6 +843,42 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
             $('#dateto5').datetimepicker({
                 format: 'DD-MM-YYYY'
             });
+            <?php } ?>
+            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                //Date picker
+            $('#datefrom1').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto1').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom2').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto2').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom3').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto3').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom4').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto4').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom5').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto5').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            <?php } ?>
+
+
         })
     </script>
     <script>

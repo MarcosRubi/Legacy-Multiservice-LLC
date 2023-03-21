@@ -83,7 +83,7 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                                                         <a href="#" title="Ver detalles" onclick="javascript:detallesCotizacion(<?=$DatosCotizacion['IdCotizacion'] ?>)"><?=$DatosCotizacion['IdCotizacion']?></a>
                                                     </td>
                                                     <td><?=$DatosCotizacion['Pnr']?></td>
-                                                    <td><?=$DatosCotizacion['FechaCreado'] ." ". $DatosCotizacion['HoraCreado'] . " ". $DatosCotizacion['CreadoTimestamp'] ?></td>
+                                                    <td><?=$Obj_Ajustes->FechaInvertir(substr($DatosCotizacion['FechaCreado'], 0, -9)) . " " . substr($DatosCotizacion['FechaCreado'], 10, 20) . " " . $DatosCotizacion['HoraCreado'] ?></td>
                                                     <td><?=$DatosCotizacion['Agencia']?></td>
                                                     <td><?=$DatosCotizacion['Agente']?></td>
                                                     <td><?=$DatosCotizacion['Origen']?></td>

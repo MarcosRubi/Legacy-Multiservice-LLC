@@ -67,7 +67,12 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFecha">
+                                        <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFecha">
+                                        <?php } ?>
+                                        <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFecha">
+                                        <?php } ?>
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -75,14 +80,14 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                 <!-- Agencia -->
                                 <div class="form-group mx-1">
                                     <label>Agencia</label>
-                                    <input type="text" class="form-control" placeholder="Agencia ..." name="txtAgencia" value="<?=$_SESSION['Agencia'] ?>">
+                                    <input type="text" class="form-control" placeholder="Agencia ..." name="txtAgencia" value="<?= $_SESSION['Agencia'] ?>">
                                 </div>
                             </div>
                             <div class="d-flex flex-column flex-xl-row">
                                 <!-- Agente -->
                                 <div class="form-group mx-1">
                                     <label>Agente</label>
-                                    <input type="text" class="form-control" placeholder="Agente ..." name="txtAgente" value="<?=$_SESSION['Agente'] ?>">
+                                    <input type="text" class="form-control" placeholder="Agente ..." name="txtAgente" value="<?= $_SESSION['Agente'] ?>">
                                 </div>
                                 <!-- Origen -->
                                 <div class="form-group mx-1">
@@ -101,7 +106,12 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtIda">
+                                        <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtIda">
+                                        <?php } ?>
+                                        <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtIda">
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <!-- Regreso dd-mm-yyyy -->
@@ -111,7 +121,12 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtRegreso">
+                                        <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtRegreso">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtRegreso">
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <!-- # Boletos -->
@@ -129,7 +144,7 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                     <label>MAX</label>
                                     <input type="text" class="form-control" placeholder="Max ..." name="txtMax">
                                 </div>
-                                <input type="text" class="form-control d-none" name="IdCliente" value="<?=$_GET['id']?>">
+                                <input type="text" class="form-control d-none" name="IdCliente" value="<?= $_GET['id'] ?>">
                             </div>
                             <!-- /.form group -->
                             <div class="form-group pr-1">

@@ -21,6 +21,7 @@ if ($Res_Empleado->num_rows > 0 && password_verify($_POST['password'], $Datos_Em
     $_SESSION['NombreRol'] = $Datos_Empleado['NombreRol'];
     $_SESSION['Agencia'] = $Datos_Empleado['Agencia'];
     $_SESSION['Agente'] = $Datos_Empleado['Agente'];
+    $_SESSION['FormatoFecha'] = $Datos_Empleado['FormatoFecha'];
     header("Location:" . $_SESSION['path']);
     return;
 }
