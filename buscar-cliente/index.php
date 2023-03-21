@@ -110,13 +110,12 @@ if (isset($_GET['s'])) {
                                                     <td><?= $DatosCliente['Telefono'] ?></td>
                                                     <td><?php echo $DatosCliente['Cp'];
                                                         if ($DatosCliente['Ciudad'] !== '') {
-                                                            echo ", ";
+                                                            echo ", " . $DatosCliente['Ciudad'];
                                                         }
-                                                        echo $DatosCliente['Ciudad'];
                                                         if ($DatosCliente['Provincia'] !== '') {
-                                                            echo ", ";
-                                                        }
-                                                        echo $DatosCliente['Provincia'] ?></td>
+                                                            echo ", " . $DatosCliente['Provincia'];
+                                                        }?>
+                                                    </td>
                                                     <td><?= $DatosCliente['FechaNacimiento'] !== '0000-00-00' ? $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']) : '' ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">

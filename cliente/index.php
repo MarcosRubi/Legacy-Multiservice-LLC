@@ -36,10 +36,11 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
     <style>
-        #logs_wrapper .row:last-child{
+        #logs_wrapper .row:last-child {
             display: none !important;
         }
-        #list-results{
+
+        #list-results {
             font-size: 14px;
         }
     </style>
@@ -61,7 +62,7 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <h3 class='display-5'>Datos de: <strong><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " ". $DatosCliente['Apellido'] ?></strong></h3>
+                    <h3 class='display-5'>Datos de: <strong><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido'] ?></strong></h3>
                     <div class="row mt-3">
                         <div class="col-12">
                             <div class="card">
@@ -72,7 +73,7 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                 <div class="card-body">
                                     <table id="logs" class="table table-bordered table-hover">
                                         <thead>
-                                            <tr class="text-center">
+                                            <tr>
                                                 <th>ID</th>
                                                 <th>Cliente</th>
                                                 <th>Número De Teléfono</th>
@@ -82,23 +83,32 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                <tr>
-                                                    <td><?= $DatosCliente['IdCliente'] ?></td>
-                                                    <td><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido']  ?></td>
-                                                    <td><?= $DatosCliente['Telefono'] ?></td>
-                                                    <td><?php echo $DatosCliente['Cp'];  if($DatosCliente['Ciudad'] !== null){echo ", ";} echo $DatosCliente['Ciudad']; if($DatosCliente['Provincia'] !== null){echo ", ";} echo $DatosCliente['Provincia'] ?></td>
-                                                    <td><?php if($DatosCliente['FechaNacimiento'] !== '0000-00-00'){echo $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']);} ?></td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-around">
-                                                            <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editar(<?= $DatosCliente['IdCliente'] ?>);">
-                                                                <i class="fa fa-edit"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm mx-1 btn-primary" title="Eliminar" onclick="javascript:eliminar(<?= $DatosCliente['IdCliente'] ?>);">
-                                                                <i class="fa fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td><?= $DatosCliente['IdCliente'] ?></td>
+                                                <td><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido']  ?></td>
+                                                <td><?= $DatosCliente['Telefono'] ?></td>
+                                                <td><?php echo $DatosCliente['Cp'];
+                                                    if ($DatosCliente['Ciudad'] !== '') {
+                                                        echo ", " .  $DatosCliente['Ciudad'];
+                                                    }
+                                                    if ($DatosCliente['Provincia'] !== '') {
+                                                        echo ", " . $DatosCliente['Provincia'];
+                                                    }?>
+                                                </td>
+                                                <td><?php if ($DatosCliente['FechaNacimiento'] !== '0000-00-00') {
+                                                        echo $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']);
+                                                    } ?></td>
+                                                <td>
+                                                    <div class="d-flex justify-content-around">
+                                                        <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editar(<?= $DatosCliente['IdCliente'] ?>);">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-sm mx-1 btn-primary" title="Eliminar" onclick="javascript:eliminar(<?= $DatosCliente['IdCliente'] ?>);">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

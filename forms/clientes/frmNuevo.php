@@ -34,65 +34,69 @@ require_once '../../func/validateSession.php';
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Agregar nuevo cliente</h3>
                         </div>
-                        <div class="card-body">
-                            <!-- Primer nombre -->
-                            <div class="form-group">
-                                <label>Primer nombre</label>
-                                <input type="text" class="form-control" placeholder="Primer nombre ..." name="txtPrimerNombre">
-                            </div>
-                            <!-- Segundo nombre -->
-                            <div class="form-group">
-                                <label>Segundo nombre</label>
-                                <input type="text" class="form-control" placeholder="Segundo nombre ..." name="txtSegundoNombre">
-                            </div>
-                            <!-- Apellido -->
-                            <div class="form-group">
-                                <label>Apellido</label>
-                                <input type="text" class="form-control" placeholder="Apellido ..." name="txtApellido">
-                            </div>
-                            <!-- phone mask -->
-                            <div class="form-group">
-                                <label>Teléfono:</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' placeholder="(XXX) XXXX-XXXX" data-mask name="txtTelefono" onkeypress="javascript:typeNumber();">
+                        <div class="card-body ">
+                            <div class="d-flex flex-column flex-xl-row">
+                                <!-- Primer nombre -->
+                                <div class="form-group mx-1">
+                                    <label>Primer nombre</label>
+                                    <input type="text" class="form-control" placeholder="Primer nombre ..." name="txtPrimerNombre">
                                 </div>
-                                <!-- /.input group -->
-                            </div>
-                            <!-- Código postal -->
-                            <div class="form-group">
-                                <label>Código postal</label>
-                                <input type="text" class="form-control" placeholder="Código postal ..." name="txtCp">
-                            </div>
-                            <!-- Ciudad -->
-                            <div class="form-group">
-                                <label>Ciudad</label>
-                                <input type="text" class="form-control" placeholder="Ciudad ..." name="txtCiudad">
-                            </div>
-                            <!-- Provincia -->
-                            <div class="form-group">
-                                <label>Provincia</label>
-                                <input type="text" class="form-control" placeholder="Provincia ..." name="txtProvincia">
-                            </div>
-                            <!-- Date dd/mm/yyyy -->
-                            <div class="form-group">
-                                <label>Fecha de nacimiento:</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    </div>
-                                    <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaNacimiento">
-                                    <?php } ?>
-                                    <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaNacimiento">
-                                    <?php } ?>
+                                <!-- Segundo nombre -->
+                                <div class="form-group mx-1">
+                                    <label>Segundo nombre</label>
+                                    <input type="text" class="form-control" placeholder="Segundo nombre ..." name="txtSegundoNombre">
                                 </div>
-                                <!-- /.input group -->
+                                <!-- Apellido -->
+                                <div class="form-group mx-1">
+                                    <label>Apellido</label>
+                                    <input type="text" class="form-control" placeholder="Apellido ..." name="txtApellido">
+                                </div>
+                                <!-- phone mask -->
+                                <div class="form-group mx-1">
+                                    <label>Teléfono:</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' placeholder="(XXX) XXXX-XXXX" data-mask name="txtTelefono" onkeypress="javascript:typeNumber();">
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column flex-xl-row">
+                                <!-- Código postal -->
+                                <div class="form-group mx-1">
+                                    <label>Código postal</label>
+                                    <input type="text" class="form-control" placeholder="Código postal ..." name="txtCp">
+                                </div>
+                                <!-- Ciudad -->
+                                <div class="form-group mx-1">
+                                    <label>Ciudad</label>
+                                    <input type="text" class="form-control" placeholder="Ciudad ..." name="txtCiudad">
+                                </div>
+                                <!-- Provincia -->
+                                <div class="form-group mx-1">
+                                    <label>Provincia</label>
+                                    <input type="text" class="form-control" placeholder="Provincia ..." name="txtProvincia">
+                                </div>
+                                <!-- Date dd/mm/yyyy -->
+                                <div class="form-group mx-1">
+                                    <label>Fecha de nacimiento:</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                        </div>
+                                        <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaNacimiento">
+                                        <?php } ?>
+                                        <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaNacimiento">
+                                        <?php } ?>
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Agregar</button>
