@@ -44,13 +44,11 @@ if($_SESSION['FormatoFecha'] === 'mdy'){
 
 $Res_Clientes = $Obj_Clientes->Insertar();
 
-var_dump($Res_Clientes);
-
-// if ($Res_Clientes) {
-//     $_SESSION['success-registro'] = 'cliente';
-//     echo "<script>
-//     let URL = window.opener.location.pathname;
-//         window.opener.location.reload();
-//     window.close();
-// </script>";
-// }
+if ($Res_Clientes) {
+    $_SESSION['success-registro'] = 'cliente';
+    echo "<script>
+    let URL = window.opener.location.pathname;
+        window.opener.location.reload();
+    window.close();
+</script>";
+}

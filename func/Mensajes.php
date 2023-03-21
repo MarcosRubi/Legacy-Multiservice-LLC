@@ -117,19 +117,19 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'idaFo
             })";
     unset($_SESSION['error-registro']);
 }
-// if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'regresoVacio') {
-//     echo "var Toast = Swal.mixin({
-//                 toast: true,
-//                 position: 'top-end',
-//                 showConfirmButton: false,
-//                 timer: 3000
-//             });
-//             Toast.fire({
-//                 icon: 'error',
-//                 title: 'La fecha de regreso es obligatoria.'
-//             })";
-//     unset($_SESSION['error-registro']);
-// }
+if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'regresoVacio') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'La fecha de regreso es obligatoria.'
+            })";
+    unset($_SESSION['error-registro']);
+}
 if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'regresoFormato') {
     echo "var Toast = Swal.mixin({
                 toast: true,

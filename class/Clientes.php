@@ -60,8 +60,7 @@ class Clientes extends DB
             '" . $this->Provincia . "',
             '" . $this->FechaNacimiento . "',
             'N' ) ";
-        // return $this->EjecutarQuery($query);
-        return $query;
+        return $this->EjecutarQuery($query);
     }
 
     public function Actualizar($id)

@@ -108,7 +108,7 @@ if (isset($_GET['s'])) {
                                                     <td><a href="<?= $_SESSION['path'] ?>cliente/?id=<?= $DatosCliente['IdCliente'] ?>"><?= $DatosCliente['IdCliente'] ?></a></td>
                                                     <td><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido']  ?></td>
                                                     <td><?= $DatosCliente['Telefono'] ?></td>
-                                                    <td><?php echo $DatosCliente['Cp'];  if($DatosCliente['Ciudad'] !== null){echo ", ";} echo $DatosCliente['Ciudad']; if($DatosCliente['Provincia'] !== null){echo ", ";} echo $DatosCliente['Provincia'] ?></td>
+                                                    <td><?php echo $DatosCliente['Cp'];  if($DatosCliente['Ciudad'] !== ''){echo ", ";} echo $DatosCliente['Ciudad']; if($DatosCliente['Provincia'] !== ''){echo ", ";} echo $DatosCliente['Provincia'] ?></td>
                                                     <td><?= $DatosCliente['FechaNacimiento'] !== '0000-00-00' ? $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']) : '' ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">

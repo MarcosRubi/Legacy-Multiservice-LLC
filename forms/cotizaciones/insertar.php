@@ -42,7 +42,19 @@ if ($_POST['txtFecha'] !== "" && $_POST['txtFecha'] !== "dd-mm-yyyy" && $_POST['
 };
 //VALIDANDO FORMATO DE FECHA - IDA
 if ($_POST['txtIda'] !== "" && $_POST['txtIda'] !== "dd-mm-yyyy" && $_POST['txtIda'] !== "mm-dd-yyyy" && !preg_match($regexFecha, $_POST['txtIda'])) {
-    $_SESSION['error-registro'] = 'ida';
+    $_SESSION['error-registro'] = 'idaFormato';
+    echo "<script>history.go(-1)</script>";
+    return;
+};
+//VALIDANDO FORMATO DE FECHA - IDA
+if ($_POST['txtIda'] === "" ) {
+    $_SESSION['error-registro'] = 'idaVacio';
+    echo "<script>history.go(-1)</script>";
+    return;
+};
+//VALIDANDO FORMATO DE FECHA - REGRESO
+if ($_POST['txtRegreso'] !== "" && $_POST['txtRegreso'] !== "dd-mm-yyyy" && $_POST['txtRegreso'] !== "mm-dd-yyyy" && !preg_match($regexFecha, $_POST['txtRegreso'])) {
+    $_SESSION['error-registro'] = 'regresoFormato';
     echo "<script>history.go(-1)</script>";
     return;
 };

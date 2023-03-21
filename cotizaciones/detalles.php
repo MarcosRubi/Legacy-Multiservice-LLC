@@ -79,7 +79,7 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                                                 <td>
                                                     <!-- Valor -->
                                                     <div class="form-group mx-1 container-fluid mb-0">
-                                                        <input type="text" class="form-control" value="<?= $DatosCotizacion['FechaCreado'] . " " . $DatosCotizacion['HoraCreado'] . " " . $DatosCotizacion['CreadoTimestamp'] ?>" readonly>
+                                                        <input type="text" class="form-control" value="<?=$Obj_Ajustes->FechaInvertir(substr($DatosCotizacion['FechaCreado'], 0, -9))?>" readonly>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -93,11 +93,11 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="align-middle" style="max-width:5rem;">Fecha de ida / Fecha de regreso</td>
+                                                <td class="align-middle" style="max-width:5rem;">Fecha de ida <?php if($DatosCotizacion['Regreso'] !== '0000-00-00'){echo " / Fecha de regreso"; } ?> </td>
                                                 <td>
                                                     <!-- Valor -->
                                                     <div class="form-group mx-1 container-fluid mb-0">
-                                                        <input type="text" class="form-control" value="<?= $Obj_Ajustes->FechaInvertir($DatosCotizacion['Ida']) . " / " . $Obj_Ajustes->FechaInvertir($DatosCotizacion['Regreso']) ?>" readonly>
+                                                        <input type="text" class="form-control" value="<?php echo $Obj_Ajustes->FechaInvertir($DatosCotizacion['Ida']);  if($DatosCotizacion['Regreso'] !== '0000-00-00'){echo " / " . $Obj_Ajustes->FechaInvertir($DatosCotizacion['Regreso']);} ?>" readonly>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -140,7 +140,7 @@ $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><?= $DatosCotizacion['FechaCreado'] . " " . $DatosCotizacion['HoraCreado'] . " " . $DatosCotizacion['CreadoTimestamp'] ?></td>
+                                                <td><?= $DatosCotizacion['FechaCreado'] . " " . $DatosCotizacion['HoraCreado']  ?></td>
                                                 <td><?= $DatosCotizacion['Agente'] ?></td>
                                                 <td><?= $DatosCotizacion['Agencia'] ?></td>
                                                 <td><?= $DatosCotizacion['Comentario'] ?></td>
