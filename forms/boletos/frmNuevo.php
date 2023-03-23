@@ -1,6 +1,5 @@
 <?php
 require_once '../../func/validateSession.php';
-
 if (!isset($_GET['id'])) {
     echo "<script>window.location.replace('" . $_SESSION['path'] . "buscar-cliente/');</script>";
     return;
@@ -280,14 +279,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-                                        <div class="input-group date" id="dateto1" data-target-input="nearest">
+                                        <div class="input-group date" id="dateto2" data-target-input="nearest">
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda2">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto2" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda2">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda2">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto2" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda2">
                                             <?php } ?>
-                                            <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
+                                            <div class="input-group-append" data-target="#dateto2" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -296,14 +295,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-                                        <div class="input-group date" id="datefrom1" data-target-input="nearest">
+                                        <div class="input-group date" id="datefrom2" data-target-input="nearest">
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso2">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom2" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso2">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso2">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom2" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso2">
                                             <?php } ?>
-                                            <div class="input-group-append" data-target="#datefrom1" data-toggle="datetimepicker">
+                                            <div class="input-group-append" data-target="#datefrom2" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -409,14 +408,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-                                        <div class="input-group date" id="dateto1" data-target-input="nearest">
+                                        <div class="input-group date" id="dateto3" data-target-input="nearest">
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda3">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto3" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda3">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda3">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto3" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda3">
                                             <?php } ?>
-                                            <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
+                                            <div class="input-group-append" data-target="#dateto3" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -425,14 +424,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-                                        <div class="input-group date" id="datefrom1" data-target-input="nearest">
+                                        <div class="input-group date" id="datefrom3" data-target-input="nearest">
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso3">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom3" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso3">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso3">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom3" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso3">
                                             <?php } ?>
-                                            <div class="input-group-append" data-target="#datefrom1" data-toggle="datetimepicker">
+                                            <div class="input-group-append" data-target="#datefrom3" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -538,14 +537,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-                                        <div class="input-group date" id="dateto1" data-target-input="nearest">
+                                        <div class="input-group date" id="dateto4" data-target-input="nearest">
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda4">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto4" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda4">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda4">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto4" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda4">
                                             <?php } ?>
-                                            <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
+                                            <div class="input-group-append" data-target="#dateto4" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -554,14 +553,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-                                        <div class="input-group date" id="datefrom1" data-target-input="nearest">
+                                        <div class="input-group date" id="datefrom4" data-target-input="nearest">
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso4">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom4" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso4">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso4">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom4" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso4">
                                             <?php } ?>
-                                            <div class="input-group-append" data-target="#datefrom1" data-toggle="datetimepicker">
+                                            <div class="input-group-append" data-target="#datefrom4" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -667,14 +666,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha ida:</label>
-                                        <div class="input-group date" id="dateto1" data-target-input="nearest">
+                                        <div class="input-group date" id="dateto5" data-target-input="nearest">
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda5">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto5" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda5">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda5">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto5" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda5">
                                             <?php } ?>
-                                            <div class="input-group-append" data-target="#dateto1" data-toggle="datetimepicker">
+                                            <div class="input-group-append" data-target="#dateto5" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -683,14 +682,14 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <!-- Fecha regreso dd-mm-yyyy -->
                                     <div class="form-group mx-1">
                                         <label>Fecha regreso:</label>
-                                        <div class="input-group date" id="datefrom1" data-target-input="nearest">
+                                        <div class="input-group date" id="datefrom5" data-target-input="nearest">
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso5">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom5" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso5">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom1" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso5">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom5" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso5">
                                             <?php } ?>
-                                            <div class="input-group-append" data-target="#datefrom1" data-toggle="datetimepicker">
+                                            <div class="input-group-append" data-target="#datefrom5" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                 </div>
                                             </div>
@@ -743,6 +742,1296 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <div class="form-group mx-1">
                                         <label>Fee</label>
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee5">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="6">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(6)"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto6" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero6">
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob6">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob6">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea6">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen6">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino6">
+                                    </div>
+                                    <!-- Fecha Ida dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+                                        <div class="input-group date" id="dateto6" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto6" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda6">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto6" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda6">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto6" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+                                        <div class="input-group date" id="datefrom6" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom6" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso6">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom6" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso6">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom6" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata6">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo6">
+                                            <?= $opcionesTipo ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago6">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio6">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase6">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax6">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm6">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="7">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(7)"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto7" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero7">
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob7">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob7">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea7">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen7">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino7">
+                                    </div>
+                                    <!-- Fecha Ida dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+                                        <div class="input-group date" id="dateto7" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto7" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda7">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto7" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda7">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto7" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+                                        <div class="input-group date" id="datefrom7" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom7" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso7">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom7" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso7">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom7" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata7">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo7">
+                                            <?= $opcionesTipo ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago7">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio7">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase7">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax7">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm7">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee7">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="8">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(8)"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto8" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero8">
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob8">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob8">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea8">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen8">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino8">
+                                    </div>
+                                    <!-- Fecha Ida dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+                                        <div class="input-group date" id="dateto8" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto8" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda8">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto8" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda8">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto8" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+                                        <div class="input-group date" id="datefrom8" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom8" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso8">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom8" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso8">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom8" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata8">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo8">
+                                            <?= $opcionesTipo ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago8">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio8">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase8">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax8">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm8">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee8">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="9">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(9)"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto9" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero9">
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob9">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob9">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea9">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen9">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino9">
+                                    </div>
+                                    <!-- Fecha Ida dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+                                        <div class="input-group date" id="dateto9" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto9" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda9">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto9" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda9">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto9" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+                                        <div class="input-group date" id="datefrom9" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom9" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso9">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom9" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso9">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom9" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata9">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo9">
+                                            <?= $opcionesTipo ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago9">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio9">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase9">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax9">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm9">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee9">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="10">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(10)"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto10" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero10">
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob10">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob10">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea10">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen10">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino10">
+                                    </div>
+                                    <!-- Fecha Ida dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+                                        <div class="input-group date" id="dateto10" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto10" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda10">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto10" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda10">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto10" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+                                        <div class="input-group date" id="datefrom10" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom10" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso10">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom10" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso10">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom10" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata10">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo10">
+                                            <?= $opcionesTipo ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago10">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio10">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase10">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax10">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm10">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee10">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="11">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(11)"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto11" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero11">
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob11">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob11">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea11">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen11">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino11">
+                                    </div>
+                                    <!-- Fecha Ida dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+                                        <div class="input-group date" id="dateto11" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto11" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda11">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto11" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda11">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto11" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+                                        <div class="input-group date" id="datefrom11" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom11" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso11">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom11" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso11">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom11" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata11">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo11">
+                                            <?= $opcionesTipo ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago11">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio11">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase11">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax11">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm11">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee11">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="12">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(12)"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto12" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero12">
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob12">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob12">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea12">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen12">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino12">
+                                    </div>
+                                    <!-- Fecha Ida dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+                                        <div class="input-group date" id="dateto12" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto12" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda12">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto12" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda12">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto12" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+                                        <div class="input-group date" id="datefrom12" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom12" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso12">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom12" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso12">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom12" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata12">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo12">
+                                            <?= $opcionesTipo ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago12">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio12">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase12">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax12">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm12">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee12">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="13">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(13)"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto13" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero13">
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob13">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob13">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea13">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen13">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino13">
+                                    </div>
+                                    <!-- Fecha Ida dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+                                        <div class="input-group date" id="dateto13" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto13" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda13">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto13" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda13">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto13" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+                                        <div class="input-group date" id="datefrom13" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom13" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso13">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom13" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso13">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom13" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata13">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo13">
+                                            <?= $opcionesTipo ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago13">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio13">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase13">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax13">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm13">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee13">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="14">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(14)"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto14" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero14">
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob14">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob14">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea14">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen14">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino14">
+                                    </div>
+                                    <!-- Fecha Ida dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+                                        <div class="input-group date" id="dateto14" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto14" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda14">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto14" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda14">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto14" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+                                        <div class="input-group date" id="datefrom14" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom14" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso14">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom14" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso14">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom14" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata14">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo14">
+                                            <?= $opcionesTipo ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago14">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio14">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase14">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax14">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm14">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee14">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="15">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(15)"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- # Boleto -->
+                                    <div class="form-group mx-1">
+                                        <label># Boleto</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtBoleto15" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Nombre del pasajero -->
+                                    <div class="form-group mx-1">
+                                        <label>Nombre del pasajero</label>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero15">
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob15">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob15">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Aerolínea -->
+                                    <div class="form-group mx-1">
+                                        <label>Aerolínea</label>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea15">
+                                    </div>
+                                    <!-- Origen -->
+                                    <div class="form-group mx-1">
+                                        <label>Origen</label>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen15">
+                                    </div>
+                                    <!-- Destino -->
+                                    <div class="form-group mx-1">
+                                        <label>Destino</label>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino15">
+                                    </div>
+                                    <!-- Fecha Ida dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha ida:</label>
+                                        <div class="input-group date" id="dateto15" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto15" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda15">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto15" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda15">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#dateto15" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fecha regreso dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Fecha regreso:</label>
+                                        <div class="input-group date" id="datefrom15" data-target-input="nearest">
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom15" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso15">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom15" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso15">
+                                            <?php } ?>
+                                            <div class="input-group-append" data-target="#datefrom15" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata15">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Tipo -->
+                                    <div class="form-group mx-1">
+                                        <label>Tipo</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo15">
+                                            <?= $opcionesTipo ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago15">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Precio</label>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio15">
+                                    </div>
+                                    <!--Base -->
+                                    <div class="form-group mx-1">
+                                        <label>Base</label>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase15">
+                                    </div>
+                                    <!-- TAX -->
+                                    <div class="form-group mx-1">
+                                        <label>Tax</label>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax15">
+                                    </div>
+                                    <!-- Fm -->
+                                    <div class="form-group mx-1">
+                                        <label>Fm</label>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm15">
+                                    </div>
+                                    <!-- Fee -->
+                                    <div class="form-group mx-1">
+                                        <label>Fee</label>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee15">
                                     </div>
                                 </div>
                             </div>
@@ -843,6 +2132,66 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
             $('#dateto5').datetimepicker({
                 format: 'DD-MM-YYYY'
             });
+            $('#datefrom6').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto6').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom7').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto7').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom8').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto8').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom9').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto9').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom10').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto10').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom11').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto11').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom12').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto12').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom13').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto13').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom14').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto14').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#datefrom15').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
+            $('#dateto15').datetimepicker({
+                format: 'DD-MM-YYYY'
+            });
             <?php } ?>
             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
                 //Date picker
@@ -874,6 +2223,66 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                 format: 'MM-DD-YYYY'
             });
             $('#dateto5').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom6').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto6').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom7').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto7').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom8').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto8').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom9').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto9').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom10').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto10').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom11').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto11').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom12').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto12').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom13').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto13').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom14').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto14').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#datefrom15').datetimepicker({
+                format: 'MM-DD-YYYY'
+            });
+            $('#dateto15').datetimepicker({
                 format: 'MM-DD-YYYY'
             });
             <?php } ?>
@@ -986,10 +2395,10 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
         function mostrarNuevaFila() {
             const filas = document.querySelectorAll('.fila.d-none')
 
-            if (posicion === 4) {
+            if (posicion === 14) {
                 document.getElementById('addNewRow').classList.add('d-none')
             }
-            if (posicion <= 5) {
+            if (posicion <= 15) {
                 formsValidar.push(parseInt(filas[0].id))
                 filas[0].classList.remove('d-none')
                 posicion++
@@ -1004,7 +2413,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
             formsValidar = formsValidar.filter(pos => pos !== id)
             inputNb.value = formsValidar
 
-            if (posicion <= 4) {
+            if (posicion <= 14) {
                 document.getElementById('addNewRow').classList.remove('d-none')
             }
         }
