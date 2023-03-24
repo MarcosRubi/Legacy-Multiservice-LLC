@@ -109,6 +109,62 @@ class Boletos extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function InsertarQueryPreparada($query)
+    {
+        return $this->EjecutarQuery($query);
+    }
+
+    public function InsertarPreparar()
+    {
+        $query = "INSERT INTO tbl_boletos(
+            IdCliente,
+            Pnr,
+            NumeroBoletos,
+            NombrePasajero,
+            Aerolinea,
+            Origen,
+            Destino,
+            FechaIda,
+            FechaRegreso,
+            IdIata,
+            IdTipo,
+            IdFormaPago,
+            Precio,
+            Base,
+            Tax,
+            Fm,
+            Fee,
+            Itinerario,
+            Dob,
+            Agencia,
+            Agente,
+            Eliminado )
+            VALUES (
+            '" . $this->IdCliente . "',
+            '" . $this->Pnr . "',
+            '" . $this->NumeroBoletos . "',
+            '" . $this->NombrePasajero . "',
+            '" . $this->Aerolinea . "',
+            '" . $this->Origen . "',
+            '" . $this->Destino . "',
+            '" . $this->FechaIda . "',
+            '" . $this->FechaRegreso . "',
+            '" . $this->IdIata . "',
+            '" . $this->IdTipo . "',
+            '" . $this->IdFormaPago . "',
+            '" . $this->Precio . "',
+            '" . $this->Base . "',
+            '" . $this->Tax . "',
+            '" . $this->Fm . "',
+            '" . $this->Fee . "',
+            '" . $this->Itinerario . "',
+            '" . $this->Dob . "',
+            '" . $this->Agencia . "',
+            '" . $this->Agente . "',
+            'N' ) ";
+        return $query;
+    }
+
     public function Actualizar($id)
     {
         $query = "UPDATE tbl_boletos SET 

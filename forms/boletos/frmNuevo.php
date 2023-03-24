@@ -101,7 +101,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <i class="fa fa-plus"></i>
                                 </span>
                             </div>
-                            <div class="px-2 mb-3 rounded fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="1">
+                            <div class="px-2 mb-3 pt-3 rounded fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="1">
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1">
@@ -122,13 +122,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') { echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);} ?>">
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') {
+                                                                                                                                                                                                                                    echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);
+                                                                                                                                                                                                                                } ?>">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') { echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);} ?>">
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') {
+                                                                                                                                                                                                                                    echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);
+                                                                                                                                                                                                                                } ?>">
                                             <?php } ?>
 
-                                            
+
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -228,10 +232,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee1">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(1);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="2">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="2">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(2)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(2)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -357,10 +368,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee2">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(1);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="3">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="3">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(3)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(3)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -486,10 +504,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee3">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(3);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="4">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="4">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(4)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(4)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -615,10 +640,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee4">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(4);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="5">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="5">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(5)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(5)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -744,10 +776,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee5">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(5);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="6">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="6">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(6)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(6)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -873,10 +912,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee6">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(6);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="7">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="7">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(7)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(7)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1002,10 +1048,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee7">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(7);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="8">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="8">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(8)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(8)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1131,10 +1184,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee8">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(8);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="9">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="9">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(9)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(9)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1260,10 +1320,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee9">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(9);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="10">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="10">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(10)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(10)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1389,10 +1456,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee10">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(10);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="11">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="11">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(11)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(11)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1518,10 +1592,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee11">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(11);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="12">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="12">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(12)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(12)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1647,10 +1728,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee12">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-danger mb-1" onclick="agregarMCO(12);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="13">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="13">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(13)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(13)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1776,10 +1864,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee13">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-danger mb-1" onclick="agregarMCO(13);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="14">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="14">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(14)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(14)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1905,10 +2000,17 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee14">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-danger mb-1" onclick="agregarMCO(14);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="px-2 mb-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="15">
+                            <div class="px-2 mb-3 pt-3 rounded d-none fila" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="15">
                                 <div class="d-flex justify-content-end pt-2">
-                                    <i class="btn bg-primary fa-lg fa fa-window-close" onclick="javascript:eliminarFila(15)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(15)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -2034,7 +2136,441 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <input type="number" class="form-control" placeholder="Fee ..." name="txtFee15">
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-end pb-2">
+                                    <div id="addMCO">
+                                        <span class="btn btn-danger mb-1" onclick="agregarMCO(15);">
+                                            AGREGAR MCO <i class="fa fa-plus pl-3"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
+
+
+                            <h3 class="font-weight-bold text-center mt-5 d-none" id="title-mco">LISTA DE MCO AGREGADOS</h3>
+                            <div class="px-2 mb-3 rounded mco d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="MCO-1">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFilaMCO('MCO-1')"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <div class="form-group mx-1">
+                                        <label># MCO</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO1" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO1">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO1">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Valor</label>
+                                        <input type="number" class="form-control" placeholder="Valor ..." name="txtValorMCO1">
+                                    </div>
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIataMCO1">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPagoMCO1">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded mco d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="MCO-2">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFilaMCO('MCO-2')"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <div class="form-group mx-1">
+                                        <label># MCO</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO2" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO2">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO2">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Valor</label>
+                                        <input type="number" class="form-control" placeholder="Valor ..." name="txtValorMCO2">
+                                    </div>
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIataMCO2">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPagoMCO2">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded mco d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="MCO-3">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFilaMCO('MCO-3')"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <div class="form-group mx-1">
+                                        <label># MCO</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO3" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO3">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO3">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Valor</label>
+                                        <input type="number" class="form-control" placeholder="Valor ..." name="txtValorMCO3">
+                                    </div>
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIataMCO3">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPagoMCO3">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded mco d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="MCO-4">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFilaMCO('MCO-4')"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <div class="form-group mx-1">
+                                        <label># MCO</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO4" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO4">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO4">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Valor</label>
+                                        <input type="number" class="form-control" placeholder="Valor ..." name="txtValorMCO4">
+                                    </div>
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIataMCO4">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPagoMCO4">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded mco d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="MCO-5">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFilaMCO('MCO-5')"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <div class="form-group mx-1">
+                                        <label># MCO</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO5" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO5">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO5">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Valor</label>
+                                        <input type="number" class="form-control" placeholder="Valor ..." name="txtValorMCO5">
+                                    </div>
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIataMCO5">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPagoMCO5">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded mco d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="MCO-6">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFilaMCO('MCO-6')"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <div class="form-group mx-1">
+                                        <label># MCO</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO6" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO6">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO6">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Valor</label>
+                                        <input type="number" class="form-control" placeholder="Valor ..." name="txtValorMCO6">
+                                    </div>
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIataMCO6">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPagoMCO6">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded mco d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="MCO-7">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFilaMCO('MCO-7')"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <div class="form-group mx-1">
+                                        <label># MCO</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO7" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO7">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO7">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Valor</label>
+                                        <input type="number" class="form-control" placeholder="Valor ..." name="txtValorMCO7">
+                                    </div>
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIataMCO7">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPagoMCO7">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded mco d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="MCO-8">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFilaMCO('MCO-8')"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <div class="form-group mx-1">
+                                        <label># MCO</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO8" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO8">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO8">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Valor</label>
+                                        <input type="number" class="form-control" placeholder="Valor ..." name="txtValorMCO8">
+                                    </div>
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIataMCO8">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPagoMCO8">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 mb-3 rounded mco d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="MCO-9">
+                                <div class="d-flex justify-content-end pt-2">
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFilaMCO('MCO-9')"></i>
+                                </div>
+                                <div class="d-flex flex-column flex-xl-row">
+                                    <div class="form-group mx-1">
+                                        <label># MCO</label>
+                                        <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO9" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
+                                    </div>
+                                    <!-- Passenger DOB dd-mm-yyyy -->
+                                    <div class="form-group mx-1">
+                                        <label>Passenger DOB:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                            </div>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO9">
+                                            <?php } ?>
+                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO9">
+                                            <?php } ?>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- Precio -->
+                                    <div class="form-group mx-1">
+                                        <label>Valor</label>
+                                        <input type="number" class="form-control" placeholder="Valor ..." name="txtValorMCO9">
+                                    </div>
+                                    <!-- IATA -->
+                                    <div class="form-group mx-1">
+                                        <label>IATA</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIataMCO9">
+                                            <?= $opcionesIatas ?>
+                                        </select>
+                                    </div>
+                                    <!-- Forma de pago -->
+                                    <div class="form-group mx-1">
+                                        <label>Forma de pago</label>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPagoMCO9">
+                                            <?= $opcionesFormaPago ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label>Itinerario</label>
                                 <textarea id="summernote" name="txtItinerario">
@@ -2042,6 +2578,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                 </textarea>
                             </div>
                             <input type="hidden" name="nb" id="nb" value="1">
+                            <input type="hidden" name="nm" id="nm" >
                             <input type="hidden" class="form-control d-none" name="IdCliente" value="<?= $DatosClientes['IdCliente'] ?>">
                             <!-- /.form group -->
                             <div class="form-group pr-1 mt-3">
@@ -2101,190 +2638,190 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
             // Summernote
             $('#summernote').summernote()
             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-            //Date picker
-            $('#datefrom1').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto1').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom2').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto2').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom3').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto3').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom4').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto4').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom5').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto5').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom6').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto6').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom7').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto7').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom8').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto8').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom9').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto9').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom10').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto10').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom11').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto11').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom12').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto12').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom13').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto13').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom14').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto14').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#datefrom15').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
-            $('#dateto15').datetimepicker({
-                format: 'DD-MM-YYYY'
-            });
+                //Date picker
+                $('#datefrom1').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto1').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom2').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto2').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom3').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto3').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom4').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto4').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom5').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto5').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom6').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto6').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom7').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto7').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom8').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto8').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom9').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto9').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom10').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto10').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom11').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto11').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom12').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto12').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom13').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto13').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom14').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto14').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#datefrom15').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto15').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
             <?php } ?>
             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
                 //Date picker
-            $('#datefrom1').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto1').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom2').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto2').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom3').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto3').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom4').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto4').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom5').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto5').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom6').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto6').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom7').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto7').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom8').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto8').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom9').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto9').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom10').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto10').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom11').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto11').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom12').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto12').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom13').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto13').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom14').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto14').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#datefrom15').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
-            $('#dateto15').datetimepicker({
-                format: 'MM-DD-YYYY'
-            });
+                $('#datefrom1').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto1').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom2').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto2').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom3').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto3').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom4').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto4').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom5').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto5').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom6').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto6').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom7').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto7').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom8').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto8').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom9').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto9').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom10').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto10').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom11').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto11').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom12').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto12').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom13').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto13').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom14').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto14').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#datefrom15').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto15').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
             <?php } ?>
 
 
@@ -2388,6 +2925,10 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
         let formsValidar = [1]
         let inputNb = document.getElementById('nb')
 
+        let posicionMCO = 0;
+        let formsValidarMCO = []
+        let inputNm = document.getElementById('nm')
+
         function closeForm() {
             window.close()
         }
@@ -2407,6 +2948,24 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
             }
         }
 
+        function agregarMCO() {
+            const filas = document.querySelectorAll('.mco.d-none')
+
+            let id = filas[0].id
+            formsValidarMCO.push(parseInt(id.charAt(id.length - 1)))
+
+            filas[0].classList.remove('d-none')
+            posicionMCO++
+            
+            if(posicionMCO <= 9){
+                inputNm.value = formsValidarMCO
+            }
+            
+            if(posicionMCO >= 1){
+                document.getElementById('title-mco').classList.remove('d-none')
+            }
+        }
+
         function eliminarFila(id) {
             document.getElementById(id).classList.add('d-none')
             posicion--
@@ -2416,6 +2975,16 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
             if (posicion <= 14) {
                 document.getElementById('addNewRow').classList.remove('d-none')
             }
+        }
+
+        function eliminarFilaMCO(id) {
+            document.getElementById(id).classList.add('d-none')
+            posicionMCO--
+            if(posicionMCO <= 0){
+                document.getElementById('title-mco').classList.add('d-none')
+            }
+            formsValidarMCO = formsValidarMCO.filter(pos => pos !== parseInt(id.charAt(id.length - 1)))
+            inputNm.value = formsValidarMCO
         }
     </script>
     <script>

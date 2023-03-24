@@ -22,6 +22,13 @@ if (trim($_POST['txtPnr']) === '') {
 
 $regexFecha = '/^(\d{2})-(\d{2})-(\d{4})$/';
 $arr = explode(',', $_POST['nb']);
+$arrMCO = explode(',', $_POST['nm']);
+
+
+$arrBoletosInsertar = [];
+$arrMcosInsertar = [];
+
+
 
 if (isset($_POST['nb'])) {
     foreach ($arr as $key => $i) {
@@ -89,11 +96,6 @@ if (isset($_POST['nb'])) {
             echo "<script>history.go(-1)</script>";
             return;
         };
-        // if ($_POST['txtFechaRegreso' . $i] === '') {
-        //     $_SESSION['error-registro'] = 'regresoVacio';
-        //     echo "<script>history.go(-1)</script>";
-        //     return;
-        // };
         if ($_POST['txtFechaRegreso' . $i] !== "" && $_POST['txtFechaRegreso' . $i] !== "dd-mm-yyyy" && $_POST['txtFechaRegreso' . $i] !== "mm-dd-yyyy" && !preg_match($regexFecha, $_POST['txtFechaRegreso' . $i])) {
             $_SESSION['error-registro'] = 'regresoFormato';
             echo "<script>history.go(-1)</script>";
@@ -120,19 +122,76 @@ if (isset($_POST['nb'])) {
             return;
         };
 
-        $Res_Boletos = $Obj_Boletos->Insertar();
+        $arrBoletosInsertar[] = $Obj_Boletos->InsertarPreparar();
     }
 }
 
 
-if ($Res_Boletos) {
-    if (count($arr) > 1) {
-        $_SESSION['success-registro'] = 'boletos';
-    } else {
-        $_SESSION['success-registro'] = 'boleto';
+if (isset($_POST['nm']) && count($arrMCO) >= 1 & $arrMCO[0] !== '') {
+    require_once '../../class/Mcos.php';
+
+    $Obj_Mcos = new Mcos();
+
+    $Obj_Mcos->Pnr = $Obj_Ajustes->RemoverEtiquetas(trim(strtoupper($_POST['txtPnr'])));
+    $Obj_Mcos->IdCliente = $Obj_Ajustes->RemoverEtiquetas($_POST['IdCliente']);
+
+    foreach ($arrMCO as $key => $i) {
+        $Obj_Mcos->NumeroMco = $_POST['txtMCO' . $i];
+        $Obj_Mcos->Dob = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaDobMCO' . $i]));
+        $Obj_Mcos->Valor = $Obj_Ajustes->RemoverEtiquetas(strtoupper($_POST['txtValorMCO' . $i]));
+        $Obj_Mcos->IdIata = $_POST['txtIdIataMCO' . $i];
+        $Obj_Mcos->IdFormaPago = $_POST['txtIdPagoMCO' . $i];
+        $Obj_Mcos->Fm = 'test';
+        $Obj_Mcos->Fee = 'testFee';
+
+        if (trim($_POST['txtMCO' . $i]) === '') {
+            $_SESSION['error-registro'] = 'mco';
+            echo "<script>history.go(-1)</script>";
+            return;
+        };
+        //VALIDANDO FORMATO DE FECHA DE NACIMIENTO
+        if (trim($_POST['txtFechaDobMCO' . $i]) === '') {
+            $_SESSION['error-registro'] = 'dobVacio';
+            echo "<script>history.go(-1)</script>";
+            return;
+        };
+        if ($_POST['txtFechaDobMCO' . $i] !== "" && $_POST['txtFechaDobMCO' . $i] !== "dd-mm-yyyy" && $_POST['txtFechaDobMCO' . $i] !== "mm-dd-yyyy" && !preg_match($regexFecha, $_POST['txtFechaDob' . $i])) {
+            $_SESSION['error-registro'] = 'dobFormato';
+            echo "<script>history.go(-1)</script>";
+            return;
+        };
+        //VALIDANDO FORMATO DE FECHA
+        if (trim($_POST['txtValorMCO' . $i]) === '') {
+            $_SESSION['error-registro'] = 'valorMCO';
+            echo "<script>history.go(-1)</script>";
+            return;
+        };
+
+        $arrMcosInsertar[] = $Obj_Mcos->InsertarPreparar();
     }
-    $Res_Boletos = $Obj_Boletos->obtenerBoletoCreado($_POST['IdCliente']);
-    $DatosBoleto = $Res_Boletos->fetch_assoc();
-    
-    header("Location:" . $_SESSION['path'] . "forms/facturas/frmNuevo.php?cliente=" . $DatosBoleto['IdCliente'] . "&pnr=" . $DatosBoleto['Pnr'] ."");
 }
+
+foreach ($arrBoletosInsertar as $key => $boleto) {
+    $Obj_Boletos->InsertarQueryPreparada($boleto);
+}
+foreach ($arrMcosInsertar as $key => $mco) {
+    $Obj_Mcos->InsertarQueryPreparada($mco);
+}
+
+$Res_Boletos = $Obj_Boletos->obtenerBoletoCreado($_POST['IdCliente']);
+$DatosBoleto = $Res_Boletos->fetch_assoc();
+
+
+if (count($arr) > 1) {
+    $_SESSION['success-registro'] = 'boletos';
+} else {
+    $_SESSION['success-registro'] = 'boleto';
+}
+if (count($arrMCO) > 1 & $arrMCO[0] !== '') {
+    $_SESSION['success-registro'] = 'mcos';
+} else {
+    $_SESSION['success-registro'] = 'mco';
+}
+
+
+header("Location:" . $_SESSION['path'] . "forms/facturas/frmNuevo.php?cliente=" . $DatosBoleto['IdCliente'] . "&pnr=" . $DatosBoleto['Pnr'] . "");

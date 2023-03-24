@@ -437,4 +437,57 @@ if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'e
     unset($_SESSION['success-registro']);
 }
 
+if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'valorMCO') {
+    echo "var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    Toast.fire({
+        icon: 'error',
+        title: 'Introduzca un valor en el MCO.'
+    })";
+unset($_SESSION['error-registro']);
+}
+if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'mco') {
+    echo "var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    Toast.fire({
+        icon: 'error',
+        title: 'El # de MCO es obligatorio.'
+    })";
+unset($_SESSION['error-registro']);
+}
+if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'mco') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'MCO guardado correctamente.'
+                })";
+    unset($_SESSION['success-registro']);
+}
+if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'mco') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Los MCO se guardaron correctamente.'
+                })";
+    unset($_SESSION['success-registro']);
+}
+
 ?>
