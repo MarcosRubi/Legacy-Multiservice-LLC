@@ -54,8 +54,6 @@ $BalanceTotal = $Res_BalanceTotal->fetch_assoc()['BalanceTotal'];
                                 <div class="card-header">
                                     <?php if ($Res_Facturas->num_rows === 0) { ?>
                                         <h3 class="card-title">No hay facturas creadas para este cliente</h3>
-                                    <?php } else { ?>
-                                        <h3 class="card-title">Facturas a nombre de <strong><?= $Datosfacturas['PrimerNombre'] . " " . $Datosfacturas['Apellido'] ?></strong></h3>
                                     <?php } ?>
                                 </div>
                                 <!-- /.card-header -->

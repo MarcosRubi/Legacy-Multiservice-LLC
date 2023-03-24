@@ -1730,7 +1730,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                 </div>
                                 <div class="d-flex justify-content-end pb-2">
                                     <div id="addMCO">
-                                        <span class="btn btn-danger mb-1" onclick="agregarMCO(12);">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(12);">
                                             AGREGAR MCO <i class="fa fa-plus pl-3"></i>
                                         </span>
                                     </div>
@@ -1866,7 +1866,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                 </div>
                                 <div class="d-flex justify-content-end pb-2">
                                     <div id="addMCO">
-                                        <span class="btn btn-danger mb-1" onclick="agregarMCO(13);">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(13);">
                                             AGREGAR MCO <i class="fa fa-plus pl-3"></i>
                                         </span>
                                     </div>
@@ -2002,7 +2002,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                 </div>
                                 <div class="d-flex justify-content-end pb-2">
                                     <div id="addMCO">
-                                        <span class="btn btn-danger mb-1" onclick="agregarMCO(14);">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(14);">
                                             AGREGAR MCO <i class="fa fa-plus pl-3"></i>
                                         </span>
                                     </div>
@@ -2138,7 +2138,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                 </div>
                                 <div class="d-flex justify-content-end pb-2">
                                     <div id="addMCO">
-                                        <span class="btn btn-danger mb-1" onclick="agregarMCO(15);">
+                                        <span class="btn btn-primary mb-1" onclick="agregarMCO(15);">
                                             AGREGAR MCO <i class="fa fa-plus pl-3"></i>
                                         </span>
                                     </div>
@@ -2155,23 +2155,6 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <div class="form-group mx-1">
                                         <label># MCO</label>
                                         <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO1" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
-                                    </div>
-                                    <!-- Passenger DOB dd-mm-yyyy -->
-                                    <div class="form-group mx-1">
-                                        <label>Passenger DOB:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                            </div>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO1">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO1">
-                                            <?php } ?>
-                                        </div>
-                                        <!-- /.input group -->
                                     </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
@@ -2203,23 +2186,6 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <label># MCO</label>
                                         <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO2" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
-                                    <!-- Passenger DOB dd-mm-yyyy -->
-                                    <div class="form-group mx-1">
-                                        <label>Passenger DOB:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                            </div>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO2">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO2">
-                                            <?php } ?>
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
                                         <label>Valor</label>
@@ -2249,23 +2215,6 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <div class="form-group mx-1">
                                         <label># MCO</label>
                                         <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO3" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
-                                    </div>
-                                    <!-- Passenger DOB dd-mm-yyyy -->
-                                    <div class="form-group mx-1">
-                                        <label>Passenger DOB:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                            </div>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO3">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO3">
-                                            <?php } ?>
-                                        </div>
-                                        <!-- /.input group -->
                                     </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
@@ -2297,23 +2246,6 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <label># MCO</label>
                                         <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO4" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
-                                    <!-- Passenger DOB dd-mm-yyyy -->
-                                    <div class="form-group mx-1">
-                                        <label>Passenger DOB:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                            </div>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO4">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO4">
-                                            <?php } ?>
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
                                         <label>Valor</label>
@@ -2343,23 +2275,6 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <div class="form-group mx-1">
                                         <label># MCO</label>
                                         <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO5" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
-                                    </div>
-                                    <!-- Passenger DOB dd-mm-yyyy -->
-                                    <div class="form-group mx-1">
-                                        <label>Passenger DOB:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                            </div>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO5">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO5">
-                                            <?php } ?>
-                                        </div>
-                                        <!-- /.input group -->
                                     </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
@@ -2391,23 +2306,6 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <label># MCO</label>
                                         <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO6" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
-                                    <!-- Passenger DOB dd-mm-yyyy -->
-                                    <div class="form-group mx-1">
-                                        <label>Passenger DOB:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                            </div>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO6">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO6">
-                                            <?php } ?>
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
                                         <label>Valor</label>
@@ -2437,23 +2335,6 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <div class="form-group mx-1">
                                         <label># MCO</label>
                                         <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO7" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
-                                    </div>
-                                    <!-- Passenger DOB dd-mm-yyyy -->
-                                    <div class="form-group mx-1">
-                                        <label>Passenger DOB:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                            </div>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO7">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO7">
-                                            <?php } ?>
-                                        </div>
-                                        <!-- /.input group -->
                                     </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
@@ -2485,23 +2366,6 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                         <label># MCO</label>
                                         <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO8" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
                                     </div>
-                                    <!-- Passenger DOB dd-mm-yyyy -->
-                                    <div class="form-group mx-1">
-                                        <label>Passenger DOB:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                            </div>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO8">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO8">
-                                            <?php } ?>
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">
                                         <label>Valor</label>
@@ -2531,23 +2395,6 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                     <div class="form-group mx-1">
                                         <label># MCO</label>
                                         <input type="text" class="form-control" placeholder="XXX-XXXXXXXXXX" name="txtMCO9" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask>
-                                    </div>
-                                    <!-- Passenger DOB dd-mm-yyyy -->
-                                    <div class="form-group mx-1">
-                                        <label>Passenger DOB:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                            </div>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDobMCO9">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDobMCO9">
-                                            <?php } ?>
-                                        </div>
-                                        <!-- /.input group -->
                                     </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1">

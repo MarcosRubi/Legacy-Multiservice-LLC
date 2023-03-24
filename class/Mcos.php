@@ -6,7 +6,6 @@ class Mcos extends DB
     public $IdCliente;
     public $Pnr;
     public $NumeroMco;
-    public $Dob;
     public $Valor;
     public $IdIata;
     public $IdFormaPago;
@@ -28,7 +27,6 @@ class Mcos extends DB
             IdCliente,
             Pnr,
             NumeroMco,
-            Dob,
             Valor,
             IdIata,
             IdFormaPago,
@@ -41,7 +39,6 @@ class Mcos extends DB
             '" . $this->IdCliente . "',
             '" . $this->Pnr . "',
             '" . $this->NumeroMco . "',
-            '" . $this->Dob . "',
             '" . $this->Valor . "',
             '" . $this->IdIata . "',
             '" . $this->IdFormaPago . "',
@@ -64,7 +61,6 @@ class Mcos extends DB
             IdCliente,
             Pnr,
             NumeroMco,
-            Dob,
             Valor,
             IdIata,
             IdFormaPago,
@@ -77,7 +73,6 @@ class Mcos extends DB
             '" . $this->IdCliente . "',
             '" . $this->Pnr . "',
             '" . $this->NumeroMco . "',
-            '" . $this->Dob . "',
             '" . $this->Valor . "',
             '" . $this->IdIata . "',
             '" . $this->IdFormaPago . "',
@@ -93,7 +88,6 @@ class Mcos extends DB
     {
         $query = "UPDATE tbl_mcos 
         SET NumeroMco = '".$this->NumeroMco."',
-        Dob = '" . $this->Dob . "',
         Valor = '" . $this->Valor . "',
         IdIata = '" . $this->IdIata . "',
         IdFormaPago = '" . $this->IdFormaPago . "',

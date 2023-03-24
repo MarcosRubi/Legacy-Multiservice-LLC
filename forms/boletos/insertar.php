@@ -137,7 +137,6 @@ if (isset($_POST['nm']) && count($arrMCO) >= 1 & $arrMCO[0] !== '') {
 
     foreach ($arrMCO as $key => $i) {
         $Obj_Mcos->NumeroMco = $_POST['txtMCO' . $i];
-        $Obj_Mcos->Dob = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaDobMCO' . $i]));
         $Obj_Mcos->Valor = $Obj_Ajustes->RemoverEtiquetas(strtoupper($_POST['txtValorMCO' . $i]));
         $Obj_Mcos->IdIata = $_POST['txtIdIataMCO' . $i];
         $Obj_Mcos->IdFormaPago = $_POST['txtIdPagoMCO' . $i];
@@ -146,17 +145,6 @@ if (isset($_POST['nm']) && count($arrMCO) >= 1 & $arrMCO[0] !== '') {
 
         if (trim($_POST['txtMCO' . $i]) === '') {
             $_SESSION['error-registro'] = 'mco';
-            echo "<script>history.go(-1)</script>";
-            return;
-        };
-        //VALIDANDO FORMATO DE FECHA DE NACIMIENTO
-        if (trim($_POST['txtFechaDobMCO' . $i]) === '') {
-            $_SESSION['error-registro'] = 'dobVacio';
-            echo "<script>history.go(-1)</script>";
-            return;
-        };
-        if ($_POST['txtFechaDobMCO' . $i] !== "" && $_POST['txtFechaDobMCO' . $i] !== "dd-mm-yyyy" && $_POST['txtFechaDobMCO' . $i] !== "mm-dd-yyyy" && !preg_match($regexFecha, $_POST['txtFechaDob' . $i])) {
-            $_SESSION['error-registro'] = 'dobFormato';
             echo "<script>history.go(-1)</script>";
             return;
         };
