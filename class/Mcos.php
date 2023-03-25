@@ -9,8 +9,8 @@ class Mcos extends DB
     public $Valor;
     public $IdIata;
     public $IdFormaPago;
-    public $Fm;
-    public $Fee;
+    public $Comision;
+    public $GananciaNeta;
     public $Creado;
     public $CreadoTimesTamp;
 
@@ -23,6 +23,9 @@ class Mcos extends DB
 
     public function Insertar()
     {
+        $this->GananciaNeta = round(($this->Valor * 0.965), 2);
+        $this->Comision = round(($this->Valor - $this->GananciaNeta), 2);
+
         $query = "INSERT INTO tbl_mcos(
             IdCliente,
             Pnr,
@@ -30,8 +33,8 @@ class Mcos extends DB
             Valor,
             IdIata,
             IdFormaPago,
-            Fm,
-            Fee,
+            Comision,
+            GananciaNeta,
             Creado,
             CreadoTimestamp,
             Eliminado )
@@ -42,8 +45,8 @@ class Mcos extends DB
             '" . $this->Valor . "',
             '" . $this->IdIata . "',
             '" . $this->IdFormaPago . "',
-            '" . $this->Fm . "',
-            '" . $this->Fee . "',
+            '" . $this->Comision . "',
+            '" . $this->GananciaNeta . "',
             '" . date("Y-m-d h:i:s ") . "',
             '" . date("A") . "',
             'N' ) ";
@@ -57,6 +60,9 @@ class Mcos extends DB
     
     public function InsertarPreparar()
     {
+        $this->GananciaNeta = round(($this->Valor * 0.965),2);
+        $this->Comision = round(($this->Valor - $this->GananciaNeta),2);
+
         $query = "INSERT INTO tbl_mcos(
             IdCliente,
             Pnr,
@@ -64,8 +70,8 @@ class Mcos extends DB
             Valor,
             IdIata,
             IdFormaPago,
-            Fm,
-            Fee,
+            Comision,
+            GananciaNeta,
             Creado,
             CreadoTimestamp,
             Eliminado )
@@ -76,8 +82,8 @@ class Mcos extends DB
             '" . $this->Valor . "',
             '" . $this->IdIata . "',
             '" . $this->IdFormaPago . "',
-            '" . $this->Fm . "',
-            '" . $this->Fee . "',
+            '" . $this->Comision. "',
+            '" . $this->GananciaNeta . "',
             '" . date("Y-m-d h:i:s ") . "',
             '" . date("A") . "',
             'N' ) ";
@@ -91,8 +97,8 @@ class Mcos extends DB
         Valor = '" . $this->Valor . "',
         IdIata = '" . $this->IdIata . "',
         IdFormaPago = '" . $this->IdFormaPago . "',
-        Fm = '" . $this->Fm . "',
-        Fee = '" . $this->Fee . "' 
+        Comision = '" . $this->Comision . "',
+        GananciaNeta = '" . $this->GananciaNeta . "' 
         WHERE IdMco = '".$id."'";
 
         return $this->EjecutarQuery($query);
