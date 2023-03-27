@@ -219,7 +219,7 @@ if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'b
                 Toast.fire({
                     icon: 'success',
                     title: 'Boletos guardado correctamente.'
-                })";
+                });";
     unset($_SESSION['success-registro']);
 }
 if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'boleto') {
@@ -232,7 +232,7 @@ if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'b
                 Toast.fire({
                     icon: 'success',
                     title: 'Boleto guardado correctamente.'
-                })";
+                });";
     unset($_SESSION['success-registro']);
 }
 if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'cliente') {
@@ -463,31 +463,37 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'mco')
     })";
 unset($_SESSION['error-registro']);
 }
-if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'mco') {
-    echo "var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                Toast.fire({
-                    icon: 'success',
-                    title: 'MCO guardado correctamente.'
-                })";
-    unset($_SESSION['success-registro']);
+if (isset($_SESSION['success-registro-mco']) && $_SESSION['success-registro-mco'] === 'mco') {
+    echo "
+    setTimeout(() => {
+        var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'MCO guardado correctamente.'
+                    });
+    }, 3000);";
+    unset($_SESSION['success-registro-mco']);
 }
-if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'mco') {
-    echo "var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Los MCO se guardaron correctamente.'
-                })";
-    unset($_SESSION['success-registro']);
+if (isset($_SESSION['success-registro-mco']) && $_SESSION['success-registro-mco'] === 'mcos') {
+    echo "
+    setTimeout(() => {
+        var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Los MCO se guardaron correctamente.'
+                    });
+    }, 3000);";
+    unset($_SESSION['success-registro-mco']);
 }
 
 ?>

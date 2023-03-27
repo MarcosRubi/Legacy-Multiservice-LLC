@@ -70,6 +70,12 @@ class Facturas extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function obtenerFacturaCreada()
+    {
+        $query = "SELECT * FROM vta_listar_facturas ORDER BY IdFactura desc LIMIT 1";
+        return $this->EjecutarQuery($query);
+    }
+
     public function Insertar()
     {
         $query = "INSERT INTO tbl_facturas(

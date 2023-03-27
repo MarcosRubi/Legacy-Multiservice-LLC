@@ -314,7 +314,7 @@ for ($i = 0; $i < 5; $i++) {
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <script>
-        // window.addEventListener("load", window.print());
+        window.addEventListener("load", window.print());
     </script>
 </body>
 

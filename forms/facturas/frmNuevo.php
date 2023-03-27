@@ -197,12 +197,13 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                             </div>
                             <input type="text" class="form-control d-none" value="<?= isset($_GET['id']) ? $_GET['id'] : $_GET['cliente'] ?>" name="txtIdCliente" readonly>
                             <input type="text" class="form-control d-none" value="<?= isset($_GET['pnr']) ? $_GET['pnr'] : '' ?>" name="txtPnr" readonly>
+                            <input type="text" class="form-control d-none" value="false" name="txtPendiente" readonly id="pendiente">
                             <!-- /.form group -->
                             <div class="form-group pr-1 mt-3">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar factura</button>
                             </div>
                             <div class="form-group pl-1">
-                                <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cancelar</button>
+                                <button class="btn btn-block text-center" type="submit" onclick="javascript:closeForm();">Cancelar</button>
                             </div>
                         </form>
                         <!-- /.form group -->
@@ -286,9 +287,10 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
         <?php require_once '../../func/Mensajes.php'; ?>
     </script>
     <script>
-        function closeForm() {
-            window.close()
-        }
+        function closeForm(){
+            let input = document.getElementById('pendiente')
+            input.setAttribute('value','true');
+        };
     </script>
 </body>
 

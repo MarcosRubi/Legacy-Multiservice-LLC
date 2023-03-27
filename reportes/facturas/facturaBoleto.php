@@ -298,7 +298,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <script>
-        // window.addEventListener("load", window.print());
+        window.addEventListener("load", window.print());
     </script>
 </body>
 

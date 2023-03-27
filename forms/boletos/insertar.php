@@ -3,6 +3,7 @@
 session_start();
 require_once '../../bd/bd.php';
 require_once '../../class/Boletos.php';
+require_once '../../class/Eventos.php';
 require_once '../../class/Ajustes.php';
 
 $Obj_Boletos = new Boletos();
@@ -35,6 +36,12 @@ $Obj_Boletos->FechaIda = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInver
 $Obj_Boletos->FechaRegreso = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaRegreso']));
 $Obj_Boletos->IdIata = $Obj_Ajustes->RemoverEtiquetas($_POST['txtIdIata']);
 $Obj_Boletos->IdTipo = $Obj_Ajustes->RemoverEtiquetas($_POST['txtIdTipo']);
+
+$Obj_Eventos = new Eventos();
+$Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
+$Obj_Eventos->TipoEvento = 'boleto';
+$Obj_Eventos->Mensaje = 'Ha creado un nuevo';
+
 
 if (trim($_POST['txtPnr']) === '') {
     $_SESSION['error-registro'] = 'pnr';
@@ -165,6 +172,11 @@ if (isset($_POST['nm']) && count($arrMCO) >= 1 && $arrMCO[0] !== '') {
 
 foreach ($arrBoletosInsertar as $key => $boleto) {
     $Obj_Boletos->InsertarQueryPreparada($boleto);
+    $Res_Boletos = $Obj_Boletos->obtenerBoletoCreado($_POST['IdCliente']);
+    $DatosBoleto = $Res_Boletos->fetch_assoc();
+
+    $Obj_Eventos->UrlEvento = 'forms/boletos/detalles.php?id=' . $DatosBoleto['IdBoleto'];
+    $Obj_Eventos->Insertar();
 }
 foreach ($arrMcosInsertar as $key => $mco) {
     $Obj_Mcos->InsertarQueryPreparada($mco);
@@ -173,6 +185,11 @@ foreach ($arrMcosInsertar as $key => $mco) {
 $Res_Boletos = $Obj_Boletos->obtenerBoletoCreado($_POST['IdCliente']);
 $DatosBoleto = $Res_Boletos->fetch_assoc();
 
+$Obj_Eventos = new Eventos();
+$Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
+$Obj_Eventos->TipoEvento = 'boleto';
+$Obj_Eventos->Mensaje = 'Ha creado un nuevo';
+$Obj_Eventos->UrlEvento = 'forms/boletos/detalles.php?id=' . $DatosBoleto['IdBoleto'];
 
 if (count($arr) > 1) {
     $_SESSION['success-registro'] = 'boletos';
@@ -180,10 +197,13 @@ if (count($arr) > 1) {
     $_SESSION['success-registro'] = 'boleto';
 }
 if (count($arrMCO) > 1 & $arrMCO[0] !== '') {
-    $_SESSION['success-registro'] = 'mcos';
-} else {
-    $_SESSION['success-registro'] = 'mco';
-}
+    $_SESSION['success-registro-mco'] = 'mcos';
+} 
+if (count($arrMCO) === 1 & $arrMCO[0] !== '') {
+    $_SESSION['success-registro-mco'] = 'mco';
+} 
+
+
 
 
 header("Location:" . $_SESSION['path'] . "forms/facturas/frmNuevo.php?cliente=" . $DatosBoleto['IdCliente'] . "&pnr=" . $DatosBoleto['Pnr'] . "");

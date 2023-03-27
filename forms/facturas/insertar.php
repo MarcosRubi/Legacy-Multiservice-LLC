@@ -2,10 +2,12 @@
 session_start();
 require_once '../../bd/bd.php';
 require_once '../../class/Facturas.php';
+require_once '../../class/Eventos.php';
 require_once '../../class/Ajustes.php';
 
 $Obj_Facturas = new Facturas();
 $Obj_Ajustes = new Ajustes();
+$Obj_Eventos = new Eventos();
 
 $Obj_Facturas->IdCliente = $Obj_Ajustes->RemoverEtiquetas($_POST['txtIdCliente']);
 $Obj_Facturas->IdTipoFactura = $Obj_Ajustes->RemoverEtiquetas($_POST['txtIdTipo']);
@@ -21,6 +23,7 @@ $Obj_Facturas->Comentario = $_POST['txtComentario'];
 $Obj_Facturas->Agencia = $_SESSION['Agencia'];
 $Obj_Facturas->Agente = $_SESSION['Agente'];
 $Obj_Facturas->Pnr = $_POST['txtPnr'];
+
 
 if ($_POST['txtEfectivo'] !== '') {
     $Obj_Facturas->FormaPagoInicial = 'Efectivo';
@@ -74,10 +77,30 @@ if (trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCreditoNumero']) !
     $Obj_Facturas->CreditoNumero = "";
 }
 
+if ($_POST['txtPendiente'] === 'true') {
+    $Obj_Facturas->Efectivo = 0;
+    $Obj_Facturas->CreditoValor = 0;
+    $Obj_Facturas->CreditoNumero = "";
+    $Obj_Facturas->Cheque = 0;
+    $Obj_Facturas->Banco = 0;
+    $Obj_Facturas->Cupon = 0;
+}
+
 $Res_Facturas = $Obj_Facturas->Insertar();
 
 
+
 if ($Res_Facturas) {
+    $Res_Facturas = $Obj_Facturas->obtenerFacturaCreada();
+    $DatosFactura = $Res_Facturas->fetch_assoc();
+
+    $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
+    $Obj_Eventos->TipoEvento = 'factura';
+    $Obj_Eventos->Mensaje = 'Ha generado una nueva';
+    $Obj_Eventos->UrlEvento = 'forms/facturas/detalles.php?id=' . $DatosFactura['IdFactura'];
+    $Obj_Eventos->Insertar();
+
+
     $_SESSION['success-registro'] = 'factura';
     echo "<script>
     let URL = window.opener.location.pathname;

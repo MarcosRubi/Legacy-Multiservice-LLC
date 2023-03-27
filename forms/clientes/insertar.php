@@ -3,9 +3,15 @@ session_start();
 require_once '../../bd/bd.php';
 require_once '../../class/Clientes.php';
 require_once '../../class/Ajustes.php';
+require_once '../../class/Eventos.php';
 
 $Obj_Clientes = new Clientes();
 $Obj_Ajustes = new Ajustes();
+$Obj_Eventos = new Eventos();
+
+$Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
+$Obj_Eventos->TipoEvento = 'cliente';
+$Obj_Eventos->Mensaje = 'Ha agregado un nuevo';
 
 $Obj_Clientes->PrimerNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtPrimerNombre']))));
 $Obj_Clientes->SegundoNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtSegundoNombre']))));
@@ -45,6 +51,12 @@ if($_SESSION['FormatoFecha'] === 'mdy'){
 $Res_Clientes = $Obj_Clientes->Insertar();
 
 if ($Res_Clientes) {
+    $Res_Cliente = $Obj_Clientes->obtenerClienteCreado();
+    $DatosCliente = $Res_Cliente->fetch_assoc();
+
+    $Obj_Eventos->UrlEvento = 'cliente/?id=' . $DatosCliente['IdCliente'];
+    $Obj_Eventos->Insertar();
+
     $_SESSION['success-registro'] = 'cliente';
     echo "<script>
     let URL = window.opener.location.pathname;

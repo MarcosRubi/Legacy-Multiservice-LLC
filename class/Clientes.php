@@ -38,6 +38,12 @@ class Clientes extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function obtenerClienteCreado()
+    {
+        $query = "SELECT * FROM vta_listar_clientes ORDER BY IdCliente desc LIMIT 1";
+        return $this->EjecutarQuery($query);
+    }
+
     public function Insertar()
     {
         $query = "INSERT INTO tbl_clientes(

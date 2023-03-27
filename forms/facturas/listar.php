@@ -62,7 +62,7 @@ $BalanceTotal = $Res_BalanceTotal->fetch_assoc()['BalanceTotal'];
                                         <thead>
                                             <tr>
                                                 <th>Cliente</th>
-                                                <th>Total de la factura</th>
+                                                <th>Total de las facturas</th>
                                                 <th>Pagos totales</th>
                                                 <th>Balance</th>
                                             </tr>
