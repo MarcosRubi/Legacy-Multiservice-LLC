@@ -32,5 +32,9 @@ class OpcionesTablas extends DB
         $query = "SELECT * FROM tbl_formas_pagos WHERE IdFormaPago='".$id."'";
         return $this->EjecutarQuery($query);
     }
+    public function buscarTipoFactura($id){
+        $query = "SELECT * FROM vta_listar_tipos_facturas WHERE IdTipoFactura='".$id."'";
+        return $this->EjecutarQuery($query);
+    }
 
 }

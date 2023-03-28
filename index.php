@@ -164,7 +164,7 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
                       echo "<i class=\"fas fa-dollar-sign bg-green\"></i>";
                     }
                     if ($DatosEventos['TipoEvento'] === 'cotización') {
-                      echo "<i class=\"fas fa-money-check-alt bg-blue\"></i>";
+                      echo "<i class=\"fas fa-money-check-alt bg-indigo\"></i>";
                     }
                     if ($DatosEventos['TipoEvento'] === 'boleto') {
                       echo "<i class=\"fas fa-ticket-alt bg-blue\"></i>";

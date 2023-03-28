@@ -33,7 +33,7 @@ class Facturas extends DB
         $query = "SELECT * FROM vta_listar_facturas WHERE IdCliente='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
-    public function buscarPorParaFactura($id)
+    public function buscarFactura($id)
     {
         $query = "SELECT * FROM vta_listar_facturas WHERE IdFactura='" . $id . "'";
         return $this->EjecutarQuery($query);

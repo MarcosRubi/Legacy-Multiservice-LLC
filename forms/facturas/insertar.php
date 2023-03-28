@@ -97,7 +97,7 @@ if ($Res_Facturas) {
     $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
     $Obj_Eventos->TipoEvento = 'factura';
     $Obj_Eventos->Mensaje = 'Ha generado una nueva';
-    $Obj_Eventos->UrlEvento = 'forms/facturas/detalles.php?id=' . $DatosFactura['IdFactura'];
+    $Obj_Eventos->UrlEvento = 'facturas/detalles.php?id=' . $DatosFactura['IdFactura'];
     $Obj_Eventos->Insertar();
 
 
