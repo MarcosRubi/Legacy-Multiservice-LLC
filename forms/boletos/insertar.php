@@ -189,7 +189,7 @@ $Obj_Eventos = new Eventos();
 $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
 $Obj_Eventos->TipoEvento = 'boleto';
 $Obj_Eventos->Mensaje = 'Ha creado un nuevo';
-$Obj_Eventos->UrlEvento = 'forms/boletos/detalles.php?id=' . $DatosBoleto['IdBoleto'];
+$Obj_Eventos->UrlEvento = 'boletos/detalles.php?id=' . $DatosBoleto['IdBoleto'];
 
 if (count($arr) > 1) {
     $_SESSION['success-registro'] = 'boletos';

@@ -258,7 +258,7 @@ $DatosFactura = $Res_Facturas->fetch_assoc();
         })
     </script>
     <script>
-        <?php require_once '../../func/Mensajes.php'; ?>
+        <?php require_once '../func/Mensajes.php'; ?>
     </script>
 </body>
 
