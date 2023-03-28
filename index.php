@@ -139,19 +139,22 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
               <div class="timeline">
                 <!-- timeline time label -->
                 <div class="time-label">
-                  <?php
-                  if ($_SESSION['FormatoFecha'] === 'mdy') {
-                    echo '<span class="bg-red">' . date("Y-m-d") . '</span>';
-                  }
-                  if ($_SESSION['FormatoFecha'] === 'dmy') {
-                    echo '<span class="bg-red">' . date("d-m-Y") . '</span>';
-                  }
-                  ?>
+                <span class="bg-red px-3">Hoy</span>
                 </div>
                 <!-- /.timeline-label -->
                 <!-- timeline item -->
                 <?php
+                $mensajeAnteriormente = false;
                 while ($DatosEventos = $Res_Eventos->fetch_assoc()) { ?>
+                  <?php
+                  if ((substr($DatosEventos['Creado'], 0, -9) !== date("Y-m-d")) && !$mensajeAnteriormente) {
+                    echo "<!-- timeline time label -->
+                <div class=\"time-label\">
+                  <span class=\"bg-green\">Anteriormente</span>
+                </div>";
+                    $mensajeAnteriormente = true;
+                  }
+                  ?>
                   <div>
                     <?php
                     if ($DatosEventos['TipoEvento'] === 'cliente') {
@@ -170,76 +173,31 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
 
                     <div class="timeline-item">
                       <span class="time">
-                        <i class="fas fa-clock"></i> 
+                        <i class="fas fa-clock"></i>
                         <?php
-                          if(substr($DatosEventos['Creado'], 0, -9) === date("Y-m-d")){
-                            echo "Hoy ~ " . substr($DatosEventos['Creado'], 10, 20) . " " .  $DatosEventos['CreadoTimestamp'];
-                          }else{
-                            echo $Obj_Ajustes->FechaInvertir(substr($DatosEventos['Creado'], 0, -9)) . " " . substr($DatosEventos['Creado'], 10, 20) . " " .  $DatosEventos['CreadoTimestamp'];
-                          }
+                        if (substr($DatosEventos['Creado'], 0, -9) === date("Y-m-d")) {
+                          echo substr($DatosEventos['Creado'], 10, 20) . " " .  $DatosEventos['CreadoTimestamp'];
+                        } else {
+                          echo $Obj_Ajustes->FechaInvertir(substr($DatosEventos['Creado'], 0, -9)) . " " . substr($DatosEventos['Creado'], 10, 20) . " " .  $DatosEventos['CreadoTimestamp'];
+                        }
                         ?>
-                        </span>
-                      <h3 class="timeline-header"><strong><?= $DatosEventos['NombreEmpleado'] ?></strong> <?= $DatosEventos['Mensaje'] ?> <a href="<?= $DatosEventos['UrlEvento'] ?>"><?= $DatosEventos['TipoEvento'] ?></a>
+                      </span>
+                      <?php
+                        if ($DatosEventos['TipoEvento'] === 'cliente') {
+                          echo "<h3 class=\"timeline-header\">
+                            <strong>". $DatosEventos['NombreEmpleado']. " </strong>" 
+                            . $DatosEventos['Mensaje'].
+                            "<a href=\"".$DatosEventos['UrlEvento']. "\"> ". $DatosEventos['TipoEvento']. "</a></h3>";
+                        }else{
+                          echo "<h3 class=\"timeline-header\"><strong>". $DatosEventos['NombreEmpleado']. " </strong>" . $DatosEventos['Mensaje']. " <a href=\"#\" onclick=\"javascript:abrirFormDetalles('".$DatosEventos['UrlEvento']."')\">". $DatosEventos['TipoEvento']. "</a></h3>";
+                        }
+                      ?>
                       </h3>
                     </div>
                   </div>
+
                 <?php } ?>
                 <!-- END timeline item -->
-                <!-- timeline item -->
-                <div>
-                  <i class="fas fa-dollar-sign bg-green"></i>
-                  <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> Hace 5 minutos</span>
-                    <h3 class="timeline-header"><strong>Verónica Martínez</strong> ha creado una <a href="#">cotización</a></h3>
-                  </div>
-                </div>
-                <!-- END timeline item -->
-                <!-- timeline item -->
-                <div>
-                  <i class="fas fa-user-plus bg-info"></i>
-                  <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> Hace 1 hora y 20 minutos</span>
-                    <h3 class="timeline-header"><strong>Rhina Sorto</strong> ha agregado un nuevo <a href="#">cliente</a></h3>
-                  </div>
-                </div>
-                <!-- END timeline item -->
-
-                <!-- timeline time label -->
-                <div class="time-label">
-                  <span class="bg-green">01 Marzo</span>
-                </div>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <div>
-                  <i class="fas fa-dollar-sign bg-green"></i>
-                  <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> Hace un día</span>
-                    <h3 class="timeline-header"><strong>Rhina Sorto</strong> ha creado una <a href="#">cotización</a>
-                    </h3>
-                  </div>
-                </div>
-                <!-- END timeline item -->
-                <!-- timeline item -->
-                <div>
-                  <i class="fas fa-user-plus bg-info"></i>
-                  <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> Hace un día</span>
-                    <h3 class="timeline-header"><strong>Verónica Martínez</strong> ha agregado un nuevo <a href="#">cliente</a></h3>
-                  </div>
-                </div>
-                <!-- END timeline item -->
-                <!-- timeline item -->
-                <div>
-                  <i class="fas fa-dollar-sign bg-green"></i>
-                  <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> Hace un día</span>
-                    <h3 class="timeline-header"><strong>Vilma Vanegas</strong> ha creado una <a href="#">cotización</a>
-                    </h3>
-                  </div>
-                </div>
-                <!-- END timeline item -->
-
-
                 <div>
                   <i class="fas fa-clock bg-gray"></i>
                 </div>
@@ -302,8 +260,13 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
     });
   </script>
   <script>
-    <?php require_once './func/Mensajes.php'; ?>
+    <?php require_once './func/Mensajes.php'; ?> 
   </script>
+  <script>
+        function abrirFormDetalles(url) {
+          window.open('<?= $_SESSION['path'] ?>'+url ,'Detalles', 'width=1000,height=1000')
+        }
+    </script>
 </body>
 
 </html>
