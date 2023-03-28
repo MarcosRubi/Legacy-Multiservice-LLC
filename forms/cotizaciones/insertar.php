@@ -3,10 +3,12 @@
 session_start();
 require_once '../../bd/bd.php';
 require_once '../../class/Cotizaciones.php';
+require_once '../../class/Eventos.php';
 require_once '../../class/Ajustes.php';
 
 $Obj_Cotizaciones = new Cotizaciones();
 $Obj_Ajustes = new Ajustes();
+$Obj_Eventos = new Eventos();
 
 $Obj_Cotizaciones->IdCliente = $Obj_Ajustes->RemoverEtiquetas($_POST['IdCliente']);
 $Obj_Cotizaciones->Pnr = $Obj_Ajustes->RemoverEtiquetas(strtoupper($_POST['txtPnr']));
@@ -47,7 +49,7 @@ if ($_POST['txtIda'] !== "" && $_POST['txtIda'] !== "dd-mm-yyyy" && $_POST['txtI
     return;
 };
 //VALIDANDO FORMATO DE FECHA - IDA
-if ($_POST['txtIda'] === "" ) {
+if ($_POST['txtIda'] === "") {
     $_SESSION['error-registro'] = 'idaVacio';
     echo "<script>history.go(-1)</script>";
     return;
@@ -62,13 +64,22 @@ if ($_POST['txtRegreso'] !== "" && $_POST['txtRegreso'] !== "dd-mm-yyyy" && $_PO
 $Res_Cotizaciones = $Obj_Cotizaciones->Insertar();
 
 
-    if ($Res_Cotizaciones) {
-        $_SESSION['success-registro'] = 'cotizacion';
-        echo "<script>
+if ($Res_Cotizaciones) {
+    $Res_Cotizaciones = $Obj_Cotizaciones->obtenerCotizacionCreada();
+    $DatosCotizacion = $Res_Cotizaciones->fetch_assoc();
+
+    $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
+    $Obj_Eventos->TipoEvento = 'cotización';
+    $Obj_Eventos->Mensaje = 'Ha realizado una nueva';
+    $Obj_Eventos->UrlEvento = 'cotizaciones/detalles.php?id=' . $DatosCotizacion['IdCotizacion'];
+    $Obj_Eventos->Insertar();
+
+    $_SESSION['success-registro'] = 'cotizacion';
+    echo "<script>
         let URL = window.opener.location.pathname;
         if (URL.indexOf('buscar-cliente') !== -1) {
             window.opener.location.reload();
         }
         window.close();
     </script>";
-    }
+}

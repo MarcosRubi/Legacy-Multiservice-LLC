@@ -2,7 +2,12 @@
 require_once './func/validateSession.php';
 
 require_once './bd/bd.php';
+require_once './class/Ajustes.php';
+require_once './class/Eventos.php';
 
+$Obj_Eventos = new Eventos();
+$Obj_Ajustes = new Ajustes();
+$Res_Eventos = $Obj_Eventos->listarEventos();
 
 ?>
 
@@ -134,18 +139,51 @@ require_once './bd/bd.php';
               <div class="timeline">
                 <!-- timeline time label -->
                 <div class="time-label">
-                  <span class="bg-red">02 Marzo</span>
+                  <?php
+                  if ($_SESSION['FormatoFecha'] === 'mdy') {
+                    echo '<span class="bg-red">' . date("Y-m-d") . '</span>';
+                  }
+                  if ($_SESSION['FormatoFecha'] === 'dmy') {
+                    echo '<span class="bg-red">' . date("d-m-Y") . '</span>';
+                  }
+                  ?>
                 </div>
                 <!-- /.timeline-label -->
                 <!-- timeline item -->
-                <div>
-                  <i class="fas fa-money-check-alt bg-blue"></i>
-                  <div class="timeline-item">
-                    <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                    <h3 class="timeline-header"><strong>Vilma Vanegas</strong> ha creado una <a href="#">factura</a>
-                    </h3>
+                <?php
+                while ($DatosEventos = $Res_Eventos->fetch_assoc()) { ?>
+                  <div>
+                    <?php
+                    if ($DatosEventos['TipoEvento'] === 'cliente') {
+                      echo "<i class=\"fas fa-user-plus bg-info\"></i>";
+                    }
+                    if ($DatosEventos['TipoEvento'] === 'factura') {
+                      echo "<i class=\"fas fa-dollar-sign bg-green\"></i>";
+                    }
+                    if ($DatosEventos['TipoEvento'] === 'cotización') {
+                      echo "<i class=\"fas fa-money-check-alt bg-blue\"></i>";
+                    }
+                    if ($DatosEventos['TipoEvento'] === 'boleto') {
+                      echo "<i class=\"fas fa-ticket-alt bg-blue\"></i>";
+                    }
+                    ?>
+
+                    <div class="timeline-item">
+                      <span class="time">
+                        <i class="fas fa-clock"></i> 
+                        <?php
+                          if(substr($DatosEventos['Creado'], 0, -9) === date("Y-m-d")){
+                            echo "Hoy ~ " . substr($DatosEventos['Creado'], 10, 20) . " " .  $DatosEventos['CreadoTimestamp'];
+                          }else{
+                            echo $Obj_Ajustes->FechaInvertir(substr($DatosEventos['Creado'], 0, -9)) . " " . substr($DatosEventos['Creado'], 10, 20) . " " .  $DatosEventos['CreadoTimestamp'];
+                          }
+                        ?>
+                        </span>
+                      <h3 class="timeline-header"><strong><?= $DatosEventos['NombreEmpleado'] ?></strong> <?= $DatosEventos['Mensaje'] ?> <a href="<?= $DatosEventos['UrlEvento'] ?>"><?= $DatosEventos['TipoEvento'] ?></a>
+                      </h3>
+                    </div>
                   </div>
-                </div>
+                <?php } ?>
                 <!-- END timeline item -->
                 <!-- timeline item -->
                 <div>

@@ -38,6 +38,12 @@ class Cotizaciones extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function obtenerCotizacionCreada()
+    {
+        $query = "SELECT * FROM vta_listar_cotizaciones ORDER BY IdCotizacion desc LIMIT 1";
+        return $this->EjecutarQuery($query);
+    }
+
     public function Insertar()
     {
         $query = "INSERT INTO tbl_cotizaciones(

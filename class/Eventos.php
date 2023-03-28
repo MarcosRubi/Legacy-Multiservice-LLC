@@ -13,7 +13,7 @@ class Eventos extends DB
 
     public function listarEventos()
     {
-        $query = "SELECT * FROM vta_listar_eventos";
+        $query = "SELECT * FROM vta_listar_eventos lIMIT 10";
         return $this->EjecutarQuery($query);
     }
 
