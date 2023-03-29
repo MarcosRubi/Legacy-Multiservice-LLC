@@ -496,4 +496,19 @@ if (isset($_SESSION['success-registro-mco']) && $_SESSION['success-registro-mco'
     unset($_SESSION['success-registro-mco']);
 }
 
+
+if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'cliente') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Cliente actualizado correctamente.'
+                })";
+    unset($_SESSION['success-update']);
+}
+
 ?>

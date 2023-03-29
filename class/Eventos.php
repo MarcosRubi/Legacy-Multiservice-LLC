@@ -7,6 +7,7 @@ class Eventos extends DB
     public $TipoEvento;
     public $UrlEvento;
     public $Mensaje;
+    public $VentanaEmergente;
     public $Creado;
     public $CreadoTimestamp;
 
@@ -24,6 +25,7 @@ class Eventos extends DB
             TipoEvento,
             UrlEvento,
             Mensaje,
+            VentanaEmergente,
             Creado,
             CreadoTimestamp,
             Eliminado )
@@ -32,6 +34,7 @@ class Eventos extends DB
             '" . $this->TipoEvento . "',
             '" . $this->UrlEvento . "',
             '" . $this->Mensaje . "',
+            '" . $this->VentanaEmergente . "',
             '" . date("Y-m-d h:i:s ") . "',
             '" . date("A") . "',
             'N' ) ";

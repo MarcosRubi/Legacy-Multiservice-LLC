@@ -10,8 +10,7 @@ $Obj_Ajustes = new Ajustes();
 $Obj_Eventos = new Eventos();
 
 $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
-$Obj_Eventos->TipoEvento = 'cliente';
-$Obj_Eventos->Mensaje = 'ha agregado un nuevo';
+$Obj_Eventos->Mensaje = 'ha actualizado la información de';
 $Obj_Eventos->VentanaEmergente = 'N';
 
 $Obj_Clientes->PrimerNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtPrimerNombre']))));
@@ -26,14 +25,14 @@ $Obj_Clientes->FechaNacimiento =  $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->F
 $regexFecha = '/^(\d{2})-(\d{2})-(\d{4})$/';
 
 // //VALIDANDO FORMATO DE FECHA
-if($_SESSION['FormatoFecha'] === 'dmy'){
+if ($_SESSION['FormatoFecha'] === 'dmy') {
     if ($_POST['txtFechaNacimiento'] !== "" && $_POST['txtFechaNacimiento'] !== "dd-mm-yyyy" && !preg_match($regexFecha, $_POST['txtFechaNacimiento'])) {
         $_SESSION['error-registro'] = 'fecha';
         echo "<script>history.go(-1)</script>";
         return;
     };
 }
-if($_SESSION['FormatoFecha'] === 'mdy'){
+if ($_SESSION['FormatoFecha'] === 'mdy') {
     if ($_POST['txtFechaNacimiento'] !== "" && $_POST['txtFechaNacimiento'] !== "mm-dd-yyyy" && !preg_match($regexFecha, $_POST['txtFechaNacimiento'])) {
         $_SESSION['error-registro'] = 'fecha';
         echo "<script>history.go(-1)</script>";
@@ -49,16 +48,17 @@ if($_SESSION['FormatoFecha'] === 'mdy'){
 //     return str_replace("_", "", $_POST['txtTelefono']);
 // };
 
-$Res_Clientes = $Obj_Clientes->Insertar();
+$Res_Clientes = $Obj_Clientes->Actualizar($_POST['IdCliente']);
 
 if ($Res_Clientes) {
-    $Res_Cliente = $Obj_Clientes->obtenerClienteCreado();
+    $Res_Cliente = $Obj_Clientes->buscarPorId($_POST['IdCliente']);
     $DatosCliente = $Res_Cliente->fetch_assoc();
 
     $Obj_Eventos->UrlEvento = 'cliente/?id=' . $DatosCliente['IdCliente'];
+    $Obj_Eventos->TipoEvento = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtPrimerNombre'])))). " " . $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtSegundoNombre'])))) . " " . $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtApellido']))));
     $Obj_Eventos->Insertar();
 
-    $_SESSION['success-registro'] = 'cliente';
+    $_SESSION['success-update'] = 'cliente';
     echo "<script>
     let URL = window.opener.location.pathname;
         window.opener.location.reload();

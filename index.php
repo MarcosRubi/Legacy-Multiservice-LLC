@@ -183,7 +183,7 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
                         ?>
                       </span>
                       <?php
-                        if ($DatosEventos['TipoEvento'] === 'cliente') {
+                        if ($DatosEventos['VentanaEmergente'] === 'N') {
                           echo "<h3 class=\"timeline-header\">
                             <strong>". $DatosEventos['NombreEmpleado']. " </strong>" 
                             . $DatosEventos['Mensaje'].

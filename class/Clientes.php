@@ -75,10 +75,10 @@ class Clientes extends DB
         PrimerNombre = '" . $this->PrimerNombre . "',
         SegundoNombre = '" . $this->SegundoNombre . "',
         Apellido = '" . $this->Apellido . "',
-        Telefono = '" . $this->Telefono . "' 
-        Cp = '" . $this->Cp . "' 
-        Ciudad = '" . $this->Ciudad . "' 
-        Provincia = '" . $this->Provincia . "' 
+        Telefono = '" . $this->Telefono . "', 
+        Cp = '" . $this->Cp . "', 
+        Ciudad = '" . $this->Ciudad . "', 
+        Provincia = '" . $this->Provincia . "', 
         FechaNacimiento = '" . $this->FechaNacimiento . "' 
         WHERE IdCliente='" . $id . "' ";
 
