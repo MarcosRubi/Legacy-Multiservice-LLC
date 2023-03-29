@@ -11,7 +11,7 @@ $Obj_Eventos = new Eventos();
 
 $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
 $Obj_Eventos->TipoEvento = 'cliente';
-$Obj_Eventos->Mensaje = 'Ha agregado un nuevo';
+$Obj_Eventos->Mensaje = 'ha agregado un nuevo';
 
 $Obj_Clientes->PrimerNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtPrimerNombre']))));
 $Obj_Clientes->SegundoNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtSegundoNombre']))));

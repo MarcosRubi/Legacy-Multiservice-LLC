@@ -70,7 +70,7 @@ if ($Res_Cotizaciones) {
 
     $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
     $Obj_Eventos->TipoEvento = 'cotización';
-    $Obj_Eventos->Mensaje = 'Ha realizado una nueva';
+    $Obj_Eventos->Mensaje = 'ha realizado una nueva';
     $Obj_Eventos->UrlEvento = 'cotizaciones/detalles.php?id=' . $DatosCotizacion['IdCotizacion'];
     $Obj_Eventos->Insertar();
 
