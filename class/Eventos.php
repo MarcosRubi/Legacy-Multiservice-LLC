@@ -10,6 +10,7 @@ class Eventos extends DB
     public $VentanaEmergente;
     public $Creado;
     public $CreadoTimestamp;
+    public $Icono;
 
 
     public function listarEventos()
@@ -26,6 +27,7 @@ class Eventos extends DB
             UrlEvento,
             Mensaje,
             VentanaEmergente,
+            Icono,
             Creado,
             CreadoTimestamp,
             Eliminado )
@@ -35,6 +37,7 @@ class Eventos extends DB
             '" . $this->UrlEvento . "',
             '" . $this->Mensaje . "',
             '" . $this->VentanaEmergente . "',
+            '" . $this->Icono . "',
             '" . date("Y-m-d h:i:s ") . "',
             '" . date("A") . "',
             'N' ) ";

@@ -41,6 +41,7 @@ $Obj_Eventos = new Eventos();
 $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
 $Obj_Eventos->TipoEvento = 'boleto';
 $Obj_Eventos->Mensaje = 'ha creado un nuevo';
+$Obj_Eventos->Icono = 'fas fa-ticket-alt bg-blue';
 
 
 if (trim($_POST['txtPnr']) === '') {

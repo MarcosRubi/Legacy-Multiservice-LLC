@@ -12,6 +12,7 @@ $Obj_Eventos = new Eventos();
 $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
 $Obj_Eventos->Mensaje = 'ha actualizado la información de';
 $Obj_Eventos->VentanaEmergente = 'N';
+$Obj_Eventos->Icono = 'fas fa-user-edit bg-orange';
 
 $Obj_Clientes->PrimerNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtPrimerNombre']))));
 $Obj_Clientes->SegundoNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtSegundoNombre']))));

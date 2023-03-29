@@ -156,21 +156,7 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
                   }
                   ?>
                   <div>
-                    <?php
-                    if ($DatosEventos['TipoEvento'] === 'cliente') {
-                      echo "<i class=\"fas fa-user-plus bg-info\"></i>";
-                    }
-                    if ($DatosEventos['TipoEvento'] === 'factura') {
-                      echo "<i class=\"fas fa-dollar-sign bg-green\"></i>";
-                    }
-                    if ($DatosEventos['TipoEvento'] === 'cotización') {
-                      echo "<i class=\"fas fa-money-check-alt bg-indigo\"></i>";
-                    }
-                    if ($DatosEventos['TipoEvento'] === 'boleto') {
-                      echo "<i class=\"fas fa-ticket-alt bg-blue\"></i>";
-                    }
-                    ?>
-
+                    <i class="<?=$DatosEventos['Icono'];?>"></i>
                     <div class="timeline-item">
                       <span class="time">
                         <i class="fas fa-clock"></i>

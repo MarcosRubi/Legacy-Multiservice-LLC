@@ -12,6 +12,7 @@ $Obj_Eventos = new Eventos();
 $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
 $Obj_Eventos->TipoEvento = 'cliente';
 $Obj_Eventos->Mensaje = 'ha agregado un nuevo';
+$Obj_Eventos->Icono = 'fas fa-user-plus bg-info';
 $Obj_Eventos->VentanaEmergente = 'N';
 
 $Obj_Clientes->PrimerNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtPrimerNombre']))));
