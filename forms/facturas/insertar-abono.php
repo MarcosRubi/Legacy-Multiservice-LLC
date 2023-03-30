@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once '../../func/validateSession.php';
 require_once '../../bd/bd.php';
 require_once '../../class/Abonos.php';
 require_once '../../class/Facturas.php';

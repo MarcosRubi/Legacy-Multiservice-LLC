@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once '../../func/validateSession.php';
 require_once '../../bd/bd.php';
 require_once '../../class/Clientes.php';
 require_once '../../class/Ajustes.php';
@@ -18,7 +18,7 @@ $Obj_Clientes->PrimerNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(
 $Obj_Clientes->SegundoNombre = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtSegundoNombre']))));
 $Obj_Clientes->Apellido = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtApellido']))));
 $Obj_Clientes->Telefono = $Obj_Ajustes->RemoverEtiquetas(trim(str_replace("_", "", $_POST['txtTelefono'])));
-$Obj_Clientes->Cp = $Obj_Ajustes->RemoverEtiquetas(strtoupper(strtolower(trim($_POST['txtCp']))));
+$Obj_Clientes->Cp = $Obj_Ajustes->RemoverEtiquetas(trim($_POST['txtCp']));
 $Obj_Clientes->Ciudad = $Obj_Ajustes->RemoverEtiquetas(ucwords(strtolower(trim($_POST['txtCiudad']))));
 $Obj_Clientes->Provincia = $Obj_Ajustes->RemoverEtiquetas(ucwords(strtolower(trim($_POST['txtProvincia']))));
 $Obj_Clientes->FechaNacimiento =  $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaNacimiento']));
@@ -60,9 +60,9 @@ if ($Res_Clientes) {
     $Obj_Eventos->Insertar();
 
     $_SESSION['success-update'] = 'cliente';
-    echo "<script>
-    let URL = window.opener.location.pathname;
-        window.opener.location.reload();
-    window.close();
-</script>";
+//     echo "<script>
+//     let URL = window.opener.location.pathname;
+//         window.opener.location.reload();
+//     window.close();
+// </script>";
 }

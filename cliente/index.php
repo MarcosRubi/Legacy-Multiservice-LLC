@@ -67,6 +67,7 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
+                    <?php if($DatosCliente['Eliminado']==='N'){ ?>
                     <h3 class='display-5'>Datos de: <strong><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido'] ?></strong></h3>
                     <div class="row mt-3">
                         <div class="col-12">
@@ -98,7 +99,7 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                                     }
                                                     if ($DatosCliente['Provincia'] !== '') {
                                                         echo ", " . $DatosCliente['Provincia'];
-                                                    }?>
+                                                    } ?>
                                                 </td>
                                                 <td><?php if ($DatosCliente['FechaNacimiento'] !== '0000-00-00') {
                                                         echo $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']);
@@ -108,7 +109,7 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                                         <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editarCliente(<?= $DatosCliente['IdCliente'] ?>);">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <a href="#" class="btn btn-sm mx-1 btn-primary" title="Eliminar" onclick="javascript:eliminar(<?= $DatosCliente['IdCliente'] ?>);">
+                                                        <a href="#" class="btn btn-sm mx-1 btn-primary" title="Eliminar" onclick="javascript:eliminarCliente(<?= $DatosCliente['IdCliente'] ?>);">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -121,8 +122,16 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                             </div>
                             <!-- /.card -->
                         </div>
+                        
+
                         <!-- /.col -->
                     </div>
+                    <?php }else{
+                            echo '<div class="d-flex justify-content-center align-middle" style="height:90vh"><div class="d-flex justify-content-center flex-column">';
+                                echo '<h1 class=" mt-5 font-weight-bold">Lo sentimos, este cliente no existe o ha sido eliminado</h1>';
+                                echo '<a href="'.$_SESSION['path'].'" class="btn btn-primary btn-lg">Ir a inicio</a>';
+                            echo '</div></div>';
+                        } ?>
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -210,8 +219,17 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
         function listarFacturas() {
             window.open('<?= $_SESSION['path'] ?>forms/facturas/listar.php', 'Facturas', 'width=2000,height=2000')
         }
+
         function editarCliente(id) {
-            window.open('<?= $_SESSION['path'] ?>forms/clientes/frmEditar.php?id='+id, 'Editar Cliente', 'width=1200,height=500')
+            window.open('<?= $_SESSION['path'] ?>forms/clientes/frmEditar.php?id=' + id, 'Editar Cliente', 'width=1200,height=500')
+        }
+
+        function eliminarCliente(id) {
+            let confirmacion = confirm("¿Está seguro que desea eliminar este cliente?");
+
+            if (confirmacion) {
+                window.location.href = '<?= $_SESSION['path'] ?>forms/clientes/eliminar.php?id=' + id
+            }
         }
     </script>
     <script>

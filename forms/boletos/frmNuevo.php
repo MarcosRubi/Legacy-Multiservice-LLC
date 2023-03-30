@@ -1738,13 +1738,13 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                         required: "La fecha es obligatorio"
                     },
                     txtAerolinea: {
-                        required: "La Aerolínea es obligatorio"
+                        required: "La aerolínea es obligatorio"
                     },
                     txtOrigen: {
                         required: "El origen es obligatorio"
                     },
                     txtDestino: {
-                        required: "El desino es obligatorio"
+                        required: "El destino es obligatorio"
                     },
                     txtFechaIda: {
                         required: "La fecha de ida es obligatorio"

@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+require_once '../../func/validateSession.php';
 require_once '../../bd/bd.php';
 require_once '../../class/Cotizaciones.php';
 require_once '../../class/Eventos.php';

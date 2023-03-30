@@ -139,7 +139,7 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
               <div class="timeline">
                 <!-- timeline time label -->
                 <div class="time-label">
-                <span class="bg-red px-3">Hoy</span>
+                  <span class="bg-red px-3">Hoy</span>
                 </div>
                 <!-- /.timeline-label -->
                 <!-- timeline item -->
@@ -156,7 +156,7 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
                   }
                   ?>
                   <div>
-                    <i class="<?=$DatosEventos['Icono'];?>"></i>
+                    <i class="<?= $DatosEventos['Icono']; ?>"></i>
                     <div class="timeline-item">
                       <span class="time">
                         <i class="fas fa-clock"></i>
@@ -169,14 +169,15 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
                         ?>
                       </span>
                       <?php
-                        if ($DatosEventos['VentanaEmergente'] === 'N') {
-                          echo "<h3 class=\"timeline-header\">
-                            <strong>". $DatosEventos['NombreEmpleado']. " </strong>" 
-                            . $DatosEventos['Mensaje'].
-                            "<a href=\"".$DatosEventos['UrlEvento']. "\"> ". $DatosEventos['TipoEvento']. "</a></h3>";
-                        }else{
-                          echo "<h3 class=\"timeline-header\"><strong>". $DatosEventos['NombreEmpleado']. " </strong>" . $DatosEventos['Mensaje']. " <a href=\"#\" onclick=\"javascript:abrirFormDetalles('".$DatosEventos['UrlEvento']."')\">". $DatosEventos['TipoEvento']. "</a></h3>";
-                        }
+                      if ($DatosEventos['VentanaEmergente'] === 'N') {
+                        $url = $DatosEventos['UrlEvento'] !== '' ? $DatosEventos['UrlEvento'] : '#';
+                        echo "<h3 class=\"timeline-header\">
+                            <strong>" . $DatosEventos['NombreEmpleado'] . " </strong>"
+                          . $DatosEventos['Mensaje'] .
+                          "<a href=\"" . $url  . "\"> " . $DatosEventos['TipoEvento'] . "</a></h3>";
+                      } else {
+                        echo "<h3 class=\"timeline-header\"><strong>" . $DatosEventos['NombreEmpleado'] . " </strong>" . $DatosEventos['Mensaje'] . " <a href=\"#\" onclick=\"javascript:abrirFormDetalles('" . $DatosEventos['UrlEvento'] . "')\">" . $DatosEventos['TipoEvento'] . "</a></h3>";
+                      }
                       ?>
                       </h3>
                     </div>
@@ -246,13 +247,13 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
     });
   </script>
   <script>
-    <?php require_once './func/Mensajes.php'; ?> 
+    <?php require_once './func/Mensajes.php'; ?>
   </script>
   <script>
-        function abrirFormDetalles(url) {
-          window.open('<?= $_SESSION['path'] ?>'+url ,'Detalles', 'width=1000,height=1000')
-        }
-    </script>
+    function abrirFormDetalles(url) {
+      window.open('<?= $_SESSION['path'] ?>' + url, 'Detalles', 'width=1000,height=1000')
+    }
+  </script>
 </body>
 
 </html>

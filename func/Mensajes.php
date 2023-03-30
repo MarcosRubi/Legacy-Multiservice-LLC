@@ -511,4 +511,18 @@ if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'clien
     unset($_SESSION['success-update']);
 }
 
+if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'cliente') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Cliente eliminado correctamente.'
+                })";
+    unset($_SESSION['success-delete']);
+}
+
 ?>
