@@ -171,4 +171,75 @@ class Facturas extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function obtenerTotalesPorMesFacturas()
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        SUM( Valor ) AS Total,
+        SUM( Balance ) AS Balance 
+        FROM
+            tbl_facturas 
+        WHERE
+            Creado BETWEEN '2023-01-01' AND '2023-12-31' 
+        GROUP BY
+            YEAR ( Creado ),
+            MONTH (
+            Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function obtenerTotalesDelMesActual()
+    {
+        $query = "SELECT YEAR(Creado) AS Anio,
+            MONTH(Creado) AS Mes,
+        WEEK(Creado) AS Semana,
+            SUM(Valor) AS Total,
+            SUM(Balance) AS Balance
+        FROM tbl_facturas
+        WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())
+        GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function obtenerTotalesPorSemana()
+    {
+        $query = "SELECT YEAR(Creado) AS Anio,
+        MONTH(Creado) AS Mes,
+        WEEK(Creado) AS Semana,
+        DAYOFWEEK(Creado) AS DiaSemana,
+        SUM(Valor) AS Total,
+        SUM(Balance) AS Balance
+        FROM tbl_facturas
+        WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())
+        AND WEEK(Creado) = WEEK(CURRENT_DATE())
+        GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado), DAYOFWEEK(Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function obtenerTotalesDiaActual()
+    {
+        $query = "SELECT Anio, Mes, Dia, 
+        CASE 
+            WHEN Hora >= 18 THEN '19:00-23:59'
+            ELSE CONCAT(Hora, ':00-', Hora, ':59')
+        END AS Hora_Rango,
+        SUM(Total) AS Total,
+        SUM(Balance) AS Balance
+        FROM (
+            SELECT YEAR(Creado) AS Anio,
+                MONTH(Creado) AS Mes,
+                DAY(Creado) AS Dia,
+                HOUR(Creado) AS Hora,
+                SUM(Valor) AS Total,
+                SUM(Balance) AS Balance
+            FROM tbl_facturas
+            WHERE DATE(Creado) = CURDATE()
+            GROUP BY YEAR(Creado), MONTH(Creado), DAY(Creado), HOUR(Creado)
+        ) AS subconsulta
+        GROUP BY Anio, Mes, Dia, Hora_Rango";
+
+        return $this->EjecutarQuery($query);
+    }
 }

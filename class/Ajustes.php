@@ -1,5 +1,5 @@
 <?php
-class Ajustes
+class Ajustes extends DB
 {
     
     public function FechaInvertir($fecha)
@@ -44,6 +44,11 @@ class Ajustes
             return 0.0;
         }
         return doubleval($valor);
+    }
+
+    public function ObtenerCantidadSemanasMesActual(){
+        $query = "SELECT WEEK(LAST_DAY(NOW())) - WEEK(DATE_FORMAT(NOW(),'%Y-%m-01')) + 1 AS semanas_del_mes_actual";
+        return $this->EjecutarQuery($query);
     }
 
 }
