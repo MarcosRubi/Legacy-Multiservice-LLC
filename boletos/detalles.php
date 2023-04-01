@@ -66,7 +66,7 @@ $DatosBoleto = $Res_Boletos->fetch_assoc();
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Detalles de boleto #<?=$DatosBoleto['IdBoleto'] ?></h3>
                         </div>
-                        <form action="./insertar.php" method="post" class="card-body" id="frmNuevo">
+                        <form action="#" method="post" class="card-body" id="frmNuevo" onsubmit="return false;">
                             <div class="form-group mx-1 p-2 rounded" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                                 <div class="form-group mx-1  ">
                                     <label>Código PNR</label>

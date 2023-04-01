@@ -60,9 +60,9 @@ if ($Res_Clientes) {
     $Obj_Eventos->Insertar();
 
     $_SESSION['success-update'] = 'cliente';
-//     echo "<script>
-//     let URL = window.opener.location.pathname;
-//         window.opener.location.reload();
-//     window.close();
-// </script>";
+    echo "<script>
+    let URL = window.opener.location.pathname;
+        window.opener.location.reload();
+    window.close();
+</script>";
 }

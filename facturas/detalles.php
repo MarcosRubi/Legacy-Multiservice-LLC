@@ -1,5 +1,6 @@
 <?php
 require_once '../func/validateSession.php';
+require_once '../bd/bd.php';
 require_once '../class/Ajustes.php';
 
 $Obj_Ajustes = new Ajustes();
@@ -8,7 +9,6 @@ if (!isset($_GET['id'])) {
     echo "<script>window.close(); window.location.replace('" . $_SESSION['path'] . "');</script>";
     return;
 }
-require_once '../bd/bd.php';
 require_once '../class/Facturas.php';
 require_once '../class/Ajustes.php';
 
@@ -57,7 +57,7 @@ $DatosFactura = $Res_Facturas->fetch_assoc();
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Detalles de factura # <?= $DatosFactura['IdFactura'] ?></h3>
                         </div>
-                        <form action="./insertar.php" method="post" class="card-body" id="frmNuevo">
+                        <form action="#" method="post" class="card-body" id="frmNuevo" onsubmit="return false;">
                             <div class="px-2 mb-3 rounded" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                                 <div class="d-flex pt-3">
                                     <!-- Cliente -->

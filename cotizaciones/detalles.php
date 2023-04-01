@@ -1,5 +1,6 @@
 <?php
 require_once '../func/validateSession.php';
+require_once '../bd/bd.php';
 require_once '../class/Ajustes.php';
 
 $Obj_Ajustes = new Ajustes();
@@ -8,7 +9,6 @@ if (!isset($_GET['id'])) {
     echo "<script>window.close(); window.location.replace('" . $_SESSION['path'] . "buscar-cliente/');</script>";
     return;
 }
-require_once '../bd/bd.php';
 require_once '../class/Cotizaciones.php';
 require_once '../class/Movimientos.php';
 

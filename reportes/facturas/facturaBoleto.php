@@ -202,7 +202,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                         if ($Res_Abonos->num_rows >= 1) { ?>
                                             <div class="row">
                                                 <!-- /.col -->
-                                                <div class="col-4">
+                                                <div class="col-6">
                                                     <p class="lead">Información de abonos</p>
 
                                                     <div class="table-responsive">
