@@ -17,7 +17,7 @@ while ($DatosEmpleado = $Res_Empleados->fetch_assoc()) {
     $empleados .= "'" . $DatosEmpleado['NombreEmpleado'] . "',";
 
 
-    $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleado($DatosEmpleado['Agente'], date("Y-m-d"));
+    $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleado($DatosEmpleado['Agente']);
     $TotalPorEmpleado .=  intval($Res_Cotizaciones->fetch_assoc()['total_cotizaciones']) . ',';
 }
 

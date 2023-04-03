@@ -219,4 +219,12 @@ class Boletos extends DB
         AND MONTH(Creado) = MONTH(CURRENT_DATE())";
         return $this->EjecutarQuery($query);
     }
+
+    public function cantidadBoletosPorEmpleado($agente)
+    {
+        $query = "SELECT COUNT(IdBoleto) AS total_boletos 
+        FROM tbl_boletos 
+        WHERE Agente = '".$agente."' AND DATE(Creado) = CURRENT_DATE();";
+        return $this->EjecutarQuery($query);
+    }
 }

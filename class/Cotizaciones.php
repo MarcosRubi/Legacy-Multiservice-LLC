@@ -123,7 +123,7 @@ class Cotizaciones extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidadCotizacionesPorEmpleado($agente, $time)
+    public function cantidadCotizacionesPorEmpleado($agente)
     {
         $query = "SELECT COUNT(IdCotizacion) AS total_cotizaciones 
         FROM tbl_cotizaciones 

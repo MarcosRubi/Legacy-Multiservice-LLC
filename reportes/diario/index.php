@@ -108,9 +108,7 @@ require_once '../../func/validateSession.php';
                                         </button>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <canvas id="boletosChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                </div>
+                                <div id="resultsBoletos"></div>
                                 <!-- /.card-body -->
                             </div>
                         </div>
@@ -227,7 +225,6 @@ require_once '../../func/validateSession.php';
             //- PIE CHART -
             //-------------
             // Get context with jQuery - using jQuery's .get() method.
-            var boletosChartCanvas = $('#boletosChart').get(0).getContext('2d')
             var facturasChartCanvas = $('#facturasChart').get(0).getContext('2d')
             var pieData = donutData;
             var pieOptions = {
@@ -236,11 +233,6 @@ require_once '../../func/validateSession.php';
             }
             //Create pie or douhnut chart
             // You can switch between pie and douhnut using the method below.
-            new Chart(boletosChartCanvas, {
-                type: 'pie',
-                data: pieData,
-                options: pieOptions
-            })
             new Chart(facturasChartCanvas, {
                 type: 'pie',
                 data: pieData,
@@ -251,10 +243,18 @@ require_once '../../func/validateSession.php';
     </script>
     <script>
         $.ajax({
-            url: '../../secciones/graficaPastelCotizaciones.php',
+            url: '../../secciones/graficaCotizaciones.php',
             method: 'POST',
             success: function(response) {
                 $('#resultCotizaciones').html(response);
+            }
+        });
+
+        $.ajax({
+            url: '../../secciones/graficaBoletos.php',
+            method: 'POST',
+            success: function(response) {
+                $('#resultsBoletos').html(response);
             }
         });
     </script>
