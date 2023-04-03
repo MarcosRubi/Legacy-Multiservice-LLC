@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/El_Salvador');
+
 class Boletos extends DB
 {
     public $IdCliente;
@@ -82,6 +84,8 @@ class Boletos extends DB
             Dob,
             Agencia,
             Agente,
+            Creado,
+            CreadoTimestamp
             Eliminado )
             VALUES (
             '" . $this->IdCliente . "',
@@ -105,6 +109,8 @@ class Boletos extends DB
             '" . $this->Dob . "',
             '" . $this->Agencia . "',
             '" . $this->Agente . "',
+            '" . date("Y-m-d h:i:s ") . "',
+            '" . date("A") . "',
             'N' ) ";
         return $this->EjecutarQuery($query);
     }
@@ -202,6 +208,15 @@ class Boletos extends DB
 
     public function valorTotalBoletos($idCliente, $pnr){
         $query = "SELECT SUM(vta_listar_boletos.Precio) AS 'Valor' FROM vta_listar_boletos WHERE IdCliente='".$idCliente."' AND Pnr='".$pnr."'";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadBoletosPorMes(){
+        $query = "SELECT COUNT(IdBoleto) AS TotalBoletos
+        FROM tbl_boletos
+        WHERE Eliminado = 'N'
+        AND YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())";
         return $this->EjecutarQuery($query);
     }
 }

@@ -112,4 +112,13 @@ class Cotizaciones extends DB
         $query = "UPDATE tbl_cotizaciones SET Eliminado='S' WHERE IdCotizacion='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
+
+    public function cantidadContizacionesPorMes(){
+        $query = "SELECT COUNT(IdCotizacion) AS TotalCotizaciones
+        FROM tbl_cotizaciones
+        WHERE Eliminado = 'N'
+        AND YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())";
+        return $this->EjecutarQuery($query);
+    }
 }

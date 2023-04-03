@@ -90,4 +90,13 @@ class Clientes extends DB
         $query = "UPDATE tbl_clientes SET Eliminado='S' WHERE IdCliente='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
+
+    public function cantidabClientesPorMes(){
+        $query = "SELECT COUNT(IdCliente) AS TotalClientes
+        FROM tbl_clientes
+        WHERE Eliminado = 'N'
+        AND YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())";
+        return $this->EjecutarQuery($query);
+    }
 }
