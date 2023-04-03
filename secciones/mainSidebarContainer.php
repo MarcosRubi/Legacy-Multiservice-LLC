@@ -86,7 +86,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= $_SESSION['path'] ?>reportes/diario/" class="nav-link">
                                 <i class="fa fa-list-alt nav-icon"></i>
                                 <p>Reporte Diario</p>
                             </a>

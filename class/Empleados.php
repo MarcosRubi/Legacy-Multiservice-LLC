@@ -62,4 +62,9 @@ class Empleados extends DB
         $query = "UPDATE tbl_empleados SET Eliminado='S' WHERE IdEmpleado='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
+
+    public function ListarEmpleados(){
+        $query = "SELECT NombreEmpleado, Agente FROM tbl_Empleados WHERE Eliminado='N'";
+        return $this->EjecutarQuery($query);
+    }
 }

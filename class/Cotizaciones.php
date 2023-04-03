@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('America/El_Salvador'); 
+date_default_timezone_set('America/El_Salvador');
 
 class Cotizaciones extends DB
 {
@@ -113,12 +113,21 @@ class Cotizaciones extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidadContizacionesPorMes(){
+    public function cantidadContizacionesPorMes()
+    {
         $query = "SELECT COUNT(IdCotizacion) AS TotalCotizaciones
         FROM tbl_cotizaciones
         WHERE Eliminado = 'N'
         AND YEAR(Creado) = YEAR(CURRENT_DATE())
         AND MONTH(Creado) = MONTH(CURRENT_DATE())";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadCotizacionesPorEmpleado($agente, $time)
+    {
+        $query = "SELECT COUNT(IdCotizacion) AS total_cotizaciones 
+        FROM tbl_cotizaciones 
+        WHERE Agente = '".$agente."' AND DATE(Creado) = CURRENT_DATE();";
         return $this->EjecutarQuery($query);
     }
 }
