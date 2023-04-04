@@ -242,4 +242,12 @@ class Facturas extends DB
 
         return $this->EjecutarQuery($query);
     }
+
+    public function cantidadFacturasPorEmpleado($Agente)
+    {
+        $query = "SELECT COUNT(IdFactura) AS total_facturas 
+        FROM tbl_facturas
+        WHERE Agente = '" . $Agente . "' AND DATE(Creado) = CURRENT_DATE() AND Eliminado = 'N'";
+        return $this->EjecutarQuery($query);
+    }
 }

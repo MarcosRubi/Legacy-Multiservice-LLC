@@ -24,6 +24,19 @@ while ($DatosEmpleado = $Res_Empleados->fetch_assoc()) {
 $TotalPorEmpleado .= ']';
 
 
+$string = str_replace(array('[', ']'), '', $TotalPorEmpleado);
+$array = explode(',', $string);
+$array = array_map('intval', $array);
+
+// Eliminar todos los elementos que no son 0
+$array_filtered = array_filter($array, function($value) {
+    return $value !== 0;
+});
+
+// Si el tamaño del array filtrado es 0, entonces todos los elementos son 0
+if (count($array_filtered) === 0) {
+    echo "<h5 class='position-absolute' style='top: 50%;left: 50%;transform: translate(-50%, -50%);'>No hay cotizaciones creadas el día de hoy<h5>";
+}
 ?>
 
 
@@ -34,10 +47,6 @@ $TotalPorEmpleado .= ']';
 
 <script>
     $(function() {
-        //-------------
-        //- DONUT CHART -
-        //-------------
-        // Get context with jQuery - using jQuery's .get() method.
         var cotizacionesChartCanvas = $('#cotizacionesChart').get(0).getContext('2d')
         var donutData = {
             labels: [
@@ -52,8 +61,6 @@ $TotalPorEmpleado .= ']';
             maintainAspectRatio: false,
             responsive: true,
         }
-        //Create pie or douhnut chart
-        // You can switch between pie and douhnut using the method below.
         new Chart(cotizacionesChartCanvas, {
             type: 'doughnut',
             data: donutData,

@@ -147,9 +147,7 @@ require_once '../../func/validateSession.php';
                                         </button>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <canvas id="facturasChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                </div>
+                                <div id="resultsFacturas"></div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
@@ -187,51 +185,6 @@ require_once '../../func/validateSession.php';
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        $(function() {
-            //-------------
-            //- DONUT CHART -
-            //-------------
-            // Get context with jQuery - using jQuery's .get() method.
-            var donutData = {
-                labels: [
-                    'Chrome',
-                    'IE',
-                    'FireFox',
-                    'Safari',
-                    'Opera',
-                    'Navigator',
-                ],
-                datasets: [{
-                    data: [700, 500, 400, 600, 300, 100],
-                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-                }]
-            }
-            var donutOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-            }
-
-            //-------------
-            //- PIE CHART -
-            //-------------
-            // Get context with jQuery - using jQuery's .get() method.
-            var facturasChartCanvas = $('#facturasChart').get(0).getContext('2d')
-            var pieData = donutData;
-            var pieOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-            }
-            //Create pie or douhnut chart
-            // You can switch between pie and douhnut using the method below.
-            new Chart(facturasChartCanvas, {
-                type: 'pie',
-                data: pieData,
-                options: pieOptions
-            })
-
-        })
-    </script>
-    <script>
         $.ajax({
             url: '../../secciones/graficaCotizaciones.php',
             method: 'POST',
@@ -253,6 +206,13 @@ require_once '../../func/validateSession.php';
             method: 'POST',
             success: function(response) {
                 $('#resultsClientes').html(response);
+            }
+        });
+        $.ajax({
+            url: '../../secciones/graficaFacturas.php',
+            method: 'POST',
+            success: function(response) {
+                $('#resultsFacturas').html(response);
             }
         });
     </script>

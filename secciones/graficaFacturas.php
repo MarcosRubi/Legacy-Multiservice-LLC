@@ -2,15 +2,14 @@
 require_once '../func/validateSession.php';
 require_once '../bd/bd.php';
 require_once '../class/Empleados.php';
-require_once '../class/Clientes.php';
+require_once '../class/Facturas.php';
 
 $Obj_Empleados = new Empleados();
-$Obj_Clientes = new Clientes();
+$Obj_Facturas = new Facturas();
 
 $Res_Empleados = $Obj_Empleados->ListarEmpleados();
 
 $empleados = '';
-$agentes = [];
 $TotalPorEmpleado = '[';
 
 
@@ -18,9 +17,9 @@ while ($DatosEmpleado = $Res_Empleados->fetch_assoc()) {
     $empleados .= "'" . $DatosEmpleado['NombreEmpleado'] . "',";
 
 
-    $Res_Clientes = $Obj_Clientes->cantidadClientesPorEmpleado($DatosEmpleado['IdEmpleado']);
-    $TotalPorEmpleado .=  intval($Res_Clientes->fetch_assoc()['total_clientes']) . ',';
-}
+    $Res_Facturas = $Obj_Facturas->cantidadFacturasPorEmpleado($DatosEmpleado['Agente']);
+    $TotalPorEmpleado .=  intval($Res_Facturas->fetch_assoc()['total_facturas']) . ',';
+}   
 
 $TotalPorEmpleado .= ']';
 
@@ -36,19 +35,17 @@ $array_filtered = array_filter($array, function($value) {
 
 // Si el tamaño del array filtrado es 0, entonces todos los elementos son 0
 if (count($array_filtered) === 0) {
-    echo "<h5 class='position-absolute' style='top: 50%;left: 50%;transform: translate(-50%, -50%);'>No hay clientes creados el día de hoy<h5>";
-}
+    echo "<h5 class='position-absolute' style='top: 50%;left: 50%;transform: translate(-50%, -50%);'>No hay facturas creadas el día de hoy<h5>";
+} 
 
 ?>
 
-
 <div class="card-body">
-    <canvas id="clientesChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+    <canvas id="facturasChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
 </div>
 
 <script>
         $(function() {
-            var clientesChartCanvas = $('#clientesChart').get(0).getContext('2d')
             var donutData = {
                 labels: [
                     <?=$empleados?>
@@ -63,10 +60,16 @@ if (count($array_filtered) === 0) {
                 responsive: true,
             }
 
-            new Chart(clientesChartCanvas, {
-                type: 'doughnut',
-                data: donutData,
-                options: donutOptions
+            var facturasChartCanvas = $('#facturasChart').get(0).getContext('2d')
+            var pieData = donutData;
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            new Chart(facturasChartCanvas, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
             })
 
         })
