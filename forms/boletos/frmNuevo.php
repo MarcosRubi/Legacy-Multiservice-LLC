@@ -1598,7 +1598,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             <div class="form-group">
                                 <label>Itinerario</label>
                                 <textarea id="summernote" name="txtItinerario">
-                                    Escribe <em>el</em> <u>itinerario</u> <strong>aquí</strong>
+                                    
                                 </textarea>
                             </div>
                             <input type="hidden" name="nb" id="nb" value="1">

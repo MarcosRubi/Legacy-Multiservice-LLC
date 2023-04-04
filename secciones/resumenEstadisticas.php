@@ -28,7 +28,6 @@ $TotalBoletos = $Res_Boletos->fetch_assoc()['TotalBoletos'];
 $TotalClientes = $Obj_Clientes->cantidabClientesPorMes();
 $TotalCotizaciones = $Obj_Cotizaciones->cantidadContizacionesPorMes();
 
-
 $PORCENTAJE_META = $META * (intval($TotalBoletos)/100); 
 
 
@@ -58,7 +57,7 @@ $PORCENTAJE_META = $META * (intval($TotalBoletos)/100);
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3><?=$TotalCotizaciones->fetch_assoc()['TotalCotizaciones']?></h3>
+                        <h3><?=$TotalClientes->fetch_assoc()['TotalClientes']?></h3>
 
                         <p>Clientes creados</p>
                     </div>
@@ -73,7 +72,7 @@ $PORCENTAJE_META = $META * (intval($TotalBoletos)/100);
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3><?=$TotalClientes->fetch_assoc()['TotalClientes']?></h3>
+                        <h3><?=$TotalCotizaciones->fetch_assoc()['TotalCotizaciones']?></h3>
 
                         <p>Cotizaciones realizadas</p>
                     </div>

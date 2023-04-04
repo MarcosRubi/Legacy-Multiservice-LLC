@@ -34,11 +34,13 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <!-- Theme style -->
+    <!-- summernote -->
+    <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
+    <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
     <style>
         #logs_wrapper .row:last-child {
@@ -67,71 +69,93 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <?php if($DatosCliente['Eliminado']==='N'){ ?>
-                    <h3 class='display-5'>Datos de: <strong><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido'] ?></strong></h3>
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class='display-5'>Información personal</h5>
+                    <?php if ($DatosCliente['Eliminado'] === 'N') { ?>
+                        <h3 class='display-5'>Datos de: <strong><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido'] ?></strong></h3>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class='display-5'>Información personal</h5>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <table id="logs" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Cliente</th>
+                                                    <th>Número De Teléfono</th>
+                                                    <th>Dirección</th>
+                                                    <th>Fecha de Nac.</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><?= $DatosCliente['IdCliente'] ?></td>
+                                                    <td><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido']  ?></td>
+                                                    <td><?= $DatosCliente['Telefono'] ?></td>
+                                                    <td><?php echo $DatosCliente['Cp'];
+                                                        if ($DatosCliente['Ciudad'] !== '') {
+                                                            echo ", " .  $DatosCliente['Ciudad'];
+                                                        }
+                                                        if ($DatosCliente['Provincia'] !== '') {
+                                                            echo ", " . $DatosCliente['Provincia'];
+                                                        } ?>
+                                                    </td>
+                                                    <td><?php if ($DatosCliente['FechaNacimiento'] !== '0000-00-00') {
+                                                            echo $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']);
+                                                        } ?></td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-around">
+                                                            <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editarCliente(<?= $DatosCliente['IdCliente'] ?>);">
+                                                                <i class="fa fa-edit"></i>
+                                                            </a>
+                                                            <a href="#" class="btn btn-sm mx-1 btn-primary" title="Eliminar" onclick="javascript:eliminarCliente(<?= $DatosCliente['IdCliente'] ?>);">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /.card-body -->
                                 </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table id="logs" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Cliente</th>
-                                                <th>Número De Teléfono</th>
-                                                <th>Dirección</th>
-                                                <th>Fecha de Nac.</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><?= $DatosCliente['IdCliente'] ?></td>
-                                                <td><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido']  ?></td>
-                                                <td><?= $DatosCliente['Telefono'] ?></td>
-                                                <td><?php echo $DatosCliente['Cp'];
-                                                    if ($DatosCliente['Ciudad'] !== '') {
-                                                        echo ", " .  $DatosCliente['Ciudad'];
-                                                    }
-                                                    if ($DatosCliente['Provincia'] !== '') {
-                                                        echo ", " . $DatosCliente['Provincia'];
-                                                    } ?>
-                                                </td>
-                                                <td><?php if ($DatosCliente['FechaNacimiento'] !== '0000-00-00') {
-                                                        echo $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']);
-                                                    } ?></td>
-                                                <td>
-                                                    <div class="d-flex justify-content-around">
-                                                        <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editarCliente(<?= $DatosCliente['IdCliente'] ?>);">
-                                                            <i class="fa fa-edit"></i>
-                                                        </a>
-                                                        <a href="#" class="btn btn-sm mx-1 btn-primary" title="Eliminar" onclick="javascript:eliminarCliente(<?= $DatosCliente['IdCliente'] ?>);">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
+                                <!-- /.card -->
                             </div>
-                            <!-- /.card -->
-                        </div>
-                        
 
-                        <!-- /.col -->
+
+                            <!-- /.col -->
+                        </div>
+                    <?php } else {
+                        echo '<div class="d-flex justify-content-center align-middle" style="height:90vh"><div class="d-flex justify-content-center flex-column">';
+                        echo '<h1 class=" mt-5 font-weight-bold">Lo sentimos, este cliente no existe o ha sido eliminado</h1>';
+                        echo '<a href="' . $_SESSION['path'] . '" class="btn btn-primary btn-lg">Ir a inicio</a>';
+                        echo '</div></div>';
+                    } ?>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="display-5">Información adicional</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="./actualizar-informacion.php" method="POST">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <textarea id="summernote" name="txtInformacion">
+                                        <?= $DatosCliente['Informacion'] ?>
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="IdCliente" value="<?= $DatosCliente['IdCliente'] ?>">
+                                <input type="hidden" name="NombreCliente" value="<?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido'] ?>">
+                                <button class="btn btn-primary btn-lg font-weight-bold btn-block">Actualizar información</button>
+                            </form>
+                        </div>
                     </div>
-                    <?php }else{
-                            echo '<div class="d-flex justify-content-center align-middle" style="height:90vh"><div class="d-flex justify-content-center flex-column">';
-                                echo '<h1 class=" mt-5 font-weight-bold">Lo sentimos, este cliente no existe o ha sido eliminado</h1>';
-                                echo '<a href="'.$_SESSION['path'].'" class="btn btn-primary btn-lg">Ir a inicio</a>';
-                            echo '</div></div>';
-                        } ?>
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -166,6 +190,8 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
     <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="../plugins/toastr/toastr.min.js"></script>
+    <!-- Summernote -->
+    <script src="../plugins/summernote/summernote-bs4.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -193,6 +219,9 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                 "autoWidth": false,
                 "responsive": true,
             });
+
+            // Summernote
+            $('#summernote').summernote()
         });
     </script>
     <script>

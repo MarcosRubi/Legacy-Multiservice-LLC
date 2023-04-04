@@ -12,6 +12,7 @@ class Clientes extends DB
     public $Provincia;
     public $FechaNacimiento;
     public $IdEmpleado;
+    public $Informacion;
 
 
     public function listarTodo()
@@ -61,6 +62,7 @@ class Clientes extends DB
             IdEmpleado,
             Creado,
             CreadoTimestamp,
+            Informacion,
             Eliminado )
             VALUES (
             '" . $this->PrimerNombre . "',
@@ -74,6 +76,7 @@ class Clientes extends DB
             '" . $_SESSION['IdEmpleado'] . "',
             '" . date("Y-m-d h:i:s ") . "',
             '" . date("A") . "',
+            '" . $this->Informacion . "',
             'N' ) ";
         return $this->EjecutarQuery($query);
     }
@@ -89,6 +92,14 @@ class Clientes extends DB
         Ciudad = '" . $this->Ciudad . "', 
         Provincia = '" . $this->Provincia . "', 
         FechaNacimiento = '" . $this->FechaNacimiento . "' 
+        WHERE IdCliente='" . $id . "' ";
+
+        return $this->EjecutarQuery($query);
+    }
+    public function ActualizarInformacion($id)
+    {
+        $query = "UPDATE tbl_clientes SET 
+        Informacion = '" . $this->Informacion . "'
         WHERE IdCliente='" . $id . "' ";
 
         return $this->EjecutarQuery($query);

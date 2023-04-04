@@ -113,7 +113,7 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                     <div class="form-group">
                                         <label>Descripción</label>
                                         <textarea id="summernote" name="txtDescripcion">
-                                            Escribe <em>la</em> <u>descripción</u> <strong>aquí</strong>
+                                            
                                         </textarea>
                                     </div>
                                 </div>
@@ -190,7 +190,7 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                                     <div class="form-group">
                                         <label>Comentario</label>
                                         <textarea id="comentario" name="txtComentario">
-                                            Escribe <em>la</em> <u>comentario</u> <strong>aquí</strong>
+                                            
                                         </textarea>
                                     </div>
                                 </div>
