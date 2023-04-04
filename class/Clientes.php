@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/El_Salvador');
+
 class Clientes extends DB
 {
     public $PrimerNombre;
@@ -9,6 +11,7 @@ class Clientes extends DB
     public $Ciudad;
     public $Provincia;
     public $FechaNacimiento;
+    public $IdEmpleado;
 
 
     public function listarTodo()
@@ -55,6 +58,9 @@ class Clientes extends DB
             Ciudad,
             Provincia,
             FechaNacimiento,
+            IdEmpleado,
+            Creado,
+            CreadoTimestamp,
             Eliminado )
             VALUES (
             '" . $this->PrimerNombre . "',
@@ -65,6 +71,9 @@ class Clientes extends DB
             '" . $this->Ciudad . "',
             '" . $this->Provincia . "',
             '" . $this->FechaNacimiento . "',
+            '" . $_SESSION['IdEmpleado'] . "',
+            '" . date("Y-m-d h:i:s ") . "',
+            '" . date("A") . "',
             'N' ) ";
         return $this->EjecutarQuery($query);
     }
@@ -97,6 +106,14 @@ class Clientes extends DB
         WHERE Eliminado = 'N'
         AND YEAR(Creado) = YEAR(CURRENT_DATE())
         AND MONTH(Creado) = MONTH(CURRENT_DATE())";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadClientesPorEmpleado($IdEmpleado)
+    {
+        $query = "SELECT COUNT(IdCliente) AS total_clientes 
+        FROM tbl_clientes
+        WHERE IdEmpleado = '".$IdEmpleado."' AND DATE(Creado) = CURRENT_DATE() AND Eliminado = 'N'";
         return $this->EjecutarQuery($query);
     }
 }

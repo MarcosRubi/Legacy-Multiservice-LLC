@@ -23,8 +23,6 @@ $Obj_Eventos->Insertar();
 
 if ($Res_Clientes) {
     $_SESSION['success-delete'] = 'cliente';
-    echo "<script>history.go(-1);setTimeout(() => {
-        window.location.reload()
-    }, 1000); </script>";
+    header("Location:" . $_SESSION['path'] . "buscar-cliente/");
 }
 ?>

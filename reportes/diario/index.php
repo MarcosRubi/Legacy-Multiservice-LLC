@@ -129,9 +129,7 @@ require_once '../../func/validateSession.php';
                                         </button>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <canvas id="clientesChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                </div>
+                                <div id="resultsClientes"></div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
@@ -194,7 +192,6 @@ require_once '../../func/validateSession.php';
             //- DONUT CHART -
             //-------------
             // Get context with jQuery - using jQuery's .get() method.
-            var clientesChartCanvas = $('#clientesChart').get(0).getContext('2d')
             var donutData = {
                 labels: [
                     'Chrome',
@@ -213,13 +210,6 @@ require_once '../../func/validateSession.php';
                 maintainAspectRatio: false,
                 responsive: true,
             }
-            //Create pie or douhnut chart
-            // You can switch between pie and douhnut using the method below.
-            new Chart(clientesChartCanvas, {
-                type: 'doughnut',
-                data: donutData,
-                options: donutOptions
-            })
 
             //-------------
             //- PIE CHART -
@@ -255,6 +245,14 @@ require_once '../../func/validateSession.php';
             method: 'POST',
             success: function(response) {
                 $('#resultsBoletos').html(response);
+            }
+        });
+
+        $.ajax({
+            url: '../../secciones/graficaClientes.php',
+            method: 'POST',
+            success: function(response) {
+                $('#resultsClientes').html(response);
             }
         });
     </script>
