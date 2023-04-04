@@ -64,7 +64,7 @@ class Empleados extends DB
     }
 
     public function ListarEmpleados(){
-        $query = "SELECT IdEmpleado, NombreEmpleado, Agente FROM tbl_Empleados WHERE Eliminado='N'";
+        $query = "SELECT IdEmpleado, NombreEmpleado, Agente FROM tbl_empleados WHERE Eliminado='N'";
         return $this->EjecutarQuery($query);
     }
 }
