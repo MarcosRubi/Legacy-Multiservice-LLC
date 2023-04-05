@@ -125,7 +125,7 @@ if (isset($_GET['s'])) {
                                                             <a class="btn btn-sm mx-1 bg-lightblue" title="Editar" onclick="javascript:nuevaCotizacion(<?= $DatosFactura['IdFactura'] ?>);">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
-                                                            <a class="btn btn-sm mx-1 bg-danger" title="Listar" onclick="javascript:listarCotizaciones(<?= $DatosFactura['IdFactura'] ?>);">
+                                                            <a class="btn btn-sm mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarFactura(<?= $DatosFactura['IdFactura'] ?>);">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
                                                         </div>
@@ -198,6 +198,13 @@ if (isset($_GET['s'])) {
 
         function abrirFormDetalles(id) {
             window.open('<?= $_SESSION['path'] ?>facturas/detalles.php?id=' + id, 'Facturas', 'width=1000,height=1000')
+        }
+        function eliminarFactura(id) {
+            let confirmacion = confirm("¿Está seguro que desea eliminar la factura?");
+
+            if (confirmacion) {
+                window.location.href = '<?= $_SESSION['path'] ?>forms/facturas/eliminar.php?id=' + id
+            }
         }
     </script>
     <script>
