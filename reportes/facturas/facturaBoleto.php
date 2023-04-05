@@ -23,7 +23,7 @@ $Res_Facturas = $Obj_Facturas->buscarPorId($_GET['id']);
 
 $Datosfacturas = $Res_Facturas->fetch_assoc();
 
-$Res_PnrFactura = $Obj_Facturas->buscarPorIdFactura($DatosCliente['IdFactura']);
+$Res_PnrFactura = $Obj_Facturas->obtenerIdclienteYPnrFactura($DatosCliente['IdFactura']);
 
 
 $Res_buscarPagos = $Res_PnrFactura->fetch_assoc();

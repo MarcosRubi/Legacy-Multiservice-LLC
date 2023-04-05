@@ -17,7 +17,7 @@ $DatosCliente = $Res_Cliente->fetch_assoc();
 
 
 $Obj_Facturas = new Facturas();
-$Res_Facturas = $Obj_Facturas->buscarFactura($_GET['id']);
+$Res_Facturas = $Obj_Facturas->buscarFacturaPorId($_GET['id']);
 
 $Datosfacturas = $Res_Facturas->fetch_assoc();
 

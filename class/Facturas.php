@@ -33,12 +33,37 @@ class Facturas extends DB
         $query = "SELECT * FROM vta_listar_facturas WHERE IdCliente='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
-    public function buscarFactura($id)
+
+    public function buscarFacturaPorId($id)
     {
         $query = "SELECT * FROM vta_listar_facturas WHERE IdFactura='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
-    public function buscarPorIdFactura($id)
+    public function buscarFactura($content)
+    {
+        $query = "SELECT * FROM vta_listar_facturas WHERE 
+        IdFactura LIKE'%" . $content . "%' OR 
+        Valor LIKE'%" . $content . "%' OR 
+        Descripcion LIKE'%" . $content . "%' OR 
+        Efectivo LIKE'%" . $content . "%' OR 
+        CreditoValor LIKE'%" . $content . "%' OR 
+        CreditoNumero LIKE'%" . $content . "%' OR 
+        Cheque LIKE'%" . $content . "%' OR 
+        Banco LIKE'%" . $content . "%' OR 
+        Comentario LIKE'%" . $content . "%' OR 
+        IdCliente LIKE'%" . $content . "%' OR 
+        PrimerNombre LIKE'%" . $content . "%' OR 
+        SegundoNombre LIKE'%" . $content . "%' OR 
+        Apellido LIKE'%" . $content . "%' OR 
+        IdTipoFactura LIKE'%" . $content . "%' OR 
+        Tipo LIKE'%" . $content . "%' OR 
+        Agencia LIKE'%" . $content . "%' OR 
+        Agente LIKE'%" . $content . "%' OR 
+        Balance LIKE'%" . $content . "%' OR 
+        Cupon LIKE'%" . $content . "%'";
+        return $this->EjecutarQuery($query);
+    }
+    public function obtenerIdclienteYPnrFactura($id)
     {
         $query = "SELECT IdCliente,Pnr FROM tbl_facturas WHERE IdFactura='" . $id . "'";
         return $this->EjecutarQuery($query);
