@@ -18,7 +18,7 @@ if ($Res_Empleado->num_rows > 0 && password_verify($_POST['password'], $Datos_Em
     $_SESSION['IdEmpleado'] = $Datos_Empleado['IdEmpleado'];
     $_SESSION['NombreEmpleado'] = $Datos_Empleado['NombreEmpleado'];
     $_SESSION['UrlFoto'] = $Datos_Empleado['UrlFoto'];
-    $_SESSION['NombreRol'] = $Datos_Empleado['NombreRol'];
+    $_SESSION['IdRole'] = intval($Datos_Empleado['IdRole']);
     $_SESSION['Agencia'] = $Datos_Empleado['Agencia'];
     $_SESSION['Agente'] = $Datos_Empleado['Agente'];
     $_SESSION['FormatoFecha'] = $Datos_Empleado['FormatoFecha'];

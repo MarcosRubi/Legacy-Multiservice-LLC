@@ -141,7 +141,6 @@ if (!isset($_GET['factura']) || !isset($_GET['nombre']) || !isset($_GET['cliente
                                     <div class="form-group">
                                         <label>Comentario</label>
                                         <textarea id="comentario" name="txtComentario">
-                                            Escribe <em>la</em> <u>comentario</u> <strong>aquí</strong>
                                         </textarea>
                                     </div>
                                 </div>

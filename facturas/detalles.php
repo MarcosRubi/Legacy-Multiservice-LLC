@@ -2,6 +2,7 @@
 require_once '../func/validateSession.php';
 require_once '../bd/bd.php';
 require_once '../class/Ajustes.php';
+require_once '../class/OpcionesTablas.php';
 
 $Obj_Ajustes = new Ajustes();
 
@@ -15,8 +16,16 @@ require_once '../class/Ajustes.php';
 $Obj_Facturas = new Facturas();
 $Obj_Ajustes = new Ajustes();
 
-$Res_Facturas = $Obj_Facturas->buscarFactura($_GET['id']);
+$Res_Facturas = $Obj_Facturas->buscarFacturaPorId($_GET['id']);
 $DatosFactura = $Res_Facturas->fetch_assoc();
+
+$editar = false;
+
+if ($_SESSION['IdRole'] === 2) {
+    $editar = true;
+    $Obj_OpcionesTablas = new OpcionesTablas();
+    $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
+}
 
 ?>
 
@@ -57,7 +66,7 @@ $DatosFactura = $Res_Facturas->fetch_assoc();
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Detalles de factura # <?= $DatosFactura['IdFactura'] ?></h3>
                         </div>
-                        <form action="#" method="post" class="card-body" id="frmNuevo" onsubmit="return false;">
+                        <form action="../forms/facturas/editar.php" method="post" class="card-body" id="frmEditar">
                             <div class="px-2 mb-3 rounded" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                                 <div class="d-flex pt-3">
                                     <!-- Cliente -->
@@ -68,14 +77,23 @@ $DatosFactura = $Res_Facturas->fetch_assoc();
                                     <!-- Tipo -->
                                     <div class="form-group mx-1 container-fluid">
                                         <label>Tipo</label>
-                                        <select class="form-control select2" style="width: 100%;" name="txtIdTipo" disabled>
+                                        <select class="form-control select2" style="width: 100%;" name="txtIdTipo" <?= $editar ? '' : 'disabled' ?>>
                                             <option value="<?= $DatosFactura['IdTipoFactura'] ?>" selected><?= $DatosFactura['Tipo'] ?></option>
+                                            <?php
+                                            if ($DatosFactura['IdTipoFactura'] > 3 && $editar) {
+
+                                                while ($DatoTipoFactura = $Res_OpcionesTipoFactura->fetch_assoc()) {
+                                                    if ($DatoTipoFactura['IdTipoFactura'] > 3 && $DatoTipoFactura['IdTipoFactura'] !== $DatosFactura['IdTipoFactura']) { ?>
+                                                        <option value="<?= $DatoTipoFactura['IdTipoFactura'] ?>"><?= $DatoTipoFactura['Tipo'] ?></option>
+                                            <?php }
+                                                }
+                                            } ?>
                                         </select>
                                     </div>
                                     <!-- Valor -->
                                     <div class="form-group mx-1 container-fluid">
                                         <label>Valor</label>
-                                        <input type="number" class="form-control" placeholder="0.0" name="txtValor" value="<?= $DatosFactura['Valor'] ?>" readonly>
+                                        <input type="number" class="form-control" placeholder="0.0" name="txtValor" value="<?= $DatosFactura['Valor'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                 </div>
                                 <div class="d-flex">
@@ -166,11 +184,10 @@ $DatosFactura = $Res_Facturas->fetch_assoc();
                                 </div>
                             </div>
                             <input type="text" class="form-control d-none" value="<?= $DatosFactura['IdCliente'] ?>" name="txtIdCliente" readonly>
-                            <input type="text" class="form-control d-none" value="" name="txtPnr" readonly>
-                            <input type="text" class="form-control d-none" value="false" name="txtPendiente" readonly id="pendiente">
+                            <input type="text" class="form-control d-none" value="<?= $DatosFactura['IdFactura'] ?>" name="txtIdFactura" readonly>
                             <!-- /.form group -->
                             <?php
-                            if ($_SESSION['NombreRol'] === 'Administrador') {
+                            if ($_SESSION['IdRole'] === 2) {
                             ?>
                                 <div class="form-group pr-1 mt-3">
                                     <button class="btn btn-primary btn-block btn-lg" type="submit">Editar factura</button>
@@ -232,7 +249,7 @@ $DatosFactura = $Res_Facturas->fetch_assoc();
     </script>
     <script>
         $(function() {
-            $('#frmNuevo').validate({
+            $('#frmEditar').validate({
                 rules: {
                     txtValor: {
                         required: true

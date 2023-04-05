@@ -111,7 +111,7 @@
                         </li>
                     </ul>
                 </li>
-                <?php if($_SESSION['NombreRol'] === 'Administrador'){ ?>
+                <?php if($_SESSION['IdRole'] === 2){ ?>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-user-cog"></i>

@@ -179,7 +179,7 @@ $Res_Movimientos = $Obj_Movimientos->listarMovimientos($_GET['id']);
                                                 <th>Agencia</th>
                                                 <th>Comentario</th>
                                                 <th>Acción</th>
-                                                <?php if ($_SESSION['NombreRol'] === 'Administrador') { ?>
+                                                <?php if ($_SESSION['IdRole'] === 2) { ?>
                                                     <th></th>
                                                 <?php } ?>
                                             </tr>
@@ -194,7 +194,7 @@ $Res_Movimientos = $Obj_Movimientos->listarMovimientos($_GET['id']);
                                                     <td><?= $DatosMovimientos['Agencia'] ?></td>
                                                     <td><?= $DatosMovimientos['Comentario'] ?></td>
                                                     <td><?= $DatosMovimientos['Accion'] ?></td>
-                                                    <?php if ($_SESSION['NombreRol'] === 'Administrador') { ?>
+                                                    <?php if ($_SESSION['IdRole'] === 2) { ?>
                                                         <td style="width:1rem;">
                                                             <a href="#" title="Eliminar" onclick="javascript:eliminarMovimiento(<?= $DatosMovimientos['IdMovimiento'] ?>)"><i class="fa fa-trash fa-lg"></i></a>
                                                         </td>

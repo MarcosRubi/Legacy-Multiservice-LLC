@@ -139,10 +139,10 @@ for ($i = 0; $i < 5; $i++) {
                                                     <th>Valor total</th>
                                                     <?php if ($formasPagos <= 1) { ?>
                                                         <th>Total recibido</th>
-                                                        <?php if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) > 0) { ?>
+                                                        <?php if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) === 0) { ?>
                                                             <th>Forma de pago</th>
                                                         <?php } ?>
-                                                        <th>Balance</th>
+                                                        <th>Balance</th>    
                                                     <?php } ?>
                                                     <th>Agencia</th>
                                                     <th>Agente</th>
@@ -154,8 +154,8 @@ for ($i = 0; $i < 5; $i++) {
                                                     <td><?= $Obj_Ajustes->FechaInvertir(substr($DatosCliente['Creado'], 0, -9)) ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['Valor']) ?></td>
                                                     <?php if ($formasPagos <= 1) { ?>
-                                                        <td><?= $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) ?></td>
-                                                        <?php if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) > 0) { ?>
+                                                        <td><?= $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) ?></td>
+                                                        <?php if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) === 0) { ?>
 
                                                             <td><?php
                                                                 if ($efectivo > 0) {
@@ -176,7 +176,7 @@ for ($i = 0; $i < 5; $i++) {
                                                                 ?></td>
                                                         <?php } ?>
 
-                                                        <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['BalanceInicial']) ?></td>
+                                                        <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['Balance']) ?></td>
                                                     <?php } ?>
                                                     <td><?= $DatosCliente['Agencia'] ?></td>
                                                     <td><?= $DatosCliente['Agente'] ?></td>
@@ -241,7 +241,7 @@ for ($i = 0; $i < 5; $i++) {
                                         if ($Res_Abonos->num_rows >= 1) { ?>
                                             <div class="row">
                                                 <!-- /.col -->
-                                                <div class="col-4">
+                                                <div class="col-6">
                                                     <p class="lead">Información de abonos</p>
 
                                                     <div class="table-responsive">

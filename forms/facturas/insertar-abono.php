@@ -70,6 +70,7 @@ $Res_Factura = $Obj_Facturas->obtenerValoresPagos($_POST['txtIdFactura']);
 while ($DatosPagos = $Res_Factura->fetch_assoc()) {
     $Obj_Facturas->Efectivo = $Obj_Ajustes->ConvertirFormatoDolar($DatosPagos['Efectivo']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtEfectivo']);
     $Obj_Facturas->CreditoValor = $Obj_Ajustes->ConvertirFormatoDolar($DatosPagos['CreditoValor']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtCreditoValor']);
+    $Obj_Facturas->CreditoNumero = $Obj_Ajustes->RemoverEtiquetas($_POST['txtCreditoNumero']);
     $Obj_Facturas->Cheque = $Obj_Ajustes->ConvertirFormatoDolar($DatosPagos['Cheque']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtCheque']);
     $Obj_Facturas->Banco = $Obj_Ajustes->ConvertirFormatoDolar($DatosPagos['Banco']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtBanco']);
     $Obj_Facturas->Cupon = $Obj_Ajustes->ConvertirFormatoDolar($DatosPagos['Cupon']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtCupon']);

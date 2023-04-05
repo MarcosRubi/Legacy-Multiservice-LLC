@@ -151,19 +151,11 @@ class Facturas extends DB
     public function Actualizar($id)
     {
         $query = "UPDATE tbl_facturas SET 
-        IdCliente = '" . $this->IdCliente . "',
         IdTipoFactura = '" . $this->IdTipoFactura . "',
         Valor = '" . $this->Valor . "',
-        Descripcion = '" . $this->Descripcion . "' 
-        Efectivo = '" . $this->Efectivo . "' 
-        Agencia = '" . $this->Agencia . "' 
-        Agente = '" . $this->Agente . "' 
-        CreditoValor = '" . $this->CreditoValor . "' 
-        CreditoNumero = '" . $this->CreditoNumero . "' 
-        Cheque = '" . $this->Cheque . "' 
-        Banco = '" . $this->Banco . "' 
-        Cupon = '" . $this->Cupon . "' 
-        Comentario = '" . $this->Comentario . "' 
+        Descripcion = '" . $this->Descripcion . "', 
+        Comentario = '" . $this->Comentario . "',
+        Balance = '" . ((doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon) + doubleval($this->Banco)) - doubleval($this->Valor)) . "'
         WHERE IdFactura='" . $id . "' ";
 
         return $this->EjecutarQuery($query);
@@ -182,6 +174,7 @@ class Facturas extends DB
         $query = "UPDATE tbl_facturas SET 
         Efectivo = '" . $this->Efectivo . "',
         CreditoValor = '" . $this->CreditoValor . "',
+        CreditoNumero = '" . $this->CreditoNumero . "',
         Cheque = '" . $this->Cheque . "',
         Banco = '" . $this->Banco . "',
         Cupon = '" . $this->Cupon . "'
@@ -206,6 +199,7 @@ class Facturas extends DB
             tbl_facturas 
         WHERE
             Creado BETWEEN '2023-01-01' AND '2023-12-31' 
+            AND Eliminado='N'
         GROUP BY
             YEAR ( Creado ),
             MONTH (
@@ -223,6 +217,7 @@ class Facturas extends DB
         FROM tbl_facturas
         WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
         AND MONTH(Creado) = MONTH(CURRENT_DATE())
+        AND Eliminado='N'
         GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado)";
         return $this->EjecutarQuery($query);
     }
@@ -239,6 +234,7 @@ class Facturas extends DB
         WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
         AND MONTH(Creado) = MONTH(CURRENT_DATE())
         AND WEEK(Creado) = WEEK(CURRENT_DATE())
+        AND Eliminado='N'
         GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado), DAYOFWEEK(Creado)";
         return $this->EjecutarQuery($query);
     }
@@ -260,7 +256,7 @@ class Facturas extends DB
                 SUM(Valor) AS Total,
                 SUM(Balance) AS Balance
             FROM tbl_facturas
-            WHERE DATE(Creado) = CURDATE()
+            WHERE DATE(Creado) = CURDATE() AND Eliminado='N'
             GROUP BY YEAR(Creado), MONTH(Creado), DAY(Creado), HOUR(Creado)
         ) AS subconsulta
         GROUP BY Anio, Mes, Dia, Hora_Rango";

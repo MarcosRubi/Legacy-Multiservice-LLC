@@ -69,9 +69,9 @@ class Abonos extends DB
 
     public function Actualizar($id)
     {
-        $query = "UPDATE tbl_facturas 
-        SET Balance = '".$this->BalanceActual."' 
-        WHERE IdFactura = '".$id."'";
+        $query = "UPDATE tbl_abonos
+        SET BalanceActual = '".$this->BalanceActual."' 
+        WHERE IdAbono = '".$id."'";
 
         return $this->EjecutarQuery($query);
     }
@@ -79,6 +79,14 @@ class Abonos extends DB
     public function Eliminar($id)
     {
         $query = "UPDATE tbl_abonos SET Eliminado='S' WHERE IdAbono='" . $id . "'";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function obtenerUltimoAbono($id){
+        $query = "SELECT * FROM tbl_abonos
+        WHERE IdFactura = '".$id."'
+        ORDER BY Creado DESC
+        LIMIT 1;";
         return $this->EjecutarQuery($query);
     }
 }

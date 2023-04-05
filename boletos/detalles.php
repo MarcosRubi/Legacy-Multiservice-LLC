@@ -218,7 +218,7 @@ $DatosBoleto = $Res_Boletos->fetch_assoc();
                             <input type="hidden" class="form-control d-none" name="IdCliente" value="<?=$DatosBoleto['IdCliente']?>">
                             <!-- /.form group -->
                             <?php
-                                if($_SESSION['NombreRol'] === 'Administrador'){
+                                if($_SESSION['IdRole'] === 2){
                             ?>
                             <div class="form-group pr-1 mt-3">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Editar Boleto</button>

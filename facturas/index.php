@@ -110,7 +110,10 @@ if (isset($_GET['s'])) {
                                                     <td><a href="#" onclick="javascript:abrirFormDetalles(<?= $DatosFactura['IdFactura'] ?>);"><?= $DatosFactura['IdFactura'] ?></a></td>
                                                     <td><?= $DatosFactura['PrimerNombre'] . " " . $DatosFactura['SegundoNombre'] . " " . $DatosFactura['Apellido']  ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosFactura['Valor']) ?></td>
-                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosFactura['Balance']) ?></td>
+                                                    <td class="
+                                                            <?php if($Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['Balance']) < 0){echo "text-danger font-weight-bold";}?>
+                                                            <?php if($Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['Balance']) > 0){echo "text-success font-weight-bold";}?>"
+                                                    ><?= $Obj_Ajustes->FormatoDinero($DatosFactura['Balance']) ?></td>
                                                     <td><?= $Obj_Ajustes->FechaInvertir(substr($DatosFactura['Creado'], 0, -9)) . " " . substr($DatosFactura['Creado'], 10, 20) . " " .  $DatosFactura['CreadoTimestamp'] ?></td>
                                                     <td><?= "<strong>Efectivo:</strong> " . $Obj_Ajustes->FormatoDinero($DatosFactura['Efectivo']) ?></td>
                                                     <td><?= "<strong>Crédito:</strong> " . $Obj_Ajustes->FormatoDinero($DatosFactura['CreditoValor']) ?></td>
@@ -122,7 +125,10 @@ if (isset($_GET['s'])) {
                                                     <td><?= $DatosFactura['Agente'] ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">
-                                                            <a class="btn btn-sm mx-1 bg-lightblue" title="Editar" onclick="javascript:nuevaCotizacion(<?= $DatosFactura['IdFactura'] ?>);">
+                                                            <a href="#" onclick="javascript:abrirFormAbonos(<?=$DatosFactura['IdFactura']?>, '<?=$DatosFactura['PrimerNombre'] . ' ' . $DatosFactura['Apellido']?>', <?=$DatosFactura['IdCliente']?>);" class="btn btn-sm mx-1 btn-primary" title="Abonar" style="<?= $Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['Balance']) < 0 ? '' : 'opacity:0; pointer-events:none;' ?>">
+                                                                <i class="fa fa-dollar-sign px-1 fa-lg"></i>
+                                                            </a>
+                                                            <a class="btn btn-sm mx-1 bg-lightblue" title="Editar" onclick="javascript:abrirFormDetalles(<?= $DatosFactura['IdFactura'] ?>);">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
                                                             <a class="btn btn-sm mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarFactura(<?= $DatosFactura['IdFactura'] ?>);">
@@ -195,10 +201,13 @@ if (isset($_GET['s'])) {
         });
     </script>
     <script>
-
         function abrirFormDetalles(id) {
-            window.open('<?= $_SESSION['path'] ?>facturas/detalles.php?id=' + id, 'Facturas', 'width=1000,height=1000')
+            window.open('<?= $_SESSION['path'] ?>facturas/detalles.php?id=' + id, 'Detalles', 'width=1000,height=1000')
         }
+        function abrirFormAbonos(factura, nombre, cliente) {
+            window.open('<?= $_SESSION['path'] ?>forms/facturas/frmAbono.php?factura=' + factura + '&nombre='+nombre + '&cliente='+cliente, 'Detalles', 'width=1000,height=1000')
+        }
+
         function eliminarFactura(id) {
             let confirmacion = confirm("¿Está seguro que desea eliminar la factura?");
 
