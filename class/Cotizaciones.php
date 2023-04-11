@@ -123,11 +123,71 @@ class Cotizaciones extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidadCotizacionesPorEmpleado($agente)
+    public function cantidadContizacionesPorEmpleadoMesActual($agente)
+    {
+        $query = "SELECT COUNT(IdCotizacion) AS total_cotizaciones
+        FROM tbl_cotizaciones
+        WHERE Eliminado = 'N'
+        AND YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE()) 
+        AND Agente='".$agente."' " ;
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadCotizacionesPorEmpleadoAnioActual($agente)
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdCotizacion) AS total_cotizaciones 
+        FROM tbl_cotizaciones
+        WHERE
+        Creado BETWEEN '" . date("Y-01-01") . "' AND '" . date("Y-12-31") . "' 
+            AND Eliminado='N'
+            AND Agente = '" . $agente . "'
+        GROUP BY
+            YEAR ( Creado ),
+            MONTH (
+            Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadCotizacionesPorEmpleadoMesActual($agente)
+    {
+        $query = "SELECT YEAR(Creado) AS Anio,
+        MONTH(Creado) AS Mes,
+    WEEK(Creado) AS Semana,
+    COUNT(IdCotizacion) AS total_cotizaciones 
+    FROM tbl_cotizaciones
+    WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
+    AND MONTH(Creado) = MONTH(CURRENT_DATE())
+    AND Agente = '" . $agente . "'
+    AND Eliminado='N'
+    GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadCotizacionesPorEmpleadoSemanaActual($agente)
+    {
+        $query = "SELECT YEAR(Creado) AS Anio,
+        MONTH(Creado) AS Mes,
+        WEEK(Creado) AS Semana,
+        DAYOFWEEK(Creado) AS DiaSemana,
+        COUNT(IdCotizacion) AS total_cotizaciones 
+        FROM tbl_cotizaciones
+        WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())
+        AND WEEK(Creado) = WEEK(CURRENT_DATE())
+        AND Agente = '" . $agente . "'
+        AND Eliminado='N'
+        GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado), DAYOFWEEK(Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadCotizacionesPorEmpleadoDiaActual($agente)
     {
         $query = "SELECT COUNT(IdCotizacion) AS total_cotizaciones 
         FROM tbl_cotizaciones 
-        WHERE Agente = '".$agente."' AND DATE(Creado) = CURRENT_DATE();";
+        WHERE Agente = '" . $agente . "' AND DATE(Creado) = CURRENT_DATE();";
         return $this->EjecutarQuery($query);
     }
 }

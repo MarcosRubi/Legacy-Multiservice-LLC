@@ -1,5 +1,6 @@
 <?php
 require_once '../../func/validateSession.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -54,17 +55,6 @@ require_once '../../func/validateSession.php';
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                             <i class="fas fa-minus"></i>
                                         </button>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-wrench"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-right bg-dark" role="menu">
-                                                <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'year')">Este año</a>
-                                                <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'month')">Este mes</a>
-                                                <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'week')">Esta semana</a>
-                                                <a href="#" class="dropdown-item active" onclick="javascript:changeTime(event,'now')">Hoy</a>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-body" id="result">
@@ -74,16 +64,13 @@ require_once '../../func/validateSession.php';
                             </div>
                             <!-- /.card -->
                         </div>
-                        <div class="d-flex justify-content-center col-12 mt-3">
+                        <div class="d-flex justify-content-center col-12 mt-3 flex-column flex-md-row">
                             <!-- DONUT CHART -->
                             <div class="card card-danger col mx-2 p-0">
                                 <div class="card-header">
                                     <h3 class="card-title">Cotizaciones realizadas</h3>
 
                                     <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
                                         <button type="button" class="btn btn-tool" data-card-widget="remove">
                                             <i class="fas fa-times"></i>
                                         </button>
@@ -100,9 +87,6 @@ require_once '../../func/validateSession.php';
                                     <h3 class="card-title">Boletos creados</h3>
 
                                     <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
                                         <button type="button" class="btn btn-tool" data-card-widget="remove">
                                             <i class="fas fa-times"></i>
                                         </button>
@@ -113,7 +97,7 @@ require_once '../../func/validateSession.php';
                             </div>
                         </div>
                         <!-- /.card -->
-                        <div class="d-flex justify-content-center col-12 mt-3">
+                        <div class="d-flex justify-content-center col-12 mt-3 flex-column flex-md-row">
 
                             <!-- PIE CHART -->
                             <div class="card card-warning col mx-2 p-0">
@@ -121,9 +105,6 @@ require_once '../../func/validateSession.php';
                                     <h3 class="card-title">Clientes creados</h3>
 
                                     <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
                                         <button type="button" class="btn btn-tool" data-card-widget="remove">
                                             <i class="fas fa-times"></i>
                                         </button>
@@ -139,9 +120,6 @@ require_once '../../func/validateSession.php';
                                     <h3 class="card-title">Facturas creadas</h3>
 
                                     <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
                                         <button type="button" class="btn btn-tool" data-card-widget="remove">
                                             <i class="fas fa-times"></i>
                                         </button>
@@ -156,20 +134,33 @@ require_once '../../func/validateSession.php';
                     <!-- /.col (RIGHT) -->
                 </div>
                 <!-- /.row -->
-        </section>
-        <!-- /.content -->
+            </section>
+            <!-- /.content -->
 
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <?php include_once '../../secciones/footer.php'; ?>
     </div>
-    <!-- /.content-wrapper -->
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-
-    <!-- Main Footer -->
-    <?php include_once '../../secciones/footer.php'; ?>
+    <div class="position-fixed bg-info" style=" z-index: 5000; bottom: 1rem; right: 1rem;  border-radius: 50%;box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;">
+        <div class="btn-group">
+            <button type="button" class="btn btn-tool dropdown-toggle text-white" data-toggle="dropdown" aria-expanded="false" style="padding: 2.5rem 1.5rem;">
+                <i class="fas fa-lg fa-wrench"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right bg-dark" role="menu">
+                <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'year')">Este año</a>
+                <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'month')">Este mes</a>
+                <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'week')">Esta semana</a>
+                <a href="#" class="dropdown-item active" onclick="javascript:changeTime(event,'now')">Hoy</a>
+            </div>
+        </div>
     </div>
     <!-- ./wrapper -->
 
@@ -185,14 +176,6 @@ require_once '../../func/validateSession.php';
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        $.ajax({
-            url: '../../secciones/graficaCotizaciones.php',
-            method: 'POST',
-            success: function(response) {
-                $('#resultCotizaciones').html(response);
-            }
-        });
-
         $.ajax({
             url: '../../secciones/graficaBoletos.php',
             method: 'POST',
@@ -239,6 +222,12 @@ require_once '../../func/validateSession.php';
 
         function changeTime(e, filter) {
 
+            updateIncomeGraph(e, filter)
+            updateCharCotizaciones(e, filter)
+            e?.target.classList.add('active');
+        };
+
+        function updateIncomeGraph(e, filter) {
             $.ajax({
                 url: '../../secciones/tablaIngresos.php',
                 method: 'POST',
@@ -262,8 +251,20 @@ require_once '../../func/validateSession.php';
                 filter === 'week' ? title.innerHTML = 'Ingresos para la semana #' + numeroDeSemana(new Date()) + ' del ' + date.getFullYear() : ''
                 filter === 'now' ? title.innerHTML = 'Ingresos del día ' + date.getDate() + ' de ' + MONTHS[date.getMonth()] + ' del ' + date.getFullYear() : ''
             }
-            e?.target.classList.add('active');
-        };
+        }
+
+        function updateCharCotizaciones(e, filter) {
+            $.ajax({
+                url: '../../secciones/graficaCotizaciones.php',
+                method: 'POST',
+                data: {
+                    filter
+                },
+                success: function(response) {
+                    $('#resultCotizaciones').html(response);
+                }
+            });
+        }
     </script>
     <!-- Page specific script -->
 

@@ -198,7 +198,7 @@ class Facturas extends DB
         FROM
             tbl_facturas 
         WHERE
-            Creado BETWEEN '2023-01-01' AND '2023-12-31' 
+            Creado BETWEEN '".date("Y-01-01")."' AND '".date("Y-12-31")."' 
             AND Eliminado='N'
         GROUP BY
             YEAR ( Creado ),

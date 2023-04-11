@@ -8,6 +8,7 @@ $Obj_Empleados = new Empleados();
 $Obj_Cotizaciones = new Cotizaciones();
 $Res_Empleados = $Obj_Empleados->ListarEmpleados();
 
+
 $empleados = '';
 $agentes = [];
 $TotalPorEmpleado = '[';
@@ -17,11 +18,22 @@ while ($DatosEmpleado = $Res_Empleados->fetch_assoc()) {
     $empleados .= "'" . $DatosEmpleado['NombreEmpleado'] . "',";
 
 
-    $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleado($DatosEmpleado['Agente']);
-    $TotalPorEmpleado .=  intval($Res_Cotizaciones->fetch_assoc()['total_cotizaciones']) . ',';
+    $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleadoDiaActual($DatosEmpleado['Agente']);
+    if ($_POST['filter'] === 'week') {
+        $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleadoSemanaActual($DatosEmpleado['Agente']);
+    }
+    if ($_POST['filter'] === 'month') {
+        $Res_Cotizaciones = $Obj_Cotizaciones->cantidadContizacionesPorEmpleadoMesActual($DatosEmpleado['Agente']);
+    }
+    if ($_POST['filter'] === 'year') {
+        $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleadoAnioActual($DatosEmpleado['Agente']);
+    }
+
+    @$TotalPorEmpleado .=  intval($Res_Cotizaciones->fetch_assoc()['total_cotizaciones']) . ',';
 }
 
 $TotalPorEmpleado .= ']';
+
 
 
 $string = str_replace(array('[', ']'), '', $TotalPorEmpleado);
@@ -29,13 +41,13 @@ $array = explode(',', $string);
 $array = array_map('intval', $array);
 
 // Eliminar todos los elementos que no son 0
-$array_filtered = array_filter($array, function($value) {
+$array_filtered = array_filter($array, function ($value) {
     return $value !== 0;
 });
 
 // Si el tamaño del array filtrado es 0, entonces todos los elementos son 0
 if (count($array_filtered) === 0) {
-    echo "<h5 class='position-absolute' style='top: 50%;left: 50%;transform: translate(-50%, -50%);'>No hay cotizaciones creadas el día de hoy<h5>";
+    echo "<h5 class='position-absolute' style='top: 50%;left: 50%;transform: translate(-50%, -50%);'>No hay cotizaciones creadas.<h5>";
 }
 ?>
 
