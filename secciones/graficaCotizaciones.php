@@ -23,7 +23,7 @@ while ($DatosEmpleado = $Res_Empleados->fetch_assoc()) {
         $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleadoSemanaActual($DatosEmpleado['Agente']);
     }
     if ($_POST['filter'] === 'month') {
-        $Res_Cotizaciones = $Obj_Cotizaciones->cantidadContizacionesPorEmpleadoMesActual($DatosEmpleado['Agente']);
+        $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleadoMesActual($DatosEmpleado['Agente']);
     }
     if ($_POST['filter'] === 'year') {
         $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleadoAnioActual($DatosEmpleado['Agente']);

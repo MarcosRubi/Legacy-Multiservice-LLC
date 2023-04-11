@@ -176,14 +176,7 @@ require_once '../../func/validateSession.php';
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        $.ajax({
-            url: '../../secciones/graficaBoletos.php',
-            method: 'POST',
-            success: function(response) {
-                $('#resultsBoletos').html(response);
-            }
-        });
-
+        
         $.ajax({
             url: '../../secciones/graficaClientes.php',
             method: 'POST',
@@ -224,6 +217,7 @@ require_once '../../func/validateSession.php';
 
             updateIncomeGraph(e, filter)
             updateCharCotizaciones(e, filter)
+            updateCharBoletos(e, filter)
             e?.target.classList.add('active');
         };
 
@@ -252,7 +246,6 @@ require_once '../../func/validateSession.php';
                 filter === 'now' ? title.innerHTML = 'Ingresos del día ' + date.getDate() + ' de ' + MONTHS[date.getMonth()] + ' del ' + date.getFullYear() : ''
             }
         }
-
         function updateCharCotizaciones(e, filter) {
             $.ajax({
                 url: '../../secciones/graficaCotizaciones.php',
@@ -264,6 +257,18 @@ require_once '../../func/validateSession.php';
                     $('#resultCotizaciones').html(response);
                 }
             });
+        }
+        function updateCharBoletos(e, filter){
+            $.ajax({
+            url: '../../secciones/graficaBoletos.php',
+            method: 'POST',
+            data: {
+                    filter
+                },
+            success: function(response) {
+                $('#resultsBoletos').html(response);
+            }
+        });
         }
     </script>
     <!-- Page specific script -->

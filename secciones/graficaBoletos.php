@@ -17,8 +17,18 @@ while ($DatosEmpleado = $Res_Empleados->fetch_assoc()) {
     $empleados .= "'" . $DatosEmpleado['NombreEmpleado'] . "',";
 
 
-    $Res_Boletos = $Obj_Boletos->cantidadBoletosPorEmpleado($DatosEmpleado['Agente']);
-    $TotalPorEmpleado .=  intval($Res_Boletos->fetch_assoc()['total_boletos']) . ',';
+    $Res_Boletos = $Obj_Boletos->cantidadBoletosPorEmpleadoDiaActual($DatosEmpleado['Agente']);
+    if ($_POST['filter'] === 'week') {
+        $Res_Boletos = $Obj_Boletos->cantidadBoletosPorEmpleadoSemanaActual($DatosEmpleado['Agente']);
+    }
+    if ($_POST['filter'] === 'month') {
+        $Res_Boletos = $Obj_Boletos->cantidadBoletosPorEmpleadoMesActual($DatosEmpleado['Agente']);
+    }
+    if ($_POST['filter'] === 'year') {
+        $Res_Boletos = $Obj_Boletos->cantidadBoletosPorEmpleadoAnioActual($DatosEmpleado['Agente']);
+    }
+
+    @$TotalPorEmpleado .=  intval($Res_Boletos->fetch_assoc()['total_boletos']) . ',';
 }
 
 $TotalPorEmpleado .= ']';

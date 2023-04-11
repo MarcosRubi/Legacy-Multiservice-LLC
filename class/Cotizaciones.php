@@ -123,7 +123,7 @@ class Cotizaciones extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidadContizacionesPorEmpleadoMesActual($agente)
+    public function cantidadCotizacionesPorEmpleadoMesActual($agente)
     {
         $query = "SELECT COUNT(IdCotizacion) AS total_cotizaciones
         FROM tbl_cotizaciones
@@ -151,20 +151,6 @@ class Cotizaciones extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidadCotizacionesPorEmpleadoMesActual($agente)
-    {
-        $query = "SELECT YEAR(Creado) AS Anio,
-        MONTH(Creado) AS Mes,
-    WEEK(Creado) AS Semana,
-    COUNT(IdCotizacion) AS total_cotizaciones 
-    FROM tbl_cotizaciones
-    WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
-    AND MONTH(Creado) = MONTH(CURRENT_DATE())
-    AND Agente = '" . $agente . "'
-    AND Eliminado='N'
-    GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado)";
-        return $this->EjecutarQuery($query);
-    }
 
     public function cantidadCotizacionesPorEmpleadoSemanaActual($agente)
     {
