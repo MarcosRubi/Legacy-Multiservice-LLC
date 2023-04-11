@@ -264,7 +264,54 @@ class Facturas extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidadFacturasPorEmpleado($Agente)
+
+    // PARA LOS FILTROS DE GRAFICA
+    public function cantidadFacturasPorEmpleadoAnioActual($agente)
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdFactura) AS total_facturas
+        FROM tbl_Facturas
+        WHERE
+        Creado BETWEEN '" . date("Y-01-01") . "' AND '" . date("Y-12-31") . "' 
+            AND Eliminado='N'
+            AND Agente = '" . $agente . "'
+        GROUP BY
+            YEAR ( Creado ),
+            MONTH (
+            Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadFacturasPorEmpleadoMesActual($agente)
+    {
+        $query = "SELECT COUNT(IDFactura) AS total_facturas
+        FROM tbl_facturas
+        WHERE Eliminado = 'N'
+        AND YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE()) 
+        AND Agente='".$agente."' " ;
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadFacturasPorEmpleadoSemanaActual($agente)
+    {
+        $query = "SELECT YEAR(Creado) AS Anio,
+        MONTH(Creado) AS Mes,
+        WEEK(Creado) AS Semana,
+        DAYOFWEEK(Creado) AS DiaSemana,
+        COUNT(IdFactura) AS total_facturas 
+        FROM tbl_facturas
+        WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())
+        AND WEEK(Creado) = WEEK(CURRENT_DATE())
+        AND Agente = '" . $agente . "'
+        AND Eliminado='N'
+        GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado), DAYOFWEEK(Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadFacturasPorEmpleadoDiaActual($Agente)
     {
         $query = "SELECT COUNT(IdFactura) AS total_facturas 
         FROM tbl_facturas

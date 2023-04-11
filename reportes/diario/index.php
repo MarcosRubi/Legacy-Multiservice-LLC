@@ -176,15 +176,6 @@ require_once '../../func/validateSession.php';
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        $.ajax({
-            url: '../../secciones/graficaFacturas.php',
-            method: 'POST',
-            success: function(response) {
-                $('#resultsFacturas').html(response);
-            }
-        });
-    </script>
-    <script>
         const MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 
         const numeroDeSemana = fecha => {
@@ -210,7 +201,8 @@ require_once '../../func/validateSession.php';
             updateIncomeGraph(e, filter)
             updateCharCotizaciones(e, filter)
             updateCharBoletos(e, filter)
-            uodateCharClientes(e,filter)
+            uodateCharClientes(e, filter)
+            updateCharFacturas(e, filter)
             e?.target.classList.add('active');
         };
 
@@ -266,6 +258,7 @@ require_once '../../func/validateSession.php';
             });
 
         }
+
         function uodateCharClientes(e, filter) {
             $.ajax({
                 url: '../../secciones/graficaClientes.php',
@@ -275,6 +268,19 @@ require_once '../../func/validateSession.php';
                 },
                 success: function(response) {
                     $('#resultsClientes').html(response);
+                }
+            });
+        }
+
+        function updateCharFacturas(e, filter) {
+            $.ajax({
+                url: '../../secciones/graficaFacturas.php',
+                method: 'POST',
+                data: {
+                    filter
+                },
+                success: function(response) {
+                    $('#resultsFacturas').html(response);
                 }
             });
         }

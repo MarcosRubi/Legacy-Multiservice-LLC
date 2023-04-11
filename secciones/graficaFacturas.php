@@ -17,9 +17,19 @@ while ($DatosEmpleado = $Res_Empleados->fetch_assoc()) {
     $empleados .= "'" . $DatosEmpleado['NombreEmpleado'] . "',";
 
 
-    $Res_Facturas = $Obj_Facturas->cantidadFacturasPorEmpleado($DatosEmpleado['Agente']);
-    $TotalPorEmpleado .=  intval($Res_Facturas->fetch_assoc()['total_facturas']) . ',';
-}   
+    $Res_Facturas = $Obj_Facturas->cantidadFacturasPorEmpleadoDiaActual($DatosEmpleado['Agente']);
+    if ($_POST['filter'] === 'week') {
+        $Res_Facturas = $Obj_Facturas->cantidadFacturasPorEmpleadoSemanaActual($DatosEmpleado['Agente']);
+    }
+    if ($_POST['filter'] === 'month') {
+        $Res_Facturas = $Obj_Facturas->cantidadFacturasPorEmpleadoMesActual($DatosEmpleado['Agente']);
+    }
+    if ($_POST['filter'] === 'year') {
+        $Res_Facturas = $Obj_Facturas->cantidadFacturasPorEmpleadoAnioActual($DatosEmpleado['Agente']);
+    }
+
+    @$TotalPorEmpleado .=  intval($Res_Facturas->fetch_assoc()['total_facturas']) . ',';
+}
 
 $TotalPorEmpleado .= ']';
 
