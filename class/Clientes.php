@@ -127,4 +127,61 @@ class Clientes extends DB
         WHERE IdEmpleado = '".$IdEmpleado."' AND DATE(Creado) = CURRENT_DATE() AND Eliminado = 'N'";
         return $this->EjecutarQuery($query);
     }
+
+
+    // PARA GRAFICOS DE REPORTE DIARIOS
+
+    public function cantidadClientesPorEmpleadoAnioActual($agente)
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdCliente) AS total_clientes 
+        FROM vta_listar_clientes
+        WHERE
+        Creado BETWEEN '" . date("Y-01-01") . "' AND '" . date("Y-12-31") . "' 
+            AND Eliminado='N'
+            AND Agente = '" . $agente . "'
+        GROUP BY
+            YEAR ( Creado ),
+            MONTH (
+            Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+
+    public function cantidadClientesPorEmpleadoMesActual($agente)
+    {
+        $query = "SELECT COUNT(IdCliente) AS total_clientes
+        FROM vta_listar_clientes
+        WHERE Eliminado = 'N'
+        AND YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE()) 
+        AND Agente='".$agente."' " ;
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadClientesPorEmpleadoSemanaActual($agente)
+    {
+        $query = "SELECT YEAR(Creado) AS Anio,
+        MONTH(Creado) AS Mes,
+        WEEK(Creado) AS Semana,
+        DAYOFWEEK(Creado) AS DiaSemana,
+        COUNT(IdCliente) AS total_clientes 
+        FROM vta_listar_clientes
+        WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())
+        AND WEEK(Creado) = WEEK(CURRENT_DATE())
+        AND Agente = '" . $agente . "'
+        AND Eliminado='N'
+        GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado), DAYOFWEEK(Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadClientesPorEmpleadoDiaActual($agente)
+    {
+        $query = "SELECT COUNT(IdCliente) AS total_clientes 
+        FROM vta_listar_clientes
+        WHERE Agente = '".$agente."' AND DATE(Creado) = CURRENT_DATE() AND Eliminado='N';";
+        return $this->EjecutarQuery($query);
+    }
 }

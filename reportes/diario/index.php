@@ -176,14 +176,6 @@ require_once '../../func/validateSession.php';
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        
-        $.ajax({
-            url: '../../secciones/graficaClientes.php',
-            method: 'POST',
-            success: function(response) {
-                $('#resultsClientes').html(response);
-            }
-        });
         $.ajax({
             url: '../../secciones/graficaFacturas.php',
             method: 'POST',
@@ -218,6 +210,7 @@ require_once '../../func/validateSession.php';
             updateIncomeGraph(e, filter)
             updateCharCotizaciones(e, filter)
             updateCharBoletos(e, filter)
+            uodateCharClientes(e,filter)
             e?.target.classList.add('active');
         };
 
@@ -246,6 +239,7 @@ require_once '../../func/validateSession.php';
                 filter === 'now' ? title.innerHTML = 'Ingresos del día ' + date.getDate() + ' de ' + MONTHS[date.getMonth()] + ' del ' + date.getFullYear() : ''
             }
         }
+
         function updateCharCotizaciones(e, filter) {
             $.ajax({
                 url: '../../secciones/graficaCotizaciones.php',
@@ -258,17 +252,31 @@ require_once '../../func/validateSession.php';
                 }
             });
         }
-        function updateCharBoletos(e, filter){
+
+        function updateCharBoletos(e, filter) {
             $.ajax({
-            url: '../../secciones/graficaBoletos.php',
-            method: 'POST',
-            data: {
+                url: '../../secciones/graficaBoletos.php',
+                method: 'POST',
+                data: {
                     filter
                 },
-            success: function(response) {
-                $('#resultsBoletos').html(response);
-            }
-        });
+                success: function(response) {
+                    $('#resultsBoletos').html(response);
+                }
+            });
+
+        }
+        function uodateCharClientes(e, filter) {
+            $.ajax({
+                url: '../../secciones/graficaClientes.php',
+                method: 'POST',
+                data: {
+                    filter
+                },
+                success: function(response) {
+                    $('#resultsClientes').html(response);
+                }
+            });
         }
     </script>
     <!-- Page specific script -->

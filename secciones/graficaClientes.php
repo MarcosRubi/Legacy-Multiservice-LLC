@@ -13,13 +13,22 @@ $empleados = '';
 $agentes = [];
 $TotalPorEmpleado = '[';
 
-
 while ($DatosEmpleado = $Res_Empleados->fetch_assoc()) {
     $empleados .= "'" . $DatosEmpleado['NombreEmpleado'] . "',";
 
 
-    $Res_Clientes = $Obj_Clientes->cantidadClientesPorEmpleado($DatosEmpleado['IdEmpleado']);
-    $TotalPorEmpleado .=  intval($Res_Clientes->fetch_assoc()['total_clientes']) . ',';
+    $Res_Clientes = $Obj_Clientes->cantidadClientesPorEmpleadoDiaActual($DatosEmpleado['Agente']);
+    if ($_POST['filter'] === 'week') {
+        $Res_Clientes = $Obj_Clientes->cantidadClientesPorEmpleadoSemanaActual($DatosEmpleado['Agente']);
+    }
+    if ($_POST['filter'] === 'month') {
+        $Res_Clientes = $Obj_Clientes->cantidadClientesPorEmpleadoMesActual($DatosEmpleado['Agente']);
+    }
+    if ($_POST['filter'] === 'year') {
+        $Res_Clientes = $Obj_Clientes->cantidadClientesPorEmpleadoAnioActual($DatosEmpleado['Agente']);
+    }
+
+    @$TotalPorEmpleado .=  intval($Res_Clientes->fetch_assoc()['total_clientes']) . ',';
 }
 
 $TotalPorEmpleado .= ']';
@@ -36,7 +45,7 @@ $array_filtered = array_filter($array, function($value) {
 
 // Si el tamaño del array filtrado es 0, entonces todos los elementos son 0
 if (count($array_filtered) === 0) {
-    echo "<h5 class='position-absolute' style='top: 50%;left: 50%;transform: translate(-50%, -50%);'>No hay clientes creados el día de hoy<h5>";
+    echo "<h5 class='position-absolute' style='top: 50%;left: 50%;transform: translate(-50%, -50%);'>No hay clientes creados.<h5>";
 }
 
 ?>
