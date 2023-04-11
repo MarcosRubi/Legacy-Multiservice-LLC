@@ -98,7 +98,6 @@ if (isset($_GET['s'])) {
                                                 <th>Balance</th>
                                                 <th>Creado</th>
                                                 <th colspan="5" class="text-center">Formas de pago</th>
-                                                <th>Comentario</th>
                                                 <th>Tipo factura</th>
                                                 <th>Agente</th>
                                                 <th>Acciones</th>
@@ -120,14 +119,23 @@ if (isset($_GET['s'])) {
                                                     <td><?= "<strong>Banco:</strong> " . $Obj_Ajustes->FormatoDinero($DatosFactura['Banco']) ?></td>
                                                     <td><?= "<strong>Cupon:</strong> " . $Obj_Ajustes->FormatoDinero($DatosFactura['Cupon']) ?></td>
                                                     <td><?= "<strong>Cheque:</strong> " . $Obj_Ajustes->FormatoDinero($DatosFactura['Cheque']) ?></td>
-                                                    <td><?= $DatosFactura['Comentario'] ?></td>
                                                     <td><?= $DatosFactura['Tipo'] ?></td>
                                                     <td><?= $DatosFactura['Agente'] ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">
-                                                            <a href="#" onclick="javascript:abrirFormAbonos(<?=$DatosFactura['IdFactura']?>, '<?=$DatosFactura['PrimerNombre'] . ' ' . $DatosFactura['Apellido']?>', <?=$DatosFactura['IdCliente']?>);" class="btn btn-sm mx-1 btn-primary" title="Abonar" style="<?= $Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['Balance']) < 0 ? '' : 'opacity:0; pointer-events:none;' ?>">
+                                                            <a href="#" onclick="javascript:abrirFormAbonos(<?=$DatosFactura['IdFactura']?>, '<?=$DatosFactura['PrimerNombre'] . ' ' . $DatosFactura['Apellido']?>', <?=$DatosFactura['IdCliente']?>);" class="btn btn-sm mx-1 btn-success" title="Abonar" style="<?= $Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['Balance']) < 0 ? '' : 'opacity:0; pointer-events:none;' ?>">
                                                                 <i class="fa fa-dollar-sign px-1 fa-lg"></i>
                                                             </a>
+                                                            <?php if ($DatosFactura['IdTipoFactura'] === '2') { ?>
+                                                                <a href="#" onclick="javascript:imprimirParaBoleto(<?=$DatosFactura['IdFactura'] ?>)" class="btn btn-sm mx-1 btn-primary" title="Imprimir">
+                                                                    <i class="fa fa-print fa-lg"></i>
+                                                                </a>
+                                                            <?php } ?>
+                                                            <?php if ($DatosFactura['IdTipoFactura'] !== '2') { ?>
+                                                                <a href="#" onclick="javascript:imprimir(<?=$DatosFactura['IdFactura'] ?>)" class="btn btn-sm mx-1 btn-primary" title="Imprimir">
+                                                                    <i class="fa fa-print fa-lg"></i>
+                                                                </a>
+                                                            <?php } ?>
                                                             <a class="btn btn-sm mx-1 bg-lightblue" title="Editar" onclick="javascript:abrirFormDetalles(<?= $DatosFactura['IdFactura'] ?>);">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
@@ -206,6 +214,12 @@ if (isset($_GET['s'])) {
         }
         function abrirFormAbonos(factura, nombre, cliente) {
             window.open('<?= $_SESSION['path'] ?>forms/facturas/frmAbono.php?factura=' + factura + '&nombre='+nombre + '&cliente='+cliente, 'Detalles', 'width=1000,height=1000')
+        }
+        function imprimir(id) {
+            window.open('<?= $_SESSION['path'] ?>reportes/facturas/facturaInd.php?id=' + id, 'Imprimir', 'width=2000,height=2000')
+        }
+        function imprimirParaBoleto(id) {
+            window.open('<?= $_SESSION['path'] ?>reportes/facturas/facturaBoleto.php?id=' + id, 'Imprimir', 'width=2000,height=2000')
         }
 
         function eliminarFactura(id) {
