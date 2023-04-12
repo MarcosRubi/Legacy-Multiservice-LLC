@@ -39,7 +39,8 @@ require_once '../../func/validateSession.php';
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper pt-3">
-            <?php include_once '../../secciones/resumenEstadisticas.php'; ?>
+            <div id="resultsResumenEstadisticas"></div>
+
 
             <!-- Main content -->
             <section class="content">
@@ -203,6 +204,7 @@ require_once '../../func/validateSession.php';
             updateCharBoletos(e, filter)
             uodateCharClientes(e, filter)
             updateCharFacturas(e, filter)
+            updateupdateSalesSummaryCharts(e, filter)
             e?.target.classList.add('active');
         };
 
@@ -281,6 +283,20 @@ require_once '../../func/validateSession.php';
                 },
                 success: function(response) {
                     $('#resultsFacturas').html(response);
+                }
+            });
+        }
+
+        function updateupdateSalesSummaryCharts(e, filter) {
+            $.ajax({
+                url: '../../secciones/resumenEstadisticas.php',
+                method: 'POST',
+                data: {
+                    filter,
+                    report: true
+                },
+                success: function(response) {
+                    $('#resultsResumenEstadisticas').html(response);
                 }
             });
         }

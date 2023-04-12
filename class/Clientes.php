@@ -111,8 +111,19 @@ class Clientes extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidabClientesPorMes(){
-        $query = "SELECT COUNT(IdCliente) AS TotalClientes
+    //PARA GRAFICO DE RESUMEN DE ESTADISTICAS
+    public function cantidadClientesPorAnioActual()
+    {
+        $query = "SELECT COUNT(IdCliente) AS total_clientes 
+        FROM tbl_clientes
+        WHERE Creado BETWEEN '" . date("Y-01-01") . "' AND '" . date("Y-12-31") . "' 
+        AND Eliminado='N'";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadClientesPorMesActual()
+    {
+        $query = "SELECT COUNT(IdCliente) AS total_clientes
         FROM tbl_clientes
         WHERE Eliminado = 'N'
         AND YEAR(Creado) = YEAR(CURRENT_DATE())
@@ -120,17 +131,26 @@ class Clientes extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidadClientesPorEmpleado($IdEmpleado)
+    public function cantidadClientesPorSemanaActual()
     {
-        $query = "SELECT COUNT(IdCliente) AS total_clientes 
+        $query = "SELECT IFNULL(COUNT(IdCliente), 0) AS total_clientes 
         FROM tbl_clientes
-        WHERE IdEmpleado = '".$IdEmpleado."' AND DATE(Creado) = CURRENT_DATE() AND Eliminado = 'N'";
+        WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())
+        AND WEEK(Creado) = WEEK(CURRENT_DATE())
+        AND Eliminado='N'";
         return $this->EjecutarQuery($query);
     }
 
+    public function cantidadClientesPorDiaActual()
+    {
+        $query = "SELECT COUNT(IdCliente) AS total_clientes 
+        FROM tbl_clientes
+        WHERE DATE(Creado) = CURRENT_DATE() AND Eliminado='N';";
+        return $this->EjecutarQuery($query);
+    }
 
     // PARA GRAFICOS DE REPORTE DIARIOS
-
     public function cantidadClientesPorEmpleadoAnioActual($agente)
     {
         $query = "SELECT YEAR( Creado ) AS Anio,
@@ -148,7 +168,6 @@ class Clientes extends DB
         return $this->EjecutarQuery($query);
     }
 
-
     public function cantidadClientesPorEmpleadoMesActual($agente)
     {
         $query = "SELECT COUNT(IdCliente) AS total_clientes
@@ -156,7 +175,7 @@ class Clientes extends DB
         WHERE Eliminado = 'N'
         AND YEAR(Creado) = YEAR(CURRENT_DATE())
         AND MONTH(Creado) = MONTH(CURRENT_DATE()) 
-        AND Agente='".$agente."' " ;
+        AND Agente='" . $agente . "' ";
         return $this->EjecutarQuery($query);
     }
 
@@ -181,7 +200,7 @@ class Clientes extends DB
     {
         $query = "SELECT COUNT(IdCliente) AS total_clientes 
         FROM vta_listar_clientes
-        WHERE Agente = '".$agente."' AND DATE(Creado) = CURRENT_DATE() AND Eliminado='N';";
+        WHERE Agente = '" . $agente . "' AND DATE(Creado) = CURRENT_DATE() AND Eliminado='N';";
         return $this->EjecutarQuery($query);
     }
 }

@@ -113,9 +113,22 @@ class Cotizaciones extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidadContizacionesPorMes()
+    //PARA GRAFICA RESUMEN DE ESTADISTICA
+    public function cantidadCotizacionesPorAnioActual()
     {
-        $query = "SELECT COUNT(IdCotizacion) AS TotalCotizaciones
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdCotizacion) AS total_cotizaciones 
+        FROM tbl_cotizaciones
+        WHERE
+        Creado BETWEEN '" . date("Y-01-01") . "' AND '" . date("Y-12-31") . "' 
+            AND Eliminado='N' ";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadCotizacionesPorMesActual()
+    {
+        $query = "SELECT COUNT(IdCotizacion) AS total_cotizaciones
         FROM tbl_cotizaciones
         WHERE Eliminado = 'N'
         AND YEAR(Creado) = YEAR(CURRENT_DATE())
@@ -123,6 +136,30 @@ class Cotizaciones extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function cantidadCotizacionesPorSemanaActual()
+    {
+        $query = "SELECT YEAR(Creado) AS Anio,
+        MONTH(Creado) AS Mes,
+        WEEK(Creado) AS Semana,
+        DAYOFWEEK(Creado) AS DiaSemana,
+        COUNT(IdCotizacion) AS total_cotizaciones 
+        FROM tbl_cotizaciones
+        WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())
+        AND WEEK(Creado) = WEEK(CURRENT_DATE())
+        AND Eliminado='N' ";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadCotizacionesPorDiaActual()
+    {
+        $query = "SELECT COUNT(IdCotizacion) AS total_cotizaciones 
+        FROM tbl_cotizaciones 
+        WHERE DATE(Creado) = CURRENT_DATE();";
+        return $this->EjecutarQuery($query);
+    }
+
+    //PARA GRAFICA DE REPORTE DIARIOS
     public function cantidadCotizacionesPorEmpleadoMesActual($agente)
     {
         $query = "SELECT COUNT(IdCotizacion) AS total_cotizaciones
@@ -150,7 +187,6 @@ class Cotizaciones extends DB
             Creado)";
         return $this->EjecutarQuery($query);
     }
-
 
     public function cantidadCotizacionesPorEmpleadoSemanaActual($agente)
     {

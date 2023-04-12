@@ -211,8 +211,27 @@ class Boletos extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidadBoletosPorMes(){
-        $query = "SELECT COUNT(IdBoleto) AS TotalBoletos
+
+    // PARA GRAFICA GENERAL
+    
+    public function cantidadBoletosPorAnioActual()
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdBoleto) AS total_boletos 
+        FROM tbl_boletos
+        WHERE
+        Creado BETWEEN '" . date("Y-01-01") . "' AND '" . date("Y-12-31") . "' 
+            AND Eliminado='N'
+        GROUP BY
+            YEAR ( Creado ),
+            MONTH (
+            Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadBoletosPorMesActual(){
+        $query = "SELECT COUNT(IdBoleto) AS total_boletos
         FROM tbl_boletos
         WHERE Eliminado = 'N'
         AND YEAR(Creado) = YEAR(CURRENT_DATE())
@@ -220,6 +239,31 @@ class Boletos extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function cantidadBoletosPorSemanaActual()
+    {
+        $query = "SELECT YEAR(Creado) AS Anio,
+        MONTH(Creado) AS Mes,
+        WEEK(Creado) AS Semana,
+        DAYOFWEEK(Creado) AS DiaSemana,
+        COUNT(IdBoleto) AS total_boletos 
+        FROM tbl_boletos
+        WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
+        AND MONTH(Creado) = MONTH(CURRENT_DATE())
+        AND WEEK(Creado) = WEEK(CURRENT_DATE())
+        AND Eliminado='N'
+        GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado), DAYOFWEEK(Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadBoletosPorDiaActual()
+    {
+        $query = "SELECT COUNT(IdBoleto) AS total_boletos 
+        FROM tbl_boletos 
+        WHERE DATE(Creado) = CURRENT_DATE();";
+        return $this->EjecutarQuery($query);
+    }
+
+    // PARA GRAFICA EN REPORTE DIARIO
     public function cantidadBoletosPorEmpleadoAnioActual($agente)
     {
         $query = "SELECT YEAR( Creado ) AS Anio,

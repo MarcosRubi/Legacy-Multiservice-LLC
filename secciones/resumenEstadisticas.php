@@ -2,34 +2,57 @@
 $URL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $META = 100;
 
-if (strpos($URL, 'reportes') !== false) {
-    require_once '../../func/validateSession.php';
-    require_once '../../bd/bd.php';
-    require_once '../../class/Boletos.php';
-    require_once '../../class/Clientes.php';
-    require_once '../../class/Cotizaciones.php';
-} else {
+if (!isset($_POST['report'])) {
     require_once 'func/validateSession.php';
     require_once 'bd/bd.php';
     require_once 'class/Boletos.php';
     require_once 'class/Clientes.php';
     require_once 'class/Cotizaciones.php';
+} else {
+    require_once '../func/validateSession.php';
+    require_once '../bd/bd.php';
+    require_once '../class/Boletos.php';
+    require_once '../class/Clientes.php';
+    require_once '../class/Cotizaciones.php';
 }
-
 
 
 $Obj_Boletos = new Boletos();
 $Obj_Clientes = new Clientes();
 $Obj_Cotizaciones = new Cotizaciones();
 
-$Res_Boletos = $Obj_Boletos->cantidadBoletosPorMes();
-$TotalBoletos = $Res_Boletos->fetch_assoc()['TotalBoletos'];
+$Res_Boletos = $Obj_Boletos->cantidadBoletosPorDiaActual();
+$Res_Clientes = $Obj_Clientes->cantidadClientesPorDiaActual();
+$Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorDiaActual();
 
-$TotalClientes = $Obj_Clientes->cantidabClientesPorMes();
-$TotalCotizaciones = $Obj_Cotizaciones->cantidadContizacionesPorMes();
+
+if(isset($_POST['report']) && isset($_POST['filter']) && $_POST['filter'] === 'week' ){
+    $Res_Boletos = $Obj_Boletos->cantidadBoletosPorSemanaActual();
+    $Res_Clientes = $Obj_Clientes->cantidadClientesPorSemanaActual();
+    $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorSemanaActual();
+}
+if(isset($_POST['report']) && isset($_POST['filter']) && $_POST['filter'] === 'month' ){
+    $Res_Boletos = $Obj_Boletos->cantidadBoletosPorMesActual();
+    $Res_Clientes = $Obj_Clientes->cantidadClientesPorMesActual();
+    $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorMesActual();
+}
+if(isset($_POST['report']) && isset($_POST['filter']) && $_POST['filter'] === 'year' ){
+    $Res_Boletos = $Obj_Boletos->cantidadBoletosPorAnioActual();
+    $Res_Clientes = $Obj_Clientes->cantidadClientesPorAnioActual();
+    $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorAnioActual();
+}
+
+if(!isset($_POST['filter'])){
+    $Res_Boletos = $Obj_Boletos->cantidadBoletosPorMesActual();
+    $Res_Clientes = $Obj_Clientes->cantidadClientesPorMesActual();
+    $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorMesActual();
+}
+
+$TotalBoletos = $Res_Boletos->fetch_assoc()['total_boletos'];
+$TotalClientes = $Res_Clientes->fetch_assoc()['total_clientes'];
+$TotalCotizaciones = $Res_Cotizaciones->fetch_assoc()['total_cotizaciones'];
 
 $PORCENTAJE_META = $META * (intval($TotalBoletos)/100); 
-
 
 ?>
 
@@ -57,7 +80,7 @@ $PORCENTAJE_META = $META * (intval($TotalBoletos)/100);
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3><?=$TotalClientes->fetch_assoc()['TotalClientes']?></h3>
+                        <h3><?=$TotalClientes?></h3>
 
                         <p>Clientes creados</p>
                     </div>
@@ -72,7 +95,7 @@ $PORCENTAJE_META = $META * (intval($TotalBoletos)/100);
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3><?=$TotalCotizaciones->fetch_assoc()['TotalCotizaciones']?></h3>
+                        <h3><?=$TotalCotizaciones?></h3>
 
                         <p>Cotizaciones realizadas</p>
                     </div>

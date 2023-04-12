@@ -45,7 +45,7 @@ $array_filtered = array_filter($array, function($value) {
 
 // Si el tamaño del array filtrado es 0, entonces todos los elementos son 0
 if (count($array_filtered) === 0) {
-    echo "<h5 class='position-absolute' style='top: 50%;left: 50%;transform: translate(-50%, -50%);'>No hay facturas creadas el día de hoy<h5>";
+    echo "<h5 class='position-absolute' style='top: 50%;left: 50%;transform: translate(-50%, -50%);'>No hay facturas creadas.<h5>";
 } 
 
 ?>
