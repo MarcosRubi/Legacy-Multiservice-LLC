@@ -70,72 +70,72 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-calculator"></i>
-                        <p>
-                            Contabilidad
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="<?= $_SESSION['path'] ?>facturas/" class="nav-link">
-                                <i class="fa fa-search nav-icon"></i>
-                                <p>Buscar Factura</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= $_SESSION['path'] ?>reportes/diario/" class="nav-link">
-                                <i class="fa fa-list-alt nav-icon"></i>
-                                <p>Reporte Diario</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= $_SESSION['path'] ?>reportes/boletos/" class="nav-link">
-                                <i class="fa fa-list-alt nav-icon"></i>
-                                <p>Reporte De Boletos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= $_SESSION['path'] ?>reportes/volumen/" class="nav-link">
-                                <i class="fa fa-list-alt nav-icon"></i>
-                                <p>Reporte Volumen</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-list-alt nav-icon"></i>
-                                <p>Reporte De Llamadas</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <?php if($_SESSION['IdRole'] === 2){ ?>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fa fa-user-cog"></i>
-                        <p>
-                            Mantenimiento
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-list nav-icon"></i>
-                                <p>Listar Empleados</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fa fa-plus nav-icon"></i>
-                                <p>Nuevo Empleado</p>
-                            </a>
-                        </li>
+                <?php if ($_SESSION['IdRole'] === 2) { ?>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-calculator"></i>
+                            <p>
+                                Contabilidad
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= $_SESSION['path'] ?>facturas/" class="nav-link">
+                                    <i class="fa fa-search nav-icon"></i>
+                                    <p>Buscar Factura</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= $_SESSION['path'] ?>reportes/diario/" class="nav-link">
+                                    <i class="fa fa-list-alt nav-icon"></i>
+                                    <p>Reporte Diario</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= $_SESSION['path'] ?>reportes/boletos/" class="nav-link">
+                                    <i class="fa fa-list-alt nav-icon"></i>
+                                    <p>Reporte De Boletos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= $_SESSION['path'] ?>reportes/volumen/" class="nav-link">
+                                    <i class="fa fa-list-alt nav-icon"></i>
+                                    <p>Reporte Volumen</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-list-alt nav-icon"></i>
+                                    <p>Reporte De Llamadas</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-user-cog"></i>
+                            <p>
+                                Mantenimiento
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-list nav-icon"></i>
+                                    <p>Listar Empleados</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fa fa-plus nav-icon"></i>
+                                    <p>Nuevo Empleado</p>
+                                </a>
+                            </li>
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
                 <?php } ?>
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="javascript:CerrarSesion();">

@@ -21,7 +21,7 @@ $DatosFactura = $Res_Facturas->fetch_assoc();
 
 $editar = false;
 
-if ($_SESSION['IdRole'] === 2) {
+if ($_SESSION['IdRole'] <= 3) {
     $editar = true;
     $Obj_OpcionesTablas = new OpcionesTablas();
     $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
@@ -187,7 +187,7 @@ if ($_SESSION['IdRole'] === 2) {
                             <input type="text" class="form-control d-none" value="<?= $DatosFactura['IdFactura'] ?>" name="txtIdFactura" readonly>
                             <!-- /.form group -->
                             <?php
-                            if ($_SESSION['IdRole'] === 2) {
+                            if ($_SESSION['IdRole'] <= 3) {
                             ?>
                                 <div class="form-group pr-1 mt-3">
                                     <button class="btn btn-primary btn-block btn-lg" type="submit">Editar factura</button>

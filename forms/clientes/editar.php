@@ -1,9 +1,17 @@
 <?php
 require_once '../../func/validateSession.php';
+
+if ($_SESSION['IdRole'] > 3) {
+    header("Location:" . $_SESSION['path']);
+    $_SESSION['error-permissions'] = 'true';
+    return;
+}
+
 require_once '../../bd/bd.php';
 require_once '../../class/Clientes.php';
 require_once '../../class/Ajustes.php';
 require_once '../../class/Eventos.php';
+
 
 $Obj_Clientes = new Clientes();
 $Obj_Ajustes = new Ajustes();
@@ -40,14 +48,6 @@ if ($_SESSION['FormatoFecha'] === 'mdy') {
         return;
     };
 }
-
-// //VALIDANDO FORMATO DE TELEFONO
-// if (strpos($_POST['txtTelefono'], "_")) {
-//     // $_SESSION['error-registro'] = 'tel';
-//     // echo "<script>history.go(-1)</script>";
-
-//     return str_replace("_", "", $_POST['txtTelefono']);
-// };
 
 $Res_Clientes = $Obj_Clientes->Actualizar($_POST['IdCliente']);
 

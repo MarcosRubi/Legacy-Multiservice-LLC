@@ -1,9 +1,17 @@
 
 <?php
 require_once '../../func/validateSession.php';
+
+if ($_SESSION['IdRole'] > 3) {
+    header("Location:" . $_SESSION['path']);
+    $_SESSION['error-permissions'] = 'true';
+    return;
+}
+
 require_once '../../bd/bd.php';
 require_once '../../class/Clientes.php';
 require_once '../../class/Eventos.php';
+
 
 $Obj_Clientes = new Clientes();
 $Obj_Eventos = new Eventos();

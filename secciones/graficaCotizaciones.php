@@ -1,5 +1,12 @@
 <?php
 require_once '../func/validateSession.php';
+
+if ($_SESSION['IdRole'] !== 2) {
+    header("Location:" . $_SESSION['path']);
+    $_SESSION['error-permissions'] = 'true';
+    return;
+}
+
 require_once '../bd/bd.php';
 require_once '../class/Empleados.php';
 require_once '../class/Cotizaciones.php';

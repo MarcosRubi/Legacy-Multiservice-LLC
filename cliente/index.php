@@ -87,7 +87,7 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                                     <th>Número De Teléfono</th>
                                                     <th>Dirección</th>
                                                     <th>Fecha de Nac.</th>
-                                                    <th>Acciones</th>
+                                                    <?= $_SESSION['IdRole'] <= 3 ? '<th>Acciones</th>' : '' ?>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -106,16 +106,18 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                                     <td><?php if ($DatosCliente['FechaNacimiento'] !== '0000-00-00') {
                                                             echo $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']);
                                                         } ?></td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-around">
-                                                            <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editarCliente(<?= $DatosCliente['IdCliente'] ?>);">
-                                                                <i class="fa fa-edit"></i>
-                                                            </a>
-                                                            <a href="#" class="btn btn-sm mx-1 btn-primary" title="Eliminar" onclick="javascript:eliminarCliente(<?= $DatosCliente['IdCliente'] ?>);">
-                                                                <i class="fa fa-trash"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
+                                                    <?php if ($_SESSION['IdRole'] <= 3) { ?>
+                                                        <td>
+                                                            <div class="d-flex justify-content-around">
+                                                                <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editarCliente(<?= $DatosCliente['IdCliente'] ?>);">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </a>
+                                                                <a href="#" class="btn btn-sm mx-1 btn-primary" title="Eliminar" onclick="javascript:eliminarCliente(<?= $DatosCliente['IdCliente'] ?>);">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    <?php } ?>
                                                 </tr>
                                             </tbody>
                                         </table>

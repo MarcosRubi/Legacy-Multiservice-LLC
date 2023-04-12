@@ -1,10 +1,18 @@
 <?php
 require_once '../../func/validateSession.php';
+
+if ($_SESSION['IdRole'] > 3) {
+    header("Location:" . $_SESSION['path']);
+    $_SESSION['error-permissions'] = 'true';
+    return;
+}
+
 require_once '../../bd/bd.php';
 require_once '../../class/Facturas.php';
 require_once '../../class/Eventos.php';
 require_once '../../class/Ajustes.php';
 require_once '../../class/Abonos.php';
+
 
 $Obj_Facturas = new Facturas();
 $Obj_Ajustes = new Ajustes();
