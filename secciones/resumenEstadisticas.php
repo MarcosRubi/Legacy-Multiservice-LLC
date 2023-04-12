@@ -61,6 +61,7 @@ $TotalCotizaciones = $Res_Cotizaciones->fetch_assoc()['total_cotizaciones'];
 
 $PORCENTAJE_META = $META * (intval($TotalBoletos) / 100);
 
+
 ?>
 
 <!-- Main content -->

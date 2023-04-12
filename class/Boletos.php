@@ -222,11 +222,7 @@ class Boletos extends DB
         FROM tbl_boletos
         WHERE
         Creado BETWEEN '" . date("Y-01-01") . "' AND '" . date("Y-12-31") . "' 
-            AND Eliminado='N'
-        GROUP BY
-            YEAR ( Creado ),
-            MONTH (
-            Creado)";
+            AND Eliminado='N'";
         return $this->EjecutarQuery($query);
     }
 
@@ -250,8 +246,7 @@ class Boletos extends DB
         WHERE YEAR(Creado) = YEAR(CURRENT_DATE())
         AND MONTH(Creado) = MONTH(CURRENT_DATE())
         AND WEEK(Creado) = WEEK(CURRENT_DATE())
-        AND Eliminado='N'
-        GROUP BY YEAR(Creado), MONTH(Creado), WEEK(Creado), DAYOFWEEK(Creado)";
+        AND Eliminado='N'";
         return $this->EjecutarQuery($query);
     }
 

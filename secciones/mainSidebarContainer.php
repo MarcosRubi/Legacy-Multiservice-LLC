@@ -81,7 +81,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= $_SESSION['path'] ?>facturas/" class="nav-link">
+                                <a href="<?= $_SESSION['path'] ?>buscar-factura/" class="nav-link">
                                     <i class="fa fa-search nav-icon"></i>
                                     <p>Buscar Factura</p>
                                 </a>

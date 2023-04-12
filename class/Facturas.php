@@ -271,7 +271,7 @@ class Facturas extends DB
         $query = "SELECT YEAR( Creado ) AS Anio,
         MONTH ( Creado ) AS Mes,
         COUNT(IdFactura) AS total_facturas
-        FROM tbl_Facturas
+        FROM tbl_facturas
         WHERE
         Creado BETWEEN '" . date("Y-01-01") . "' AND '" . date("Y-12-31") . "' 
             AND Eliminado='N'

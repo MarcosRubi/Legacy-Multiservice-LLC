@@ -28,6 +28,6 @@ $Obj_Eventos->Insertar();
 
 if ($Res_Facturas) {
     $_SESSION['success-delete'] = 'factura';
-    header("Location:" . $_SESSION['path'] . "facturas/");
+    header("Location:" . $_SESSION['path'] . "buscar-factura/");
 }
 ?>
