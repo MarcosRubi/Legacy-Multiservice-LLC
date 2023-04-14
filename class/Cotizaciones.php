@@ -113,6 +113,14 @@ class Cotizaciones extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function ObtenerCotizacionesPorFechaIngresada($FechaInicio, $FechaFin, $condition)
+    {
+        $query = "SELECT * FROM vta_listar_cotizaciones
+        WHERE ".$condition." BETWEEN '".$FechaInicio."' AND '".$FechaFin."' 
+        ORDER BY IdCotizacion Desc";
+        return  $this->EjecutarQuery($query);
+    }
+
     //PARA GRAFICA RESUMEN DE ESTADISTICA
     public function cantidadCotizacionesPorAnioActual()
     {
@@ -167,7 +175,7 @@ class Cotizaciones extends DB
         WHERE Eliminado = 'N'
         AND YEAR(Creado) = YEAR(CURRENT_DATE())
         AND MONTH(Creado) = MONTH(CURRENT_DATE()) 
-        AND Agente='".$agente."' " ;
+        AND Agente='" . $agente . "' ";
         return $this->EjecutarQuery($query);
     }
 

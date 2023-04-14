@@ -1,5 +1,19 @@
 <?php
 require_once '../../func/validateSession.php';
+require_once '../../bd/bd.php';
+require_once '../../class/Cotizaciones.php';
+require_once '../../class/Ajustes.php';
+
+$Obj_Cotizaciones = new Cotizaciones();
+$Obj_Ajustes = new Ajustes();
+
+$FechaInicio = $Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaInicio']);
+$FechaFin = $Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaFin']);
+
+
+
+$Res_Cotizaciones = $Obj_Cotizaciones->ObtenerCotizacionesPorFechaIngresada($FechaInicio, $FechaFin, $_POST['rdbTipo']);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,12 +24,14 @@ require_once '../../func/validateSession.php';
     <title>Resultados de cotizaciones</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -31,17 +47,17 @@ require_once '../../func/validateSession.php';
                     <div class="row mt-3">
                         <div class="col-12">
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="pt-3">Cotizaciones encontradas de: <strong>12/02/2023</strong> a
-                                    <strong>22/02/2023</strong></p>
+                                <p class="pt-3">Cotizaciones encontradas de: <strong><?= $_POST['txtFechaInicio'] ?></strong> a
+                                    <strong><?= $_POST['txtFechaFin'] ?></strong>
+                                </p>
                                 <div>
-                                    <button class="btn btn-primary btn-lg"
-                                        onclick="javascript:cerrarVentana();">Cerrar</button>
+                                    <button class="btn btn-primary btn-lg" onclick="javascript:cerrarVentana();">Cerrar</button>
                                 </div>
                             </div>
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="logs" class="table table-bordered table-hover">
+                                    <table id="cotizaciones" class="table table-bordered table-hover">
                                         <thead>
                                             <tr class="text-center">
                                                 <th>ID</th>
@@ -63,204 +79,27 @@ require_once '../../func/validateSession.php';
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$500</td>
-                                                <td>$300</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$300</td>
-                                                <td>$500</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$300</td>
-                                                <td>$500</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$300</td>
-                                                <td>$500</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$300</td>
-                                                <td>$500</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$300</td>
-                                                <td>$500</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$300</td>
-                                                <td>$500</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$300</td>
-                                                <td>$500</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$300</td>
-                                                <td>$500</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$300</td>
-                                                <td>$500</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="/cotizazion?id=123456">123456</a></td>
-                                                <td><a href="/cliente?id=123456">123456</a></td>
-                                                <td>3QRBMG</td>
-                                                <td>Dice que no tiene dinero</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>03/03/2023</td>
-                                                <td>SLU</td>
-                                                <td>MR</td>
-                                                <td>JFK</td>
-                                                <td>SAL</td>
-                                                <td>12/02/2023</td>
-                                                <td>22/02/2023</td>
-                                                <td>1</td>
-                                                <td>$300</td>
-                                                <td>$500</td>
-                                            </tr>
+                                            <?php
+                                            while ($DatosCotizaciones = $Res_Cotizaciones->fetch_assoc()) { ?>
+                                                <tr>
+                                                    <td><a href="#" onclick="javascript:abrirFormDetalles('<?= $_SESSION['path'] . '/cotizaciones/detalles.php?id=' . $DatosCotizaciones['IdCotizacion'] ?>')"><?= $DatosCotizaciones['IdCotizacion'] ?></a></td>
+                                                    <td><a href="#" onclick="javascript:mostrarDatosCliente('<?= $DatosCotizaciones['IdCliente'] ?>')"> <?= $DatosCotizaciones['PrimerNombre'] . " " . $DatosCotizaciones['SegundoNombre'] . " " . $DatosCotizaciones['Apellido'] ?></a></td>
+                                                    <td><?= $DatosCotizaciones['Pnr']?></td>
+                                                    <td><?= $DatosCotizaciones['Comentario']?></td>
+                                                    <td><?= $DatosCotizaciones['Accion']?></td>
+                                                    <td><?= $DatosCotizaciones['Fecha'] !== '0000-00-00' && $Obj_Ajustes->FechaInvertir($DatosCotizaciones['Fecha']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FechaInvertir(substr($DatosCotizaciones['FechaCreado'], 0, -9)) . " " . substr($DatosCotizaciones['FechaCreado'], 10, 20) . " " .  $DatosCotizaciones['HoraCreado'] ?></td>
+                                                    <td><?= $DatosCotizaciones['Agencia']?></td>
+                                                    <td><?= $DatosCotizaciones['Agente']?></td>
+                                                    <td><?= $DatosCotizaciones['Origen']?></td>
+                                                    <td><?= $DatosCotizaciones['Destino']?></td>
+                                                    <td><?= $DatosCotizaciones['Ida'] !== '0000-00-00' ? $Obj_Ajustes->FechaInvertir($DatosCotizaciones['Ida']) : '' ?></td>
+                                                    <td><?= $DatosCotizaciones['Regreso'] !== '0000-00-00' ? $Obj_Ajustes->FechaInvertir($DatosCotizaciones['Regreso']) : '' ?></td>
+                                                    <td><?= $DatosCotizaciones['NumeroBoletos']?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosCotizaciones['Max'])?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosCotizaciones['Cotizado'])?></td>
+                                                </tr>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -296,12 +135,11 @@ require_once '../../func/validateSession.php';
     <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
-        $(function () {
-            $('#logs').DataTable({
+        $(function() {
+            window.resizeTo(2000, 800)
+            $('#cotizaciones').DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": false,
@@ -313,15 +151,17 @@ require_once '../../func/validateSession.php';
         });
     </script>
     <script>
-        function nuevoCliente() {
-            window.open('../forms/nuevo-cliente/', 'Nuevo Cliente', 'width=400,height=1000')
-        }
-        function nuevoClientev2() {
-            window.open('../forms/cliente/frmNuevo.php', 'Nuevo Cliente', 'width=2000,height=400')
+        function abrirFormDetalles(url) {
+            window.open(url, 'Detalles cotización', 'width=1000,height=1000')
         }
 
         function cerrarVentana() {
             window.close();
+        }
+
+        function mostrarDatosCliente(id) {
+            window.opener.location.href = "<?= $_SESSION['path'] . 'cliente/?id=' ?>" + id;
+            Minimize();
         }
 
     </script>
