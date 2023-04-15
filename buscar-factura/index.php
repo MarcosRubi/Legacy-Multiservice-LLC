@@ -146,7 +146,7 @@ if (isset($_GET['s'])) {
                                                             <a class="btn btn-sm mx-1 bg-lightblue" title="Editar" onclick="javascript:abrirFormDetalles(<?= $DatosFactura['IdFactura'] ?>);">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
-                                                            <a class="btn btn-sm mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarFactura(<?= $DatosFactura['IdFactura'] ?>);">
+                                                            <a class="btn btn-sm mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarFactura(<?= $DatosFactura['IdFactura'] . ',' . $DatosFactura['IdTipoFactura'] ?>);">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
                                                         </div>
@@ -229,11 +229,18 @@ if (isset($_GET['s'])) {
             window.open('<?= $_SESSION['path'] ?>reportes/facturas/facturaBoleto.php?id=' + id, 'Imprimir', 'width=2000,height=2000')
         }
 
-        function eliminarFactura(id) {
+        function eliminarFactura(id, idTipo) {
             let confirmacion = confirm("¿Está seguro que desea eliminar la factura?");
 
             if (confirmacion) {
-                window.location.href = '<?= $_SESSION['path'] ?>forms/facturas/eliminar.php?id=' + id
+                if(idTipo === 2){
+                    let confirmation2 = confirm("¿También se eliminarán los boletos, desea continuar?");
+                    if(confirmation2){
+                        window.location.href = '<?= $_SESSION['path'] ?>forms/facturas/eliminar.php?id=' + id
+                    }
+                }else{
+                    window.location.href = '<?= $_SESSION['path'] ?>forms/facturas/eliminar.php?id=' + id
+                }
             }
         }
     </script>

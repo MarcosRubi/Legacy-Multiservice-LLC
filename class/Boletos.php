@@ -308,7 +308,7 @@ class Boletos extends DB
     {
         $query = "SELECT COUNT(IdBoleto) AS total_boletos 
         FROM tbl_boletos 
-        WHERE Agente = '".$agente."' AND DATE(Creado) = CURRENT_DATE();";
+        WHERE Agente = '".$agente."' AND DATE(Creado) = CURRENT_DATE() AND Eliminado='N';";
         return $this->EjecutarQuery($query);
     }
 }
