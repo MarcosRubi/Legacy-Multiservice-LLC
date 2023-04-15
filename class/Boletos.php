@@ -144,8 +144,6 @@ class Boletos extends DB
             Dob,
             Agencia,
             Agente,
-            Creado,
-            CreadoTimestamp
             Eliminado )
             VALUES (
             '" . $this->IdCliente . "',
@@ -169,8 +167,6 @@ class Boletos extends DB
             '" . $this->Dob . "',
             '" . $this->Agencia . "',
             '" . $this->Agente . "',
-            '" . date("Y-m-d h:i:s ") . "',
-            '" . date("A") . "',
             'N' ) ";
         return $query;
     }
