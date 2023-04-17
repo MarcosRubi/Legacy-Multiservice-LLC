@@ -19,6 +19,12 @@ $Obj_Ajustes = new Ajustes();
 $Res_Facturas = $Obj_Facturas->buscarFacturaPorId($_GET['id']);
 $DatosFactura = $Res_Facturas->fetch_assoc();
 
+if($Res_Facturas->num_rows <= 0){
+    $_SESSION['reg-delete'] = 'factura';
+    echo "<script>window.close();window.opener.location.reload();</script>";
+    return;
+}
+
 $editar = false;
 
 if ($_SESSION['IdRole'] <= 3) {

@@ -15,6 +15,12 @@ $Obj_Ajustes = new Ajustes();
 $Res_Boletos = $Obj_Boletos->buscarPorId($_GET['id']);
 $DatosBoleto = $Res_Boletos->fetch_assoc();
 
+if($Res_Boletos->num_rows <= 0){
+    $_SESSION['reg-delete'] = 'boleto';
+    echo "<script>window.close();window.opener.location.reload();</script>";
+    return;
+}
+
 ?>
 
 <!DOCTYPE html>

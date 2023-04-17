@@ -577,3 +577,30 @@ if (isset($_SESSION['error-permissions']) && $_SESSION['error-permissions'] === 
             })";
     unset($_SESSION['error-permissions']);
 }
+
+if (isset($_SESSION['reg-delete']) && $_SESSION['reg-delete'] === 'factura') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'La factura ha sido eliminada.'
+            })";
+    unset($_SESSION['reg-delete']);
+}
+if (isset($_SESSION['reg-delete']) && $_SESSION['reg-delete'] === 'boleto') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'Este boleto ha sido eliminado.'
+            })";
+    unset($_SESSION['reg-delete']);
+}
