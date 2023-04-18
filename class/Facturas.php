@@ -63,6 +63,13 @@ class Facturas extends DB
         Cupon LIKE'%" . $content . "%'";
         return $this->EjecutarQuery($query);
     }
+    public function buscarFacturaPorIdClienteYPnr($IdCliente, $Pnr)
+    {
+        $query = "SELECT * FROM vta_listar_facturas WHERE 
+        IdCliente LIKE'%" . $IdCliente . "%' AND
+        Pnr LIKE'%" . $Pnr . "%'";
+        return $this->EjecutarQuery($query);
+    }
     public function obtenerIdclienteYPnrFactura($id)
     {
         $query = "SELECT IdCliente,Pnr FROM tbl_facturas WHERE IdFactura='" . $id . "'";
@@ -154,6 +161,25 @@ class Facturas extends DB
         IdTipoFactura = '" . $this->IdTipoFactura . "',
         Valor = '" . $this->Valor . "',
         Descripcion = '" . $this->Descripcion . "', 
+        Comentario = '" . $this->Comentario . "',
+        Balance = '" . ((doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon) + doubleval($this->Banco)) - doubleval($this->Valor)) . "'
+        WHERE IdFactura='" . $id . "' ";
+
+        return $this->EjecutarQuery($query);
+    }
+    public function ActualizarTodaLaFactura($id)
+    {
+        $query = "UPDATE tbl_facturas SET 
+        IdTipoFactura = '" . $this->IdTipoFactura . "',
+        Valor = '" . $this->Valor . "',
+        Descripcion = '" . $this->Descripcion . "', 
+        Efectivo = '" . $this->Efectivo . "', 
+        CreditoValor = '" . $this->CreditoValor . "', 
+        Cheque = '" . $this->Cheque . "', 
+        Banco = '" . $this->Banco . "', 
+        Cupon = '" . $this->Cupon . "', 
+        Agencia = '" . $this->Agencia . "', 
+        Agente = '" . $this->Agente . "', 
         Comentario = '" . $this->Comentario . "',
         Balance = '" . ((doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon) + doubleval($this->Banco)) - doubleval($this->Valor)) . "'
         WHERE IdFactura='" . $id . "' ";

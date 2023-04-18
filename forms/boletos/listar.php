@@ -34,6 +34,10 @@ $Obj_OpcionesTablas = new OpcionesTablas();
     <!-- DataTables -->
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
@@ -81,10 +85,10 @@ $Obj_OpcionesTablas = new OpcionesTablas();
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($Res_Boletos as $key => $DatosBoleto) { 
+                                            <?php foreach ($Res_Boletos as $key => $DatosBoleto) {
                                                 $Res_Iata = $Obj_OpcionesTablas->buscarIata($DatosBoleto['IdIata']);
                                                 $Res_FormaPagos = $Obj_OpcionesTablas->buscarFormaPago($DatosBoleto['IdFormaPago']);
-                                                ?>
+                                            ?>
                                                 <tr>
                                                     <td><?= $DatosBoleto['IdBoleto'] ?></td>
                                                     <td><?= $DatosBoleto['NombrePasajero'] ?></td>
@@ -105,6 +109,9 @@ $Obj_OpcionesTablas = new OpcionesTablas();
                                                     <td>
                                                         <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editarBoleto(<?= $DatosCliente['IdBoleto'] ?>);">
                                                             <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a class="btn btn-sm mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarBoleto(<?= $DatosBoleto['IdBoleto'] ?>);">
+                                                            <i class="fa fa-trash"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -144,6 +151,10 @@ $Obj_OpcionesTablas = new OpcionesTablas();
     <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -161,6 +172,17 @@ $Obj_OpcionesTablas = new OpcionesTablas();
                 "responsive": true,
             });
         });
+
+        function eliminarBoleto(id) {
+            let confirmacion = confirm("¿Está seguro que desea eliminar el boleto? Esto puede eliminar o modificar los datos de la factura.");
+
+            if (confirmacion) {
+                window.location.href = '<?= $_SESSION['path'] ?>forms/boletos/eliminar.php?id=' + id
+            } 
+        }
+    </script>
+    <script>
+        <?php require_once '../../func/Mensajes.php'; ?>
     </script>
 </body>
 

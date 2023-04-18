@@ -87,9 +87,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= $_SESSION['path'] ?>reportes/diario/" class="nav-link">
+                                <a href="<?= $_SESSION['path'] ?>reportes/ventas/" class="nav-link">
                                     <i class="fa fa-list-alt nav-icon"></i>
-                                    <p>Reporte Diario</p>
+                                    <p>Reporte de ventas</p>
                                 </a>
                             </li>
                             <li class="nav-item">

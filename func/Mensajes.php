@@ -550,6 +550,19 @@ if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'factu
                 })";
     unset($_SESSION['success-delete']);
 }
+if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'boleto') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Boleto eliminado correctamente.'
+                })";
+    unset($_SESSION['success-delete']);
+}
 if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'boleto&factura') {
     echo "var Toast = Swal.mixin({
                     toast: true,
@@ -559,7 +572,33 @@ if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'bolet
                 });
                 Toast.fire({
                     icon: 'success',
-                    title: 'Boleto(s) y factura han sido eliminado(s) correctamente.'
+                    title: 'Boleto y factura han sido eliminados correctamente.'
+                })";
+    unset($_SESSION['success-delete']);
+}
+if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'boletos&factura') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Los boletos y factura han sido eliminados correctamente.'
+                })";
+    unset($_SESSION['success-delete']);
+}
+if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'boleto&editFactura') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Boleto eliminado y factura actualizada correctamente.'
                 })";
     unset($_SESSION['success-delete']);
 }

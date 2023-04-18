@@ -53,7 +53,7 @@ if ($Res_NumBoletos > 1) {
             $Obj_Eventos->Insertar();
 
             if ($DatosFactura['IdTipoFactura'] === '2') {
-                $_SESSION['success-delete'] = 'boleto&factura';
+                $_SESSION['success-delete'] = 'boletos&factura';
             }
 
             header("Location:" . $_SESSION['path'] . "buscar-factura/");
