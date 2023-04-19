@@ -4,10 +4,13 @@ require_once './func/validateSession.php';
 require_once './bd/bd.php';
 require_once './class/Ajustes.php';
 require_once './class/Eventos.php';
+require_once './class/Empleados.php';
 
 $Obj_Eventos = new Eventos();
 $Obj_Ajustes = new Ajustes();
+$Obj_Empleados = new Empleados();
 $Res_Eventos = $Obj_Eventos->listarEventos();
+
 
 ?>
 

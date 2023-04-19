@@ -6,6 +6,9 @@ class Empleados extends DB
     public $Email;
     public $UrlFoto;
     public $IdRole;
+    public $Agencia;
+    public $Agente;
+    public $FormatoFecha;
 
     public function listarTodo()
     {
@@ -33,6 +36,9 @@ class Empleados extends DB
             Email,
             UrlFoto,
             IdRole,
+            Agencia,
+            Agente,
+            FormatoFecha,
             Eliminado )
             VALUES (
             '" . $this->NombreEmpleado . "',
@@ -40,6 +46,9 @@ class Empleados extends DB
             '" . $this->Email . "',
             'dist/img/avatar.png',
             '" . $this->IdRole . "',
+            '" . $this->Agencia . "',
+            '" . $this->Agente . "',
+            '" . $this->FormatoFecha . "',
             'N' ) ";
         return $this->EjecutarQuery($query);
     }
