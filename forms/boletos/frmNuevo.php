@@ -188,17 +188,21 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') { echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']); } ?>">
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') {
+                                                                                                                                                                                                                                    echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);
+                                                                                                                                                                                                                                } ?>">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') { echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']); } ?>">
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob1" value="<?php if ($DatosClientes['FechaNacimiento'] !== '0000-00-00') {
+                                                                                                                                                                                                                                    echo $Obj_Ajustes->FechaInvertir($DatosClientes['FechaNacimiento']);
+                                                                                                                                                                                                                                } ?>">
                                             <?php } ?>
 
 
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -245,7 +249,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="2">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(2)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(2)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -267,15 +271,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob2" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob2">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob2" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob2">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -322,7 +326,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="3">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(3)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(3)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -344,15 +348,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob3" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob3">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob3" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob3">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -399,7 +403,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="4">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(4)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(4)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -421,15 +425,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob4" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob4">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob4" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob4">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -476,7 +480,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="5">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(5)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(5)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -498,15 +502,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob5" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob5">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob5" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob5">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -553,7 +557,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="6">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(6)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(6)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -575,15 +579,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob6" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob6">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob6" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob6">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -630,7 +634,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="7">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(7)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(7)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -652,15 +656,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob7" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob7">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob7" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob7">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -707,7 +711,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="8">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(8)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(8)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -729,15 +733,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob8" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob8">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob8" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob8">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -784,7 +788,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="9">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(9)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(9)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -806,15 +810,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob9" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob9">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob9" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob9">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -861,7 +865,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="10">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(10)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(10)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -883,15 +887,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob10" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob10">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob10" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob10">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -938,7 +942,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="11">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(11)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(11)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -960,15 +964,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob11" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob11">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob11" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob11">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -1015,7 +1019,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="12">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(12)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(12)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1037,15 +1041,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob12" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob12">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob12" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob12">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -1092,7 +1096,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="13">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(13)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(13)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1114,15 +1118,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob13" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob13">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob13" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob13">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -1169,7 +1173,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="14">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(14)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(14)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1191,15 +1195,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob14" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob14">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob14" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob14">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -1246,7 +1250,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             </div>
                             <div class="px-2 mb-3 pt-3 rounded fila d-none" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="15">
                                 <div class="d-flex justify-content-end pt-2">
-                                        <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(15)"></i>
+                                    <i class="btn bg-danger fa-lg fa fa-window-close" onclick="javascript:eliminarFila(15)"></i>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- # Boleto -->
@@ -1268,15 +1272,15 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob15" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob15">
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob15" >
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob15">
                                             <?php } ?>
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
+
 
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
@@ -1598,7 +1602,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
                             <div class="form-group">
                                 <label>Itinerario</label>
                                 <textarea id="summernote" name="txtItinerario">
-                                    
+
                                 </textarea>
                             </div>
                             <input type="hidden" name="nb" id="nb" value="1">
@@ -1661,6 +1665,24 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
             $('[data-mask]').inputmask()
             // Summernote
             $('#summernote').summernote()
+
+            $('#summernote').on('summernote.paste', function(_, e) {
+                setTimeout(() => {
+
+                    // Obtener el elemento pre con el id "responseCommand"
+                    var preElement = document.getElementById("responseCommand");
+
+                    // Quitar el estilo de fondo
+                    preElement.style.backgroundColor = "transparent";
+
+                    // Cambiar el color del texto a #000 (negro)
+                    preElement.style.color = "#000";
+                    preElement.querySelector('code').style.fontFamily = "Arial";
+                }, 10);
+
+            });
+
+
             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
                 //Date picker
                 $('#datefrom').datetimepicker({
@@ -1683,6 +1705,7 @@ $DatosClientes = $Res_Clientes->fetch_assoc();
 
         })
     </script>
+
     <script>
         $(function() {
             $('#frmNuevo').validate({
