@@ -229,10 +229,10 @@ if($Res_Boletos->num_rows <= 0){
                             <div class="form-group pr-1 mt-3">
                                 <button class="btn btn-primary btn-block btn-lg" type="submit">Editar Boleto</button>
                             </div>
+                            <?php } ?>
                             <div class="form-group pl-1">
                                 <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cerrar</button>
                             </div>
-                            <?php } ?>
                         </form>
                         <!-- /.form group -->
                     </div>
