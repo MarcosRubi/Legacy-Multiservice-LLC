@@ -38,6 +38,12 @@ if ($cantidadBoletosFactura <= 1) {
     $Res_Boletos = $Obj_Boletos->Eliminar($_GET['id']);
     $Obj_Facturas->Eliminar($DatosFactura['IdFactura']);
 
+    $Obj_Eventos->Mensaje = 'ha eliminado la';
+    $Obj_Eventos->VentanaEmergente = 'N';
+    $Obj_Eventos->TipoEvento = "factura #" . $DatosFactura['IdFactura'];
+    $Obj_Eventos->Icono = 'fas fa-minus bg-danger';
+    $Obj_Eventos->Insertar();
+
     if ($Res_Boletos) {
         echo "<script>history.go(-1)</script>";
         $_SESSION['success-delete'] = 'boleto&factura';
@@ -74,6 +80,13 @@ $Obj_Facturas->Pnr = $DatosFactura['Pnr'];
 
 $Res_Boletos = $Obj_Boletos->Eliminar($_GET['id']);
 $Obj_Facturas->ActualizarTodaLaFactura($DatosFactura['IdFactura']);
+
+$Obj_Eventos->Mensaje = 'ha actualizado la';
+$Obj_Eventos->TipoEvento = "factura #" . $DatosFactura['IdFactura'];
+$Obj_Eventos->VentanaEmergente = 'N';
+$Obj_Eventos->Icono = 'fas fa-user-edit bg-orange';
+$Obj_Eventos->UrlEvento = 'facturas/detalles.php?id=' . $DatosFactura['IdFactura'];
+$Obj_Eventos->Insertar();
 
 
 if ($Res_Facturas && $Res_Boletos) {
