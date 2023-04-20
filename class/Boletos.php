@@ -200,6 +200,40 @@ class Boletos extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function ActualizarPreparar($id)
+    {
+        $query = "UPDATE tbl_boletos SET 
+        IdCliente = '" . $this->IdCliente . "',
+        Pnr = '" . $this->Pnr . "',
+        NumeroBoletos = '" . $this->NumeroBoletos . "',
+        NombrePasajero = '" . $this->NombrePasajero . "',
+        Aerolinea = '" . $this->Aerolinea . "', 
+        Origen = '" . $this->Origen . "', 
+        Destino = '" . $this->Destino . "', 
+        FechaIda = '" . $this->FechaIda . "', 
+        FechaRegreso = '" . $this->FechaRegreso . "', 
+        IdIata = '" . $this->IdIata . "', 
+        IdTipo = '" . $this->IdTipo . "', 
+        IdFormaPago = '" . $this->IdFormaPago . "', 
+        Precio = '" . $this->Precio . "', 
+        Base = '" . $this->Base . "', 
+        Tax = '" . $this->Tax . "', 
+        Fm = '" . $this->Fm . "', 
+        Fee = '" . $this->Fee . "', 
+        Itinerario = '" . $this->Itinerario . "', 
+        Dob = '" . $this->Dob . "', 
+        Agencia = '" . $this->Agencia . "', 
+        Agente = '" . $this->Agente . "' 
+        WHERE IdBoleto='" . $id . "' ";
+
+        return $query;
+    }
+
+    public function ActualizarQueryPreparada($query)
+    {
+        return $this->EjecutarQuery($query);
+    }
+
     public function Eliminar($id)
     {
         $query = "UPDATE tbl_boletos SET Eliminado='S' WHERE IdBoleto='" . $id . "'";

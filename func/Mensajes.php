@@ -523,6 +523,19 @@ if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'factu
                 })";
     unset($_SESSION['success-update']);
 }
+if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'boleto') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Boleto actualizado correctamente.'
+                })";
+    unset($_SESSION['success-update']);
+}
 
 if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'cliente') {
     echo "var Toast = Swal.mixin({

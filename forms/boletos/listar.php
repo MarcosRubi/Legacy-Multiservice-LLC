@@ -107,7 +107,7 @@ $Obj_OpcionesTablas = new OpcionesTablas();
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Tax']) ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Fm']) ?></td>
                                                     <td>
-                                                        <a class="btn btn-sm mx-1 btn-primary" title="Editar" href="<?=$_SESSION['path']?>forms/boletos/frmEditar.php?id=<?=$DatosBoleto['IdBoleto']?>">
+                                                        <a class="btn btn-sm mx-1 btn-primary" title="Editar" href="<?=$_SESSION['path']?>boletos/detalles.php?id=<?=$DatosBoleto['IdBoleto']?>">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
                                                         <a class="btn btn-sm mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarBoleto(<?= $DatosBoleto['IdBoleto'] ?>);">

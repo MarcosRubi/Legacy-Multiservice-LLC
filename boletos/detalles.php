@@ -1,25 +1,54 @@
 <?php
 require_once '../func/validateSession.php';
 if (!isset($_GET['id'])) {
-    echo "<script>window.location.replace('" . $_SESSION['path'] . "');</script>";
+    echo "<script>history.go(-1);</script>";
     return;
+}
+
+$editar = false;
+if ($_SESSION['IdRole'] <= 2) {
+    $editar = true;
 }
 
 require_once '../bd/bd.php';
 require_once '../class/Boletos.php';
 require_once '../class/Ajustes.php';
+require_once '../class/OpcionesTablas.php';
 
 $Obj_Boletos = new Boletos();
 $Obj_Ajustes = new Ajustes();
+$Obj_OpcionesTablas = new OpcionesTablas();
 
-$Res_Boletos = $Obj_Boletos->buscarPorId($_GET['id']);
-$DatosBoleto = $Res_Boletos->fetch_assoc();
+$Res_Boleto = $Obj_Boletos->buscarPorId($_GET['id']);
+$Res_OpcionesIatas = $Obj_OpcionesTablas->listarIatas();
+$Res_OpcionesTipos = $Obj_OpcionesTablas->listarTipos();
+$Res_OpcionesFormasPago = $Obj_OpcionesTablas->listarFormasPagos();
 
-if($Res_Boletos->num_rows <= 0){
-    $_SESSION['reg-delete'] = 'boleto';
-    echo "<script>window.close();window.opener.location.reload();</script>";
-    return;
+
+$DatosBoleto = $Res_Boleto->fetch_assoc();
+
+$opcionesIatas = "";
+while ($DatoTipoIata = $Res_OpcionesIatas->fetch_assoc()) {
+    if ($DatoTipoIata['IdIata'] !== $DatosBoleto['IdIata']) {
+        $opcionesIatas .= "<option value=" . $DatoTipoIata['IdIata'] . ">" . $DatoTipoIata['NombreIata'] . "</option>";
+    }
 }
+
+$opcionesTipo = '';
+while ($DatoTipos = $Res_OpcionesTipos->fetch_assoc()) {
+    if ($DatoTipos['IdTipo'] !== $DatosBoleto['IdTipo']) {
+        $opcionesTipo .= "<option value=" . $DatoTipos['IdTipo'] . ">" . $DatoTipos['NombreTipo'] . "</option>";
+    }
+}
+
+$opcionesFormaPago = '';
+while ($DatoFormaPago = $Res_OpcionesFormasPago->fetch_assoc()) {
+    if ($DatoFormaPago['IdFormaPago'] !== $DatosBoleto['IdFormaPago']) {
+        $opcionesFormaPago .= "<option value=" . $DatoFormaPago['IdFormaPago'] . ">" . $DatoFormaPago['FormaPago'] . "</option>";
+    }
+}
+
+
 
 ?>
 
@@ -29,7 +58,7 @@ if($Res_Boletos->num_rows <= 0){
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detalles Boleto</title>
+    <title>Editar Boleto</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -70,39 +99,39 @@ if($Res_Boletos->num_rows <= 0){
                 <div class="row">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title w-100 font-weight-bold text-center">Detalles de boleto #<?=$DatosBoleto['IdBoleto'] ?></h3>
+                            <h3 class="card-title w-100 font-weight-bold text-center">Detalles del boleto #<?= $DatosBoleto['IdBoleto'] ?></h3>
                         </div>
-                        <form action="#" method="post" class="card-body" id="frmNuevo" onsubmit="return false;">
+                        <form action="../forms/boletos/editar.php" method="post" class="card-body" id="frmNuevo">
                             <div class="form-group mx-1 p-2 rounded" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                                 <div class="form-group mx-1  ">
                                     <label>Código PNR</label>
-                                    <input type="text" class="form-control" placeholder="PNR ..." name="txtPnr" value="<?=$DatosBoleto['Pnr'] ?>" readonly>
+                                    <input type="text" class="form-control" placeholder="PNR ..." name="txtPnr" value="<?= $DatosBoleto['Pnr'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                 </div>
                                 <div class="d-flex flex-column flex-xl-row">
                                     <!-- Aerolínea -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Aerolínea</label>
-                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea" value="<?=$DatosBoleto['Aerolinea'] ?>" readonly>
+                                        <input type="text" class="form-control" placeholder="Aerolínea ..." name="txtAerolinea" value="<?= $DatosBoleto['Aerolinea'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                     <!-- Origen -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Origen</label>
-                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen" value="<?=$DatosBoleto['Origen'] ?>" readonly>
+                                        <input type="text" class="form-control" placeholder="Origen ..." name="txtOrigen" value="<?= $DatosBoleto['Origen'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                     <!-- Destino -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Destino</label>
-                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino" value="<?=$DatosBoleto['Destino'] ?>" readonly>
+                                        <input type="text" class="form-control" placeholder="Destino ..." name="txtDestino" value="<?= $DatosBoleto['Destino'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                     <!-- Fecha Ida dd-mm-yyyy -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Fecha ida:</label>
                                         <div class="input-group date" id="dateto" data-target-input="nearest">
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda" value="<?=$Obj_Ajustes->FechaInvertir($DatosBoleto['FechaIda']) ?>" disabled>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaIda" value="<?= $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaIda']) ?>" <?= $editar ? '' : 'disabled' ?>>
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda" value="<?=$Obj_Ajustes->FechaInvertir($DatosBoleto['FechaIda']) ?>" disabled>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaIda" value="<?= $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaIda']) ?>" <?= $editar ? '' : 'disabled' ?>>
                                             <?php } ?>
                                             <div class="input-group-append" data-target="#dateto" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
@@ -115,10 +144,10 @@ if($Res_Boletos->num_rows <= 0){
                                         <label>Fecha regreso:</label>
                                         <div class="input-group date" id="datefrom" data-target-input="nearest">
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso" value="<?=$Obj_Ajustes->FechaInvertir($DatosBoleto['FechaRegreso']) ?>" disabled>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaRegreso" value="<?= $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaRegreso']) ?>" <?= $editar ? '' : 'disabled' ?>>
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso" value="<?=$Obj_Ajustes->FechaInvertir($DatosBoleto['FechaRegreso']) ?>" disabled>
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaRegreso" value="<?= $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaRegreso']) ?>" <?= $editar ? '' : 'disabled' ?>>
                                             <?php } ?>
                                             <div class="input-group-append" data-target="#datefrom" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>
@@ -129,15 +158,17 @@ if($Res_Boletos->num_rows <= 0){
                                     <!-- IATA -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>IATA</label>
-                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata" disabled>
-                                            <option value="<?=$DatosBoleto['IdIata'] ?>"><?=$DatosBoleto['NombreIata'] ?></option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdIata" <?= $editar ? '' : 'disabled' ?>>
+                                            <?= "<option value=" . $DatosBoleto['IdIata'] . ">" . $DatosBoleto['NombreIata'] . "</option>"; ?>
+                                            <?= $opcionesIatas ?>
                                         </select>
                                     </div>
                                     <!-- Tipo -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Tipo</label>
-                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo" disabled>
-                                            <option value="<?=$DatosBoleto['IdTipo'] ?>"><?=$DatosBoleto['NombreTipo'] ?></option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdTipo" <?= $editar ? '' : 'disabled' ?>>
+                                            <?= "<option value=" . $DatosBoleto['IdTipo'] . ">" . $DatosBoleto['NombreTipo'] . "</option>"; ?>
+                                            <?= $opcionesTipo ?>
                                         </select>
                                     </div>
                                 </div>
@@ -148,12 +179,12 @@ if($Res_Boletos->num_rows <= 0){
                                     <!-- # Boleto -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label># Boleto</label>
-                                        <input type="text" class="form-control" name="txtBoleto1" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask value="<?=$DatosBoleto['NumeroBoletos'] ?>" readonly>
+                                        <input type="text" class="form-control" name="txtBoleto1" data-inputmask='"mask": "999-9999999999"' placeholder="XXX-XXXXXXXXXX" data-mask value="<?= $DatosBoleto['NumeroBoletos'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                     <!-- Nombre del pasajero -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Nombre del pasajero</label>
-                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero1" value="<?=$DatosBoleto['NombrePasajero'] ?>" readonly>
+                                        <input type="text" class="form-control" placeholder="Nombre del pasajero ..." name="txtNombrePasajero1" value="<?= $DatosBoleto['NombrePasajero'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                     <!-- Passenger DOB dd-mm-yyyy -->
                                     <div class="form-group mx-1 flex-fill">
@@ -164,75 +195,69 @@ if($Res_Boletos->num_rows <= 0){
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?=$Obj_Ajustes->FechaInvertir($DatosBoleto['Dob']) ?>" readonly>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?php if ($DatosBoleto['Dob'] !== '0000-00-00') { echo $Obj_Ajustes->FechaInvertir($DatosBoleto['Dob']);} ?>" <?= $editar ? '' : 'readonly' ?>>
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob1" value="<?=$Obj_Ajustes->FechaInvertir($DatosBoleto['Dob']) ?>" readonly>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob1" value="<?php if ($DatosBoleto['Dob'] !== '0000-00-00') { echo $Obj_Ajustes->FechaInvertir($DatosBoleto['Dob']);} ?>" <?= $editar ? '' : 'readonly' ?>>
                                             <?php } ?>
 
 
                                         </div>
                                         <!-- /.input group -->
                                     </div>
-                                    
-
                                 </div>
                                 <div class="d-flex  flex-column flex-xl-row">
                                     <!-- Forma de pago -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Forma de pago</label>
-                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago1" disabled>
-                                            <option value="<?=$DatosBoleto['IdFormaPago'] ?>"><?=$DatosBoleto['FormaPago'] ?></option>
+                                        <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago1" <?= $editar ? '' : 'disabled' ?>>
+                                        <?= "<option value=" . $DatosBoleto['IdFormaPago'] . ">" . $DatosBoleto['FormaPago'] . "</option>";?>
+                                            <?= $opcionesFormaPago ?>
                                         </select>
                                     </div>
                                     <!-- Precio -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Precio</label>
-                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio1" value="<?=$DatosBoleto['Precio']?>" readonly>
+                                        <input type="number" class="form-control" placeholder="Precio ..." name="txtPrecio1" value="<?= $DatosBoleto['Precio'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                     <!--Base -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Base</label>
-                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase1" value="<?=$DatosBoleto['Base']?>" readonly>
+                                        <input type="number" class="form-control" placeholder="Base ..." name="txtBase1" value="<?= $DatosBoleto['Base'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                     <!-- TAX -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Tax</label>
-                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax1" value="<?=$DatosBoleto['Tax']?>" readonly>
+                                        <input type="number" class="form-control" placeholder="Tax ..." name="txtTax1" value="<?= $DatosBoleto['Tax'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                     <!-- Fm -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Fm</label>
-                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm1" value="<?=$DatosBoleto['Fm']?>" readonly>
+                                        <input type="number" class="form-control" placeholder="Fm ..." name="txtFm1" value="<?= $DatosBoleto['Fm'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                     <!-- Fee -->
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Fee</label>
-                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee1" value="<?=$DatosBoleto['Fee']?>" readonly>
+                                        <input type="number" class="form-control" placeholder="Fee ..." name="txtFee1" value="<?= $DatosBoleto['Fee'] !== '' ? $DatosBoleto['Fee'] : '0.00' ?>" <?= $editar ? '' : 'readonly' ?>>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label>Itinerario</label>
-                                <textarea id="summernote" name="txtItinerario">
-                                <?=$DatosBoleto['Itinerario']?>
+                                <div class="form-group">
+                                    <label>Itinerario</label>
+                                    <textarea id="summernote" name="txtItinerario" value="<?= $DatosBoleto['Itinerario'] ?>" >
+
                                 </textarea>
-                            </div>
-                            <input type="hidden" name="nb" id="nb" value="1">
-                            <input type="hidden" name="nm" id="nm">
-                            <input type="hidden" class="form-control d-none" name="IdCliente" value="<?=$DatosBoleto['IdCliente']?>">
-                            <!-- /.form group -->
-                            <?php
-                                if($_SESSION['IdRole'] === 2){
-                            ?>
-                            <div class="form-group pr-1 mt-3">
-                                <button class="btn btn-primary btn-block btn-lg" type="submit">Editar Boleto</button>
-                            </div>
-                            <?php } ?>
-                            <div class="form-group pl-1">
-                                <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cerrar</button>
-                            </div>
+                                </div>
+                                <input type="hidden" name="nb" id="nb" value="1">
+                                <input type="hidden" name="nm" id="nm">
+                                <input type="hidden" class="form-control d-none" name="IdCliente" value="<?= $DatosBoleto['IdCliente'] ?>">
+                                <input type="hidden" class="form-control d-none" name="IdBoleto" value="<?= $DatosBoleto['IdBoleto'] ?>">
+                                <!-- /.form group -->
+                                <?= $editar ? '<div class="form-group pr-1 mt-3"><button class="btn btn-primary btn-block btn-lg" type="submit">Guardar cambios</button></div>' : ''?>
+                                
+                                <div class="form-group pl-1 pb-3">
+                                    <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cerrar</button>
+                                </div>
                         </form>
                         <!-- /.form group -->
                     </div>
@@ -301,14 +326,120 @@ if($Res_Boletos->num_rows <= 0){
                     format: 'MM-DD-YYYY'
                 });
             <?php } ?>
+
+
         })
     </script>
     <script>
-        function closeForm(){
-            window.close();
-        }
+        $(function() {
+            $('#frmNuevo').validate({
+                rules: {
+                    txtPnr: {
+                        required: true
+                    },
+                    txtBoleto1: {
+                        required: true
+                    },
+                    txtNombrePasajero1: {
+                        required: true
+                    },
+                    txtFechaDob1: {
+                        required: true
+                    },
+                    txtAerolinea: {
+                        required: true
+                    },
+                    txtOrigen: {
+                        required: true
+                    },
+                    txtDestino: {
+                        required: true
+                    },
+                    txtFechaIda: {
+                        required: true
+                    },
+                    txtPrecio1: {
+                        required: true
+                    },
+                    txtBase1: {
+                        required: true
+                    },
+                    txtTax1: {
+                        required: true
+                    },
+                    txtFm1: {
+                        required: true
+                    }
+                },
+                messages: {
+                    txtPnr: {
+                        required: "El PNR es obligatorio",
+                    },
+                    txtBoleto1: {
+                        required: "El # de boleto es obligatorio"
+                    },
+                    txtNombrePasajero1: {
+                        required: "El nombre es obligatorio"
+                    },
+                    txtFechaDob1: {
+                        required: "La fecha es obligatorio"
+                    },
+                    txtAerolinea: {
+                        required: "La aerolínea es obligatorio"
+                    },
+                    txtOrigen: {
+                        required: "El origen es obligatorio"
+                    },
+                    txtDestino: {
+                        required: "El destino es obligatorio"
+                    },
+                    txtFechaIda: {
+                        required: "La fecha de ida es obligatorio"
+                    },
+                    txtPrecio1: {
+                        required: "El precio es obligatorio"
+                    },
+                    txtBase1: {
+                        required: "La base es obligatorio"
+                    },
+                    txtTax1: {
+                        required: "El TAX es obligatorio"
+                    },
+                    txtFm1: {
+                        required: "El FM es obligatorio"
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        })
     </script>
+    <script>
+        let posicion = 1;
+        let formsValidar = [1]
+        let inputNb = document.getElementById('nb')
 
+        let posicionMCO = 0;
+        let formsValidarMCO = []
+        let inputNm = document.getElementById('nm')
+
+        function closeForm() {
+            window.close()
+        }
+
+    </script>
+    <script>
+        <?php require_once '../func/Mensajes.php'; ?>
+    </script>
 
 </body>
 
