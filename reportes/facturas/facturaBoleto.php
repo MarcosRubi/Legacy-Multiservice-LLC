@@ -31,7 +31,19 @@ $Res_PagosBoletos = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $R
 
 $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res_buscarPagos['Pnr']);
 
+$efectivo = 0;
+$credito = 0;
+$formaPago = '';
+while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
+    $formaPago = $DatosPagosBoletos['FormaPago'];
 
+    if ($DatosPagosBoletos['FormaPago'] === 'Efectivo') {
+        $efectivo = $efectivo + $DatosPagosBoletos['Precio'];
+    }
+    if ($DatosPagosBoletos['FormaPago'] === 'Crédito') {
+        $credito = $credito + $DatosPagosBoletos['Precio'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -111,10 +123,10 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                                     <th>Fecha</th>
                                                     <th>Valor total</th>
                                                     <?php
-                                                    if ($Res_PagosBoletos->num_rows <= 1) {
+                                                    if ($Res_PagosBoletos->num_rows <= 1 || ($efectivo > 0 && $credito === 0) || ($efectivo === 0 && $credito > 0)) {
                                                         echo "<th>Total recibido</th>";
                                                         if (((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) > 0)) {
-                                                            if ($Res_Abonos->num_rows <= 0) {
+                                                            if ($Res_Abonos->num_rows <= 0 && ($efectivo > 0 && $credito === 0) || ($efectivo === 0 && $credito > 0)) {
                                                                 echo "<th>Forma de pago</th>";
                                                             }
                                                         }
@@ -131,11 +143,11 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                                     <td><?= $Obj_Ajustes->FechaInvertir(substr($DatosCliente['Creado'], 0, -9)) ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['Valor']) ?></td>
                                                     <?php
-                                                    if ($Res_PagosBoletos->num_rows <= 1) {
+                                                    if ($Res_PagosBoletos->num_rows <= 1 || ($efectivo > 0 && $credito === 0) || ($efectivo === 0 && $credito > 0)) {
                                                         echo "<td>" . $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) . "</td>";
                                                         if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) > 0) {
                                                             if ($Res_Abonos->num_rows <= 0) {
-                                                                echo "<td>" . $Res_PagosBoletos->fetch_assoc()['FormaPago'] . "</td>";
+                                                                echo "<td>" . $formaPago . "</td>";
                                                             }
                                                         }
                                                         echo "<td>" . $Obj_Ajustes->FormatoDinero($DatosCliente['BalanceInicial']) . "</td>";
@@ -147,7 +159,7 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
                                         </table>
 
                                         <?php
-                                        if ($Res_PagosBoletos->num_rows > 1) { ?>
+                                        if ($Res_PagosBoletos->num_rows > 1 && ($efectivo > 0 && $credito > 0)) { ?>
                                             <div class="row">
                                                 <!-- /.col -->
                                                 <div class="col-4">
@@ -155,19 +167,6 @@ $Res_Itinerario = $Obj_Boletos->buscarPorPnr($Res_buscarPagos['IdCliente'], $Res
 
                                                     <div class="table-responsive">
                                                         <table class="table">
-                                                            <?php
-                                                            $efectivo = 0;
-                                                            $credito = 0;
-                                                            while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
-                                                                if ($DatosPagosBoletos['FormaPago'] === 'Efectivo') {
-                                                                    $efectivo = $efectivo + $DatosPagosBoletos['Precio'];
-                                                                }
-                                                                if ($DatosPagosBoletos['FormaPago'] === 'Crédito') {
-                                                                    $credito = $credito + $DatosPagosBoletos['Precio'];
-                                                                }
-
-                                                            }
-                                                            ?>
                                                             <tr>
                                                                 <?php if ($efectivo > 0 || $credito > 0) { ?>
                                                                     <?php if ($efectivo > 0 && $credito === 0) { ?>
