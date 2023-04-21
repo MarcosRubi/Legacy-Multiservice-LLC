@@ -10,11 +10,13 @@ if ($_SESSION['IdRole'] > 3) {
 
 require_once '../../bd/bd.php';
 require_once '../../class/Boletos.php';
+require_once '../../class/Facturas.php';
 require_once '../../class/Eventos.php';
 require_once '../../class/Ajustes.php';
 
 $Obj_Boletos = new Boletos();
 $Obj_Ajustes = new Ajustes();
+$Obj_Facturas = new Facturas();
 
 
 $regexFecha = '/^(\d{2})-(\d{2})-(\d{4})$/';
@@ -24,6 +26,7 @@ $arr = explode(',', $_POST['nb']);
 $boletoActualizar = [];
 
 $Obj_Boletos->IdCliente = $Obj_Ajustes->RemoverEtiquetas($_POST['IdCliente']);
+
 $Obj_Boletos->Itinerario = trim($_POST['txtItinerario']);
 
 $Obj_Boletos->Aerolinea = trim($_POST['txtAerolinea']);
@@ -91,7 +94,7 @@ if (isset($_POST['nb'])) {
         $Obj_Boletos->NombrePasajero = $Obj_Ajustes->RemoverEtiquetas(ucwords(strtolower($_POST['txtNombrePasajero' . $i])));
         $Obj_Boletos->Dob = $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaDob' . $i]));
         $Obj_Boletos->IdFormaPago = $Obj_Ajustes->RemoverEtiquetas($_POST['txtIdPago' . $i]);
-        $Obj_Boletos->Precio = $Obj_Ajustes->RemoverEtiquetas($_POST['txtPrecio' . $i]);
+        $Obj_Boletos->Precio =  $Obj_Ajustes->ConvertirFormatoDolar($Obj_Ajustes->RemoverEtiquetas($_POST['txtPrecio' . $i]));
         $Obj_Boletos->Base = $Obj_Ajustes->RemoverEtiquetas($_POST['txtBase' . $i]);
         $Obj_Boletos->Tax = $Obj_Ajustes->RemoverEtiquetas($_POST['txtTax' . $i]);
         $Obj_Boletos->Fm = $Obj_Ajustes->RemoverEtiquetas($_POST['txtFm' . $i]);
@@ -140,6 +143,65 @@ if (isset($_POST['nb'])) {
             return;
         };
 
+        $Res_BoletoActualizar = $Obj_Boletos->buscarPorId($_POST['IdBoleto']);
+        $DatosBoleto = $Res_BoletoActualizar->fetch_assoc();
+
+        $Res_Facturas = $Obj_Facturas->buscarFacturaPorIdClienteYPnr($DatosBoleto['IdCliente'], $DatosBoleto['Pnr']);
+        $DatosFactura = $Res_Facturas->fetch_assoc();
+
+        $Obj_Facturas->CreditoValor =  $Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['CreditoValor']);
+        $Obj_Facturas->Efectivo =  $Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['Efectivo']);
+        $Obj_Facturas->Cheque = $DatosFactura['Cheque'];
+        $Obj_Facturas->Banco = $DatosFactura['Banco'];
+        $Obj_Facturas->Cupon = $DatosFactura['Cupon'];
+        $Obj_Facturas->CreditoNumero = $DatosFactura['CreditoNumero'];
+
+        $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
+        $Obj_Eventos->TipoEvento = 'factura #'  . $DatosFactura['IdFactura'];
+        $Obj_Eventos->Mensaje = 'ha actualizado la ';
+        $Obj_Eventos->Icono = 'fas fa-file-signature bg-orange';
+        $Obj_Eventos->UrlEvento = 'facturas/detalles.php?id=' . $DatosFactura['IdFactura'];
+
+        // SI ESTA ACTUALIZANDO EL PRECIO DETERMINA LA DIFERENCIA Y SE LA MODIFICA EN LA FACTURA ACORDE AL METODO DE PAGO Y EN EL BOLETO
+        if ($Obj_Ajustes->ConvertirFormatoDolar($DatosBoleto['Precio']) !== $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtPrecio1'])) {
+
+            // ENCUENTRA LA DIFERENCIA VALORNUEVO - VALORVIEJO Y ESTO VE A LA FACTURA A SUMARLO
+            $diferencia =  $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtPrecio1']) - $Obj_Ajustes->ConvertirFormatoDolar($DatosBoleto['Precio']);
+
+
+            if ($DatosBoleto['FormaPago'] === 'Efectivo') {
+                $Obj_Facturas->Efectivo = $Obj_Ajustes->ConvertirFormatoDolar($Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['Efectivo']) + $Obj_Ajustes->ConvertirFormatoDolar($diferencia));
+            }
+            if ($DatosBoleto['FormaPago'] === 'Crédito') {
+                $Obj_Facturas->CreditoValor = $Obj_Ajustes->ConvertirFormatoDolar($Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['CreditoValor']) + $Obj_Ajustes->ConvertirFormatoDolar($diferencia));
+            }
+            $Obj_Facturas->ActualizarValoresPago($DatosFactura['IdFactura']);
+        }
+
+        // SI CAMBIA LA FORMA DE PAGO RESTAR EL VALOR DEL BOLETO EN LA FACTURA SECCION CREDITO O EFECTIVO Y SUMARLO AL OTRO
+
+        // VALIDAR SI LO HA CAMBIADO
+        if (intval($_POST['txtIdPago1']) !== intval($DatosBoleto['IdFormaPago'])) {
+            if (intval($DatosBoleto['IdFormaPago']) === 2) {
+                $Obj_Facturas->CreditoValor = $Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['CreditoValor']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtPrecio1']);
+                $Obj_Facturas->Efectivo = $Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['Efectivo']) - $Obj_Ajustes->ConvertirFormatoDolar($DatosBoleto['Precio']);
+
+                $Obj_Facturas->ActualizarValoresPago($DatosFactura['IdFactura']);
+            }
+            if (intval($DatosBoleto['IdFormaPago']) === 3) {
+                $Obj_Facturas->CreditoValor = $Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['CreditoValor']) - $Obj_Ajustes->ConvertirFormatoDolar($DatosBoleto['Precio']);
+                $Obj_Facturas->Efectivo = $Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['Efectivo']) + $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtPrecio1']);
+            }
+            $Obj_Facturas->ActualizarValoresPago($DatosFactura['IdFactura']);
+        }
+
+
+        // SI ALGUNO DE LOS CAMPOS GENERALES ES MODIFICADO IR A TODOS LOS BOLETOS A ACTUALIZARLO
+        // VERIFICAR SI HAN SIDO MODIFICADOS
+        // VER SI HAY MAS DE UN BOLETO
+        // RECORRER LOS BOLETOS Y ACTUALIZAR LOS VALORES
+        // AL FINAL DEB BUCLE LLAMAR LA FUNCION ACTUALIZAR
+
         $boletoActualizar[] = $Obj_Boletos->ActualizarPreparar($_POST['IdBoleto']);
     }
 }
@@ -151,14 +213,9 @@ foreach ($boletoActualizar as $key => $boleto) {
 
     $Obj_Eventos->UrlEvento = 'boletos/detalles.php?id=' . $_POST['IdBoleto'];
     $Obj_Eventos->Insertar();
-}
 
-
-    if($Res_BoletosActualizar){
+    if ($Res_BoletosActualizar) {
         $_SESSION['success-update'] = 'boleto';
         echo "<script>history.go(-1)</script>";
     }
-
-
-
-
+}

@@ -203,8 +203,17 @@ class Facturas extends DB
         CreditoNumero = '" . $this->CreditoNumero . "',
         Cheque = '" . $this->Cheque . "',
         Banco = '" . $this->Banco . "',
-        Cupon = '" . $this->Cupon . "'
-        WHERE IdFactura='" . $id . "' ";
+        Cupon = '" . $this->Cupon . "',
+        Valor = '" . doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon) + doubleval($this->Banco) . "'
+        WHERE IdFactura=" . $id . " ";
+
+        return $this->EjecutarQuery($query);
+    }
+    public function ActualizarPrecioBoleto($id, $valor)
+    {
+        $query = "UPDATE tbl_facturas SET 
+        Valor = '" . $valor . "'
+        WHERE IdFactura=" . $id . " ";
 
         return $this->EjecutarQuery($query);
     }

@@ -57,7 +57,7 @@ if ($Res_Facturas) {
     $Obj_Eventos->NombreEmpleado = $_SESSION['NombreEmpleado'];
     $Obj_Eventos->TipoEvento = 'factura #'  . $_POST['txtIdFactura'];
     $Obj_Eventos->Mensaje = 'ha actualizado la ';
-    $Obj_Eventos->Icono = 'fas fa-user-edit bg-orange';
+    $Obj_Eventos->Icono = 'fas fa-file-signature bg-orange';
     $Obj_Eventos->UrlEvento = 'facturas/detalles.php?id=' . $_POST['txtIdFactura'];
     $Obj_Eventos->Insertar();
 
