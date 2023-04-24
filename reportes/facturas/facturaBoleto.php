@@ -255,7 +255,7 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                         <?php if ($Res_Itinerario->num_rows > 0) { ?>
                                             <div class="row my-4">
                                                 <div class="col-12">
-                                                    <p class="lead">Itinerario</p>
+                                                    <h5 class="text-center py-2">ITINERARIO</h5>
                                                     <div class="col-12">
                                                         <?= $Res_Itinerario->fetch_assoc()['Itinerario'] ?>
                                                     </div>

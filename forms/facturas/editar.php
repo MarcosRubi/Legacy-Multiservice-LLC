@@ -44,8 +44,6 @@ $Res_Facturas = $Obj_Facturas->Actualizar($_POST['txtIdFactura']);
 $Res_Abonos = $Obj_Abonos->obtenerUltimoAbono($_POST['txtIdFactura']);
 $DatosAbono = $Res_Abonos->fetch_assoc();
 
-var_dump($DatosAbono);
-
 if($Res_Abonos){
     $Obj_Abonos->BalanceActual = ((doubleval($_POST['txtEfectivo']) + doubleval($_POST['txtCreditoValor']) + doubleval($_POST['txtCheque']) + doubleval($_POST['txtCupon']) + doubleval($_POST['txtBanco'])) - doubleval($_POST['txtValor']));
     $Obj_Abonos->Actualizar($DatosAbono['IdAbono']);

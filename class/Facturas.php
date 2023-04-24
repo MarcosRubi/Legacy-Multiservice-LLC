@@ -217,6 +217,14 @@ class Facturas extends DB
 
         return $this->EjecutarQuery($query);
     }
+    public function ActualizarPnr($id, $pnr)
+    {
+        $query = "UPDATE tbl_facturas SET 
+        Pnr = '" . $pnr . "'
+        WHERE IdFactura=" . $id . " ";
+
+        return $this->EjecutarQuery($query);
+    }
 
     public function Eliminar($id)
     {

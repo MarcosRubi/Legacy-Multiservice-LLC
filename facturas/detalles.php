@@ -129,7 +129,7 @@ if ($_SESSION['IdRole'] <= 3) {
                                                     <td>
                                                         <!-- Valor -->
                                                         <div class="form-group mx-1 container-fluid mb-0">
-                                                            <input type="number" class="form-control" placeholder="0.0" name="txtEfectivo" value="<?= $DatosFactura['Efectivo'] ?>" readonly>
+                                                            <input type="number" class="form-control" placeholder="0.0" name="txtEfectivo" value="<?= $DatosFactura['Efectivo'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -138,10 +138,10 @@ if ($_SESSION['IdRole'] <= 3) {
                                                     <td>
                                                         <!-- Valor -->
                                                         <div class="form-group mx-1 container-fluid">
-                                                            <input type="number" class="form-control" placeholder="0.0" name="txtCreditoValor" value="<?= $DatosFactura['CreditoValor'] ?>" readonly>
+                                                            <input type="number" class="form-control" placeholder="0.0" name="txtCreditoValor" value="<?= $DatosFactura['CreditoValor'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                                         </div>
                                                         <div class="form-group mx-1 container-fluid">
-                                                            <input type="text" class="form-control" placeholder="Últimos 4" data-inputmask="'mask': ['9999']" data-mask name="txtCreditoNumero" value="<?= $DatosFactura['CreditoNumero'] ?>" readonly>
+                                                            <input type="text" class="form-control" placeholder="Últimos 4" data-inputmask="'mask': ['9999']" data-mask name="txtCreditoNumero" value="<?= $DatosFactura['CreditoNumero'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -150,7 +150,7 @@ if ($_SESSION['IdRole'] <= 3) {
                                                     <td>
                                                         <!-- Valor -->
                                                         <div class="form-group mx-1 container-fluid mb-0">
-                                                            <input type="number" class="form-control" placeholder="0.0" name="txtCheque" value="<?= $DatosFactura['Cheque'] ?>" readonly>
+                                                            <input type="number" class="form-control" placeholder="0.0" name="txtCheque" value="<?= $DatosFactura['Cheque'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -159,7 +159,7 @@ if ($_SESSION['IdRole'] <= 3) {
                                                     <td>
                                                         <!-- Valor -->
                                                         <div class="form-group mx-1 container-fluid mb-0">
-                                                            <input type="number" class="form-control" placeholder="0.0" name="txtBanco" value="<?= $DatosFactura['Banco'] ?>" readonly>
+                                                            <input type="number" class="form-control" placeholder="0.0" name="txtBanco" value="<?= $DatosFactura['Banco'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -168,7 +168,7 @@ if ($_SESSION['IdRole'] <= 3) {
                                                     <td>
                                                         <!-- Valor -->
                                                         <div class="form-group mx-1 container-fluid mb-0">
-                                                            <input type="number" class="form-control" placeholder="0.0" name="txtCupon" value="<?= $DatosFactura['Cupon'] ?>" readonly>
+                                                            <input type="number" class="form-control" placeholder="0.0" name="txtCupon" value="<?= $DatosFactura['Cupon'] ?>" <?= $editar ? '' : 'readonly' ?>>
                                                         </div>
                                                     </td>
                                                 </tr>

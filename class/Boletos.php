@@ -187,15 +187,15 @@ class Boletos extends DB
         IdTipo = '" . $this->IdTipo . "', 
         IdFormaPago = '" . $this->IdFormaPago . "', 
         Precio = '" . $this->Precio . "', 
-        Base = '" . $this->Base . "' 
-        Tax = '" . $this->Tax . "' 
-        Fm = '" . $this->Fm . "' 
-        Fee = '" . $this->Fee . "' 
-        Itinerario = '" . $this->Itinerario . "' 
-        Dob = '" . $this->Dob . "' 
-        Agencia = '" . $this->Agencia . "' 
+        Base = '" . $this->Base . "', 
+        Tax = '" . $this->Tax . "', 
+        Fm = '" . $this->Fm . "', 
+        Fee = '" . $this->Fee . "', 
+        Itinerario = '" . $this->Itinerario . "', 
+        Dob = '" . $this->Dob . "', 
+        Agencia = '" . $this->Agencia . "', 
         Agente = '" . $this->Agente . "' 
-        WHERE IdCotizacion='" . $id . "' ";
+        WHERE IdBoleto='" . $id . "' ";
 
         return $this->EjecutarQuery($query);
     }
@@ -203,7 +203,7 @@ class Boletos extends DB
     public function ActualizarPreparar($id)
     {
         $query = "UPDATE tbl_boletos SET 
-        IdCliente = '" . $this->IdCliente . "',
+        IdCliente = '" . $this->IdCliente . "', 
         Pnr = '" . $this->Pnr . "',
         NumeroBoletos = '" . $this->NumeroBoletos . "',
         NombrePasajero = '" . $this->NombrePasajero . "',
