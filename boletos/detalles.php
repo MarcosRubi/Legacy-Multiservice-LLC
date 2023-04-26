@@ -48,8 +48,6 @@ while ($DatoFormaPago = $Res_OpcionesFormasPago->fetch_assoc()) {
     }
 }
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +56,7 @@ while ($DatoFormaPago = $Res_OpcionesFormasPago->fetch_assoc()) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Editar Boleto</title>
+    <title>Detalles del Boleto</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -195,10 +193,14 @@ while ($DatoFormaPago = $Res_OpcionesFormasPago->fetch_assoc()) {
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?php if ($DatosBoleto['Dob'] !== '0000-00-00') { echo $Obj_Ajustes->FechaInvertir($DatosBoleto['Dob']);} ?>" <?= $editar ? '' : 'readonly' ?>>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaDob1" value="<?php if ($DatosBoleto['Dob'] !== '0000-00-00') {
+                                                                                                                                                                                                                                    echo $Obj_Ajustes->FechaInvertir($DatosBoleto['Dob']);
+                                                                                                                                                                                                                                } ?>" <?= $editar ? '' : 'readonly' ?>>
                                             <?php } ?>
                                             <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob1" value="<?php if ($DatosBoleto['Dob'] !== '0000-00-00') { echo $Obj_Ajustes->FechaInvertir($DatosBoleto['Dob']);} ?>" <?= $editar ? '' : 'readonly' ?>>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaDob1" value="<?php if ($DatosBoleto['Dob'] !== '0000-00-00') {
+                                                                                                                                                                                                                                    echo $Obj_Ajustes->FechaInvertir($DatosBoleto['Dob']);
+                                                                                                                                                                                                                                } ?>" <?= $editar ? '' : 'readonly' ?>>
                                             <?php } ?>
 
 
@@ -211,7 +213,7 @@ while ($DatoFormaPago = $Res_OpcionesFormasPago->fetch_assoc()) {
                                     <div class="form-group mx-1 flex-fill">
                                         <label>Forma de pago</label>
                                         <select class="form-control select2" style="width: 100%;" tabindex="-1" aria-hidden="true" name="txtIdPago1" <?= $editar ? '' : 'disabled' ?>>
-                                        <?= "<option value=" . $DatosBoleto['IdFormaPago'] . ">" . $DatosBoleto['FormaPago'] . "</option>";?>
+                                            <?= "<option value=" . $DatosBoleto['IdFormaPago'] . ">" . $DatosBoleto['FormaPago'] . "</option>"; ?>
                                             <?= $opcionesFormaPago ?>
                                         </select>
                                     </div>
@@ -244,7 +246,7 @@ while ($DatoFormaPago = $Res_OpcionesFormasPago->fetch_assoc()) {
 
                                 <div class="form-group">
                                     <label>Itinerario</label>
-                                    <textarea id="summernote" name="txtItinerario" value="<?= $DatosBoleto['Itinerario'] ?>" >
+                                    <textarea id="summernote" name="txtItinerario" value="<?= $DatosBoleto['Itinerario'] ?>">
 
                                 </textarea>
                                 </div>
@@ -253,8 +255,8 @@ while ($DatoFormaPago = $Res_OpcionesFormasPago->fetch_assoc()) {
                                 <input type="hidden" class="form-control d-none" name="IdCliente" value="<?= $DatosBoleto['IdCliente'] ?>">
                                 <input type="hidden" class="form-control d-none" name="IdBoleto" value="<?= $DatosBoleto['IdBoleto'] ?>">
                                 <!-- /.form group -->
-                                <?= $editar ? '<div class="form-group pr-1 mt-3"><button class="btn btn-primary btn-block btn-lg" type="submit">Guardar cambios</button></div>' : ''?>
-                                
+                                <?= $editar ? '<div class="form-group pr-1 mt-3"><button class="btn btn-primary btn-block btn-lg" type="submit">Guardar cambios</button></div>' : '' ?>
+
                                 <div class="form-group pl-1 pb-3">
                                     <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cerrar</button>
                                 </div>
@@ -298,9 +300,36 @@ while ($DatoFormaPago = $Res_OpcionesFormasPago->fetch_assoc()) {
     <script src="../plugins/select2/js/select2.full.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../dist/js/demo.js"></script>
     <!-- Page specific script -->
+    <script>
+        $(document).ready(function() {
+            // Obtener el contenido de PHP en una variable JavaScript
+            var newContent = <?= json_encode($DatosBoleto['Itinerario']) ?>;
+
+            // Inicializar Summernote
+            $('#summernote').summernote();
+
+            $('#summernote').on('summernote.paste', function(_, e) {
+                setTimeout(() => {
+
+                    // Obtener el elemento pre con el id "responseCommand"
+                    var preElement = document.getElementById("responseCommand");
+
+                    // Quitar el estilo de fondo
+                    preElement.style.backgroundColor = "transparent";
+
+                    // Cambiar el color del texto a #000 (negro)
+                    preElement.style.color = "#000";
+                    preElement.querySelector('code').style.fontFamily = "Arial";
+                }, 200);
+
+            });
+
+            // Establecer el contenido de PHP en Summernote
+            $('#summernote').summernote('code', newContent);
+        });
+    </script>
+
     <script>
         $(function() {
             // $('.select2').select2()
@@ -435,7 +464,6 @@ while ($DatoFormaPago = $Res_OpcionesFormasPago->fetch_assoc()) {
         function closeForm() {
             window.close()
         }
-
     </script>
     <script>
         <?php require_once '../func/Mensajes.php'; ?>

@@ -44,6 +44,7 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
         $credito = $credito + $DatosPagosBoletos['Precio'];
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -162,7 +163,7 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                         if ($Res_PagosBoletos->num_rows > 1 && ($efectivo > 0 && $credito > 0)) { ?>
                                             <div class="row">
                                                 <!-- /.col -->
-                                                <div class="col-4">
+                                                <div class="col-6">
                                                     <p class="lead">Información de pago</p>
 
                                                     <div class="table-responsive">

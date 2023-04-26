@@ -21,6 +21,8 @@ $Obj_Abonos->Banco = $Obj_Ajustes->RemoverEtiquetas($_POST['txtBanco']);
 $Obj_Abonos->Cupon = $Obj_Ajustes->RemoverEtiquetas($_POST['txtCupon']);
 $Obj_Abonos->Comentario = trim($_POST['txtComentario']);
 
+
+
 //EL VALOR NO VENGA VACIO
 if (trim($_POST['txtValor']) === '') {
     $_SESSION['error-registro'] = 'cantidad-abono';
@@ -53,7 +55,7 @@ if (trim($_POST['txtCreditoValor']) !== '' && trim($_POST['txtCreditoNumero']) !
 }
 
 //NO AGREGAR LOS 4 DIGITOS DE LA TARJETA SI NO HAY CANTIDAD INGRESADA CON ESTA FORMA DE PAGO
-if (trim($_POST['txtCreditoValor']) === '' && trim($_POST['txtCreditoNumero']) !== '' && strpos($_POST['txtCreditoNumero'], "_")) {
+if (trim($_POST['txtCreditoValor']) === '' && strpos($_POST['txtCreditoNumero'], "_")) {
     //VALIDANDO NUMEROS DE TARJETA DE CREDITO
     $Obj_Abonos->CreditoNumero = "";
 }
