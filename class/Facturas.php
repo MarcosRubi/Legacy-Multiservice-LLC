@@ -162,6 +162,12 @@ class Facturas extends DB
         Valor = '" . $this->Valor . "',
         Descripcion = '" . $this->Descripcion . "', 
         Comentario = '" . $this->Comentario . "',
+        Efectivo = '" . $this->Efectivo . "', 
+        CreditoValor = '" . $this->CreditoValor . "', 
+        CreditoNumero = '" . $this->CreditoNumero . "', 
+        Cheque = '" . $this->Cheque . "', 
+        Banco = '" . $this->Banco . "', 
+        Cupon = '" . $this->Cupon . "', 
         Balance = '" . ((doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon) + doubleval($this->Banco)) - doubleval($this->Valor)) . "'
         WHERE IdFactura='" . $id . "' ";
 
@@ -203,8 +209,7 @@ class Facturas extends DB
         CreditoNumero = '" . $this->CreditoNumero . "',
         Cheque = '" . $this->Cheque . "',
         Banco = '" . $this->Banco . "',
-        Cupon = '" . $this->Cupon . "',
-        Valor = '" . doubleval($this->Efectivo) + doubleval($this->CreditoValor) + doubleval($this->Cheque) + doubleval($this->Cupon) + doubleval($this->Banco) . "'
+        Cupon = '" . $this->Cupon . "'
         WHERE IdFactura=" . $id . " ";
 
         return $this->EjecutarQuery($query);

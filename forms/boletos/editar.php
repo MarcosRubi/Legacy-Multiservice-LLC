@@ -230,6 +230,7 @@ if ($facturaEditada) {
     $Obj_Eventos->Mensaje = 'ha actualizado la ';
     $Obj_Eventos->Icono = 'fas fa-file-signature bg-orange';
     $Obj_Eventos->UrlEvento = 'facturas/detalles.php?id=' . $DatosFactura['IdFactura'];
+    $Obj_Eventos->VentanaEmergente = "S";
     $Obj_Eventos->Insertar();
 }
 
@@ -240,6 +241,8 @@ foreach ($boletoActualizar as $key => $boleto) {
     $Obj_Eventos->Mensaje = 'ha editado el';
     $Obj_Eventos->Icono = 'fas fa-ticket-alt bg-blue';
     $Obj_Eventos->UrlEvento = 'boletos/detalles.php?id=' . $_POST['IdBoleto'];
+    $Obj_Eventos->VentanaEmergente = "S";
+
     $Obj_Eventos->Insertar();
 
     if ($Res_BoletosActualizar) {

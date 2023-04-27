@@ -127,7 +127,7 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                                     if ($Res_PagosBoletos->num_rows <= 1 || ($efectivo > 0 && $credito === 0) || ($efectivo === 0 && $credito > 0)) {
                                                         echo "<th>Total recibido</th>";
                                                         if (((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) > 0)) {
-                                                            if ($Res_Abonos->num_rows <= 0 && ($efectivo > 0 && $credito === 0) || ($efectivo === 0 && $credito > 0)) {
+                                                            if ($Res_Abonos->num_rows <= 0 ) {
                                                                 echo "<th>Forma de pago</th>";
                                                             }
                                                         }
@@ -147,7 +147,7 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                                     if ($Res_PagosBoletos->num_rows <= 1 || ($efectivo > 0 && $credito === 0) || ($efectivo === 0 && $credito > 0)) {
                                                         echo "<td>" . $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) . "</td>";
                                                         if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) > 0) {
-                                                            if ($Res_Abonos->num_rows <= 0) {
+                                                            if ($Res_Abonos->num_rows <= 0 ) {
                                                                 echo "<td>" . $formaPago . "</td>";
                                                             }
                                                         }
@@ -202,7 +202,7 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                             <!-- /.row -->
                                         <?php } ?>
                                         <?php
-                                        if ($Res_Abonos->num_rows >= 1) { ?>
+                                        if ($Res_PagosBoletos->num_rows <= 1 && $Res_Abonos->num_rows >= 1) { ?>
                                             <div class="row">
                                                 <!-- /.col -->
                                                 <div class="col-6">

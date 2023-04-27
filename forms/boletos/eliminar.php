@@ -83,7 +83,7 @@ $Obj_Facturas->ActualizarTodaLaFactura($DatosFactura['IdFactura']);
 
 $Obj_Eventos->Mensaje = 'ha actualizado la';
 $Obj_Eventos->TipoEvento = "factura #" . $DatosFactura['IdFactura'];
-$Obj_Eventos->VentanaEmergente = 'N';
+$Obj_Eventos->VentanaEmergente = 'S';
 $Obj_Eventos->Icono = 'fas fa-user-edit bg-orange';
 $Obj_Eventos->UrlEvento = 'facturas/detalles.php?id=' . $DatosFactura['IdFactura'];
 $Obj_Eventos->Insertar();
