@@ -15,6 +15,11 @@ class Empleados extends DB
         $query = "SELECT * FROM vta_listar_empleados";
         return $this->EjecutarQuery($query);
     }
+    public function listarRoles()
+    {
+        $query = "SELECT * FROM vta_listar_roles";
+        return $this->EjecutarQuery($query);
+    }
 
     public function buscarPorId($id)
     {
@@ -72,7 +77,8 @@ class Empleados extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function ListarEmpleados(){
+    public function ListarEmpleados()
+    {
         $query = "SELECT IdEmpleado, NombreEmpleado, Agente FROM tbl_empleados WHERE Eliminado='N'";
         return $this->EjecutarQuery($query);
     }

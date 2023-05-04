@@ -128,7 +128,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="#" class="nav-link" onclick="javascript:nuevoEmpleado();">
                                     <i class="fa fa-plus nav-icon"></i>
                                     <p>Nuevo Empleado</p>
                                 </a>
@@ -153,6 +153,10 @@
 <script>
     function nuevoCliente() {
         window.open('<?= $_SESSION['path'] ?>forms/clientes/frmNuevo.php', 'Nuevo Cliente', 'width=400,height=1000')
+    }
+
+    function nuevoEmpleado() {
+        window.open('<?= $_SESSION['path'] ?>forms/empleados/frmNuevo.php', 'Nuevo Empleado', 'width=700,height=850')
     }
 
     function buscarCotizacion() {
