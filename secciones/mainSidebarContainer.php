@@ -156,7 +156,7 @@
     }
 
     function nuevoEmpleado() {
-        window.open('<?= $_SESSION['path'] ?>forms/empleados/frmNuevo.php', 'Nuevo Empleado', 'width=700,height=850')
+        window.open('<?= $_SESSION['path'] ?>forms/empleados/frmNuevo.php', 'Nuevo Empleado', 'width=700,height=1000')
     }
 
     function buscarCotizacion() {

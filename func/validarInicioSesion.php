@@ -12,6 +12,7 @@ $Obj_Empleados->Contrasenna = $_POST['password'];
 $Res_Empleado = $Obj_Empleados->buscarEmpleado();
 $Datos_Empleado = $Res_Empleado->fetch_assoc();
 
+
 $_SESSION['path'] = "http://127.0.0.1/Proyectos/Legacy-Multiservice-LLC/";
 
 if ($Res_Empleado->num_rows > 0 && password_verify($_POST['password'], $Datos_Empleado['Contrasenna'])) {
@@ -28,4 +29,3 @@ if ($Res_Empleado->num_rows > 0 && password_verify($_POST['password'], $Datos_Em
 $_SESSION['error-login'] = 'true';
 $_SESSION['email'] = $_POST['email'];
 header("Location:" . $_SESSION['path'] . "/iniciar-sesion ");
-

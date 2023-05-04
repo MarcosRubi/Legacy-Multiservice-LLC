@@ -33,6 +33,12 @@ class Empleados extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function obtenerEmpleadoCreado()
+    {
+        $query = "SELECT * FROM vta_listar_empleados ORDER BY IdEmpleado desc LIMIT 1";
+        return $this->EjecutarQuery($query);
+    }
+
     public function Insertar()
     {
         $query = "INSERT INTO tbl_empleados(
@@ -49,7 +55,7 @@ class Empleados extends DB
             '" . $this->NombreEmpleado . "',
             '" . password_hash($this->Contrasenna, PASSWORD_DEFAULT) . "',
             '" . $this->Email . "',
-            'dist/img/avatar.png',
+            '" . $this->UrlFoto . "',
             '" . $this->IdRole . "',
             '" . $this->Agencia . "',
             '" . $this->Agente . "',

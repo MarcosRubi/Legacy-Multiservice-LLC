@@ -25,6 +25,8 @@ $Res_Roles = $Obj_Empleados->listarRoles();
     <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <style>
@@ -93,11 +95,19 @@ $Res_Roles = $Obj_Empleados->listarRoles();
                                     <label>Agente</label>
                                     <input type="text" class="form-control" placeholder="Agente ..." name="txtAgente">
                                 </div>
+                                <!-- Contrasenna -->
+                                <div class="form-group container-fluid">
+                                    <label>Contraseña</label>
+                                    <input type="password" class="form-control" placeholder="Contraseña ..." name="txtContrasenna">
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column flex-xl-row">
+
                                 <div class="form-group container-fluid">
                                     <label>Seleccione un avatar</label>
                                     <div class="img-user-container">
                                         <label>
-                                            <input type="radio" name="rdbImg" value="2" class="d-none">
+                                            <input type="radio" name="rdbImg" value="1" class="d-none">
                                             <img src="../../dist/img/avatar1.png" alt="..." class="img-user">
                                         </label>
                                         <label>
@@ -122,24 +132,42 @@ $Res_Roles = $Obj_Empleados->listarRoles();
                                         </label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Crear cuenta</button>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cancelar</button>
+                                <div class="form-group container-fluid">
+                                    <label>Formato de fecha</label>
+                                    <div class="d-flex align-center">
+                                        <div class="form-group clearfix mr-5">
+                                            <div class="icheck-primary d-inline">
+                                                <input type="radio" id="dmy" name="rdbFormatoFecha" checked="" value="dmy">
+                                                <label for="dmy">DD-MM-YYYY</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <div class="icheck-primary d-inline">
+                                                <input type="radio" id="mdy" name="rdbFormatoFecha" value="mdy">
+                                                <label for="mdy">MM-DD-YYYY</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- /.form group -->
-                    </form>
-                    <!-- /.card-body -->
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Crear cuenta</button>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cancelar</button>
+                        </div>
                 </div>
-                <!-- /.card -->
-                <!-- /.row -->
+                <!-- /.form group -->
+                </form>
+                <!-- /.card-body -->
             </div>
-            <!-- /.container-fluid -->
+            <!-- /.card -->
+            <!-- /.row -->
         </div>
-        <!-- /.content -->
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 

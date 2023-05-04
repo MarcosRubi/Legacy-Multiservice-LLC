@@ -182,6 +182,58 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'tax')
             })";
     unset($_SESSION['error-registro']);
 }
+if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'nombreEmpleado') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'El nombre del empleado es obligatorio.'
+            })";
+    unset($_SESSION['error-registro']);
+}
+if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'email') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'El email es obligatorio.'
+            })";
+    unset($_SESSION['error-registro']);
+}
+if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'agente') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'El agente del empleado es obligatorio.'
+            })";
+    unset($_SESSION['error-registro']);
+}
+if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'agencia') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'La agencia del empleado es obligatoria.'
+            })";
+    unset($_SESSION['error-registro']);
+}
 
 if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'factura') {
     echo "var Toast = Swal.mixin({
@@ -248,6 +300,19 @@ if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'c
                 })";
     unset($_SESSION['success-registro']);
 }
+if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'empleado') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Empleado guardado correctamente.'
+                })";
+    unset($_SESSION['success-registro']);
+}
 if (isset($_SESSION['error']) && $_SESSION['error'] === 'ClienteNotFound') {
     echo "var Toast = Swal.mixin({
                     toast: true,
@@ -303,8 +368,9 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'tel')
 }
 
 
+
 if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'fecha') {
-        echo "var Toast = Swal.mixin({
+    echo "var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -317,7 +383,7 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'fecha
     unset($_SESSION['error-registro']);
 }
 if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'ida') {
-        echo "var Toast = Swal.mixin({
+    echo "var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -331,7 +397,7 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'ida')
     unset($_SESSION['error-registro']);
 }
 if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'valor') {
-        echo "var Toast = Swal.mixin({
+    echo "var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -344,7 +410,7 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'valor
     unset($_SESSION['error-registro']);
 }
 if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'pago') {
-        echo "var Toast = Swal.mixin({
+    echo "var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -357,7 +423,7 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'pago'
     unset($_SESSION['error-registro']);
 }
 if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'numeroTarjetaVacio') {
-        echo "var Toast = Swal.mixin({
+    echo "var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -370,7 +436,7 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'numer
     unset($_SESSION['error-registro']);
 }
 if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'numeroTarjetaNoCompleto') {
-        echo "var Toast = Swal.mixin({
+    echo "var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -394,7 +460,7 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'canti
         icon: 'error',
         title: 'La cantidad es obligatoria.'
     })";
-unset($_SESSION['error-registro']);
+    unset($_SESSION['error-registro']);
 }
 if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'abono') {
     echo "var Toast = Swal.mixin({
