@@ -529,6 +529,19 @@ if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'mco')
     })";
     unset($_SESSION['error-registro']);
 }
+if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'passLength') {
+    echo "var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    Toast.fire({
+        icon: 'error',
+        title: 'La contraseña debe tener al menos 8 caracteres.'
+    })";
+    unset($_SESSION['error-registro']);
+}
 if (isset($_SESSION['success-registro-mco']) && $_SESSION['success-registro-mco'] === 'mco') {
     echo "
     setTimeout(() => {
@@ -682,6 +695,19 @@ if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'bolet
                 })";
     unset($_SESSION['success-delete']);
 }
+if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'empleado') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'empleado eliminado correctamente.'
+                })";
+    unset($_SESSION['success-delete']);
+}
 
 if (isset($_SESSION['error-permissions']) && $_SESSION['error-permissions'] === 'true') {
     echo "var Toast = Swal.mixin({
@@ -722,4 +748,18 @@ if (isset($_SESSION['reg-delete']) && $_SESSION['reg-delete'] === 'boleto') {
                 title: 'Este boleto ha sido eliminado.'
             })";
     unset($_SESSION['reg-delete']);
+}
+
+if (isset($_SESSION['error-delete']) && $_SESSION['error-delete'] === 'empleadoActual') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'Contacte a otro administrador para eliminar su cuenta.'
+            })";
+    unset($_SESSION['error-delete']);
 }

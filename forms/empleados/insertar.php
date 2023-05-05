@@ -39,7 +39,11 @@ if (trim($_POST['txtAgente']) === '') {
     echo "<script>history.go(-1)</script>";
     return false;
 };
-
+if (strlen($_POST['txtContrasenna']) >= 8) {
+    $_SESSION['error-registro'] = 'passLength';
+    echo "<script>history.go(-1)</script>";
+    return false;
+}
 $Res_Empleados = $Obj_Empleados->Insertar();
 
 if ($Res_Empleados) {

@@ -236,6 +236,10 @@ $Res_Roles = $Obj_Empleados->listarRoles();
                     txtEmail: {
                         required: true,
                         email: true
+                    },
+                    txtContrasenna: {
+                        required: true,
+                        minlength: 8
                     }
                 },
                 messages: {
@@ -251,6 +255,10 @@ $Res_Roles = $Obj_Empleados->listarRoles();
                     txtEmail: {
                         required: "El email es obligatorio",
                         email: "El correo no es válido"
+                    },
+                    txtContrasenna: {
+                        required: "La contraseña es obligatoria",
+                        minlength: "La contraseña debe tener al menos 8 caracteres"
                     }
                 },
                 errorElement: 'span',
