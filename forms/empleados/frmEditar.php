@@ -6,6 +6,10 @@ require_once '../../class/Empleados.php';
 $Obj_Empleados = new Empleados();
 $Res_Roles = $Obj_Empleados->listarRoles();
 
+$Res_Empleado = $Obj_Empleados->buscarEmpleado($_GET['id']);
+
+$DatosEmpleado = $Res_Empleado->fetch_assoc();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -13,7 +17,7 @@ $Res_Roles = $Obj_Empleados->listarRoles();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Nuevo Empleado</title>
+    <title>Editar Empleado</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -61,44 +65,42 @@ $Res_Roles = $Obj_Empleados->listarRoles();
                 <div class="row">
                     <form action="./insertar.php" method="POST" class="card card-info" id="frmNuevo" style="min-width:90vw;" onsubmit="return validarFormulario();">
                         <div class="card-header">
-                            <h3 class="card-title w-100 font-weight-bold text-center">Agregar nuevo empleado</h3>
+                            <h3 class="card-title w-100 font-weight-bold text-center">Editar empleado</h3>
                         </div>
                         <div class="card-body ">
                             <div class="d-flex flex-column flex-xl-row">
                                 <!-- Primer nombre -->
                                 <div class="form-group container-fluid">
                                     <label>Nombre del empleado</label>
-                                    <input type="text" class="form-control" placeholder="Nombre del empleado ..." name="txtNombreEmpleado">
+                                    <input type="text" class="form-control" placeholder="Nombre del empleado ..." name="txtNombreEmpleado" value="<?= $DatosEmpleado['NombreEmpleado'] ?>">
                                 </div>
                                 <!-- Rol -->
                                 <div class="form-group container-fluid">
                                     <label>Cargo</label>
                                     <select class="form-control select2" style="width: 100%;" name="txtIdRole">
+                                        <option value="<?= $DatosEmpleado['IdRole'] ?>"><?= $DatosEmpleado['NombreRol'] ?></option>
                                         <?php
-                                        while ($Rol = $Res_Roles->fetch_assoc()) { ?>
-                                            <option value="<?= $Rol['IdRole'] ?>"><?= $Rol['NombreRol'] ?></option>
-                                        <?php } ?>
+                                        while ($Rol = $Res_Roles->fetch_assoc()) {
+                                            if ($DatosEmpleado['IdRole'] !== $Rol['IdRole']) { ?>
+                                                <option value="<?= $Rol['IdRole'] ?>"><?= $Rol['NombreRol'] ?></option>
+                                        <?php }
+                                        } ?>
                                     </select>
                                 </div>
                                 <!-- Email -->
                                 <div class="form-group container-fluid">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" placeholder="Email ..." name="txtEmail">
+                                    <input type="email" class="form-control" placeholder="Email ..." name="txtEmail" value="<?= $DatosEmpleado['Email'] ?>">
                                 </div>
                                 <!-- Agencia -->
                                 <div class="form-group container-fluid">
                                     <label>Agencia</label>
-                                    <input type="text" class="form-control" placeholder="Agencia ..." name="txtAgencia">
+                                    <input type="text" class="form-control" placeholder="Agencia ..." name="txtAgencia" value="<?= $DatosEmpleado['Agencia'] ?>">
                                 </div>
                                 <!-- Agente -->
                                 <div class="form-group container-fluid">
                                     <label>Agente</label>
-                                    <input type="text" class="form-control" placeholder="Agente ..." name="txtAgente">
-                                </div>
-                                <!-- Contrasenna -->
-                                <div class="form-group container-fluid">
-                                    <label>Contraseña</label>
-                                    <input type="password" class="form-control" placeholder="Contraseña ..." name="txtContrasenna">
+                                    <input type="text" class="form-control" placeholder="Agente ..." name="txtAgente" value="<?= $DatosEmpleado['Agente'] ?>">
                                 </div>
                             </div>
                             <div class="d-flex flex-column flex-xl-row">
@@ -106,28 +108,28 @@ $Res_Roles = $Obj_Empleados->listarRoles();
                                 <div class="form-group container-fluid">
                                     <label>Seleccione un avatar</label>
                                     <div class="img-user-container">
-                                        <label>
-                                            <input type="radio" name="rdbImg" value="1" class="d-none">
+                                        <label class="<?= strpos($DatosEmpleado['UrlFoto'], 'avatar1.png') !== false ? 'img-user-selected' : '' ?>">
+                                            <input type="radio" name="rdbImg" value="1" <?= strpos($DatosEmpleado['UrlFoto'], 'avatar1.png') !== false ? 'checked=""' : '' ?> class="d-none">
                                             <img src="../../dist/img/avatar1.png" alt="..." class="img-user">
                                         </label>
-                                        <label>
-                                            <input type="radio" name="rdbImg" value="2" class="d-none">
+                                        <label class="<?= strpos($DatosEmpleado['UrlFoto'], 'avatar2.png') !== false ? 'img-user-selected' : '' ?>">
+                                            <input type="radio" name="rdbImg" value="2" <?= strpos($DatosEmpleado['UrlFoto'], 'avatar2.png') !== false ? 'checked=""' : '' ?> class="d-none">
                                             <img src="../../dist/img/avatar2.png" alt="..." class="img-user">
                                         </label>
-                                        <label>
-                                            <input type="radio" name="rdbImg" value="3" class="d-none">
+                                        <label class="<?= strpos($DatosEmpleado['UrlFoto'], 'avatar3.png') !== false ? 'img-user-selected' : '' ?>">
+                                            <input type="radio" name="rdbImg" value="3" <?= strpos($DatosEmpleado['UrlFoto'], 'avatar3.png') !== false ? 'checked=""' : '' ?> class="d-none">
                                             <img src="../../dist/img/avatar3.png" alt="..." class="img-user">
                                         </label>
-                                        <label>
-                                            <input type="radio" name="rdbImg" value="4" class="d-none">
+                                        <label class="<?= strpos($DatosEmpleado['UrlFoto'], 'avatar4.png') !== false ? 'img-user-selected' : '' ?>">
+                                            <input type="radio" name="rdbImg" value="4" <?= strpos($DatosEmpleado['UrlFoto'], 'avatar4.png') !== false ? 'checked=""' : '' ?> class="d-none">
                                             <img src="../../dist/img/avatar4.png" alt="..." class="img-user">
                                         </label>
-                                        <label>
-                                            <input type="radio" name="rdbImg" value="5" class="d-none">
+                                        <label class="<?= strpos($DatosEmpleado['UrlFoto'], 'avatar5.png') !== false ? 'img-user-selected' : '' ?>">
+                                            <input type="radio" name="rdbImg" value="5" <?= strpos($DatosEmpleado['UrlFoto'], 'avatar5.png') !== false ? 'checked=""' : '' ?> class="d-none">
                                             <img src="../../dist/img/avatar5.png" alt="..." class="img-user">
                                         </label>
-                                        <label>
-                                            <input type="radio" name="rdbImg" value="6" class="d-none">
+                                        <label class="<?= strpos($DatosEmpleado['UrlFoto'], 'avatar6.png') !== false ? 'img-user-selected' : '' ?>">
+                                            <input type="radio" name="rdbImg" value="6" <?= strpos($DatosEmpleado['UrlFoto'], 'avatar6.png') !== false ? 'checked=""' : '' ?> class="d-none">
                                             <img src="../../dist/img/avatar6.png" alt="..." class="img-user">
                                         </label>
                                     </div>
@@ -137,13 +139,13 @@ $Res_Roles = $Obj_Empleados->listarRoles();
                                     <div class="d-flex align-center">
                                         <div class="form-group clearfix mr-5">
                                             <div class="icheck-primary d-inline">
-                                                <input type="radio" id="dmy" name="rdbFormatoFecha" checked="" value="dmy">
+                                                <input type="radio" id="dmy" name="rdbFormatoFecha" <?= $DatosEmpleado['FormatoFecha'] === 'dmy' ? 'checked' : '' ?> value="dmy">
                                                 <label for="dmy">DD-MM-YYYY</label>
                                             </div>
                                         </div>
                                         <div class="form-group clearfix">
                                             <div class="icheck-primary d-inline">
-                                                <input type="radio" id="mdy" name="rdbFormatoFecha" value="mdy">
+                                                <input type="radio" id="mdy" name="rdbFormatoFecha" <?= $DatosEmpleado['FormatoFecha'] === 'mdy' ? 'checked' : '' ?> value="mdy">
                                                 <label for="mdy">MM-DD-YYYY</label>
                                             </div>
                                         </div>
@@ -152,7 +154,7 @@ $Res_Roles = $Obj_Empleados->listarRoles();
                             </div>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Crear cuenta</button>
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Actualizar datos</button>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-block text-center" type="reset" onclick="javascript:closeForm();">Cancelar</button>

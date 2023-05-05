@@ -27,9 +27,9 @@ class Empleados extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function buscarEmpleado()
+    public function buscarEmpleado($id)
     {
-        $query = "SELECT * FROM vta_empleado WHERE Email='" . $this->Email . "' ";
+        $query = "SELECT * FROM vta_empleado WHERE IdEmpleado='" . $id . "' ";
         return $this->EjecutarQuery($query);
     }
 

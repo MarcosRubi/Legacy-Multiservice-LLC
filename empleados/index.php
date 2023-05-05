@@ -132,7 +132,7 @@ if (isset($_GET['s'])) {
                                                     <td><?= $DatosEmpleado['FormatoFecha'] ?></td>
                                                     <td>
                                                         <div class="d-flex justify-content-around">
-                                                            <a class="btn btn-md mx-1 bg-lightblue" title="Editar" onclick="javascript:abrirFormDetalles(<?= $DatosEmpleado['IdEmpleado'] ?>);">
+                                                            <a class="btn btn-md mx-1 bg-lightblue" title="Editar" onclick="javascript:abrirFormEditar(<?= $DatosEmpleado['IdEmpleado'] ?>);">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
                                                             <a class="btn btn-md mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarEmpleado(<?= $DatosEmpleado['IdEmpleado'] ?>);">
@@ -205,20 +205,8 @@ if (isset($_GET['s'])) {
         });
     </script>
     <script>
-        function abrirFormDetalles(id) {
-            window.open('<?= $_SESSION['path'] ?>facturas/detalles.php?id=' + id, 'Detalles', 'width=1000,height=1000')
-        }
-
-        function abrirFormAbonos(factura, nombre, cliente) {
-            window.open('<?= $_SESSION['path'] ?>forms/facturas/frmAbono.php?factura=' + factura + '&nombre=' + nombre + '&cliente=' + cliente, 'Detalles', 'width=1000,height=1000')
-        }
-
-        function imprimir(id) {
-            window.open('<?= $_SESSION['path'] ?>reportes/facturas/facturaInd.php?id=' + id, 'Imprimir', 'width=2000,height=2000')
-        }
-
-        function imprimirParaBoleto(id) {
-            window.open('<?= $_SESSION['path'] ?>reportes/facturas/facturaBoleto.php?id=' + id, 'Imprimir', 'width=2000,height=2000')
+        function abrirFormEditar(id) {
+            window.open('<?= $_SESSION['path'] ?>forms/empleados/frmEditar.php?id=' + id, 'Editar empleado', 'width=1000,height=1000')
         }
 
         function eliminarEmpleado(id) {
