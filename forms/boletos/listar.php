@@ -81,7 +81,9 @@ $Obj_OpcionesTablas = new OpcionesTablas();
                                                 <th>Base</th>
                                                 <th>Tax</th>
                                                 <th>FM</th>
-                                                <th>&nbsp;</th>
+                                                <?php if ($_SESSION['IdRole'] <= 3) { ?>
+                                                    <th>&nbsp;</th>
+                                                <?php } ?>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -106,14 +108,16 @@ $Obj_OpcionesTablas = new OpcionesTablas();
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Base']) ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Tax']) ?></td>
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Fm']) ?></td>
-                                                    <td>
-                                                        <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editarBoleto(<?= $DatosBoleto['IdBoleto'] ?>);">
-                                                            <i class="fa fa-edit"></i>
-                                                        </a>
-                                                        <a class="btn btn-sm mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarBoleto(<?= $DatosBoleto['IdBoleto'] ?>);">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
-                                                    </td>
+                                                    <?php if ($_SESSION['IdRole'] <= 3) { ?>
+                                                        <td>
+                                                            <a class="btn btn-sm mx-1 btn-primary" title="Editar" onclick="javascript:editarBoleto(<?= $DatosBoleto['IdBoleto'] ?>);">
+                                                                <i class="fa fa-edit"></i>
+                                                            </a>
+                                                            <a class="btn btn-sm mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarBoleto(<?= $DatosBoleto['IdBoleto'] ?>);">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    <?php  } ?>
                                                 </tr>
                                             <?php } ?>
                                     </table>
@@ -178,14 +182,15 @@ $Obj_OpcionesTablas = new OpcionesTablas();
 
             if (confirmacion) {
                 window.location.href = '<?= $_SESSION['path'] ?>forms/boletos/eliminar.php?id=' + id
-            } 
+            }
         }
+
         function editarBoleto(id) {
             let confirmacion = confirm("¿Está seguro que desea editar el boleto? Esto puede modificar la factura o demás boletos.");
 
             if (confirmacion) {
-                window.location.href = '<?=$_SESSION['path']?>boletos/detalles.php?id='+id
-            } 
+                window.location.href = '<?= $_SESSION['path'] ?>boletos/detalles.php?id=' + id
+            }
         }
     </script>
     <script>

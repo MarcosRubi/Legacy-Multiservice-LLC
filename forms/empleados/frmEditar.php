@@ -6,7 +6,7 @@ require_once '../../class/Empleados.php';
 $Obj_Empleados = new Empleados();
 $Res_Roles = $Obj_Empleados->listarRoles();
 
-$Res_Empleado = $Obj_Empleados->buscarEmpleado($_GET['id']);
+$Res_Empleado = $Obj_Empleados->buscarPorId($_GET['id']);
 
 $DatosEmpleado = $Res_Empleado->fetch_assoc();
 
@@ -63,7 +63,7 @@ $DatosEmpleado = $Res_Empleado->fetch_assoc();
         <div class="content" style="min-width:90vw;">
             <div class="container-fluid">
                 <div class="row">
-                    <form action="./insertar.php" method="POST" class="card card-info" id="frmNuevo" style="min-width:90vw;" onsubmit="return validarFormulario();">
+                    <form action="./editar.php" method="POST" class="card card-info" id="frmNuevo" style="min-width:90vw;" onsubmit="return validarFormulario();">
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Editar empleado</h3>
                         </div>
@@ -153,6 +153,7 @@ $DatosEmpleado = $Res_Empleado->fetch_assoc();
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="IdEmpleado" value="<?= $DatosEmpleado['IdEmpleado'] ?>">
                         <div class="form-group">
                             <button class="btn btn-primary btn-lg btn-block" type="submit">Actualizar datos</button>
                         </div>

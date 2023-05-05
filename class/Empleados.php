@@ -27,9 +27,9 @@ class Empleados extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function buscarEmpleado($id)
+    public function buscarEmpleado()
     {
-        $query = "SELECT * FROM vta_empleado WHERE IdEmpleado='" . $id . "' ";
+        $query = "SELECT * FROM vta_empleado WHERE Email='" . $this->Email . "' ";
         return $this->EjecutarQuery($query);
     }
 
@@ -68,9 +68,11 @@ class Empleados extends DB
     {
         $query = "UPDATE tbl_empleados SET 
         NombreEmpleado = '" . $this->NombreEmpleado . "',
-        Contrasenna = '" . password_hash($this->Contrasenna, PASSWORD_DEFAULT) . "',
         Email = '" . $this->Email . "',
         UrlFoto = '" . $this->UrlFoto . "',
+        Agencia = '" . $this->Agencia . "',
+        Agente = '" . $this->Agente . "',
+        FormatoFecha = '" . $this->FormatoFecha . "',
         IdRole = '" . $this->IdRole . "' 
         WHERE IdEmpleado='" . $id . "' ";
 
