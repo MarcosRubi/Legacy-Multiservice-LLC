@@ -137,7 +137,7 @@
   var $legacy_sidebar_checkbox = $("<input />", {
     type: "checkbox",
     value: 1,
-    id: 'navLegacy',
+    id: "navLegacy",
     checked: $(".nav-sidebar").hasClass("nav-legacy"),
     class: "mr-1",
   }).on("click", function () {
@@ -261,7 +261,7 @@ window.addEventListener("load", () => {
   if (window.localStorage.getItem("isDarkActive") === "true") {
     document.querySelector("body")?.classList.add("dark-mode");
     document.getElementById("dark").checked = true;
-  }else{
+  } else {
     document.querySelector("body")?.classList.remove("dark-mode");
     document.getElementById("dark").checked = false;
   }
@@ -269,7 +269,7 @@ window.addEventListener("load", () => {
   if (window.localStorage.getItem("menuFixed") === "true") {
     document.querySelector("body")?.classList.add("layout-navbar-fixed");
     document.getElementById("menuFixed").checked = true;
-  }else{
+  } else {
     document.querySelector("body")?.classList.remove("layout-navbar-fixed");
     document.getElementById("menuFixed").checked = false;
   }
@@ -277,7 +277,7 @@ window.addEventListener("load", () => {
   if (window.localStorage.getItem("menuBorder") === "false") {
     document.querySelector(".main-header")?.classList.add("border-bottom-0");
     document.getElementById("menuBorder").checked = true;
-  }else{
+  } else {
     document.querySelector(".main-header")?.classList.remove("border-bottom-0");
     document.getElementById("menuBorder").checked = false;
   }
@@ -285,7 +285,7 @@ window.addEventListener("load", () => {
   if (window.localStorage.getItem("onlyIcons") === "true") {
     document.querySelector("body")?.classList.add("sidebar-collapse");
     document.getElementById("onlyIcons").checked = true;
-  }else{
+  } else {
     document.querySelector("body")?.classList.remove("sidebar-collapse");
     document.getElementById("onlyIcons").checked = false;
   }
@@ -293,7 +293,7 @@ window.addEventListener("load", () => {
   if (window.localStorage.getItem("fullWidth") === "true") {
     document.querySelector("body")?.classList.add("layout-fixed");
     document.getElementById("fullWidth").checked = true;
-  }else{
+  } else {
     document.querySelector("body")?.classList.remove("layout-fixed");
     document.getElementById("fullWidth").checked = false;
   }
@@ -301,7 +301,7 @@ window.addEventListener("load", () => {
   if (window.localStorage.getItem("navLegacy") === "true") {
     document.querySelector(".nav-sidebar")?.classList.add("nav-legacy");
     document.getElementById("navLegacy").checked = true;
-  }else{
+  } else {
     document.querySelector(".nav-sidebar")?.classList.remove("nav-legacy");
     document.getElementById("navLegacy").checked = false;
   }
@@ -309,7 +309,7 @@ window.addEventListener("load", () => {
   if (window.localStorage.getItem("navCompact") === "true") {
     document.querySelector(".nav-sidebar")?.classList.add("nav-compact");
     document.getElementById("navCompact").checked = true;
-  }else{
+  } else {
     document.querySelector(".nav-sidebar")?.classList.remove("nav-compact");
     document.getElementById("navCompact").checked = false;
   }
@@ -317,26 +317,32 @@ window.addEventListener("load", () => {
   if (window.localStorage.getItem("navChildIndent") === "true") {
     document.querySelector(".nav-sidebar")?.classList.add("nav-child-indent");
     document.getElementById("navChildIndent").checked = true;
-  }else{
-    document.querySelector(".nav-sidebar")?.classList.remove("nav-child-indent");
+  } else {
+    document
+      .querySelector(".nav-sidebar")
+      ?.classList.remove("nav-child-indent");
     document.getElementById("navChildIndent").checked = false;
   }
   //OPCIONES DE VISTA SUBMENU CON SANGRIA
   if (window.localStorage.getItem("navCollapseHideChild") === "true") {
-    document.querySelector(".nav-sidebar")?.classList.add("nav-collapse-hide-child");
+    document
+      .querySelector(".nav-sidebar")
+      ?.classList.add("nav-collapse-hide-child");
     document.getElementById("navCollapseHideChild").checked = true;
-  }else{
-    document.querySelector(".nav-sidebar")?.classList.remove("nav-collapse-hide-child");
+  } else {
+    document
+      .querySelector(".nav-sidebar")
+      ?.classList.remove("nav-collapse-hide-child");
     document.getElementById("navCollapseHideChild").checked = false;
   }
   //OPCIONES DE VISTA NO EXPANDIR CON HOVER
   if (window.localStorage.getItem("sidebarNoExpand") === "true") {
     document.querySelector(".main-sidebar")?.classList.add("sidebar-no-expand");
     document.getElementById("sidebarNoExpand").checked = true;
-  }else{
-    document.querySelector(".main-sidebar")?.classList.remove("sidebar-no-expand");
+  } else {
+    document
+      .querySelector(".main-sidebar")
+      ?.classList.remove("sidebar-no-expand");
     document.getElementById("sidebarNoExpand").checked = false;
   }
-
-
 });

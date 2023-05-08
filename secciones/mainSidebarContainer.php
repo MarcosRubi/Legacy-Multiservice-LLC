@@ -1,3 +1,25 @@
+<style>
+    .img-user {
+        border-radius: 50%;
+        max-width: 5rem;
+        cursor: pointer;
+        margin: .5rem;
+    }
+
+    .img-user-container {
+        display: flex;
+    }
+
+    .img-user {
+        opacity: .5;
+    }
+
+    .img-user-selected img {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, #0d47a1 0px 0px 0px 3px;
+        opacity: 1;
+    }
+</style>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= $_SESSION['path'] ?>" class="brand-link d-flex">
@@ -9,19 +31,19 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="<?= $_SESSION['path'] . $_SESSION['UrlFoto'] ?>" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a class="d-block"><?= $_SESSION['NombreEmpleado']; ?></a>
-            </div>
+            <button type="button" class="btn  w-100 d-flex" data-toggle="modal" data-target="#modal-xl">
+                <div class="image">
+                    <img src="<?= $_SESSION['path'] . $_SESSION['UrlFoto'] ?>" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a class="d-block"><?= $_SESSION['NombreEmpleado']; ?></a>
+                </div>
+            </button>
         </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
                 <li class="nav-item">
                     <a href="<?= $_SESSION['path'] ?>" class="nav-link active">
                         <i class="nav-icon fas fa-home"></i>
@@ -150,6 +172,79 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<div class="modal fade" id="modal-xl">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Actualiza tus datos <strong> <?= $_SESSION['NombreEmpleado']; ?></strong></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="./editar.php" method="POST" class="card card-info" id="frmNuevo" onsubmit="return validarFormulario();">
+                    <div class="card-body ">
+                        <div class="d-flex flex-column">
+                            <div class="form-group ">
+                                <label>Seleccione un avatar</label>
+                                <div class="img-user-container">
+                                    <label class="<?= strpos($_SESSION['UrlFoto'], 'avatar1.png') !== false ? 'img-user-selected' : '' ?>">
+                                        <input type="radio" name="rdbImg" value="1" <?= strpos($_SESSION['UrlFoto'], 'avatar1.png') !== false ? 'checked=""' : '' ?> class="d-none">
+                                        <img src="<?= $_SESSION['path'] ?>dist/img/avatar1.png" alt="..." class="img-user">
+                                    </label>
+                                    <label class="<?= strpos($_SESSION['UrlFoto'], 'avatar2.png') !== false ? 'img-user-selected' : '' ?>">
+                                        <input type="radio" name="rdbImg" value="2" <?= strpos($_SESSION['UrlFoto'], 'avatar2.png') !== false ? 'checked=""' : '' ?> class="d-none">
+                                        <img src="<?= $_SESSION['path'] ?>dist/img/avatar2.png" alt="..." class="img-user">
+                                    </label>
+                                    <label class="<?= strpos($_SESSION['UrlFoto'], 'avatar3.png') !== false ? 'img-user-selected' : '' ?>">
+                                        <input type="radio" name="rdbImg" value="3" <?= strpos($_SESSION['UrlFoto'], 'avatar3.png') !== false ? 'checked=""' : '' ?> class="d-none">
+                                        <img src="<?= $_SESSION['path'] ?>dist/img/avatar3.png" alt="..." class="img-user">
+                                    </label>
+                                    <label class="<?= strpos($_SESSION['UrlFoto'], 'avatar4.png') !== false ? 'img-user-selected' : '' ?>">
+                                        <input type="radio" name="rdbImg" value="4" <?= strpos($_SESSION['UrlFoto'], 'avatar4.png') !== false ? 'checked=""' : '' ?> class="d-none">
+                                        <img src="<?= $_SESSION['path'] ?>dist/img/avatar4.png" alt="..." class="img-user">
+                                    </label>
+                                    <label class="<?= strpos($_SESSION['UrlFoto'], 'avatar5.png') !== false ? 'img-user-selected' : '' ?>">
+                                        <input type="radio" name="rdbImg" value="5" <?= strpos($_SESSION['UrlFoto'], 'avatar5.png') !== false ? 'checked=""' : '' ?> class="d-none">
+                                        <img src="<?= $_SESSION['path'] ?>dist/img/avatar5.png" alt="..." class="img-user">
+                                    </label>
+                                    <label class="<?= strpos($_SESSION['UrlFoto'], 'avatar6.png') !== false ? 'img-user-selected' : '' ?>">
+                                        <input type="radio" name="rdbImg" value="6" <?= strpos($_SESSION['UrlFoto'], 'avatar6.png') !== false ? 'checked=""' : '' ?> class="d-none">
+                                        <img src="<?= $_SESSION['path'] ?>dist/img/avatar6.png" alt="..." class="img-user">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group container-fluid">
+                                <label>Formato de fecha</label>
+                                <div class="d-flex align-center">
+                                    <div class="form-group clearfix mr-5">
+                                        <div class="icheck-primary d-inline">
+                                            <input type="radio" id="dmy" name="rdbFormatoFecha" <?= $_SESSION['FormatoFecha'] === 'dmy' ? 'checked' : '' ?> value="dmy">
+                                            <label for="dmy">DD-MM-YYYY</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-primary d-inline">
+                                            <input type="radio" id="mdy" name="rdbFormatoFecha" <?= $_SESSION['FormatoFecha'] === 'mdy' ? 'checked' : '' ?> value="mdy">
+                                            <label for="mdy">MM-DD-YYYY</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Actualizar datos</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <script>
     function nuevoCliente() {
         window.open('<?= $_SESSION['path'] ?>forms/clientes/frmNuevo.php', 'Nuevo Cliente', 'width=400,height=1000')
@@ -165,5 +260,35 @@
 
     function CerrarSesion() {
         location.replace('<?= $_SESSION['path'] ?>func/CerrarSesion.php');
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var radios = document.querySelectorAll('input[type="radio"][name="rdbImg"]');
+
+        radios.forEach(function(radio) {
+            radio.addEventListener("click", function() {
+                var labels = document.querySelectorAll('label');
+                labels.forEach(function(label) {
+                    label.classList.remove('img-user-selected');
+                });
+                this.closest('label').classList.add('img-user-selected');
+            });
+        });
+    });
+
+    function validarFormulario() {
+        var radios = document.getElementsByName('rdbImg');
+        var imgSeleccionada = false;
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                imgSeleccionada = true;
+                break;
+            }
+        }
+        if (!imgSeleccionada) {
+            alert('Seleccione un avatar');
+            return false;
+        }
+        return true;
     }
 </script>

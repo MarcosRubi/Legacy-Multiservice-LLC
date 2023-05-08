@@ -35,6 +35,8 @@ if (isset($_GET['s'])) {
     <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
@@ -114,7 +116,7 @@ if (isset($_GET['s'])) {
                                                         }
                                                         if ($DatosCliente['Provincia'] !== '') {
                                                             echo ", " . $DatosCliente['Provincia'];
-                                                        }?>
+                                                        } ?>
                                                     </td>
                                                     <td><?= $DatosCliente['FechaNacimiento'] !== '0000-00-00' ? $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']) : '' ?></td>
                                                     <td>

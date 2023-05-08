@@ -43,6 +43,8 @@ if (isset($_GET['s'])) {
     <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
     <style>
@@ -51,6 +53,11 @@ if (isset($_GET['s'])) {
             max-width: 5rem;
             cursor: pointer;
             margin: .5rem;
+            opacity: 1;
+        }
+
+        .img-user.no-opacity {
+            opacity: 1;
         }
     </style>
 </head>
@@ -125,7 +132,7 @@ if (isset($_GET['s'])) {
                                                     <td><?= $DatosEmpleado['Email'] ?></td>
                                                     <td><?= $DatosEmpleado['NombreRol'] ?></td>
                                                     <td>
-                                                        <img src="../<?= $DatosEmpleado['UrlFoto'] ?>" alt="" class="img-user">
+                                                        <img src="../<?= $DatosEmpleado['UrlFoto'] ?>" alt="" class="img-user no-opacity">
                                                     </td>
                                                     <td><?= $DatosEmpleado['Agencia'] ?></td>
                                                     <td><?= $DatosEmpleado['Agente'] ?></td>
