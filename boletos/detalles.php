@@ -6,7 +6,7 @@ if (!isset($_GET['id'])) {
 }
 
 $editar = false;
-if ($_SESSION['IdRole'] <= 2) {
+if ($_SESSION['IdRole'] <= 2 && !isset($_GET['edit'])) {
     $editar = true;
 }
 

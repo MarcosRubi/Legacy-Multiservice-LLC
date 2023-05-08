@@ -32,6 +32,8 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
   <link rel="stylesheet" href="./plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Toastr -->
   <link rel="stylesheet" href="./plugins/toastr/toastr.min.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="./plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="./dist/css/adminlte.min.css">
 </head>
@@ -49,7 +51,7 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper pt-3">
-    <?php include_once './secciones/resumenEstadisticas.php'; ?>
+      <?php include_once './secciones/resumenEstadisticas.php'; ?>
 
       <!-- Main content -->
       <section class="content-header">

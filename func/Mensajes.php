@@ -629,6 +629,34 @@ if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'emple
     unset($_SESSION['success-update']);
 }
 
+if (isset($_SESSION['error-update']) && $_SESSION['error-update'] === 'nuevaContra') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'La nueva contraseña es obligatoria.'
+            })";
+    unset($_SESSION['error-update']);
+}
+if (isset($_SESSION['error-update']) && $_SESSION['error-update'] === 'contraNoCoincide') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'La contraseña actual no coincide.'
+            })";
+    unset($_SESSION['error-update']);
+}
+
+
 
 if (isset($_SESSION['success-delete']) && $_SESSION['success-delete'] === 'cliente') {
     echo "var Toast = Swal.mixin({

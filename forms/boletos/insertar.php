@@ -175,7 +175,7 @@ foreach ($arrBoletosInsertar as $key => $boleto) {
     $Res_Boletos = $Obj_Boletos->obtenerBoletoCreado($_POST['IdCliente']);
     $DatosBoleto = $Res_Boletos->fetch_assoc();
 
-    $Obj_Eventos->UrlEvento = 'boletos/detalles.php?id=' . $DatosBoleto['IdBoleto'];
+    $Obj_Eventos->UrlEvento = 'boletos/detalles.php?id=' . $DatosBoleto['IdBoleto'] . '&edit=false';
     $Obj_Eventos->Insertar();
 }
 foreach ($arrMcosInsertar as $key => $mco) {
@@ -194,10 +194,10 @@ if (count($arr) > 1) {
 }
 if (count($arrMCO) > 1 & $arrMCO[0] !== '') {
     $_SESSION['success-registro-mco'] = 'mcos';
-} 
+}
 if (count($arrMCO) === 1 & $arrMCO[0] !== '') {
     $_SESSION['success-registro-mco'] = 'mco';
-} 
+}
 
 
 

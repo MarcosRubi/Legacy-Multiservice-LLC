@@ -18,6 +18,10 @@
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, #0d47a1 0px 0px 0px 3px;
         opacity: 1;
     }
+
+    .hide {
+        display: none !important;
+    }
 </style>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -181,8 +185,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="./editar.php" method="POST" class="card card-info" id="frmNuevo" onsubmit="return validarFormulario();">
+            <form action="<?= $_SESSION['path'] ?>forms/empleados/editar.php" method="POST" class="card card-info" id="frmNuevo" onsubmit="return validarFormulario();">
+                <div class="modal-body">
                     <div class="card-body ">
                         <div class="d-flex flex-column">
                             <div class="form-group ">
@@ -230,19 +234,35 @@
                                         </div>
                                     </div>
                                 </div>
+                                <a href="#" onclick="javascript:TogglePasswordView();">Cambiar contraseña</a>
+                                <div class=" hide mt-3" id="password-content">
+                                    <div class="d-flex">
+                                        <div class="form-group clearfix">
+                                            <label for="passwordOld">Contraseña actual</label>
+                                            <input type="password" id="passwordOld" name="txtPasswordOld" class="form-control">
+                                        </div>
+                                        <div class="form-group clearfix ml-5">
+                                            <label for="passwordNew">Nueva contraseña</label>
+                                            <input type="password" id="passwordNew" name="txtPasswordNew" class="form-control">
+                                        </div>
+                                    </div>
+                                    <label class="text-danger text-sm">Si olvidas la contraseña, deberás contactar con un administrador para restablecerla.</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary">Actualizar datos</button>
-            </div>
+                    <input type="hidden" name="user">
+                    <input type="hidden" name="IdEmpleado" value="<?= $_SESSION['IdEmpleado'] ?>">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar datos</button>
+            </form>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 <script>
@@ -290,5 +310,11 @@
             return false;
         }
         return true;
+    }
+
+    function TogglePasswordView() {
+        let passwordContent = document.getElementById('password-content');
+
+        passwordContent.classList.toggle('hide')
     }
 </script>

@@ -19,7 +19,7 @@ $Obj_Ajustes = new Ajustes();
 $Res_Facturas = $Obj_Facturas->buscarFacturaPorId($_GET['id']);
 $DatosFactura = $Res_Facturas->fetch_assoc();
 
-if($Res_Facturas->num_rows <= 0){
+if ($Res_Facturas->num_rows <= 0) {
     $_SESSION['reg-delete'] = 'factura';
     echo "<script>window.close();window.opener.location.reload();</script>";
     return;
@@ -27,7 +27,7 @@ if($Res_Facturas->num_rows <= 0){
 
 $editar = false;
 
-if ($_SESSION['IdRole'] <= 3) {
+if ($_SESSION['IdRole'] <= 3 && !isset($_GET['edit'])) {
     $editar = true;
     $Obj_OpcionesTablas = new OpcionesTablas();
     $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
@@ -193,15 +193,15 @@ if ($_SESSION['IdRole'] <= 3) {
                             <input type="text" class="form-control d-none" value="<?= $DatosFactura['IdFactura'] ?>" name="txtIdFactura" readonly>
                             <!-- /.form group -->
                             <?php
-                            if ($_SESSION['IdRole'] <= 3) {
+                            if ($editar) {
                             ?>
                                 <div class="form-group pr-1 mt-3">
                                     <button class="btn btn-primary btn-block btn-lg" type="submit">Editar factura</button>
                                 </div>
-                                <div class="form-group pl-1">
-                                    <button class="btn btn-block text-center" type="reset" onclick="javascript:window.close();">Cancelar</button>
-                                </div>
                             <?php } ?>
+                            <div class="form-group pl-1">
+                                <button class="btn btn-block text-center" type="reset" onclick="javascript:window.close();"> <?= $editar ? 'Cancelar' : 'Cerrar' ?></button>
+                            </div>
                         </form>
                         <!-- /.form group -->
                     </div>

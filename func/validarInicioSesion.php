@@ -23,9 +23,10 @@ if ($Res_Empleado->num_rows > 0 && password_verify($_POST['password'], $Datos_Em
     $_SESSION['Agencia'] = $Datos_Empleado['Agencia'];
     $_SESSION['Agente'] = $Datos_Empleado['Agente'];
     $_SESSION['FormatoFecha'] = $Datos_Empleado['FormatoFecha'];
+    $_SESSION['Email'] = strtolower($_POST['email']);
     header("Location:" . $_SESSION['path']);
     return;
 }
 $_SESSION['error-login'] = 'true';
-$_SESSION['email'] = $_POST['email'];
+$_SESSION['Email'] = $_POST['email'];
 header("Location:" . $_SESSION['path'] . "/iniciar-sesion ");

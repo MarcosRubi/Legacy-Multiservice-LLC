@@ -98,7 +98,7 @@ if ($Res_Facturas) {
     $Obj_Eventos->TipoEvento = 'factura';
     $Obj_Eventos->Mensaje = 'ha generado una nueva';
     $Obj_Eventos->Icono = 'fas fa-dollar-sign bg-green';
-    $Obj_Eventos->UrlEvento = 'facturas/detalles.php?id=' . $DatosFactura['IdFactura'];
+    $Obj_Eventos->UrlEvento = 'facturas/detalles.php?id=' . $DatosFactura['IdFactura'] . '&edit=false';
     $Obj_Eventos->Insertar();
 
 

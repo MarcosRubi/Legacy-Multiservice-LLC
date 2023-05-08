@@ -67,7 +67,7 @@ if ($Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['CreditoValor']) !== $Obj_
     if (doubleval($_POST['txtCreditoValor']) === 0 || trim($_POST['txtCreditoValor']) === '') {
         $Obj_Facturas->CreditoNumero = "";
         $Obj_Facturas->CreditoValor = "";
-    } 
+    }
 }
 if ($Obj_Ajustes->ConvertirFormatoDolar($DatosFactura['Cheque']) !== $Obj_Ajustes->ConvertirFormatoDolar($_POST['txtCheque'])) {
     // ENCUENTRA LA DIFERENCIA VALORNUEVO - VALORVIEJO Y ESTO VE A LA FACTURA A SUMARLO
@@ -106,12 +106,12 @@ if ($Res_Facturas) {
     $Obj_Eventos->TipoEvento = 'factura #'  . $_POST['txtIdFactura'];
     $Obj_Eventos->Mensaje = 'ha actualizado la ';
     $Obj_Eventos->Icono = 'fas fa-file-signature bg-orange';
-    $Obj_Eventos->UrlEvento = 'facturas/detalles.php?id=' . $_POST['txtIdFactura'];
+    $Obj_Eventos->UrlEvento = 'facturas/detalles.php?id=' . $_POST['txtIdFactura'] . '&edit=false';
     $Obj_Eventos->Insertar();
 
 
-        $_SESSION['success-update'] = 'factura';
-        echo "<script>
+    $_SESSION['success-update'] = 'factura';
+    echo "<script>
         let URL = window.opener.location.pathname;
             window.opener.location.reload();
         window.close();
