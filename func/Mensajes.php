@@ -628,6 +628,19 @@ if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'emple
                 })";
     unset($_SESSION['success-update']);
 }
+if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'empleadoActual') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Datos actualizados correctamente.'
+                })";
+    unset($_SESSION['success-update']);
+}
 
 if (isset($_SESSION['error-update']) && $_SESSION['error-update'] === 'nuevaContra') {
     echo "var Toast = Swal.mixin({

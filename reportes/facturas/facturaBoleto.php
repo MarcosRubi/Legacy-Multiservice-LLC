@@ -78,7 +78,14 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                     <div class="col-12 mb-4">
                                         <h4 class="d-flex justify-content-between align-middle">
                                             <img src="../../dist/img/logo.png" alt="Logo" style="max-width:10rem;">
-                                            <small style="display:flex;align-items:center;"><?= date("d") . "-" . date("m") . "-" . date('Y') . " " . date("h:i:s A") ?></small>
+                                            <?php
+                                            if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                <small style="display:flex;align-items:center;"><?= date("d") . "-" . date("m") . "-" . date('Y') . " " . date("h:i:s A") ?></small>
+                                            <?php } ?>
+                                            <?php
+                                            if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                <small style="display:flex;align-items:center;"><?= date("m") . "-" . date("d") . "-" . date('Y') . " " . date("h:i:s A") ?></small>
+                                            <?php } ?>
                                         </h4>
                                     </div>
                                     <!-- /.col -->
@@ -127,7 +134,7 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                                     if ($Res_PagosBoletos->num_rows <= 1 || ($efectivo > 0 && $credito === 0) || ($efectivo === 0 && $credito > 0)) {
                                                         echo "<th>Total recibido</th>";
                                                         if (((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) > 0)) {
-                                                            if ($Res_Abonos->num_rows <= 0 ) {
+                                                            if ($Res_Abonos->num_rows <= 0) {
                                                                 echo "<th>Forma de pago</th>";
                                                             }
                                                         }
@@ -147,7 +154,7 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                                     if ($Res_PagosBoletos->num_rows <= 1 || ($efectivo > 0 && $credito === 0) || ($efectivo === 0 && $credito > 0)) {
                                                         echo "<td>" . $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) . "</td>";
                                                         if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) > 0) {
-                                                            if ($Res_Abonos->num_rows <= 0 ) {
+                                                            if ($Res_Abonos->num_rows <= 0) {
                                                                 echo "<td>" . $formaPago . "</td>";
                                                             }
                                                         }

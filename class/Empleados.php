@@ -78,6 +78,14 @@ class Empleados extends DB
 
         return $this->EjecutarQuery($query);
     }
+    public function ActualizarContrasenna($id)
+    {
+        $query = "UPDATE tbl_empleados SET 
+        Contrasenna = '" . password_hash($this->Contrasenna, PASSWORD_DEFAULT) . "'
+        WHERE IdEmpleado='" . $id . "' ";
+
+        return $this->EjecutarQuery($query);
+    }
 
     public function Eliminar($id)
     {

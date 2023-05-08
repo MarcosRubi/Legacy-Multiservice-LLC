@@ -21,16 +21,16 @@ if (isset($_POST['user'])) {
 
     // VALIDACIONES
 
-
-    if (!password_verify($_POST['txtPasswordOld'], $DatosEmpleado['Contrasenna'])) {
+    if (trim($_POST['txtPasswordOld']) !== '' && !password_verify($_POST['txtPasswordOld'], $DatosEmpleado['Contrasenna'])) {
         $_SESSION['error-update'] = 'contraNoCoincide';
-        // echo "<script>history.go(-1)</script>";.
+        echo "<script>history.go(-1)</script>";
         return false;
     };
 
+
     if (trim($_POST['txtPasswordOld']) !== '' && trim($_POST['txtPasswordNew']) === '') {
         $_SESSION['error-update'] = 'nuevaContra';
-        // echo "<script>history.go(-1)</script>";
+        echo "<script>history.go(-1)</script>";
         return false;
     };
 } else {
@@ -67,15 +67,28 @@ $Obj_Empleados->UrlFoto = "dist/img/avatar" . $_POST['rdbImg'] . ".png";
 $Obj_Empleados->FormatoFecha =  $Obj_Ajustes->RemoverEtiquetas(strtolower(trim($_POST['rdbFormatoFecha'])));
 
 
+if (trim($_POST['txtPasswordOld']) !== '' && password_verify($_POST['txtPasswordOld'], $DatosEmpleado['Contrasenna'])) {
+    $Obj_Empleados->Contrasenna = $_POST['txtPasswordNew'];
+    $Obj_Empleados->ActualizarContrasenna($_POST['IdEmpleado']);
+};
 
-// $Res_Empleados = $Obj_Empleados->Actualizar($_POST['IdEmpleado']);
+$Res_Empleados = $Obj_Empleados->Actualizar($_POST['IdEmpleado']);
 
-// if ($Res_Empleados) {
+if ($Res_Empleados) {
 
-//     $_SESSION['success-update'] = 'empleado';
-//     echo "<script>
-//     let URL = window.opener.location.pathname;
-//         window.opener.location.reload();
-//     window.close();
-// </script>";
-// }
+    if (isset($_POST['user'])) {
+        $_SESSION['success-update'] = 'empleadoActual';
+        $_SESSION['UrlFoto'] = "dist/img/avatar" . $_POST['rdbImg'] . ".png";
+        $_SESSION['FormatoFecha'] = $Obj_Ajustes->RemoverEtiquetas(strtolower(trim($_POST['rdbFormatoFecha'])));
+
+        echo "<script>history.go(-1)</script>";
+        return;
+    }
+
+    echo "<script>
+            let URL = window.opener.location.pathname;
+            window.opener.location.reload();
+            window.close();
+          </script>";
+    $_SESSION['success-update'] = 'empleado';
+}

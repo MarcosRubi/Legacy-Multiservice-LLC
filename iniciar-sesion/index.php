@@ -36,8 +36,7 @@ session_start();
         <form action="../func/validarInicioSesion.php" method="post" id="login">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" placeholder="Email" id="email" 
-                  value="<?php if(isset($_SESSION['email'])){echo $_SESSION['email'];};?>" autofocus>
+            <input type="email" class="form-control" name="email" placeholder="Email" id="email" value="<?php if (isset($_SESSION['Email'])) { echo $_SESSION['Email']; }; ?>" autofocus>
           </div>
           <div class="form-group">
             <label for="password">Contraseña</label>

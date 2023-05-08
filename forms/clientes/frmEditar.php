@@ -11,7 +11,7 @@ require_once '../../class/Clientes.php';
 require_once '../../class/Ajustes.php';
 
 
-if(!isset($_GET['id'])){
+if (!isset($_GET['id'])) {
     echo "<script>window.location.replace('" . $_SESSION['path'] . "');</script>";
     return;
 }
@@ -62,17 +62,17 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                 <!-- Primer nombre -->
                                 <div class="form-group mx-1">
                                     <label>Primer nombre</label>
-                                    <input type="text" class="form-control" placeholder="Primer nombre ..." name="txtPrimerNombre" value="<?=$DatosCliente['PrimerNombre'] ?>">
+                                    <input type="text" class="form-control" placeholder="Primer nombre ..." name="txtPrimerNombre" value="<?= $DatosCliente['PrimerNombre'] ?>">
                                 </div>
                                 <!-- Segundo nombre -->
                                 <div class="form-group mx-1">
                                     <label>Segundo nombre</label>
-                                    <input type="text" class="form-control" placeholder="Segundo nombre ..." name="txtSegundoNombre" value="<?=$DatosCliente['SegundoNombre']?>" >
+                                    <input type="text" class="form-control" placeholder="Segundo nombre ..." name="txtSegundoNombre" value="<?= $DatosCliente['SegundoNombre'] ?>">
                                 </div>
                                 <!-- Apellido -->
                                 <div class="form-group mx-1">
                                     <label>Apellido</label>
-                                    <input type="text" class="form-control" placeholder="Apellido ..." name="txtApellido" value="<?=$DatosCliente['Apellido']?>">
+                                    <input type="text" class="form-control" placeholder="Apellido ..." name="txtApellido" value="<?= $DatosCliente['Apellido'] ?>">
                                 </div>
                                 <!-- phone mask -->
                                 <div class="form-group mx-1">
@@ -82,7 +82,7 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' placeholder="(XXX) XXXX-XXXX" data-mask name="txtTelefono" onkeypress="javascript:typeNumber();" value="<?=$DatosCliente['Telefono']?>">
+                                        <input type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' placeholder="(XXX) XXXX-XXXX" data-mask name="txtTelefono" onkeypress="javascript:typeNumber();" value="<?= $DatosCliente['Telefono'] ?>">
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -91,17 +91,17 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                 <!-- Código postal -->
                                 <div class="form-group mx-1">
                                     <label>Código postal</label>
-                                    <input type="text" class="form-control" placeholder="Código postal ..." name="txtCp" value="<?=$DatosCliente['Cp']?>">
+                                    <input type="text" class="form-control" placeholder="Código postal ..." name="txtCp" value="<?= $DatosCliente['Cp'] ?>">
                                 </div>
                                 <!-- Ciudad -->
                                 <div class="form-group mx-1">
                                     <label>Ciudad</label>
-                                    <input type="text" class="form-control" placeholder="Ciudad ..." name="txtCiudad" value="<?=$DatosCliente['Ciudad']?>">
+                                    <input type="text" class="form-control" placeholder="Ciudad ..." name="txtCiudad" value="<?= $DatosCliente['Ciudad'] ?>">
                                 </div>
                                 <!-- Provincia -->
                                 <div class="form-group mx-1">
                                     <label>Provincia</label>
-                                    <input type="text" class="form-control" placeholder="Provincia ..." name="txtProvincia" value="<?=$DatosCliente['Provincia']?>">
+                                    <input type="text" class="form-control" placeholder="Provincia ..." name="txtProvincia" value="<?= $DatosCliente['Provincia'] ?>">
                                 </div>
                                 <!-- Date dd/mm/yyyy -->
                                 <div class="form-group mx-1">
@@ -112,16 +112,16 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
                                         <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaNacimiento" value="<?php $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento'])?>">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask placeholder="dd-mm-yyyy" name="txtFechaNacimiento" value="<?= $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']) ?>">
                                         <?php } ?>
                                         <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaNacimiento" value="<?php $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento'])?>">
+                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" data-mask placeholder="mm-dd-yyyy" name="txtFechaNacimiento" value="<?= $Obj_Ajustes->FechaInvertir($DatosCliente['FechaNacimiento']) ?>">
                                         <?php } ?>
                                     </div>
                                     <!-- /.input group -->
                                 </div>
                             </div>
-                            <input type="hidden" name="IdCliente" value="<?=$DatosCliente['IdCliente']?>">
+                            <input type="hidden" name="IdCliente" value="<?= $DatosCliente['IdCliente'] ?>">
                             <div class="form-group">
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Actualizar datos del cliente</button>
                             </div>
