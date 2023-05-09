@@ -154,7 +154,7 @@ $DatosEmpleado = $Res_Empleado->fetch_assoc();
                             </div>
                         </div>
                         <input type="hidden" name="IdEmpleado" value="<?= $DatosEmpleado['IdEmpleado'] ?>">
-                        <label class="text-danger text-sm text-center mb-3">El usuario debe cerrar sesión y volver a ingresar para visualizar los cambios</label>
+                        <label class="text-danger text-sm text-center mb-3">El empleado debe cerrar sesión y volver a ingresar para visualizar los cambios</label>
                         <div class="form-group">
                             <button class="btn btn-primary btn-lg btn-block" type="submit">Actualizar datos</button>
                         </div>

@@ -668,6 +668,19 @@ if (isset($_SESSION['error-update']) && $_SESSION['error-update'] === 'contraNoC
             })";
     unset($_SESSION['error-update']);
 }
+if (isset($_SESSION['error-update']) && $_SESSION['error-update'] === 'contraAdminNoCoincide') {
+    echo "var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'error',
+                title: 'Su contraseña no coincide.'
+            })";
+    unset($_SESSION['error-update']);
+}
 
 
 

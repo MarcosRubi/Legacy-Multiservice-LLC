@@ -28,7 +28,7 @@ session_start();
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
-      <div class="card-header text-center">
+      <div class="card-header textA-center">
         <p class="h3"><b>Legacy Multiservice </b>LLC</p>
       </div>
       <div class="card-body">

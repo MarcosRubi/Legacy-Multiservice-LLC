@@ -142,6 +142,9 @@ if (isset($_GET['s'])) {
                                                             <a class="btn btn-md mx-1 bg-lightblue" title="Editar" onclick="javascript:abrirFormEditar(<?= $DatosEmpleado['IdEmpleado'] ?>);">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
+                                                            <a class="btn btn-md mx-1 bg-orange" title="Restablecer contraseña" onclick="javascript:restablecerContrasenna(<?= $DatosEmpleado['IdEmpleado'] ?>);">
+                                                                <i class="fa fa-key"></i>
+                                                            </a>
                                                             <a class="btn btn-md mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarEmpleado(<?= $DatosEmpleado['IdEmpleado'] ?>);">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -214,6 +217,9 @@ if (isset($_GET['s'])) {
     <script>
         function abrirFormEditar(id) {
             window.open('<?= $_SESSION['path'] ?>forms/empleados/frmEditar.php?id=' + id, 'Editar empleado', 'width=1000,height=1000')
+        }
+        function restablecerContrasenna(id) {
+            window.open('<?= $_SESSION['path'] ?>forms/empleados/frmRestablecer.php?id=' + id, 'Restablecer contraseña', 'width=500,height=500')
         }
 
         function eliminarEmpleado(id) {
