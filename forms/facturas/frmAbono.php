@@ -4,7 +4,7 @@ require_once '../../bd/bd.php';
 require_once '../../class/OpcionesTablas.php';
 
 
-if (!isset($_GET['factura']) || !isset($_GET['nombre']) || !isset($_GET['cliente']) ) {
+if (!isset($_GET['factura']) || !isset($_GET['nombre']) || !isset($_GET['cliente'])) {
     echo "<script>history.go(-1)</script>";
     return;
 }
@@ -59,7 +59,7 @@ if (!isset($_GET['factura']) || !isset($_GET['nombre']) || !isset($_GET['cliente
                                     <div class="form-group mx-1 container-fluid">
                                         <label>Tipo</label>
                                         <select class="form-control select2" style="width: 100%;" name="txtIdTipo" disabled>
-                                        <option value="3" selected>DEP01 - Abono</option>
+                                            <option value="3" selected>DEP01 - Abono</option>
                                         </select>
                                     </div>
                                     <!-- Valor -->
@@ -192,8 +192,6 @@ if (!isset($_GET['factura']) || !isset($_GET['nombre']) || !isset($_GET['cliente
     <script src="../../plugins/select2/js/select2.full.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
         $(function() {

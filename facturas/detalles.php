@@ -240,8 +240,6 @@ if ($_SESSION['IdRole'] <= 3 && !isset($_GET['edit'])) {
     <script src="../plugins/select2/js/select2.full.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
         $(function() {
@@ -278,6 +276,7 @@ if ($_SESSION['IdRole'] <= 3 && !isset($_GET['edit'])) {
                     $(element).removeClass('is-invalid');
                 }
             });
+            document.querySelectorAll('.card-body')[1].childNodes[0].remove()
         })
     </script>
     <script>

@@ -106,36 +106,36 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                                 </div>
                                 <!-- Fecha Ida -->
                                 <div class="form-group mx-1">
-                                        <label>Ida:</label>
-                                        <div class="input-group date" id="ida" data-target-input="nearest">
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#ida" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtIda">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#ida" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtIda">
-                                            <?php } ?>
-                                            <div class="input-group-append" data-target="#ida" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
-                                                </div>
+                                    <label>Ida:</label>
+                                    <div class="input-group date" id="ida" data-target-input="nearest">
+                                        <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#ida" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtIda">
+                                        <?php } ?>
+                                        <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#ida" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtIda">
+                                        <?php } ?>
+                                        <div class="input-group-append" data-target="#ida" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 <!-- Fecha Regreso -->
                                 <div class="form-group mx-1">
-                                        <label>Regreso:</label>
-                                        <div class="input-group date" id="regreso" data-target-input="nearest">
-                                            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#regreso" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtRegreso">
-                                            <?php } ?>
-                                            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#regreso" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtRegreso">
-                                            <?php } ?>
-                                            <div class="input-group-append" data-target="#regreso" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i>
-                                                </div>
+                                    <label>Regreso:</label>
+                                    <div class="input-group date" id="regreso" data-target-input="nearest">
+                                        <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#regreso" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtRegreso">
+                                        <?php } ?>
+                                        <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#regreso" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtRegreso">
+                                        <?php } ?>
+                                        <div class="input-group-append" data-target="#regreso" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 <!-- # Boletos -->
                                 <div class="form-group mx-1">
                                     <label># Pasajeros</label>
@@ -198,8 +198,6 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
     <script src="../../plugins/select2/js/select2.full.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
     <script>
         $(function() {
