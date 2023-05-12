@@ -45,7 +45,7 @@ $array = explode(',', $string);
 $array = array_map('intval', $array);
 
 // Eliminar todos los elementos que no son 0
-$array_filtered = array_filter($array, function($value) {
+$array_filtered = array_filter($array, function ($value) {
     return $value !== 0;
 });
 
@@ -66,14 +66,14 @@ if (count($array_filtered) === 0) {
     $(function() {
         var boletosChartCanvas = $('#boletosChart').get(0).getContext('2d')
         var donutData = {
-                labels: [
-                    <?= $empleados ?>
-                ],
-                datasets: [{
-                    data: <?= $TotalPorEmpleado ?>,
-                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-                }]
-            }
+            labels: [
+                <?= $empleados ?>
+            ],
+            datasets: [{
+                data: <?= $TotalPorEmpleado ?>,
+                backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+            }]
+        }
         var pieData = donutData;
         var pieOptions = {
             maintainAspectRatio: false,

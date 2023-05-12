@@ -43,7 +43,7 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Agregar nueva cotización</h3>
                         </div>
-                        <form action="./insertar.php" method="post" class="card-body" id="frmNuevo">
+                        <form action="./insertar.php" method="post" class="card-body" id="frmNuevaCotizacion">
                             <div class="d-flex flex-column flex-xl-row">
                                 <!-- Cliente -->
                                 <div class="form-group mx-1">
@@ -206,7 +206,7 @@ if (!isset($_GET['id']) && !isset($_GET['nombre'])) {
     </script>
     <script>
         $(function() {
-            $('#frmNuevo').validate({
+            $('#frmNuevaCotizacion').validate({
                 rules: {
                     txtPnr: {
                         required: true

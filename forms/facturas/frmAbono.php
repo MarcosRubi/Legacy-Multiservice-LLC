@@ -47,7 +47,7 @@ if (!isset($_GET['factura']) || !isset($_GET['nombre']) || !isset($_GET['cliente
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Agregar nueva abono</h3>
                         </div>
-                        <form action="./insertar-abono.php" method="post" class="card-body" id="frmNuevo">
+                        <form action="./insertar-abono.php" method="post" class="card-body" id="frmNuevoAbono">
                             <div class="px-2 mb-3 rounded" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                                 <div class="d-flex pt-3">
                                     <!-- Cliente -->
@@ -205,7 +205,7 @@ if (!isset($_GET['factura']) || !isset($_GET['nombre']) || !isset($_GET['cliente
     </script>
     <script>
         $(function() {
-            $('#frmNuevo').validate({
+            $('#frmNuevoAbono').validate({
                 rules: {
                     txtValor: {
                         required: true

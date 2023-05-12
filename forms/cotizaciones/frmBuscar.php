@@ -99,7 +99,7 @@ require_once '../../func/validateSession.php';
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary font-weight-bold btn-block" >Retraer reporte</button>
+                                    <button class="btn btn-primary font-weight-bold btn-block">Retraer reporte</button>
                                 </form>
                             </div>
                         </div>

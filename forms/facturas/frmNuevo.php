@@ -77,7 +77,7 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Agregar nueva factura</h3>
                         </div>
-                        <form action="./insertar.php" method="post" class="card-body" id="frmNuevo">
+                        <form action="./insertar.php" method="post" class="card-body" id="frmNuevaFactura">
                             <div class="px-2 mb-3 rounded" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                                 <div class="d-flex pt-3">
                                     <!-- Cliente -->
@@ -262,7 +262,7 @@ $Res_OpcionesTipoFactura = $Obj_OpcionesTablas->listarTiposFacturas();
     </script>
     <script>
         $(function() {
-            $('#frmNuevo').validate({
+            $('#frmNuevaFactura').validate({
                 rules: {
                     txtValor: {
                         required: true

@@ -63,7 +63,7 @@ $DatosEmpleado = $Res_Empleado->fetch_assoc();
         <div class="content" style="min-width:90vw;">
             <div class="container-fluid">
                 <div class="row">
-                    <form action="./editar.php" method="POST" class="card card-info" id="frmNuevo" style="min-width:90vw;" onsubmit="return validarFormulario();">
+                    <orm action="./editar.php" method="POST" class="card card-info" id="frmEditarEmpleado" style="min-width:90vw;" onsubmit="return validarFormulario();">
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Editar empleado</h3>
                         </div>
@@ -226,7 +226,7 @@ $DatosEmpleado = $Res_Empleado->fetch_assoc();
     </script>
     <script>
         $(function() {
-            $('#frmNuevo').validate({
+            $('#frmEditarEmpleado').validate({
                 rules: {
                     txtNombreEmpleado: {
                         required: true

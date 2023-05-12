@@ -23,6 +23,12 @@ if ($_SESSION['IdRole'] !== 2) {
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <style>
@@ -164,6 +170,7 @@ if ($_SESSION['IdRole'] !== 2) {
                 <i class="fas fa-lg fa-wrench"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right bg-dark" role="menu">
+                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-xl-date" onclick="javascript:updateActiveItem(event)">Personalizada</a>
                 <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'year')">Este año</a>
                 <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'month')">Este mes</a>
                 <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'week')">Esta semana</a>
@@ -173,6 +180,66 @@ if ($_SESSION['IdRole'] !== 2) {
     </div>
     <!-- ./wrapper -->
 
+    <div class="modal fade" id="modal-xl-date">
+        <div class="modal-dialog modal-xl-date">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Selecciona el rango de fechas</strong></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="#" onsubmit="return false;" method="POST" class="card card-info" id="frmDate">
+                    <div class="modal-body">
+                        <div class="card-body ">
+                            <div class="d-flex flex-column">
+                                <div class="form-group container-fluid mr-5">
+                                    <div class="d-flex align-center">
+                                        <div class="form-group mr-3">
+                                            <label>Desde:</label>
+                                            <div class="input-group date" id="datefrom" data-target-input="nearest">
+                                                <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" placeholder="dd-mm-yyyy" name="txtFechaInicio">
+                                                <?php } ?>
+                                                <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaInicio">
+                                                <?php } ?>
+                                                <div class="input-group-append" data-target="#datefrom" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Hasta:</label>
+                                            <div class="input-group date" id="dateto" data-target-input="nearest">
+                                                <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaFin">
+                                                <?php } ?>
+                                                <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaFin">
+                                                <?php } ?>
+                                                <div class="input-group-append" data-target="#dateto" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="javascript:changeTime(null,'personal');">Mostrar reporte</button>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    </div>
+
     <!-- jQuery -->
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -181,9 +248,80 @@ if ($_SESSION['IdRole'] !== 2) {
     <script src="../../plugins/chart.js/Chart.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
+    <!-- InputMask -->
+    <script src="../../plugins/moment/moment.min.js"></script>
+    <script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../../plugins/toastr/toastr.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
+    <script>
+        $(function() {
+            //Phone Number
+            $('[data-mask]').inputmask()
+
+            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                //Date picker
+                $('#datefrom').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+            <?php } ?>
+            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                //Date picker
+                $('#datefrom').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+            <?php } ?>
+
+        })
+    </script>
+    <script>
+        $(function() {
+            $('#frmDate').validate({
+                rules: {
+                    txtFechaInicio: {
+                        required: true
+                    },
+                    txtFechaFin: {
+                        required: true
+                    }
+                },
+                messages: {
+                    txtFechaInicio: {
+                        required: "Este campo es obligatorio",
+                    },
+                    txtFechaFin: {
+                        required: "Este campo es obligatorio",
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        })
+    </script>
     <script>
         const MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 
@@ -307,6 +445,10 @@ if ($_SESSION['IdRole'] !== 2) {
                     $('#resultsResumenEstadisticas').html(response);
                 }
             });
+        }
+
+        function updateActiveItem(e) {
+            e?.target.classList.add('active');
         }
     </script>
     <!-- Page specific script -->

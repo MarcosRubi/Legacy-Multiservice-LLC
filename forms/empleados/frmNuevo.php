@@ -59,7 +59,7 @@ $Res_Roles = $Obj_Empleados->listarRoles();
         <div class="content" style="min-width:90vw;">
             <div class="container-fluid">
                 <div class="row">
-                    <form action="./insertar.php" method="POST" class="card card-info" id="frmNuevo" style="min-width:90vw;" onsubmit="return validarFormulario();">
+                    <form action="./insertar.php" method="POST" class="card card-info" id="frmNuevoEmpleado" style="min-width:90vw;" onsubmit="return validarFormulario();">
                         <div class="card-header">
                             <h3 class="card-title w-100 font-weight-bold text-center">Agregar nuevo empleado</h3>
                         </div>
@@ -222,7 +222,7 @@ $Res_Roles = $Obj_Empleados->listarRoles();
     </script>
     <script>
         $(function() {
-            $('#frmNuevo').validate({
+            $('#frmNuevoEmpleado').validate({
                 rules: {
                     txtNombreEmpleado: {
                         required: true

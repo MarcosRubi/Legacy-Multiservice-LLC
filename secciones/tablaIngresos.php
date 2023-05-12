@@ -25,7 +25,7 @@ $CantidadSemanas = intval($Obj_Ajustes->ObtenerCantidadSemanasMesActual()->fetch
 $ingresosPorMes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 $ingresosSemanaActual = [0, 0, 0, 0, 0, 0, 0];
 $ingresosDiaActual = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-$ingresosMesActual = [0,0,0,0,0,0];
+$ingresosMesActual = [0, 0, 0, 0, 0, 0];
 
 
 // Obtiene el número de días en el mes de abril del 2023
@@ -42,14 +42,14 @@ for ($dia = 1; $dia <= $num_dias; $dia++) {
 
 $ultimoElemento = end($semanas);
 
-$semanas[] = number_format($ultimoElemento+1);
+$semanas[] = number_format($ultimoElemento + 1);
 
-while ($valor= $Res_FacturasPorMesActual->fetch_assoc()) {
+while ($valor = $Res_FacturasPorMesActual->fetch_assoc()) {
     $semana_valor = $valor['Semana'];
 
-    for ($i=0; $i < ($CantidadSemanas) ; $i++) {
-        if(intval($semanas[$i]) === intval($semana_valor)){
-            $ingresosMesActual[$i] = $valor['Total'] + $valor['Balance'];   
+    for ($i = 0; $i < ($CantidadSemanas); $i++) {
+        if (intval($semanas[$i]) === intval($semana_valor)) {
+            $ingresosMesActual[$i] = $valor['Total'] + $valor['Balance'];
         }
     }
 }
@@ -168,36 +168,40 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
          */
 
         let areaChartData = {
-                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                datasets: [{
-                    label: 'Facturas',
-                    backgroundColor: 'rgba(60,141,188,0.9)',
-                    borderColor: 'rgba(60,141,188,0.8)',
-                    pointRadius: false,
-                    pointColor: '#3b8bba',
-                    pointStrokeColor: 'rgba(60,141,188,1)',
-                    pointHighlightFill: '#fff',
-                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data: [
-                        <?= $ingresosPorMes[0] ?>,
-                        <?= $ingresosPorMes[1] ?>,
-                        <?= $ingresosPorMes[2] ?>,
-                        <?= $ingresosPorMes[3] ?>,
-                        <?= $ingresosPorMes[4] ?>,
-                        <?= $ingresosPorMes[5] ?>,
-                        <?= $ingresosPorMes[6] ?>,
-                        <?= $ingresosPorMes[7] ?>,
-                        <?= $ingresosPorMes[8] ?>,
-                        <?= $ingresosPorMes[9] ?>,
-                        <?= $ingresosPorMes[10] ?>,
-                        <?= $ingresosPorMes[11] ?>,
-                    ]
-                }]
-            }
+            labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            datasets: [{
+                label: 'Facturas',
+                backgroundColor: 'rgba(60,141,188,0.9)',
+                borderColor: 'rgba(60,141,188,0.8)',
+                pointRadius: false,
+                pointColor: '#3b8bba',
+                pointStrokeColor: 'rgba(60,141,188,1)',
+                pointHighlightFill: '#fff',
+                pointHighlightStroke: 'rgba(60,141,188,1)',
+                data: [
+                    <?= $ingresosPorMes[0] ?>,
+                    <?= $ingresosPorMes[1] ?>,
+                    <?= $ingresosPorMes[2] ?>,
+                    <?= $ingresosPorMes[3] ?>,
+                    <?= $ingresosPorMes[4] ?>,
+                    <?= $ingresosPorMes[5] ?>,
+                    <?= $ingresosPorMes[6] ?>,
+                    <?= $ingresosPorMes[7] ?>,
+                    <?= $ingresosPorMes[8] ?>,
+                    <?= $ingresosPorMes[9] ?>,
+                    <?= $ingresosPorMes[10] ?>,
+                    <?= $ingresosPorMes[11] ?>,
+                ]
+            }]
+        }
 
         <?php if (isset($_POST['filter']) && $_POST['filter'] === 'month') { ?>
             areaChartData = {
-                labels: ['Semana 01', 'Semana 02', 'Semana 03', 'Semana 04', <?php if ($CantidadSemanas > 4) { echo "'Semana 05'"; } ?>, <?php if ($CantidadSemanas > 5) { echo "'Semana 06'"; } ?>],
+                labels: ['Semana 01', 'Semana 02', 'Semana 03', 'Semana 04', <?php if ($CantidadSemanas > 4) {
+                                                                                    echo "'Semana 05'";
+                                                                                } ?>, <?php if ($CantidadSemanas > 5) {
+                                                                                            echo "'Semana 06'";
+                                                                                        } ?>],
                 datasets: [{
                     label: 'Facturas',
                     backgroundColor: 'rgba(60,141,188,0.9)',
@@ -208,12 +212,16 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
                     pointHighlightFill: '#fff',
                     pointHighlightStroke: 'rgba(60,141,188,1)',
                     data: [
-                        <?=$ingresosMesActual[0]?>,
-                        <?=$ingresosMesActual[1]?>,
-                        <?=$ingresosMesActual[2]?>,
-                        <?=$ingresosMesActual[3]?>,
-                        <?php if($CantidadSemanas >4){echo $ingresosMesActual[4] . ",";} ?>
-                        <?php if($CantidadSemanas >5){echo $ingresosMesActual[5];} ?>,
+                        <?= $ingresosMesActual[0] ?>,
+                        <?= $ingresosMesActual[1] ?>,
+                        <?= $ingresosMesActual[2] ?>,
+                        <?= $ingresosMesActual[3] ?>,
+                        <?php if ($CantidadSemanas > 4) {
+                            echo $ingresosMesActual[4] . ",";
+                        } ?>
+                        <?php if ($CantidadSemanas > 5) {
+                            echo $ingresosMesActual[5];
+                        } ?>,
                     ]
                 }]
             }
