@@ -112,6 +112,14 @@ class Clientes extends DB
     }
 
     //PARA GRAFICO DE RESUMEN DE ESTADISTICAS
+    public function cantidadClientesPorFechaPersonalizada($fechaInicio, $fechaFin)
+    {
+        $query = "SELECT COUNT(IdCliente) AS total_clientes 
+        FROM tbl_clientes
+        WHERE Creado BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' 
+        AND Eliminado='N'";
+        return $this->EjecutarQuery($query);
+    }
     public function cantidadClientesPorAnioActual()
     {
         $query = "SELECT COUNT(IdCliente) AS total_clientes 
@@ -151,6 +159,22 @@ class Clientes extends DB
     }
 
     // PARA GRAFICOS DE REPORTE DIARIOS
+    public function cantidadClientesPorEmpleadoPersonalizado($agente,  $fechaInicio, $fechaFin)
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdCliente) AS total_clientes 
+        FROM vta_listar_clientes
+        WHERE
+        Creado BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' 
+            AND Eliminado='N'
+            AND Agente = '" . $agente . "'
+        GROUP BY
+            YEAR ( Creado ),
+            MONTH (
+            Creado)";
+        return $this->EjecutarQuery($query);
+    }
     public function cantidadClientesPorEmpleadoAnioActual($agente)
     {
         $query = "SELECT YEAR( Creado ) AS Anio,

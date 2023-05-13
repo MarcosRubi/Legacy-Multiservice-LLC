@@ -19,6 +19,7 @@ $Res_FacturasPorMes = $Obj_Facturas->obtenerTotalesPorMesFacturas();
 $Res_FacturasPorMesActual = $Obj_Facturas->obtenerTotalesDelMesActual();
 $Res_FacturasPorSemanaActual = $Obj_Facturas->obtenerTotalesPorSemana();
 $Res_FacturasPorDiaActual = $Obj_Facturas->obtenerTotalesDiaActual();
+$Res_FacturasPorFechaPersonalizada = $Obj_Facturas->obtenerTotalesFechaPersonalizada($Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
 $CantidadSemanas = intval($Obj_Ajustes->ObtenerCantidadSemanasMesActual()->fetch_assoc()['semanas_del_mes_actual']);
 
 
@@ -26,7 +27,11 @@ $ingresosPorMes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 $ingresosSemanaActual = [0, 0, 0, 0, 0, 0, 0];
 $ingresosDiaActual = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 $ingresosMesActual = [0, 0, 0, 0, 0, 0];
+$ingresosFechaPersonalizada = [];
 
+if ($_POST['formData']['txtFechaInicio'] !== '') {
+    $ingresosFechaPersonalizada[0] = $Res_FacturasPorFechaPersonalizada->fetch_assoc()['Total'];
+}
 
 // Obtiene el número de días en el mes de abril del 2023
 $num_dias = date('t');
@@ -53,7 +58,6 @@ while ($valor = $Res_FacturasPorMesActual->fetch_assoc()) {
         }
     }
 }
-
 while ($valor = $Res_FacturasPorMes->fetch_assoc()) {
     if ($valor['Mes'] === '1') {
         $ingresosPorMes[0] = $valor['Total'] + $valor['Balance'];
@@ -197,11 +201,14 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
 
         <?php if (isset($_POST['filter']) && $_POST['filter'] === 'month') { ?>
             areaChartData = {
-                labels: ['Semana 01', 'Semana 02', 'Semana 03', 'Semana 04', <?php if ($CantidadSemanas > 4) {
-                                                                                    echo "'Semana 05'";
-                                                                                } ?>, <?php if ($CantidadSemanas > 5) {
-                                                                                            echo "'Semana 06'";
-                                                                                        } ?>],
+                labels: ['Semana 01', 'Semana 02', 'Semana 03', 'Semana 04',
+                    <?php if ($CantidadSemanas > 4) {
+                        echo "'Semana 05'";
+                    } ?>,
+                    <?php if ($CantidadSemanas > 5) {
+                        echo "'Semana 06'";
+                    } ?>
+                ],
                 datasets: [{
                     label: 'Facturas',
                     backgroundColor: 'rgba(60,141,188,0.9)',
@@ -332,6 +339,26 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
                         <?= $ingresosDiaActual[9] ?>,
                         <?= $ingresosDiaActual[10] ?>,
                         <?= $ingresosDiaActual[11] ?>,
+                    ]
+                }]
+            }
+        <?php } ?>
+        <?php if (isset($_POST['filter']) && $_POST['filter'] === 'personal') { ?>
+            areaChartData = {
+                labels: [' ', '<?= $_POST['formData']['txtFechaInicio'] . ' al ' . $_POST['formData']['txtFechaFin'] ?>', ''],
+                datasets: [{
+                    label: 'Facturas',
+                    backgroundColor: 'rgba(60,141,188,0.9)',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(60,141,188,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: [
+                        <?= $ingresosFechaPersonalizada[0] ?>,
+                        <?= $ingresosFechaPersonalizada[0] ?>,
+                        <?= $ingresosFechaPersonalizada[0] ?>,
                     ]
                 }]
             }

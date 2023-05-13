@@ -50,7 +50,7 @@ class Boletos extends DB
 
     public function buscarPorPnr($idCliente, $pnr)
     {
-        $query = "SELECT * FROM vta_listar_boletos WHERE IdCliente='" . $idCliente . "' AND Pnr='".$pnr."'";
+        $query = "SELECT * FROM vta_listar_boletos WHERE IdCliente='" . $idCliente . "' AND Pnr='" . $pnr . "'";
         return $this->EjecutarQuery($query);
     }
 
@@ -240,14 +240,26 @@ class Boletos extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function valorTotalBoletos($idCliente, $pnr){
-        $query = "SELECT SUM(vta_listar_boletos.Precio) AS 'Valor' FROM vta_listar_boletos WHERE IdCliente='".$idCliente."' AND Pnr='".$pnr."'";
+    public function valorTotalBoletos($idCliente, $pnr)
+    {
+        $query = "SELECT SUM(vta_listar_boletos.Precio) AS 'Valor' FROM vta_listar_boletos WHERE IdCliente='" . $idCliente . "' AND Pnr='" . $pnr . "'";
         return $this->EjecutarQuery($query);
     }
 
 
     // PARA GRAFICA GENERAL
-    
+
+    public function cantidadBoletosPorFechapersonalizada($fechaInicio, $fechaFin)
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdBoleto) AS total_boletos 
+        FROM tbl_boletos
+        WHERE
+        Creado BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' 
+            AND Eliminado='N'";
+        return $this->EjecutarQuery($query);
+    }
     public function cantidadBoletosPorAnioActual()
     {
         $query = "SELECT YEAR( Creado ) AS Anio,
@@ -260,7 +272,8 @@ class Boletos extends DB
         return $this->EjecutarQuery($query);
     }
 
-    public function cantidadBoletosPorMesActual(){
+    public function cantidadBoletosPorMesActual()
+    {
         $query = "SELECT COUNT(IdBoleto) AS total_boletos
         FROM tbl_boletos
         WHERE Eliminado = 'N'
@@ -293,6 +306,22 @@ class Boletos extends DB
     }
 
     // PARA GRAFICA EN REPORTE DIARIO
+    public function cantidadBoletosPorEmpleadoPersonalizado($agente, $fechaInicio, $fechaFin)
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdBoleto) AS total_boletos 
+        FROM tbl_boletos
+        WHERE
+        Creado BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' 
+            AND Eliminado='N'
+            AND Agente = '" . $agente . "'
+        GROUP BY
+            YEAR ( Creado ),
+            MONTH (
+            Creado)";
+        return $this->EjecutarQuery($query);
+    }
     public function cantidadBoletosPorEmpleadoAnioActual($agente)
     {
         $query = "SELECT YEAR( Creado ) AS Anio,
@@ -317,7 +346,7 @@ class Boletos extends DB
         WHERE Eliminado = 'N'
         AND YEAR(Creado) = YEAR(CURRENT_DATE())
         AND MONTH(Creado) = MONTH(CURRENT_DATE()) 
-        AND Agente='".$agente."' " ;
+        AND Agente='" . $agente . "' ";
         return $this->EjecutarQuery($query);
     }
 
@@ -342,7 +371,7 @@ class Boletos extends DB
     {
         $query = "SELECT COUNT(IdBoleto) AS total_boletos 
         FROM tbl_boletos 
-        WHERE Agente = '".$agente."' AND DATE(Creado) = CURRENT_DATE() AND Eliminado='N';";
+        WHERE Agente = '" . $agente . "' AND DATE(Creado) = CURRENT_DATE() AND Eliminado='N';";
         return $this->EjecutarQuery($query);
     }
 }

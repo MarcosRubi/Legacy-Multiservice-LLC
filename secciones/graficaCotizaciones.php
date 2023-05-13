@@ -10,9 +10,11 @@ if ($_SESSION['IdRole'] !== 2) {
 require_once '../bd/bd.php';
 require_once '../class/Empleados.php';
 require_once '../class/Cotizaciones.php';
+require_once '../class/Ajustes.php';
 
 $Obj_Empleados = new Empleados();
 $Obj_Cotizaciones = new Cotizaciones();
+$Obj_Ajustes = new Ajustes();
 $Res_Empleados = $Obj_Empleados->ListarEmpleados();
 
 
@@ -34,6 +36,9 @@ while ($DatosEmpleado = $Res_Empleados->fetch_assoc()) {
     }
     if ($_POST['filter'] === 'year') {
         $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleadoAnioActual($DatosEmpleado['Agente']);
+    }
+    if ($_POST['filter'] === 'personal') {
+        $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorEmpleadoPersonalizado($DatosEmpleado['Agente'], $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
     }
 
     @$TotalPorEmpleado .=  intval($Res_Cotizaciones->fetch_assoc()['total_cotizaciones']) . ',';

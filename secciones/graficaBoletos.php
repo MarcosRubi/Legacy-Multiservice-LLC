@@ -9,9 +9,11 @@ if ($_SESSION['IdRole'] !== 2) {
 require_once '../bd/bd.php';
 require_once '../class/Empleados.php';
 require_once '../class/Boletos.php';
+require_once '../class/Ajustes.php';
 
 $Obj_Empleados = new Empleados();
 $Obj_Boletos = new Boletos();
+$Obj_Ajustes = new Ajustes();
 $Res_Empleados = $Obj_Empleados->ListarEmpleados();
 
 $empleados = '';
@@ -32,6 +34,9 @@ while ($DatosEmpleado = $Res_Empleados->fetch_assoc()) {
     }
     if ($_POST['filter'] === 'year') {
         $Res_Boletos = $Obj_Boletos->cantidadBoletosPorEmpleadoAnioActual($DatosEmpleado['Agente']);
+    }
+    if ($_POST['filter'] === 'personal') {
+        $Res_Boletos = $Obj_Boletos->cantidadBoletosPorEmpleadoPersonalizado($DatosEmpleado['Agente'], $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
     }
 
     @$TotalPorEmpleado .=  intval($Res_Boletos->fetch_assoc()['total_boletos']) . ',';

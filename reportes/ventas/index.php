@@ -83,7 +83,7 @@ if ($_SESSION['IdRole'] !== 2) {
                             <!-- DONUT CHART -->
                             <div class="card card-danger col mx-2 p-0">
                                 <div class="card-header">
-                                    <h3 class="card-title">Cotizaciones realizadas</h3>
+                                    <h3 class="card-title" id="title-quotes">Cotizaciones realizadas</h3>
 
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="remove">
@@ -99,7 +99,7 @@ if ($_SESSION['IdRole'] !== 2) {
                             <!-- PIE CHART -->
                             <div class="card card-info col mx-2 p-0">
                                 <div class="card-header">
-                                    <h3 class="card-title">Boletos creados</h3>
+                                    <h3 class="card-title" id="title-tickets">Boletos creados</h3>
 
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="remove">
@@ -117,7 +117,7 @@ if ($_SESSION['IdRole'] !== 2) {
                             <!-- PIE CHART -->
                             <div class="card card-warning col mx-2 p-0">
                                 <div class="card-header">
-                                    <h3 class="card-title">Clientes creados</h3>
+                                    <h3 class="card-title" id="title-clients">Clientes creados</h3>
 
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="remove">
@@ -132,7 +132,7 @@ if ($_SESSION['IdRole'] !== 2) {
                             <!-- PIE CHART -->
                             <div class="card card-success col mx-2 p-0">
                                 <div class="card-header">
-                                    <h3 class="card-title">Facturas creadas</h3>
+                                    <h3 class="card-title" id="title-invoices">Facturas creadas</h3>
 
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="remove">
@@ -189,7 +189,7 @@ if ($_SESSION['IdRole'] !== 2) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="#" onsubmit="return false;" method="POST" class="card card-info" id="frmDate">
+                <form action="#" method="POST" class="card card-info" id="frmDate">
                     <div class="modal-body">
                         <div class="card-body ">
                             <div class="d-flex flex-column">
@@ -199,10 +199,10 @@ if ($_SESSION['IdRole'] !== 2) {
                                             <label>Desde:</label>
                                             <div class="input-group date" id="datefrom" data-target-input="nearest">
                                                 <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" placeholder="dd-mm-yyyy" name="txtFechaInicio">
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" placeholder="dd-mm-yyyy" name="txtFechaInicio" id="txtFechaInicio">
                                                 <?php } ?>
                                                 <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaInicio">
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaInicio" id="txtFechaInicio">
                                                 <?php } ?>
                                                 <div class="input-group-append" data-target="#datefrom" data-toggle="datetimepicker">
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i>
@@ -214,10 +214,10 @@ if ($_SESSION['IdRole'] !== 2) {
                                             <label>Hasta:</label>
                                             <div class="input-group date" id="dateto" data-target-input="nearest">
                                                 <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaFin">
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaFin" id="txtFechaFin">
                                                 <?php } ?>
                                                 <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaFin">
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaFin" id="txtFechaFin">
                                                 <?php } ?>
                                                 <div class="input-group-append" data-target="#dateto" data-toggle="datetimepicker">
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i>
@@ -232,7 +232,8 @@ if ($_SESSION['IdRole'] !== 2) {
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="javascript:changeTime(null,'personal');">Mostrar reporte</button>
+                        <button type="reset" class="btn d-none reset">Resetear</button>
+                        <button type="submit" class="btn btn-primary">Mostrar reporte</button>
                 </form>
             </div>
         </div>
@@ -267,7 +268,6 @@ if ($_SESSION['IdRole'] !== 2) {
         $(function() {
             //Phone Number
             $('[data-mask]').inputmask()
-
             <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
                 //Date picker
                 $('#datefrom').datetimepicker({
@@ -286,11 +286,14 @@ if ($_SESSION['IdRole'] !== 2) {
                     format: 'MM-DD-YYYY'
                 });
             <?php } ?>
-
         })
     </script>
     <script>
-        $(function() {
+        let formDate = document.getElementById('frmDate')
+
+        formDate.addEventListener('submit', (e) => {
+            e.preventDefault();
+
             $('#frmDate').validate({
                 rules: {
                     txtFechaInicio: {
@@ -320,6 +323,12 @@ if ($_SESSION['IdRole'] !== 2) {
                     $(element).removeClass('is-invalid');
                 }
             });
+
+            if ($('#frmDate').valid()) {
+                changeTime(null, 'personal')
+                $('button.btn-default').click();
+                $('button.reset').click();
+            }
         })
     </script>
     <script>
@@ -344,22 +353,37 @@ if ($_SESSION['IdRole'] !== 2) {
 
 
         function changeTime(e, filter) {
-
-            updateIncomeGraph(e, filter)
-            updateCharCotizaciones(e, filter)
-            updateCharBoletos(e, filter)
-            uodateCharClientes(e, filter)
-            updateCharFacturas(e, filter)
-            updateupdateSalesSummaryCharts(e, filter)
+            const formData = obtenerDatosFormulario(); // Obtener los datos del formulario del modal
+            updateIncomeGraph(e, filter, formData);
+            updateCharCotizaciones(e, filter, formData);
+            updateCharBoletos(e, filter, formData);
+            updateCharClientes(e, filter, formData);
+            updateCharFacturas(e, filter, formData);
+            updateSalesSummaryCharts(e, filter, formData);
             e?.target.classList.add('active');
-        };
+        }
 
-        function updateIncomeGraph(e, filter) {
+        function obtenerDatosFormulario() {
+            // Obtener el formulario dentro del modal
+            const formulario = document.getElementById('frmDate');
+
+            // Crear un objeto FormData para obtener los datos del formulario
+            const formData = new FormData(formulario);
+
+            // Convertir el objeto FormData a un objeto JavaScript
+            const datosFormulario = Object.fromEntries(formData.entries());
+
+            return datosFormulario;
+        }
+
+
+        function updateIncomeGraph(e, filter, formData) {
             $.ajax({
                 url: '../../secciones/tablaIngresos.php',
                 method: 'POST',
                 data: {
-                    filter
+                    filter,
+                    formData
                 },
                 success: function(response) {
                     $('#result').html(response);
@@ -377,69 +401,84 @@ if ($_SESSION['IdRole'] !== 2) {
                 filter === 'month' ? title.innerHTML = 'Ingresos para el mes de ' + MONTHS[date.getMonth()] + ' del ' + date.getFullYear() : ''
                 filter === 'week' ? title.innerHTML = 'Ingresos para la semana #' + numeroDeSemana(new Date()) + ' del ' + date.getFullYear() : ''
                 filter === 'now' ? title.innerHTML = 'Ingresos del día ' + date.getDate() + ' de ' + MONTHS[date.getMonth()] + ' del ' + date.getFullYear() : ''
+                filter === 'personal' ? title.innerHTML = 'Ingresos del día ' + document.getElementById('txtFechaInicio').value + ' al ' + document.getElementById('txtFechaFin').value : ''
             }
         }
 
-        function updateCharCotizaciones(e, filter) {
+        function updateCharCotizaciones(e, filter, formData) {
             $.ajax({
                 url: '../../secciones/graficaCotizaciones.php',
                 method: 'POST',
                 data: {
-                    filter
+                    filter,
+                    formData
                 },
                 success: function(response) {
                     $('#resultCotizaciones').html(response);
                 }
             });
+            changeTitleChar('title-quotes', 'Cotizaciones creadas')
         }
 
-        function updateCharBoletos(e, filter) {
+        function updateCharBoletos(e, filter, formData) {
             $.ajax({
                 url: '../../secciones/graficaBoletos.php',
                 method: 'POST',
                 data: {
-                    filter
+                    filter,
+                    formData
                 },
                 success: function(response) {
                     $('#resultsBoletos').html(response);
                 }
             });
 
+            changeTitleChar('title-tickets', 'Boletos creados')
+
         }
 
-        function uodateCharClientes(e, filter) {
+        function updateCharClientes(e, filter, formData) {
             $.ajax({
                 url: '../../secciones/graficaClientes.php',
                 method: 'POST',
                 data: {
-                    filter
+                    filter,
+                    formData
                 },
                 success: function(response) {
                     $('#resultsClientes').html(response);
                 }
             });
+
+            changeTitleChar('title-clients', 'Clientes creados')
+
+
         }
 
-        function updateCharFacturas(e, filter) {
+        function updateCharFacturas(e, filter, formData) {
             $.ajax({
                 url: '../../secciones/graficaFacturas.php',
                 method: 'POST',
                 data: {
-                    filter
+                    filter,
+                    formData
                 },
                 success: function(response) {
                     $('#resultsFacturas').html(response);
                 }
             });
+
+            changeTitleChar('title-invoices', 'Facturas creadas')
         }
 
-        function updateupdateSalesSummaryCharts(e, filter) {
+        function updateSalesSummaryCharts(e, filter, formData) {
             $.ajax({
                 url: '../../secciones/resumenEstadisticas.php',
                 method: 'POST',
                 data: {
                     filter,
-                    report: true
+                    report: true,
+                    formData
                 },
                 success: function(response) {
                     $('#resultsResumenEstadisticas').html(response);
@@ -448,7 +487,17 @@ if ($_SESSION['IdRole'] !== 2) {
         }
 
         function updateActiveItem(e) {
+            document.querySelector('.dropdown-item.active')?.classList.remove('active');
             e?.target.classList.add('active');
+        }
+
+        function changeTitleChar(titleId, charName) {
+            let title = document.getElementById(titleId)
+            if (document.getElementById('txtFechaInicio').value !== '' && document.getElementById('txtFechaFin').value) {
+                title.innerHTML = `${charName} entre: <strong>${document.getElementById('txtFechaInicio').value}</strong> al <strong>${document.getElementById('txtFechaFin').value} </strong>`
+            } else {
+                title.innerHTML = `${charName}`
+            }
         }
     </script>
     <!-- Page specific script -->

@@ -8,18 +8,21 @@ if (!isset($_POST['report']) && strpos($URL, "reportes") === false) {
     require_once 'class/Boletos.php';
     require_once 'class/Clientes.php';
     require_once 'class/Cotizaciones.php';
+    require_once 'class/Ajustes.php';
 } else if (strpos($URL, "reportes") !== false) {
     require_once '../../func/validateSession.php';
     require_once '../../bd/bd.php';
     require_once '../../class/Boletos.php';
     require_once '../../class/Clientes.php';
     require_once '../../class/Cotizaciones.php';
+    require_once '../../class/Ajustes.php';
 } else {
     require_once '../func/validateSession.php';
     require_once '../bd/bd.php';
     require_once '../class/Boletos.php';
     require_once '../class/Clientes.php';
     require_once '../class/Cotizaciones.php';
+    require_once '../class/Ajustes.php';
 }
 
 
@@ -27,6 +30,7 @@ if (!isset($_POST['report']) && strpos($URL, "reportes") === false) {
 $Obj_Boletos = new Boletos();
 $Obj_Clientes = new Clientes();
 $Obj_Cotizaciones = new Cotizaciones();
+$Obj_Ajustes = new Ajustes();
 
 $Res_Boletos = $Obj_Boletos->cantidadBoletosPorDiaActual();
 $Res_Clientes = $Obj_Clientes->cantidadClientesPorDiaActual();
@@ -48,6 +52,11 @@ if (isset($_POST['report']) && isset($_POST['filter']) && $_POST['filter'] === '
     $Res_Clientes = $Obj_Clientes->cantidadClientesPorAnioActual();
     $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorAnioActual();
 }
+if (isset($_POST['report']) && isset($_POST['filter']) && $_POST['filter'] === 'personal') {
+    $Res_Boletos = $Obj_Boletos->cantidadBoletosPorFechapersonalizada($Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
+    $Res_Clientes = $Obj_Clientes->cantidadClientesPorFechaPersonalizada($Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
+    $Res_Cotizaciones = $Obj_Cotizaciones->cantidadCotizacionesPorFechaPersonalizada($Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
+}
 
 if (!isset($_POST['filter'])) {
     $Res_Boletos = $Obj_Boletos->cantidadBoletosPorMesActual();
@@ -59,7 +68,7 @@ $TotalBoletos = $Res_Boletos->fetch_assoc()['total_boletos'];
 $TotalClientes = $Res_Clientes->fetch_assoc()['total_clientes'];
 $TotalCotizaciones = $Res_Cotizaciones->fetch_assoc()['total_cotizaciones'];
 
-$PORCENTAJE_META = $META * (intval($TotalBoletos) / 100);
+$PORCENTAJE_META = $META * (intval($Obj_Boletos->cantidadBoletosPorMesActual()->fetch_assoc()['total_boletos']) / 100);
 
 
 ?>

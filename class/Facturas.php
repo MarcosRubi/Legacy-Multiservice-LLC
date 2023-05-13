@@ -246,7 +246,7 @@ class Facturas extends DB
         FROM
             tbl_facturas 
         WHERE
-            Creado BETWEEN '".date("Y-01-01")."' AND '".date("Y-12-31")."' 
+            Creado BETWEEN '" . date("Y-01-01") . "' AND '" . date("Y-12-31") . "' 
             AND Eliminado='N'
         GROUP BY
             YEAR ( Creado ),
@@ -254,6 +254,20 @@ class Facturas extends DB
             Creado)";
         return $this->EjecutarQuery($query);
     }
+
+    public function obtenerTotalesFechaPersonalizada($fechaInicio, $fechaFin)
+    {
+        $query = "SELECT 
+        COALESCE(SUM(Valor), 0) AS Total,
+        COALESCE(SUM(Balance), 0) AS Balance 
+        FROM
+            tbl_facturas 
+        WHERE
+            Creado BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' 
+            AND Eliminado='N'";     
+        return $this->EjecutarQuery($query);
+    }
+
 
     public function obtenerTotalesDelMesActual()
     {
@@ -314,6 +328,22 @@ class Facturas extends DB
 
 
     // PARA LOS FILTROS DE GRAFICA
+    public function cantidadFacturasPorEmpleadoPersonalizado($agente, $fechaInicio, $fechaFin)
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdFactura) AS total_facturas
+        FROM tbl_facturas
+        WHERE
+        Creado BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' 
+            AND Eliminado='N'
+            AND Agente = '" . $agente . "'
+        GROUP BY
+            YEAR ( Creado ),
+            MONTH (
+            Creado)";
+        return $this->EjecutarQuery($query);
+    }
     public function cantidadFacturasPorEmpleadoAnioActual($agente)
     {
         $query = "SELECT YEAR( Creado ) AS Anio,
@@ -338,7 +368,7 @@ class Facturas extends DB
         WHERE Eliminado = 'N'
         AND YEAR(Creado) = YEAR(CURRENT_DATE())
         AND MONTH(Creado) = MONTH(CURRENT_DATE()) 
-        AND Agente='".$agente."' " ;
+        AND Agente='" . $agente . "' ";
         return $this->EjecutarQuery($query);
     }
 

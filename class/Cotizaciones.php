@@ -116,12 +116,23 @@ class Cotizaciones extends DB
     public function ObtenerCotizacionesPorFechaIngresada($FechaInicio, $FechaFin, $condition)
     {
         $query = "SELECT * FROM vta_listar_cotizaciones
-        WHERE ".$condition." BETWEEN '".$FechaInicio."' AND '".$FechaFin."' 
+        WHERE " . $condition . " BETWEEN '" . $FechaInicio . "' AND '" . $FechaFin . "' 
         ORDER BY IdCotizacion Desc";
         return  $this->EjecutarQuery($query);
     }
 
     //PARA GRAFICA RESUMEN DE ESTADISTICA
+    public function cantidadCotizacionesPorFechaPersonalizada($fechaInicio, $fechaFin)
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdCotizacion) AS total_cotizaciones 
+        FROM tbl_cotizaciones
+        WHERE
+        Creado BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' 
+            AND Eliminado='N' ";
+        return $this->EjecutarQuery($query);
+    }
     public function cantidadCotizacionesPorAnioActual()
     {
         $query = "SELECT YEAR( Creado ) AS Anio,
@@ -187,6 +198,23 @@ class Cotizaciones extends DB
         FROM tbl_cotizaciones
         WHERE
         Creado BETWEEN '" . date("Y-01-01") . "' AND '" . date("Y-12-31") . "' 
+            AND Eliminado='N'
+            AND Agente = '" . $agente . "'
+        GROUP BY
+            YEAR ( Creado ),
+            MONTH (
+            Creado)";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function cantidadCotizacionesPorEmpleadoPersonalizado($agente, $fechaInicio, $fechaFin)
+    {
+        $query = "SELECT YEAR( Creado ) AS Anio,
+        MONTH ( Creado ) AS Mes,
+        COUNT(IdCotizacion) AS total_cotizaciones 
+        FROM tbl_cotizaciones
+        WHERE
+        Creado BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' 
             AND Eliminado='N'
             AND Agente = '" . $agente . "'
         GROUP BY
