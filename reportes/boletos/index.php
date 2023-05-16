@@ -1,11 +1,24 @@
 <?php
 require_once '../../func/validateSession.php';
+require_once '../../bd/bd.php';
+require_once '../../class/Ajustes.php';
+require_once '../../class/Boletos.php';
 
 if ($_SESSION['IdRole'] >= 3) {
     header("Location:" . $_SESSION['path']);
     $_SESSION['error-permissions'] = 'true';
     return;
 }
+
+$Obj_Ajustes = new Ajustes();
+$Obj_Boletos = new Boletos();
+
+$Res_BoletosListado = $Obj_Boletos->listarTodo();
+
+if (isset($_GET['s'])) {
+    $Res_BoletosListado = $Obj_Boletos->buscarBoleto($_GET['s']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -22,12 +35,15 @@ if ($_SESSION['IdRole'] >= 3) {
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
     <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <style>
@@ -98,6 +114,108 @@ if ($_SESSION['IdRole'] >= 3) {
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <!-- <h2 class="text-center display-4">Buscar Cliente</h2>
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <form method="get">
+                                <div class="input-group">
+                                    <input type="search" class="form-control form-control-lg" placeholder="Buscar..." autofocus name="s">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-lg btn-default">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <span class="text-gray">Puedes buscar por cualquier parámetro de la tabla</span>
+                        </div>
+                    </div> -->
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <?php
+                                    if (isset($_GET['s']) && $_GET['s'] !== "") { ?>
+                                        <div class="d-flex justify-content-between mb-2 mt-3">
+                                            <h3 class='card-title'>Boletos encontrados para: <strong><?= $_GET['s'] ?></strong></h3>
+                                            <a href="./" class="btn btn-primary">Listar todo</a>
+                                        </div>
+                                    <?php } else {
+                                        echo "<h3 class='card-title'>Últimos boletos creados</h3>";
+                                    }
+                                    ?>
+
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="boletos-logs" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th># Boleto</th>
+                                                <th>Nombre del pasajero</th>
+                                                <th>Aerolínea</th>
+                                                <th>Origen</th>
+                                                <th>Destino</th>
+                                                <th>Fecha Ida</th>
+                                                <th>Fecha Regreso</th>
+                                                <th>Forma de pago</th>
+                                                <th>Precio</th>
+                                                <th>Base</th>
+                                                <th>Tax</th>
+                                                <th>FM</th>
+                                                <th>IATA</th>
+                                                <?php if ($_SESSION['IdRole'] <= 3) { ?>
+                                                    <th>&nbsp;</th>
+                                                <?php } ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($Res_BoletosListado as $key => $DatosBoleto) {
+                                            ?>
+                                                <tr>
+                                                    <td><?= $DatosBoleto['NumeroBoletos'] ?></td>
+                                                    <td><?= $DatosBoleto['NombrePasajero'] ?></td>
+                                                    <td><?= $DatosBoleto['Aerolinea'] ?></td>
+                                                    <td><?= $DatosBoleto['Origen'] ?></td>
+                                                    <td><?= $DatosBoleto['Destino'] ?></td>
+                                                    <td><?= $DatosBoleto['FechaIda'] === '0000-00-00' ? '' : $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaIda']) ?></td>
+                                                    <td><?= $DatosBoleto['FechaRegreso'] === '0000-00-00' ? '' : $Obj_Ajustes->FechaInvertir($DatosBoleto['FechaRegreso']) ?></td>
+                                                    <td><?= $DatosBoleto['FormaPago'] ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Precio']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Base']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Tax']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosBoleto['Fm']) ?></td>
+                                                    <td><?= $DatosBoleto['NombreIata'] ?></td>
+                                                    <?php if ($_SESSION['IdRole'] <= 3) { ?>
+                                                        <td class="d-flex">
+                                                            <a class="btn btn-md mx-1 btn-primary" title="Editar" onclick="javascript:editarBoleto(<?= $DatosBoleto['IdBoleto'] ?>);">
+                                                                <i class="fa fa-edit"></i>
+                                                            </a>
+                                                            <a class="btn btn-md mx-1 bg-danger" title="Eliminar" onclick="javascript:eliminarBoleto(<?= $DatosBoleto['IdBoleto'] ?>);">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </td>
+                                                    <?php  } ?>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
             <!-- /.card -->
 
         </div>
@@ -157,17 +275,33 @@ if ($_SESSION['IdRole'] >= 3) {
         };
 
         $(function() {
-            $('#logs').DataTable({
+            $('#boletos-logs').DataTable({
                 "paging": true,
                 "lengthChange": false,
-                "searching": false,
+                "searching": true,
                 "ordering": false,
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
             });
-            changeTime();
         });
+        changeTime(null, 'year');
+
+        function eliminarBoleto(id) {
+            let confirmacion = confirm("¿Está seguro que desea eliminar el boleto? Esto puede eliminar o modificar los datos de la factura.");
+
+            if (confirmacion) {
+                window.location.href = '<?= $_SESSION['path'] ?>forms/boletos/eliminar.php?id=' + id
+            }
+        }
+
+        function editarBoleto(id) {
+            let confirmacion = confirm("¿Está seguro que desea editar el boleto? Esto puede modificar la factura o demás boletos.");
+
+            if (confirmacion) {
+                window.open('<?= $_SESSION['path'] ?>boletos/detalles.php?id=' + id, "Editar boleto", "width=2000,height=2000")
+            }
+        }
 
 
         function changeTime(e, filter) {

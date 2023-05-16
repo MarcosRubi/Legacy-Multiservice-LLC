@@ -31,6 +31,31 @@ class Boletos extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function buscarBoleto($content)
+    {
+        $query = "SELECT * FROM vta_listar_boletos WHERE 
+        IdBoleto LIKE'%" . $content . "%' OR 
+        NumeroBoletos LIKE'%" . $content . "%' OR 
+        NombrePasajero LIKE'%" . $content . "%' OR 
+        Aerolinea LIKE'%" . $content . "%' OR 
+        Origen LIKE'%" . $content . "%' OR 
+        Destino LIKE'%" . $content . "%' OR 
+        FechaIda LIKE'%" . $content . "%' OR 
+        FechaRegreso LIKE'%" . $content . "%' OR 
+        Base LIKE'%" . $content . "%' OR 
+        Tax LIKE'%" . $content . "%' OR 
+        Fm LIKE'%" . $content . "%' OR 
+        Dob LIKE'%" . $content . "%' OR 
+        Agencia LIKE'%" . $content . "%' OR 
+        Agente LIKE'%" . $content . "%' OR 
+        Pnr LIKE'%" . $content . "%' OR 
+        NombreTipo LIKE'%" . $content . "%' OR 
+        Itinerario LIKE'%" . $content . "%' OR 
+        NombreIata LIKE'%" . $content . "%' OR 
+        Precio LIKE'%" . $content . "%'";
+        return $this->EjecutarQuery($query);
+    }
+
     public function buscarPorClienteId($id)
     {
         $query = "SELECT * FROM vta_listar_boletos WHERE IdCliente='" . $id . "'";

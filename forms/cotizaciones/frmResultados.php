@@ -7,12 +7,16 @@ require_once '../../class/Ajustes.php';
 $Obj_Cotizaciones = new Cotizaciones();
 $Obj_Ajustes = new Ajustes();
 
-$FechaInicio = $Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaInicio']);
-$FechaFin = $Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaFin']);
+
+$Res_Cotizaciones = $Obj_Cotizaciones->listarTodo();
+
+if (isset($_POST['txtFechaInicio'])) {
+    $FechaInicio = $Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaInicio']);
+    $FechaFin = $Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaFin']);
 
 
-
-$Res_Cotizaciones = $Obj_Cotizaciones->ObtenerCotizacionesPorFechaIngresada($FechaInicio, $FechaFin, $_POST['rdbTipo']);
+    $Res_Cotizaciones = $Obj_Cotizaciones->ObtenerCotizacionesPorFechaIngresada($FechaInicio, $FechaFin, $_POST['rdbTipo']);
+}
 
 ?>
 <!DOCTYPE html>
@@ -47,8 +51,12 @@ $Res_Cotizaciones = $Obj_Cotizaciones->ObtenerCotizacionesPorFechaIngresada($Fec
                     <div class="row mt-3">
                         <div class="col-12">
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="pt-3">Cotizaciones encontradas de: <strong><?= $_POST['txtFechaInicio'] ?></strong> a
-                                    <strong><?= $_POST['txtFechaFin'] ?></strong>
+                                <p class="pt-3">
+                                    <?php if (isset($_POST['txtFechaInicio'])) { ?>
+                                    Cotizaciones encontradas de: <strong><?= $_POST['txtFechaInicio'] ?></strong> a <strong><?= $_POST['txtFechaFin'] ?></strong><?php 
+                                    } else {
+                                    echo "ÚLtimas cotizaciones realizadas";
+                                    }; ?>
                                 </p>
                                 <div>
                                     <button class="btn btn-primary btn-lg" onclick="javascript:cerrarVentana();">Cerrar</button>
@@ -84,20 +92,20 @@ $Res_Cotizaciones = $Obj_Cotizaciones->ObtenerCotizacionesPorFechaIngresada($Fec
                                                 <tr>
                                                     <td><a href="#" onclick="javascript:abrirFormDetalles('<?= $_SESSION['path'] . '/cotizaciones/detalles.php?id=' . $DatosCotizaciones['IdCotizacion'] ?>')"><?= $DatosCotizaciones['IdCotizacion'] ?></a></td>
                                                     <td><a href="#" onclick="javascript:mostrarDatosCliente('<?= $DatosCotizaciones['IdCliente'] ?>')"> <?= $DatosCotizaciones['PrimerNombre'] . " " . $DatosCotizaciones['SegundoNombre'] . " " . $DatosCotizaciones['Apellido'] ?></a></td>
-                                                    <td><?= $DatosCotizaciones['Pnr']?></td>
-                                                    <td><?= $DatosCotizaciones['Comentario']?></td>
-                                                    <td><?= $DatosCotizaciones['Accion']?></td>
+                                                    <td><?= $DatosCotizaciones['Pnr'] ?></td>
+                                                    <td><?= $DatosCotizaciones['Comentario'] ?></td>
+                                                    <td><?= $DatosCotizaciones['Accion'] ?></td>
                                                     <td><?= $DatosCotizaciones['Fecha'] !== '0000-00-00' && $Obj_Ajustes->FechaInvertir($DatosCotizaciones['Fecha']) ?></td>
                                                     <td><?= $Obj_Ajustes->FechaInvertir(substr($DatosCotizaciones['FechaCreado'], 0, -9)) . " " . substr($DatosCotizaciones['FechaCreado'], 10, 20) . " " .  $DatosCotizaciones['HoraCreado'] ?></td>
-                                                    <td><?= $DatosCotizaciones['Agencia']?></td>
-                                                    <td><?= $DatosCotizaciones['Agente']?></td>
-                                                    <td><?= $DatosCotizaciones['Origen']?></td>
-                                                    <td><?= $DatosCotizaciones['Destino']?></td>
+                                                    <td><?= $DatosCotizaciones['Agencia'] ?></td>
+                                                    <td><?= $DatosCotizaciones['Agente'] ?></td>
+                                                    <td><?= $DatosCotizaciones['Origen'] ?></td>
+                                                    <td><?= $DatosCotizaciones['Destino'] ?></td>
                                                     <td><?= $DatosCotizaciones['Ida'] !== '0000-00-00' ? $Obj_Ajustes->FechaInvertir($DatosCotizaciones['Ida']) : '' ?></td>
                                                     <td><?= $DatosCotizaciones['Regreso'] !== '0000-00-00' ? $Obj_Ajustes->FechaInvertir($DatosCotizaciones['Regreso']) : '' ?></td>
-                                                    <td><?= $DatosCotizaciones['NumeroBoletos']?></td>
-                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosCotizaciones['Max'])?></td>
-                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosCotizaciones['Cotizado'])?></td>
+                                                    <td><?= $DatosCotizaciones['NumeroBoletos'] ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosCotizaciones['Max']) ?></td>
+                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosCotizaciones['Cotizado']) ?></td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
@@ -163,7 +171,6 @@ $Res_Cotizaciones = $Obj_Cotizaciones->ObtenerCotizacionesPorFechaIngresada($Fec
             window.opener.location.href = "<?= $_SESSION['path'] . 'cliente/?id=' ?>" + id;
             Minimize();
         }
-
     </script>
 </body>
 

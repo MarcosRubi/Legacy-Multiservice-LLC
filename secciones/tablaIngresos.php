@@ -19,7 +19,9 @@ $Res_FacturasPorMes = $Obj_Facturas->obtenerTotalesPorMesFacturas();
 $Res_FacturasPorMesActual = $Obj_Facturas->obtenerTotalesDelMesActual();
 $Res_FacturasPorSemanaActual = $Obj_Facturas->obtenerTotalesPorSemana();
 $Res_FacturasPorDiaActual = $Obj_Facturas->obtenerTotalesDiaActual();
-$Res_FacturasPorFechaPersonalizada = $Obj_Facturas->obtenerTotalesFechaPersonalizada($Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
+if (isset($_POST['formData'])) {
+    $Res_FacturasPorFechaPersonalizada = $Obj_Facturas->obtenerTotalesFechaPersonalizada($Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
+}
 $CantidadSemanas = intval($Obj_Ajustes->ObtenerCantidadSemanasMesActual()->fetch_assoc()['semanas_del_mes_actual']);
 
 
@@ -29,7 +31,7 @@ $ingresosDiaActual = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 $ingresosMesActual = [0, 0, 0, 0, 0, 0];
 $ingresosFechaPersonalizada = [];
 
-if ($_POST['formData']['txtFechaInicio'] !== '') {
+if (isset($_POST['formData']) && $_POST['formData']['txtFechaInicio'] !== '') {
     $ingresosFechaPersonalizada[0] = $Res_FacturasPorFechaPersonalizada->fetch_assoc()['Total'];
 }
 
