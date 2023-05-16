@@ -8,20 +8,29 @@ if ($_SESSION['IdRole'] !== 2) {
 }
 
 require_once '../bd/bd.php';
-require_once '../bd/bd.php';
-require_once '../class/Facturas.php';
 require_once '../class/Ajustes.php';
 
-$Obj_Facturas = new Facturas();
 $Obj_Ajustes = new Ajustes();
 
-$Res_FacturasPorMes = $Obj_Facturas->obtenerTotalesPorMesFacturas();
-$Res_FacturasPorMesActual = $Obj_Facturas->obtenerTotalesDelMesActual();
-$Res_FacturasPorSemanaActual = $Obj_Facturas->obtenerTotalesPorSemana();
-$Res_FacturasPorDiaActual = $Obj_Facturas->obtenerTotalesDiaActual();
-if (isset($_POST['formData'])) {
-    $Res_FacturasPorFechaPersonalizada = $Obj_Facturas->obtenerTotalesFechaPersonalizada($Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
+
+if (!isset($_POST['mco'])) {
+    require_once '../class/Facturas.php';
+    $Obj_Facturas = new Facturas();
+    $Res_FacturasPorMes = $Obj_Facturas->obtenerTotalesPorMesFacturas();
+    $Res_FacturasPorMesActual = $Obj_Facturas->obtenerTotalesDelMesActual();
+    $Res_FacturasPorSemanaActual = $Obj_Facturas->obtenerTotalesPorSemana();
+    $Res_FacturasPorDiaActual = $Obj_Facturas->obtenerTotalesDiaActual();
+} else {
+    require_once '../class/Mcos.php';
+    $Obj_Mcos = new Mcos();
+
+    $Res_FacturasPorMes = $Obj_Mcos->obtenerIngresosPorMesMcos();
+    $Res_FacturasPorMesActual = $Obj_Mcos->obtenerIngresosDelMesActual();
+    $Res_FacturasPorSemanaActual = $Obj_Mcos->obtenerIngresosPorSemanaActual();
+    $Res_FacturasPorDiaActual = $Obj_Mcos->obtenerIngresosDiaActual();
 }
+
+
 $CantidadSemanas = intval($Obj_Ajustes->ObtenerCantidadSemanasMesActual()->fetch_assoc()['semanas_del_mes_actual']);
 
 
@@ -31,7 +40,13 @@ $ingresosDiaActual = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 $ingresosMesActual = [0, 0, 0, 0, 0, 0];
 $ingresosFechaPersonalizada = [];
 
-if (isset($_POST['formData']) && $_POST['formData']['txtFechaInicio'] !== '') {
+if (isset($_POST['formData']) && $_POST['formData']['txtFechaInicio'] !== '' && !isset($_POST['mco'])) {
+    $Res_FacturasPorFechaPersonalizada = $Obj_Facturas->obtenerTotalesFechaPersonalizada($Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
+    $ingresosFechaPersonalizada[0] = $Res_FacturasPorFechaPersonalizada->fetch_assoc()['Total'];
+}
+
+if (isset($_POST['mco']) && isset($_POST['formData'])) {
+    $Res_FacturasPorFechaPersonalizada = $Obj_Mcos->obtenerIngresosFechaPersonalizada($Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaInicio']), $Obj_Ajustes->FechaInvertirGuardar($_POST['formData']['txtFechaFin']));
     $ingresosFechaPersonalizada[0] = $Res_FacturasPorFechaPersonalizada->fetch_assoc()['Total'];
 }
 
@@ -176,7 +191,11 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
         let areaChartData = {
             labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             datasets: [{
-                label: 'Facturas',
+                label: <?php if (isset($_POST['mco'])) {
+                            echo "'Mcos'";
+                        } else {
+                            echo "'Facturas'";
+                        } ?>,
                 backgroundColor: 'rgba(60,141,188,0.9)',
                 borderColor: 'rgba(60,141,188,0.8)',
                 pointRadius: false,
@@ -212,7 +231,11 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
                     } ?>
                 ],
                 datasets: [{
-                    label: 'Facturas',
+                    label: <?php if (isset($_POST['mco'])) {
+                                echo "'Mcos'";
+                            } else {
+                                echo "'Facturas'";
+                            } ?>,
                     backgroundColor: 'rgba(60,141,188,0.9)',
                     borderColor: 'rgba(60,141,188,0.8)',
                     pointRadius: false,
@@ -239,7 +262,11 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
             areaChartData = {
                 labels: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
                 datasets: [{
-                    label: 'Facturas',
+                    label: <?php if (isset($_POST['mco'])) {
+                                echo "'Mcos'";
+                            } else {
+                                echo "'Facturas'";
+                            } ?>,
                     backgroundColor: 'rgba(60,141,188,0.9)',
                     borderColor: 'rgba(60,141,188,0.8)',
                     pointRadius: false,
@@ -287,40 +314,15 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
                 }]
             }
         <?php } ?>
-        <?php if (isset($_POST['filter']) && $_POST['filter'] === 'year') { ?>
-            areaChartData = {
-                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                datasets: [{
-                    label: 'Facturas',
-                    backgroundColor: 'rgba(60,141,188,0.9)',
-                    borderColor: 'rgba(60,141,188,0.8)',
-                    pointRadius: false,
-                    pointColor: '#3b8bba',
-                    pointStrokeColor: 'rgba(60,141,188,1)',
-                    pointHighlightFill: '#fff',
-                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data: [
-                        <?= $ingresosPorMes[0] ?>,
-                        <?= $ingresosPorMes[1] ?>,
-                        <?= $ingresosPorMes[2] ?>,
-                        <?= $ingresosPorMes[3] ?>,
-                        <?= $ingresosPorMes[4] ?>,
-                        <?= $ingresosPorMes[5] ?>,
-                        <?= $ingresosPorMes[6] ?>,
-                        <?= $ingresosPorMes[7] ?>,
-                        <?= $ingresosPorMes[8] ?>,
-                        <?= $ingresosPorMes[9] ?>,
-                        <?= $ingresosPorMes[10] ?>,
-                        <?= $ingresosPorMes[11] ?>,
-                    ]
-                }]
-            }
-        <?php } ?>
         <?php if (isset($_POST['filter']) && $_POST['filter'] === 'now') { ?>
             areaChartData = {
                 labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00~23:59'],
                 datasets: [{
-                    label: 'Facturas',
+                    label: <?php if (isset($_POST['mco'])) {
+                                echo "'Mcos'";
+                            } else {
+                                echo "'Facturas'";
+                            } ?>,
                     backgroundColor: 'rgba(60,141,188,0.9)',
                     borderColor: 'rgba(60,141,188,0.8)',
                     pointRadius: false,
@@ -349,7 +351,11 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
             areaChartData = {
                 labels: [' ', '<?= $_POST['formData']['txtFechaInicio'] . ' al ' . $_POST['formData']['txtFechaFin'] ?>', ''],
                 datasets: [{
-                    label: 'Facturas',
+                    label: <?php if (isset($_POST['mco'])) {
+                                echo "'Mcos'";
+                            } else {
+                                echo "'Facturas'";
+                            } ?>,
                     backgroundColor: 'rgba(60,141,188,0.9)',
                     borderColor: 'rgba(60,141,188,0.8)',
                     pointRadius: false,

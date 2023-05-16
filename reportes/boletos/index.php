@@ -44,6 +44,8 @@ if (isset($_GET['s'])) {
     <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
     <style>
@@ -70,7 +72,7 @@ if (isset($_GET['s'])) {
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper pt-3">
-            <?php include_once '../../secciones/resumenEstadisticas.php'; ?>
+            <div id="resultsResumenEstadisticas"></div>
 
             <!-- Main content -->
             <section class="content">
@@ -92,6 +94,7 @@ if (isset($_GET['s'])) {
                                                 <i class="fas fa-wrench"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right bg-dark" role="menu">
+                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-xl-date" onclick="javascript:updateActiveItem(event)">Personalizada</a>
                                                 <a href="#" class="dropdown-item active" onclick="javascript:changeTime(event,'year')">Este año</a>
                                                 <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'month')">Este mes</a>
                                                 <a href="#" class="dropdown-item" onclick="javascript:changeTime(event,'week')">Esta semana</a>
@@ -117,7 +120,7 @@ if (isset($_GET['s'])) {
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <!-- <h2 class="text-center display-4">Buscar Cliente</h2>
+                    <!-- <h2 class="text-center display-4">Buscar Boleto</h2>
                     <div class="row">
                         <div class="col-md-8 offset-md-2">
                             <form method="get">
@@ -232,6 +235,67 @@ if (isset($_GET['s'])) {
     </div>
     <!-- ./wrapper -->
 
+    <div class="modal fade" id="modal-xl-date">
+        <div class="modal-dialog modal-xl-date">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Selecciona el rango de fechas</strong></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="#" method="POST" class="card card-info" id="frmDate">
+                    <div class="modal-body">
+                        <div class="card-body ">
+                            <div class="d-flex flex-column">
+                                <div class="form-group container-fluid mr-5">
+                                    <div class="d-flex align-center">
+                                        <div class="form-group mr-3">
+                                            <label>Desde:</label>
+                                            <div class="input-group date" id="datefrom" data-target-input="nearest">
+                                                <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" placeholder="dd-mm-yyyy" name="txtFechaInicio" id="txtFechaInicio">
+                                                <?php } ?>
+                                                <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datefrom" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaInicio" id="txtFechaInicio">
+                                                <?php } ?>
+                                                <div class="input-group-append" data-target="#datefrom" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Hasta:</label>
+                                            <div class="input-group date" id="dateto" data-target-input="nearest">
+                                                <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" placeholder="dd-mm-yyyy" name="txtFechaFin" id="txtFechaFin">
+                                                <?php } ?>
+                                                <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#dateto" data-inputmask-alias="datetime" data-inputmask-inputformat="mm-dd-yyyy" placeholder="mm-dd-yyyy" name="txtFechaFin" id="txtFechaFin">
+                                                <?php } ?>
+                                                <div class="input-group-append" data-target="#dateto" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="reset" class="btn d-none reset">Resetear</button>
+                        <button type="submit" class="btn btn-primary">Mostrar reporte</button>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    </div>
+
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
@@ -249,13 +313,88 @@ if (isset($_GET['s'])) {
     <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="../../plugins/toastr/toastr.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
     <!-- ChartJS -->
     <script src="../../plugins/chart.js/Chart.min.js"></script>
+    <!-- InputMask -->
+    <script src="../../plugins/moment/moment.min.js"></script>
+    <script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page specific script -->
+    <script>
+        $(function() {
+            //Phone Number
+            $('[data-mask]').inputmask()
+            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                //Date picker
+                $('#datefrom').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+                $('#dateto').datetimepicker({
+                    format: 'DD-MM-YYYY'
+                });
+            <?php } ?>
+            <?php if ($_SESSION['FormatoFecha'] === 'mdy') { ?>
+                //Date picker
+                $('#datefrom').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+                $('#dateto').datetimepicker({
+                    format: 'MM-DD-YYYY'
+                });
+            <?php } ?>
+        })
+    </script>
+    <script>
+        let formDate = document.getElementById('frmDate')
+
+        formDate.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            $('#frmDate').validate({
+                rules: {
+                    txtFechaInicio: {
+                        required: true
+                    },
+                    txtFechaFin: {
+                        required: true
+                    }
+                },
+                messages: {
+                    txtFechaInicio: {
+                        required: "Este campo es obligatorio",
+                    },
+                    txtFechaFin: {
+                        required: "Este campo es obligatorio",
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+
+            if ($('#frmDate').valid()) {
+                changeTime(null, 'personal')
+                $('button.btn-default').click();
+                $('button.reset').click();
+            }
+        })
+    </script>
     <script>
         const MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 
@@ -285,6 +424,7 @@ if (isset($_GET['s'])) {
                 "responsive": true,
             });
         });
+
         changeTime(null, 'year');
 
         function eliminarBoleto(id) {
@@ -305,12 +445,34 @@ if (isset($_GET['s'])) {
 
 
         function changeTime(e, filter) {
+            const formData = obtenerDatosFormulario(); // Obtener los datos del formulario del modal
+            updateIncomeGraph(e, filter, formData, true);
+            updateSalesSummaryCharts(e, filter, formData);
+            e?.target.classList.add('active');
+        }
 
+        function obtenerDatosFormulario() {
+            // Obtener el formulario dentro del modal
+            const formulario = document.getElementById('frmDate');
+
+            // Crear un objeto FormData para obtener los datos del formulario
+            const formData = new FormData(formulario);
+
+            // Convertir el objeto FormData a un objeto JavaScript
+            const datosFormulario = Object.fromEntries(formData.entries());
+
+            return datosFormulario;
+        }
+
+
+        function updateIncomeGraph(e, filter, formData, mco) {
             $.ajax({
                 url: '../../secciones/tablaIngresos.php',
                 method: 'POST',
                 data: {
-                    filter
+                    filter,
+                    formData,
+                    mco
                 },
                 success: function(response) {
                     $('#result').html(response);
@@ -328,9 +490,29 @@ if (isset($_GET['s'])) {
                 filter === 'month' ? title.innerHTML = 'Ingresos para el mes de ' + MONTHS[date.getMonth()] + ' del ' + date.getFullYear() : ''
                 filter === 'week' ? title.innerHTML = 'Ingresos para la semana #' + numeroDeSemana(new Date()) + ' del ' + date.getFullYear() : ''
                 filter === 'now' ? title.innerHTML = 'Ingresos del día ' + date.getDate() + ' de ' + MONTHS[date.getMonth()] + ' del ' + date.getFullYear() : ''
+                filter === 'personal' ? title.innerHTML = 'Ingresos del día ' + document.getElementById('txtFechaInicio').value + ' al ' + document.getElementById('txtFechaFin').value : ''
             }
-            e?.target.classList.add('active');
         };
+
+        function updateSalesSummaryCharts(e, filter, formData) {
+            $.ajax({
+                url: '../../secciones/resumenEstadisticas.php',
+                method: 'POST',
+                data: {
+                    filter,
+                    report: true,
+                    formData
+                },
+                success: function(response) {
+                    $('#resultsResumenEstadisticas').html(response);
+                }
+            });
+        }
+
+        function updateActiveItem(e) {
+            document.querySelector('.dropdown-item.active')?.classList.remove('active');
+            e?.target.classList.add('active');
+        }
     </script>
     <!-- Page specific script -->
 
