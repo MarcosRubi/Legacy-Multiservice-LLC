@@ -152,13 +152,13 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                                     <td><?= $Obj_Ajustes->FormatoDinero($DatosCliente['Valor']) ?></td>
                                                     <?php
                                                     if ($Res_PagosBoletos->num_rows <= 1 || ($efectivo > 0 && $credito === 0) || ($efectivo === 0 && $credito > 0)) {
-                                                        echo "<td>" . $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) . "</td>";
+                                                        echo "<td>" . $Obj_Ajustes->FormatoDinero(doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) . "</td>";
                                                         if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['Balance'])) > 0) {
                                                             if ($Res_Abonos->num_rows <= 0) {
                                                                 echo "<td>" . $formaPago . "</td>";
                                                             }
                                                         }
-                                                        echo "<td>" . $Obj_Ajustes->FormatoDinero($DatosCliente['BalanceInicial']) . "</td>";
+                                                        echo "<td>" . $Obj_Ajustes->FormatoDinero($DatosCliente['Balance']) . "</td>";
                                                     } ?>
                                                     <td><?= $DatosCliente['Agencia'] ?></td>
                                                     <td><?= $DatosCliente['Agente'] ?></td>
@@ -222,7 +222,7 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                                                 <th>Fecha del abono</th>
                                                                 <th>Cantidad</th>
                                                                 <th>Forma de pago</th>
-                                                                <th>Balance</th>
+                                                                <!-- <th>Balance</th> -->
                                                             </thead>
                                                             <?php while ($DatosAbonos = $Res_Abonos->fetch_assoc()) { ?>
                                                                 <tr>
@@ -248,7 +248,8 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
                                                                         }
                                                                         ?>
                                                                     </td>
-                                                                    <td><?= $Obj_Ajustes->FormatoDinero($DatosAbonos['BalanceActual']) ?></td>
+                                                                    <!-- <td><?= '' #$Obj_Ajustes->FormatoDinero($DatosAbonos['BalanceActual']) 
+                                                                                ?></td> -->
                                                                 </tr>
                                                             <?php
                                                             } ?>
