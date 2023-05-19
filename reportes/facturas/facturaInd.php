@@ -76,7 +76,7 @@ for ($i = 0; $i < 5; $i++) {
 
 </head>
 
-<body class="hold-transition sidebar-mini" style="font-size:12px !important;">
+<body class="hold-transition sidebar-mini" style="font-size:16px !important;">
     <div class="wrapper">
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="margin-left:0px;">
@@ -99,7 +99,7 @@ for ($i = 0; $i < 5; $i++) {
                                 <!-- info row -->
                                 <div class="row invoice-info">
                                     <div class="col-sm-4 invoice-col">
-                                        Empresa
+                                        <br>
                                         <address>
                                             <strong>Legacy Multiservice LLC.</strong><br>
                                             119 Jackson St.<br>
@@ -142,7 +142,7 @@ for ($i = 0; $i < 5; $i++) {
                                                         <?php if ((doubleval($DatosCliente['Valor']) + doubleval($DatosCliente['BalanceInicial'])) === 0) { ?>
                                                             <th>Forma de pago</th>
                                                         <?php } ?>
-                                                        <th>Balance</th>    
+                                                        <th>Balance</th>
                                                     <?php } ?>
                                                     <th>Agencia</th>
                                                     <th>Agente</th>
