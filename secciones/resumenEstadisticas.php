@@ -69,7 +69,8 @@ $TotalClientes = $Res_Clientes->fetch_assoc()['total_clientes'];
 $TotalCotizaciones = $Res_Cotizaciones->fetch_assoc()['total_cotizaciones'];
 
 $PORCENTAJE_META = $META * (intval($Obj_Boletos->cantidadBoletosPorMesActual()->fetch_assoc()['total_boletos']) / 100);
-
+$Res_BoletosMesActual = $Obj_Boletos->cantidadBoletosPorMesActual();
+$totalBoletosMesActual = $Res_BoletosMesActual->fetch_assoc()['total_boletos'];
 
 ?>
 
@@ -129,7 +130,7 @@ $PORCENTAJE_META = $META * (intval($Obj_Boletos->cantidadBoletosPorMesActual()->
                     <div class="inner">
                         <h3><?= $PORCENTAJE_META ?><sup style="font-size: 20px">%</sup></h3>
 
-                        <p>Meta alcanzada</p>
+                        <p>Meta alcanzada: <span><strong><?= $totalBoletosMesActual ?></strong> de <strong><?= $META ?></strong></span></p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
