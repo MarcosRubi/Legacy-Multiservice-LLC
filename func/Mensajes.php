@@ -575,6 +575,36 @@ if (isset($_SESSION['success-registro-mco']) && $_SESSION['success-registro-mco'
     unset($_SESSION['success-registro-mco']);
 }
 
+if (isset($_SESSION['error-registro']) && $_SESSION['error-registro'] === 'titulo') {
+    echo "var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    Toast.fire({
+        icon: 'error',
+        title: 'Introduzca un título.'
+    })";
+    unset($_SESSION['error-registro']);
+}
+if (isset($_SESSION['success-registro']) && $_SESSION['success-registro'] === 'recordatorio') {
+    echo "
+    setTimeout(() => {
+        var Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Recordatorio agregado correctamente.'
+                    });
+    }, 3000);";
+    unset($_SESSION['success-registro']);
+}
+
 
 if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'cliente') {
     echo "var Toast = Swal.mixin({
@@ -638,6 +668,32 @@ if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'emple
                 Toast.fire({
                     icon: 'success',
                     title: 'Datos actualizados correctamente.'
+                })";
+    unset($_SESSION['success-update']);
+}
+if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'recordatorioRealizado') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Recordatorio actualizado correctamente.'
+                })";
+    unset($_SESSION['success-update']);
+}
+if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'recordatorioEliminado') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Recordatorio eliminado correctamente.'
                 })";
     unset($_SESSION['success-update']);
 }
