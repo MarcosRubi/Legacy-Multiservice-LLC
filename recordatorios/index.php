@@ -75,67 +75,7 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <form action="../forms/recordatorios/insertar.php" method="post" id="frmRecordatorios">
-                                    <div class="row">
-                                        <!-- Título -->
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Título</label>
-                                                <input type="text" class="form-control" placeholder="Título ..." name="txtTitulo">
-                                            </div>
-                                        </div>
-                                        <!-- Cliente -->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Cliente</label>
-                                                <select class="form-control select2" style="width: 100%;" name="txtIdCliente">
-                                                    <option value="1" selected>Sin asignar cliente</option>
-                                                    <?php while ($DatosClientes = $Res_Clientes->fetch_assoc()) { ?>
-                                                        <option value="<?= $DatosClientes['IdCliente'] ?>"><?= $DatosClientes['PrimerNombre'] . " " . $DatosClientes['SegundoNombre']  . " " .  $DatosClientes['Apellido'] ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <!-- Fecha -->
-                                        <div class="col-sm-4">
-
-                                            <div class="form-group">
-                                                <label>Fecha y Hora:</label>
-                                                <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" name="txtFecha">
-                                                    <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Estado -->
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Estado</label>
-                                                <select class="form-control select2" style="width: 100%;" name="txtEstado">
-                                                    <option selected="selected">Pendiente</option>
-                                                    <option>En Proceso</option>
-                                                    <option>Realizado</option>
-                                                    <option>Cancelado</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Descripción</label>
-                                                <textarea id="summernote" name="txtDescripcion">
-
-                                                </textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-primary font-weight-bold btn-block">Agregar nuevo
-                                        recordatorio</button>
-                                </form>
+                                <div id="frmRecordatoriosDiv"></div>
                             </div>
                         </div>
                     </div>
@@ -177,7 +117,7 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
                                                 <td><?= $DatosRecordatorio['Estado'] ?></td>
                                                 <td class="d-flex align-center justify-content-around">
                                                     <a href="#" title="Completado"><i class="fa fa-check fa-lg mx-1" onclick="javascript:EstadoCompletado(<?= $DatosRecordatorio['IdRecordatorio'] ?>);"></i></a>
-                                                    <a href="#" title="Editar" onclick="javascript:EditarRecordatorio(<?= $DatosRecordatorio['IdRecordatorio'] ?>);"><i class="fa fa-edit fa-lg mx-1"></i></a>
+                                                    <a href="#" title="Editar" onclick="javascript:obtenerFrmRecordarorios(<?= $DatosRecordatorio['IdRecordatorio'] ?>, true);"><i class="fa fa-edit fa-lg mx-1"></i></a>
                                                     <a href="#" title="Eliminar" onclick="javascript:EstadoEliminar(<?= $DatosRecordatorio['IdRecordatorio'] ?>);"><i class="fa fa-trash fa-lg mx-1"></i></a>
                                                 </td>
                                             </tr>
@@ -246,68 +186,6 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
 
     <!-- Page specific script -->
     <script>
-        $(function() {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-
-            // Summernote
-            $('#summernote').summernote()
-
-            //Date and time picker
-            <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
-                $('#reservationdatetime').datetimepicker({
-                    icons: {
-                        time: 'far fa-clock'
-                    },
-                    format: 'DD-MM-YYYY hh:mm A'
-
-                });
-            <?php } else { ?>
-                $('#reservationdatetime').datetimepicker({
-                    icons: {
-                        time: 'far fa-clock'
-                    },
-                    format: 'MM-DD-YYYY hh:mm A'
-
-                });
-            <?php  } ?>
-        })
-
-        $(function() {
-            $('#frmRecordatorios').validate({
-                rules: {
-                    txtTitulo: {
-                        required: true
-                    },
-                    txtFecha: {
-                        required: true
-                    }
-                },
-                messages: {
-                    txtTitulo: {
-                        required: "El título es obligatorio",
-                    },
-                    txtFecha: {
-                        required: "La fecha y hora son obligatorios"
-                    }
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
-            });
-            document.querySelectorAll('.card-body')[1].childNodes[0].remove()
-
-        })
-    </script>
-    <script>
         function EstadoEliminar(id) {
             let confirmacion = confirm("¿Está seguro que desea eliminar el recordatorio?");
 
@@ -316,8 +194,6 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
             }
         }
 
-        function EditarRecordatorio(id) {}
-
         function EstadoCompletado(id) {
             let confirmacion = confirm("¿Está seguro que desea marcarlo como completado?");
 
@@ -325,6 +201,22 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
                 window.location.href = '<?= $_SESSION['path'] ?>forms/recordatorios/actualizar.php?id=' + id + '&accion=completar'
             }
         }
+
+        function obtenerFrmRecordarorios(id = null, edit = false) {
+            $.ajax({
+                url: '<?= $_SESSION['path'] ?>recordatorios/formRecordatorio.php',
+                method: 'POST',
+                data: {
+                    id,
+                    edit
+                },
+                success: function(response) {
+                    $('#frmRecordatoriosDiv').html(response);
+                }
+            });
+
+        }
+        obtenerFrmRecordarorios()
     </script>
     <script>
         <?php require_once '../func/Mensajes.php'; ?>
