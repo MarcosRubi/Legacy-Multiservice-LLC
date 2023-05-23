@@ -63,7 +63,7 @@ while ($DatosPagosBoletos = $Res_PagosBoletos->fetch_assoc()) {
 
 </head>
 
-<body class="hold-transition sidebar-mini" style="font-size:13px !important;">
+<body class="hold-transition sidebar-mini" style="font-size:15px !important;">
     <div class="wrapper">
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" style="margin-left:0px;">
