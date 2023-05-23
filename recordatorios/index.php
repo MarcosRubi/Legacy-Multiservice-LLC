@@ -41,6 +41,9 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
     <link rel="stylesheet" href="../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
     <link rel="stylesheet" href="../plugins/toastr/toastr.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
@@ -63,14 +66,10 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
 
                 <div class="row mt-3">
                     <div class="col-md-12">
-                        <div class="card card-outline card-info collapsed-card">
+                        <div class="card card-outline card-info ">
                             <div class="card-header">
                                 <h3 class="card-title">Recordatorios</h3>
 
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
                                 <!-- /.card-tools -->
                             </div>
                             <!-- /.card-header -->
@@ -86,11 +85,11 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Recordatorios creados</h3>
+                                <h3 class="card-title">Recordatorios </h3>
                             </div>
                             <!-- ./card-header -->
                             <div class="card-body">
-                                <table class="table table-bordered table-hover">
+                                <table id="tabla-recordatorios" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -117,7 +116,7 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
                                                 <td><?= $DatosRecordatorio['Estado'] ?></td>
                                                 <td class="d-flex align-center justify-content-around">
                                                     <a href="#" title="Completado"><i class="fa fa-check fa-lg mx-1" onclick="javascript:EstadoCompletado(<?= $DatosRecordatorio['IdRecordatorio'] ?>);"></i></a>
-                                                    <a href="#" title="Editar" onclick="javascript:obtenerFrmRecordarorios(<?= $DatosRecordatorio['IdRecordatorio'] ?>, true);"><i class="fa fa-edit fa-lg mx-1"></i></a>
+                                                    <a href="#" title="Editar" onclick="javascript:obtenerFrmRecordarorios(<?= $DatosRecordatorio['IdRecordatorio'] ?>);"><i class="fa fa-edit fa-lg mx-1"></i></a>
                                                     <a href="#" title="Eliminar" onclick="javascript:EstadoEliminar(<?= $DatosRecordatorio['IdRecordatorio'] ?>);"><i class="fa fa-trash fa-lg mx-1"></i></a>
                                                 </td>
                                             </tr>
@@ -128,6 +127,7 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
                                                     </p>
                                                 </td>
                                             </tr>
+
 
                                         <?php } ?>
 
@@ -165,8 +165,6 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
     <script src="../plugins/inputmask/jquery.inputmask.min.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../dist/js/adminlte.min.js"></script>
     <!-- Summernote -->
     <script src="../plugins/summernote/summernote-bs4.min.js"></script>
     <!-- CodeMirror -->
@@ -181,10 +179,20 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
     <script src="../plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="../plugins/toastr/toastr.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../dist/js/demo.js"></script>
 
     <!-- Page specific script -->
+
     <script>
         function EstadoEliminar(id) {
             let confirmacion = confirm("¿Está seguro que desea eliminar el recordatorio?");
@@ -202,22 +210,79 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
             }
         }
 
-        function obtenerFrmRecordarorios(id = null, edit = false) {
+        function obtenerFrmRecordarorios(id = null) {
             $.ajax({
                 url: '<?= $_SESSION['path'] ?>recordatorios/formRecordatorio.php',
                 method: 'POST',
                 data: {
-                    id,
-                    edit
+                    id
                 },
                 success: function(response) {
-                    $('#frmRecordatoriosDiv').html(response);
+                    document.getElementById('frmRecordatoriosDiv').innerHTML = response;
+
+                    //Initialize Select2 Elements
+                    $('.select2').select2()
+                    // Summernote
+                    $('#summernote').summernote()
+
+                    //Date and time picker
+                    <?php if ($_SESSION['FormatoFecha'] === 'dmy') { ?>
+                        $('#reservationdatetime').datetimepicker({
+                            icons: {
+                                time: 'far fa-clock'
+                            },
+                            format: 'DD-MM-YYYY hh:mm A'
+
+                        });
+                    <?php } else { ?>
+                        $('#reservationdatetime').datetimepicker({
+                            icons: {
+                                time: 'far fa-clock'
+                            },
+                            format: 'MM-DD-YYYY hh:mm A'
+
+                        });
+                    <?php  } ?>
+
+                    $('#frmRecordatorios').validate({
+                        rules: {
+                            txtTitulo: {
+                                required: true
+                            },
+                            txtFecha: {
+                                required: true
+                            }
+                        },
+                        messages: {
+                            txtTitulo: {
+                                required: "El título es obligatorio",
+                            },
+                            txtFecha: {
+                                required: "La fecha y hora son obligatorios"
+                            }
+                        },
+                        errorElement: 'span',
+                        errorPlacement: function(error, element) {
+                            error.addClass('invalid-feedback');
+                            element.closest('.form-group').append(error);
+                        },
+                        highlight: function(element, errorClass, validClass) {
+                            $(element).addClass('is-invalid');
+                        },
+                        unhighlight: function(element, errorClass, validClass) {
+                            $(element).removeClass('is-invalid');
+                        }
+                    });
                 }
             });
 
         }
+
+
+
         obtenerFrmRecordarorios()
     </script>
+
     <script>
         <?php require_once '../func/Mensajes.php'; ?>
     </script>

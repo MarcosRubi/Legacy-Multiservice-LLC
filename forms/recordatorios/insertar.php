@@ -26,9 +26,5 @@ $Res_Recordatorios = $Obj_Recordatorios->Insertar();
 if ($Res_Recordatorios) {
 
     $_SESSION['success-registro'] = 'recordatorio';
-    echo "<script>
-    let URL = window.opener.location.pathname;
-        window.opener.location.reload();
-    window.close();
-</script>";
+    echo "<script>history.go(-1)</script>";
 }

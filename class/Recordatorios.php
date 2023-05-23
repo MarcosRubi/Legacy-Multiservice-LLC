@@ -41,6 +41,19 @@ class Recordatorios extends DB
         return $this->EjecutarQuery($query);
     }
 
+    public function Actualizar($id)
+    {
+        $query = "UPDATE tbl_recordatorios SET 
+        IdCliente = '" . $this->IdCliente . "', 
+        Fecha = '" . $this->Fecha . "', 
+        Estado = '" . $this->Estado . "', 
+        Titulo = '" . $this->Titulo . "', 
+        Descripcion = '" . $this->Descripcion . "', 
+        Hora = '" . $this->Hora . "' 
+        WHERE IdRecordatorio = '" . $id . "'";
+
+        return $this->EjecutarQuery($query);
+    }
     public function ActualizarEstado($id)
     {
         $query = "UPDATE tbl_recordatorios
@@ -53,6 +66,12 @@ class Recordatorios extends DB
     public function Eliminar($id)
     {
         $query = "UPDATE tbl_recordatorios SET Eliminado='S' WHERE IdRecordatorio='" . $id . "'";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function buscarPorId($id)
+    {
+        $query = "SELECT * FROM vta_listar_recordatorios WHERE IdRecordatorio='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
 }

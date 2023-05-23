@@ -680,7 +680,7 @@ if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'recor
                 });
                 Toast.fire({
                     icon: 'success',
-                    title: 'Recordatorio actualizado correctamente.'
+                    title: 'Recordatorio realizado correctamente.'
                 })";
     unset($_SESSION['success-update']);
 }
@@ -694,6 +694,19 @@ if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'recor
                 Toast.fire({
                     icon: 'success',
                     title: 'Recordatorio eliminado correctamente.'
+                })";
+    unset($_SESSION['success-update']);
+}
+if (isset($_SESSION['success-update']) && $_SESSION['success-update'] === 'recordatorio') {
+    echo "var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Recordatorio actualizado correctamente.'
                 })";
     unset($_SESSION['success-update']);
 }
