@@ -11,6 +11,9 @@ $Obj_ajustes = new Ajustes();
 
 $Res_Clientes = $Obj_clientes->listarTodo();
 $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmpleado']);
+$Res_RecordatoriosPendientes = $Obj_recordatorios->recordatoriosRestantes($_SESSION['IdEmpleado']);
+
+$_SESSION['Recordatorios'] =  intval($Res_RecordatoriosPendientes->fetch_assoc()['total_recordatorios']);
 ?>
 
 <!DOCTYPE html>
@@ -277,8 +280,6 @@ $Res_recordatorios = $Obj_recordatorios->listarRecordatorios($_SESSION['IdEmplea
             });
 
         }
-
-
 
         obtenerFrmRecordarorios()
     </script>

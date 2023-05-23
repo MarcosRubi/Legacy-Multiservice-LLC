@@ -85,7 +85,7 @@
                         <p>
                             Recordatorios
                         </p>
-                        <span class="badge badge-info right">0</span>
+                        <span class="badge badge-info right"><?= $_SESSION['Recordatorios']; ?></span>
                     </a>
                 </li>
                 <li class="nav-item">

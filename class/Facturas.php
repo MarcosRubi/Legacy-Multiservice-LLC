@@ -264,7 +264,7 @@ class Facturas extends DB
             tbl_facturas 
         WHERE
             Creado BETWEEN '" . $fechaInicio . "' AND '" . $fechaFin . "' 
-            AND Eliminado='N'";     
+            AND Eliminado='N'";
         return $this->EjecutarQuery($query);
     }
 
@@ -363,7 +363,7 @@ class Facturas extends DB
 
     public function cantidadFacturasPorEmpleadoMesActual($agente)
     {
-        $query = "SELECT COUNT(IDFactura) AS total_facturas
+        $query = "SELECT COUNT(IdFactura) AS total_facturas
         FROM tbl_facturas
         WHERE Eliminado = 'N'
         AND YEAR(Creado) = YEAR(CURRENT_DATE())

@@ -14,7 +14,7 @@ class Recordatorios extends DB
 
     public function listarRecordatorios($idEmpleado)
     {
-        $query = "SELECT * FROM vta_listar_recordatorios WHERE IdEmpleado='" . $idEmpleado . "'";
+        $query = "SELECT * FROM vta_listar_recordatorios WHERE IdEmpleado='" . $idEmpleado . "' ";
         return $this->EjecutarQuery($query);
     }
 
@@ -72,6 +72,14 @@ class Recordatorios extends DB
     public function buscarPorId($id)
     {
         $query = "SELECT * FROM vta_listar_recordatorios WHERE IdRecordatorio='" . $id . "'";
+        return $this->EjecutarQuery($query);
+    }
+
+    public function recordatoriosRestantes($id)
+    {
+        $query = "SELECT COUNT(IdRecordatorio) AS total_recordatorios
+        FROM vta_listar_recordatorios
+        WHERE IdEmpleado='" . $id . "' AND Fecha = CURDATE()";
         return $this->EjecutarQuery($query);
     }
 }
