@@ -65,20 +65,25 @@ require_once '../../func/validateSession.php';
                                 </div>
                             </div>
                             <div class="d-flex flex-column flex-xl-row">
-                                <!-- Código postal -->
-                                <div class="form-group mx-1">
-                                    <label>Código postal</label>
-                                    <input type="text" class="form-control" placeholder="Código postal ..." name="txtCp">
-                                </div>
                                 <!-- Ciudad -->
                                 <div class="form-group mx-1">
                                     <label>Ciudad</label>
                                     <input type="text" class="form-control" placeholder="Ciudad ..." name="txtCiudad">
                                 </div>
+                                <!-- Código postal -->
+                                <div class="form-group mx-1">
+                                    <label>Código postal</label>
+                                    <input type="text" class="form-control" placeholder="Código postal ..." name="txtCp">
+                                </div>
                                 <!-- Provincia -->
                                 <div class="form-group mx-1">
                                     <label>Provincia</label>
                                     <input type="text" class="form-control" placeholder="Provincia ..." name="txtProvincia">
+                                </div>
+                                <!-- Direccion -->
+                                <div class="form-group mx-1">
+                                    <label>Direccion</label>
+                                    <input type="text" class="form-control" placeholder="Direccion ..." name="txtDireccion">
                                 </div>
                                 <!-- Date dd/mm/yyyy -->
                                 <div class="form-group mx-1">

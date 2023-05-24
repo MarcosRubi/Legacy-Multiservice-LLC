@@ -275,7 +275,7 @@
     }
 
     function buscarCotizacion() {
-        window.open('<?= $_SESSION['path'] ?>forms/cotizaciones/frmBuscar.php', 'Buscar Cotización', 'width=400,height=450')
+        window.open('<?= $_SESSION['path'] ?>forms/cotizaciones/frmBuscar.php', 'Buscar Cotización', 'width=450,height=600')
     }
 
     function CerrarSesion() {

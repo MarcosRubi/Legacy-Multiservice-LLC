@@ -22,6 +22,7 @@ $Obj_Clientes->Telefono = $Obj_Ajustes->RemoverEtiquetas(trim(str_replace("_", "
 $Obj_Clientes->Cp = $Obj_Ajustes->RemoverEtiquetas(strtoupper(strtolower(trim($_POST['txtCp']))));
 $Obj_Clientes->Ciudad = $Obj_Ajustes->RemoverEtiquetas(ucwords(strtolower(trim($_POST['txtCiudad']))));
 $Obj_Clientes->Provincia = $Obj_Ajustes->RemoverEtiquetas(ucwords(strtolower(trim($_POST['txtProvincia']))));
+$Obj_Clientes->Direccion = $Obj_Ajustes->RemoverEtiquetas(ucwords(strtolower(trim($_POST['txtDireccion']))));
 $Obj_Clientes->FechaNacimiento =  $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaNacimiento']));
 $Obj_Clientes->Informacion =  '<p><br>
 </p><div style="text-align: center;"><h4 class="p-2" style="font-family: &quot;Source Sans Pro&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;"><span style="font-size: 1.5rem; font-weight: bolder;">NÚMEROS DE TELÉFONOS</span><br></h4></div><table class="table table-bordered"><tbody><tr class="bg-lightblue"><td><b>NOMBRE DEL PROPIETARIO</b></td><td><b>PARENTESCO CON EL CLIENTE</b></td><td><b>NÚMERO DE TELÉFONO</b></td></tr><tr><td><br></td><td><br></td><td><br></td></tr></tbody></table><div style="text-align: center;"><br></div><div style="text-align: center;"><br></div>
@@ -35,14 +36,14 @@ $Obj_Clientes->Informacion =  '<p><br>
 $regexFecha = '/^(\d{2})-(\d{2})-(\d{4})$/';
 
 // //VALIDANDO FORMATO DE FECHA
-if($_SESSION['FormatoFecha'] === 'dmy'){
+if ($_SESSION['FormatoFecha'] === 'dmy') {
     if ($_POST['txtFechaNacimiento'] !== "" && $_POST['txtFechaNacimiento'] !== "dd-mm-yyyy" && !preg_match($regexFecha, $_POST['txtFechaNacimiento'])) {
         $_SESSION['error-registro'] = 'fecha';
         echo "<script>history.go(-1)</script>";
         return;
     };
 }
-if($_SESSION['FormatoFecha'] === 'mdy'){
+if ($_SESSION['FormatoFecha'] === 'mdy') {
     if ($_POST['txtFechaNacimiento'] !== "" && $_POST['txtFechaNacimiento'] !== "mm-dd-yyyy" && !preg_match($regexFecha, $_POST['txtFechaNacimiento'])) {
         $_SESSION['error-registro'] = 'fecha';
         echo "<script>history.go(-1)</script>";

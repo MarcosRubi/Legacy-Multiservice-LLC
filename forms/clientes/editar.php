@@ -23,6 +23,7 @@ $Obj_Clientes->Telefono = $Obj_Ajustes->RemoverEtiquetas(trim(str_replace("_", "
 $Obj_Clientes->Cp = $Obj_Ajustes->RemoverEtiquetas(trim($_POST['txtCp']));
 $Obj_Clientes->Ciudad = $Obj_Ajustes->RemoverEtiquetas(ucwords(strtolower(trim($_POST['txtCiudad']))));
 $Obj_Clientes->Provincia = $Obj_Ajustes->RemoverEtiquetas(ucwords(strtolower(trim($_POST['txtProvincia']))));
+$Obj_Clientes->Direccion = $Obj_Ajustes->RemoverEtiquetas(ucwords(strtolower(trim($_POST['txtDireccion']))));
 $Obj_Clientes->FechaNacimiento =  $Obj_Ajustes->RemoverEtiquetas($Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaNacimiento']));
 
 $regexFecha = '/^(\d{2})-(\d{2})-(\d{4})$/';
@@ -50,7 +51,7 @@ if ($Res_Clientes) {
     $DatosCliente = $Res_Cliente->fetch_assoc();
 
     $Obj_Eventos->UrlEvento = 'cliente/?id=' . $DatosCliente['IdCliente'];
-    $Obj_Eventos->TipoEvento = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtPrimerNombre'])))). " " . $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtSegundoNombre'])))) . " " . $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtApellido']))));
+    $Obj_Eventos->TipoEvento = $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtPrimerNombre'])))) . " " . $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtSegundoNombre'])))) . " " . $Obj_Ajustes->RemoverEtiquetas(ucfirst(strtolower(trim($_POST['txtApellido']))));
     $Obj_Eventos->Insertar();
 
     $_SESSION['success-update'] = 'cliente';

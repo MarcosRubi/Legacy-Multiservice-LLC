@@ -11,7 +11,7 @@ if ($_SESSION['IdRole'] > 3) {
 if ($_SESSION['IdEmpleado'] === $_GET['id']) {
     $_SESSION['error-delete'] = 'empleadoActual';
     echo "<script>history.go(-1)</script>";
-    return false;
+    return;
 }
 
 require_once '../../bd/bd.php';

@@ -10,6 +10,7 @@ class Clientes extends DB
     public $Cp;
     public $Ciudad;
     public $Provincia;
+    public $Direccion;
     public $FechaNacimiento;
     public $IdEmpleado;
     public $Informacion;
@@ -38,6 +39,7 @@ class Clientes extends DB
         Cp LIKE'%" . $content . "%' OR 
         Ciudad LIKE'%" . $content . "%' OR 
         Provincia LIKE'%" . $content . "%' OR 
+        Direccion LIKE'%" . $content . "%' OR 
         FechaNacimiento LIKE'%" . $content . "%'";
         return $this->EjecutarQuery($query);
     }
@@ -58,6 +60,7 @@ class Clientes extends DB
             Cp,
             Ciudad,
             Provincia,
+            Direccion,
             FechaNacimiento,
             IdEmpleado,
             Creado,
@@ -72,6 +75,7 @@ class Clientes extends DB
             '" . $this->Cp . "',
             '" . $this->Ciudad . "',
             '" . $this->Provincia . "',
+            '" . $this->Direccion . "',
             '" . $this->FechaNacimiento . "',
             '" . $_SESSION['IdEmpleado'] . "',
             '" . date("Y-m-d h:i:s ") . "',
@@ -91,6 +95,7 @@ class Clientes extends DB
         Cp = '" . $this->Cp . "', 
         Ciudad = '" . $this->Ciudad . "', 
         Provincia = '" . $this->Provincia . "', 
+        Direccion = '" . $this->Direccion . "', 
         FechaNacimiento = '" . $this->FechaNacimiento . "' 
         WHERE IdCliente='" . $id . "' ";
 

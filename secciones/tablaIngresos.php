@@ -71,69 +71,69 @@ while ($valor = $Res_FacturasPorMesActual->fetch_assoc()) {
 
     for ($i = 0; $i < ($CantidadSemanas); $i++) {
         if (intval($semanas[$i]) === intval($semana_valor)) {
-            $ingresosMesActual[$i] = $valor['Total'] + $valor['Balance'];
+            $ingresosMesActual[$i] = doubleval($valor['Total']) + doubleval($valor['Balance']);
         }
     }
 }
 while ($valor = $Res_FacturasPorMes->fetch_assoc()) {
     if ($valor['Mes'] === '1') {
-        $ingresosPorMes[0] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[0] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '2') {
-        $ingresosPorMes[1] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[1] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '3') {
-        $ingresosPorMes[2] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[2] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '4') {
-        $ingresosPorMes[3] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[3] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '5') {
-        $ingresosPorMes[4] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[4] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '6') {
-        $ingresosPorMes[5] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[5] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '7') {
-        $ingresosPorMes[6] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[6] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '8') {
-        $ingresosPorMes[7] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[7] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '9') {
-        $ingresosPorMes[8] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[8] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '10') {
-        $ingresosPorMes[9] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[9] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '11') {
-        $ingresosPorMes[10] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[10] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['Mes'] === '12') {
-        $ingresosPorMes[11] = $valor['Total'] + $valor['Balance'];
+        $ingresosPorMes[11] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
 }
 while ($valor = $Res_FacturasPorSemanaActual->fetch_assoc()) {
     if ($valor['DiaSemana'] === '1') {
-        $ingresosSemanaActual[0] = $valor['Total'] + $valor['Balance'];
+        $ingresosSemanaActual[0] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['DiaSemana'] === '2') {
-        $ingresosSemanaActual[1] = $valor['Total'] + $valor['Balance'];
+        $ingresosSemanaActual[1] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['DiaSemana'] === '3') {
-        $ingresosSemanaActual[2] = $valor['Total'] + $valor['Balance'];
+        $ingresosSemanaActual[2] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['DiaSemana'] === '4') {
-        $ingresosSemanaActual[3] = $valor['Total'] + $valor['Balance'];
+        $ingresosSemanaActual[3] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['DiaSemana'] === '5') {
-        $ingresosSemanaActual[4] = $valor['Total'] + $valor['Balance'];
+        $ingresosSemanaActual[4] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['DiaSemana'] === '6') {
-        $ingresosSemanaActual[5] = $valor['Total'] + $valor['Balance'];
+        $ingresosSemanaActual[5] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
     if ($valor['DiaSemana'] === '7') {
-        $ingresosSemanaActual[6] = $valor['Total'] + $valor['Balance'];
+        $ingresosSemanaActual[6] = doubleval($valor['Total']) + doubleval($valor['Balance']);
     }
 }
 while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
@@ -192,9 +192,9 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
             labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
             datasets: [{
                 label: <?php if (isset($_POST['mco'])) {
-                            echo "'Mcos'";
+                            echo "'Ganancia MCOS'";
                         } else {
-                            echo "'Facturas'";
+                            echo "'Ingresos'";
                         } ?>,
                 backgroundColor: 'rgba(60,141,188,0.9)',
                 borderColor: 'rgba(60,141,188,0.8)',
@@ -232,9 +232,9 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
                 ],
                 datasets: [{
                     label: <?php if (isset($_POST['mco'])) {
-                                echo "'Mcos'";
+                                echo "'Ganancia MCOS'";
                             } else {
-                                echo "'Facturas'";
+                                echo "'Ingresos'";
                             } ?>,
                     backgroundColor: 'rgba(60,141,188,0.9)',
                     borderColor: 'rgba(60,141,188,0.8)',
@@ -263,9 +263,9 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
                 labels: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
                 datasets: [{
                     label: <?php if (isset($_POST['mco'])) {
-                                echo "'Mcos'";
+                                echo "'Ganancias MCOS'";
                             } else {
-                                echo "'Facturas'";
+                                echo "'Ingresos'";
                             } ?>,
                     backgroundColor: 'rgba(60,141,188,0.9)',
                     borderColor: 'rgba(60,141,188,0.8)',
@@ -319,9 +319,9 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
                 labels: ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00~23:59'],
                 datasets: [{
                     label: <?php if (isset($_POST['mco'])) {
-                                echo "'Mcos'";
+                                echo "'Ganancias MCOS'";
                             } else {
-                                echo "'Facturas'";
+                                echo "'Ingresos'";
                             } ?>,
                     backgroundColor: 'rgba(60,141,188,0.9)',
                     borderColor: 'rgba(60,141,188,0.8)',
@@ -352,9 +352,9 @@ while ($valor = $Res_FacturasPorDiaActual->fetch_assoc()) {
                 labels: [' ', '<?= $_POST['formData']['txtFechaInicio'] . ' al ' . $_POST['formData']['txtFechaFin'] ?>', ''],
                 datasets: [{
                     label: <?php if (isset($_POST['mco'])) {
-                                echo "'Mcos'";
+                                echo "'Ganancia MCOS'";
                             } else {
-                                echo "'Facturas'";
+                                echo "'Ingresos'";
                             } ?>,
                     backgroundColor: 'rgba(60,141,188,0.9)',
                     borderColor: 'rgba(60,141,188,0.8)',

@@ -97,12 +97,15 @@ $DatosCliente = $Res_Clientes->fetch_assoc();
                                                     <td><?= $DatosCliente['IdCliente'] ?></td>
                                                     <td><?= $DatosCliente['PrimerNombre'] . " " . $DatosCliente['SegundoNombre'] . " " . $DatosCliente['Apellido']  ?></td>
                                                     <td><?= $DatosCliente['Telefono'] ?></td>
-                                                    <td><?php echo $DatosCliente['Cp'];
-                                                        if ($DatosCliente['Ciudad'] !== '') {
-                                                            echo ", " .  $DatosCliente['Ciudad'];
+                                                    <td><?php echo $DatosCliente['Ciudad'];
+                                                        if (trim($DatosCliente['Cp']) !== '') {
+                                                            echo ", " .  $DatosCliente['Cp'];
                                                         }
-                                                        if ($DatosCliente['Provincia'] !== '') {
+                                                        if (trim($DatosCliente['Provincia']) !== '') {
                                                             echo ", " . $DatosCliente['Provincia'];
+                                                        }
+                                                        if (trim($DatosCliente['Direccion']) !== '') {
+                                                            echo ", " . $DatosCliente['Direccion'];
                                                         } ?>
                                                     </td>
                                                     <td><?php if ($DatosCliente['FechaNacimiento'] !== '0000-00-00') {
