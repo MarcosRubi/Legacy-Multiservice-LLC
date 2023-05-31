@@ -7,6 +7,8 @@ require_once '../../class/Ajustes.php';
 $Obj_Cotizaciones = new Cotizaciones();
 $Obj_Ajustes = new Ajustes();
 
+$_SESSION['CotizacionesDisabled'] = true;
+
 
 $Res_Cotizaciones = $Obj_Cotizaciones->listarTodo();
 
@@ -94,8 +96,8 @@ if (isset($_POST['txtFechaInicio'])) {
                                             <?php
                                             while ($DatosCotizaciones = $Res_Cotizaciones->fetch_assoc()) { ?>
                                                 <tr>
-                                                    <td><a href="#" onclick="javascript:abrirFormDetalles('<?= $_SESSION['path'] . '/cotizaciones/detalles.php?id=' . $DatosCotizaciones['IdCotizacion'] ?>')"><?= $DatosCotizaciones['IdCotizacion'] ?></a></td>
-                                                    <td><a href="#" onclick="javascript:mostrarDatosCliente('<?= $DatosCotizaciones['IdCliente'] ?>')"> <?= $DatosCotizaciones['PrimerNombre'] . " " . $DatosCotizaciones['SegundoNombre'] . " " . $DatosCotizaciones['Apellido'] ?></a></td>
+                                                    <td><a style="cursor:pointer;" class="text-primary" onclick="javascript:abrirFormDetalles('<?= $_SESSION['path'] . '/cotizaciones/detalles.php?id=' . $DatosCotizaciones['IdCotizacion'] ?>')"><?= $DatosCotizaciones['IdCotizacion'] ?></a></td>
+                                                    <td><a style="cursor:pointer;" class="text-primary" onclick="javascript:mostrarDatosCliente('<?= $DatosCotizaciones['IdCliente'] ?>')"> <?= $DatosCotizaciones['PrimerNombre'] . " " . $DatosCotizaciones['SegundoNombre'] . " " . $DatosCotizaciones['Apellido'] ?></a></td>
                                                     <td><?= $DatosCotizaciones['Pnr'] ?></td>
                                                     <td><?= $DatosCotizaciones['Comentario'] ?></td>
                                                     <td><?= $DatosCotizaciones['Accion'] ?></td>
@@ -177,8 +179,15 @@ if (isset($_POST['txtFechaInicio'])) {
         }
 
         function mostrarDatosCliente(id) {
-            window.opener.location.href = "<?= $_SESSION['path'] . 'cliente/?id=' ?>" + id;
+            window.opener.location.href = "<?= $_SESSION['path'] . 'buscar-cliente/?id=' ?>" + id;
         }
+    </script>
+    <script>
+        window.addEventListener('beforeunload', function(event) {
+            event.preventDefault();
+
+            navigator.sendBeacon('./eliminar_variable_sesion.php');
+        });
     </script>
 </body>
 

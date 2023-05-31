@@ -24,7 +24,7 @@ class Clientes extends DB
 
     public function buscarPorId($id)
     {
-        $query = "SELECT * FROM tbl_clientes WHERE IdCliente='" . $id . "'";
+        $query = "SELECT * FROM vta_listar_clientes WHERE IdCliente='" . $id . "'";
         return $this->EjecutarQuery($query);
     }
 

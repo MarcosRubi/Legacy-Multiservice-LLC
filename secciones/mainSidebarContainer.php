@@ -89,7 +89,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" onclick="javascript:buscarCotizacion();">
+                    <a href="#" class="nav-link" onclick="javascript:buscarCotizacion();" 
+                    <?php if(isset($_SESSION['CotizacionesDisabled']) && $_SESSION['CotizacionesDisabled'] === true) { echo 'style="pointer-events:none;"';} ?>>
                         <i class="nav-icon fa fa-dollar-sign"></i>
                         <p>
                             Cotizaciones

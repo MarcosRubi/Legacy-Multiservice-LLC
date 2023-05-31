@@ -12,6 +12,9 @@ $Res_Clientes = $Obj_Clientes->listarTodo();
 if (isset($_GET['s'])) {
     $Res_Clientes = $Obj_Clientes->buscarCliente($_GET['s']);
 }
+if (isset($_GET['id'])) {
+    $Res_Clientes = $Obj_Clientes->buscarPorId($_GET['id']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +86,7 @@ if (isset($_GET['s'])) {
                                             <h3 class='card-title'>Clientes encontrados para: <strong><?= $_GET['s'] ?></strong></h3>
                                             <a href="./" class="btn btn-primary">Listar todo</a>
                                         </div>
-                                    <?php } else {
+                                    <?php } else if (!isset($_GET['id'])) { 
                                         echo "<h3 class='card-title'>Últimos clientes creados</h3>";
                                     }
                                     ?>
