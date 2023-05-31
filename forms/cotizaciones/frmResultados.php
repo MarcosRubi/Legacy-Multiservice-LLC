@@ -58,7 +58,9 @@ if (isset($_POST['txtFechaInicio'])) {
                                     <?php if (isset($_POST['txtFechaInicio'])) { ?>
                                         Cotizaciones encontradas de: <strong>
                                             <?= $_POST['txtFechaInicio'] ?></strong> a <strong><?= $_POST['txtFechaFin'] ?></strong>
-                                    <?php } else { echo "ÚLtimas cotizaciones realizadas"; }; ?>
+                                    <?php } else {
+                                        echo "ÚLtimas cotizaciones realizadas";
+                                    }; ?>
                                 </p>
                                 <div>
                                     <button class="btn btn-primary btn-lg" onclick="javascript:cerrarVentana();">Cerrar</button>
@@ -158,6 +160,11 @@ if (isset($_POST['txtFechaInicio'])) {
                 "autoWidth": false,
                 "responsive": true,
             });
+
+            $('tr').click(function() {
+                $(this).find('td a').addClass('text-white');
+                $(this).addClass('bg-success');
+            });
         });
     </script>
     <script>
@@ -171,7 +178,6 @@ if (isset($_POST['txtFechaInicio'])) {
 
         function mostrarDatosCliente(id) {
             window.opener.location.href = "<?= $_SESSION['path'] . 'cliente/?id=' ?>" + id;
-            Minimize();
         }
     </script>
 </body>

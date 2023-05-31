@@ -105,16 +105,11 @@ $Res_Movimientos = $Obj_Movimientos->listarMovimientos($_GET['id']);
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="align-middle" style="max-width:5rem;">Fecha de ida <?php if ($DatosCotizacion['Regreso'] !== '0000-00-00') {
-                                                                                                                    echo " / Fecha de regreso";
-                                                                                                                } ?> </td>
+                                                <td class="align-middle" style="max-width:5rem;">Fecha de ida <?php if ($DatosCotizacion['Regreso'] !== '0000-00-00') { echo " / Fecha de regreso";} ?> </td>
                                                 <td>
                                                     <!-- Valor -->
                                                     <div class="form-group mx-1 container-fluid mb-0">
-                                                        <input type="text" class="form-control" value="<?php echo $Obj_Ajustes->FechaInvertir($DatosCotizacion['Ida']);
-                                                                                                        if ($DatosCotizacion['Regreso'] !== '0000-00-00') {
-                                                                                                            echo " / " . $Obj_Ajustes->FechaInvertir($DatosCotizacion['Regreso']);
-                                                                                                        } ?>" readonly>
+                                                        <input type="text" class="form-control" value="<?php echo $Obj_Ajustes->FechaInvertir($DatosCotizacion['Ida']); if ($DatosCotizacion['Regreso'] !== '0000-00-00') { echo " / " . $Obj_Ajustes->FechaInvertir($DatosCotizacion['Regreso']);} ?>" readonly>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -151,16 +146,12 @@ $Res_Movimientos = $Obj_Movimientos->listarMovimientos($_GET['id']);
                                     <!-- Comentario -->
                                     <div class="form-group">
                                         <label>Comentario</label>
-                                        <textarea id="comentario" name="txtComentario">
-                                            Escribe <em>tu</em> <u>comentario</u> <strong>aquí</strong>
-                                        </textarea>
+                                        <textarea id="comentario" name="txtComentario"></textarea>
                                     </div>
                                     <!-- Accion -->
                                     <div class="form-group mt-5">
                                         <label>Acción</label>
-                                        <textarea id="accion" name="txtAccion">
-                                            Escribe <em>la</em> <u>acción</u> <strong>aquí</strong>
-                                        </textarea>
+                                        <textarea id="accion" name="txtAccion"></textarea>
                                     </div>
                                     <input type="hidden" name="IdCotizacion" value="<?= $_GET['id']; ?>">
                                     <div class="form-group pr-1 mt-3">
