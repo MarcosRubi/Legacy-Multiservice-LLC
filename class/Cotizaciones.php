@@ -121,6 +121,12 @@ class Cotizaciones extends DB
         return  $this->EjecutarQuery($query);
     }
 
+    public function ObtenerCotizacionesDeUnDia($fecha, $condition)
+    {
+        $query = "SELECT * FROM vta_listar_cotizaciones WHERE Date(" . $condition . ") = '" . $fecha . "' ORDER BY IdCotizacion DESC ";
+        return  $this->EjecutarQuery($query);
+    }
+
     //PARA GRAFICA RESUMEN DE ESTADISTICA
     public function cantidadCotizacionesPorFechaPersonalizada($fechaInicio, $fechaFin)
     {

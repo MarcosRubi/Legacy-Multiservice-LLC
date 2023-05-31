@@ -14,8 +14,11 @@ if (isset($_POST['txtFechaInicio'])) {
     $FechaInicio = $Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaInicio']);
     $FechaFin = $Obj_Ajustes->FechaInvertirGuardar($_POST['txtFechaFin']);
 
-
-    $Res_Cotizaciones = $Obj_Cotizaciones->ObtenerCotizacionesPorFechaIngresada($FechaInicio, $FechaFin, $_POST['rdbTipo']);
+    if ($FechaInicio === $FechaFin) {
+        $Res_Cotizaciones = $Obj_Cotizaciones->ObtenerCotizacionesDeUnDia($FechaInicio, $_POST['rdbTipo']);
+    } else {
+        $Res_Cotizaciones = $Obj_Cotizaciones->ObtenerCotizacionesPorFechaIngresada($FechaInicio, $FechaFin, $_POST['rdbTipo']);
+    }
 }
 
 ?>
@@ -53,10 +56,9 @@ if (isset($_POST['txtFechaInicio'])) {
                             <div class="d-flex justify-content-between align-items-center">
                                 <p class="pt-3">
                                     <?php if (isset($_POST['txtFechaInicio'])) { ?>
-                                    Cotizaciones encontradas de: <strong><?= $_POST['txtFechaInicio'] ?></strong> a <strong><?= $_POST['txtFechaFin'] ?></strong><?php 
-                                    } else {
-                                    echo "ÚLtimas cotizaciones realizadas";
-                                    }; ?>
+                                        Cotizaciones encontradas de: <strong>
+                                            <?= $_POST['txtFechaInicio'] ?></strong> a <strong><?= $_POST['txtFechaFin'] ?></strong>
+                                    <?php } else { echo "ÚLtimas cotizaciones realizadas"; }; ?>
                                 </p>
                                 <div>
                                     <button class="btn btn-primary btn-lg" onclick="javascript:cerrarVentana();">Cerrar</button>

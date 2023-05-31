@@ -85,16 +85,16 @@ require_once '../../func/validateSession.php';
                                             <div class="form-group">
                                                 <label>Buscar por:</label>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="rdbTipo" checked="" value="FechaCreado">
-                                                    <label class="form-check-label">Fecha ingresada</label>
+                                                    <input class="form-check-input" type="radio" name="rdbTipo" checked="" value="FechaCreado" id="FechaIngresada">
+                                                    <label class="form-check-label" for="FechaIngresada">Fecha ingresada</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="rdbTipo" value="Ida">
-                                                    <label class="form-check-label">Fecha de ida</label>
+                                                    <input class="form-check-input" type="radio" name="rdbTipo" value="Ida" id="FechaIda">
+                                                    <label class="form-check-label" for="FechaIda">Fecha de ida</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="rdbTipo" value="Regreso">
-                                                    <label class="form-check-label">Fecha de regreso</label>
+                                                    <input class="form-check-input" type="radio" name="rdbTipo" value="Regreso" id="FechaRegreso">
+                                                    <label class="form-check-label" for="FechaRegreso">Fecha de regreso</label>
                                                 </div>
                                             </div>
                                         </div>
