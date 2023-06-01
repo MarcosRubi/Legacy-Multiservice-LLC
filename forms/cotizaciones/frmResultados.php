@@ -154,7 +154,7 @@ if (isset($_POST['txtFechaInicio'])) {
         $(function() {
             window.resizeTo(2000, 800)
             $('#cotizaciones').DataTable({
-                "paging": true,
+                "paging": false,
                 "lengthChange": false,
                 "searching": false,
                 "ordering": false,
