@@ -110,9 +110,9 @@ $Res_Eventos = $Obj_Eventos->listarEventos();
                         echo "<h3 class=\"timeline-header\">
                             <strong>" . $DatosEventos['NombreEmpleado'] . " </strong>"
                           . $DatosEventos['Mensaje'] .
-                          "<a href=\"" . $url  . "\"> " . $DatosEventos['TipoEvento'] . "</a></h3>";
+                          "<a href=\"" . $url  . "\"> " . explode("&", $DatosEventos['TipoEvento'])[0] . "</a></h3>";
                       } else {
-                        echo "<h3 class=\"timeline-header\"><strong>" . $DatosEventos['NombreEmpleado'] . " </strong>" . $DatosEventos['Mensaje'] . " <a href=\"#\" onclick=\"javascript:abrirFormDetalles('" . $DatosEventos['UrlEvento'] . "')\">" . $DatosEventos['TipoEvento'] . "</a></h3>";
+                        echo "<h3 class=\"timeline-header\"><strong>" . $DatosEventos['NombreEmpleado'] . " </strong>" . $DatosEventos['Mensaje'] . " <a href=\"#\" onclick=\"javascript:abrirFormDetalles('" . $DatosEventos['UrlEvento'] . "')\">" . explode("&", $DatosEventos['TipoEvento'])[0] . "</a></h3>";
                       }
                       ?>
                       </h3>
